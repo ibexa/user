@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUser\ExceptionHandler;
+namespace Ibexa\User\ExceptionHandler;
 
 class NullActionResultHandler implements ActionResultHandler
 {
@@ -26,3 +26,5 @@ class NullActionResultHandler implements ActionResultHandler
     ): void {
     }
 }
+
+class_alias(NullActionResultHandler::class, 'EzSystems\EzPlatformUser\ExceptionHandler\NullActionResultHandler');

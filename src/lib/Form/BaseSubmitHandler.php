@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUser\Form;
+namespace Ibexa\User\Form;
 
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,3 +24,5 @@ class BaseSubmitHandler implements SubmitHandler
         return null;
     }
 }
+
+class_alias(BaseSubmitHandler::class, 'EzSystems\EzPlatformUser\Form\BaseSubmitHandler');

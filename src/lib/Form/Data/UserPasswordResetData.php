@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUser\Form\Data;
+namespace Ibexa\User\Form\Data;
 
 use Symfony\Component\Validator\Constraints as Assert;
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
@@ -68,3 +68,5 @@ class UserPasswordResetData
         $this->contentType = $contentType;
     }
 }
+
+class_alias(UserPasswordResetData::class, 'EzSystems\EzPlatformUser\Form\Data\UserPasswordResetData');

@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUser\UserSetting\DateTimeFormat;
+namespace Ibexa\User\UserSetting\DateTimeFormat;
 
 use DateTimeInterface;
 use IntlDateFormatter;
@@ -52,3 +52,5 @@ class Formatter implements FormatterInterface
         return $result;
     }
 }
+
+class_alias(Formatter::class, 'EzSystems\EzPlatformUser\UserSetting\DateTimeFormat\Formatter');

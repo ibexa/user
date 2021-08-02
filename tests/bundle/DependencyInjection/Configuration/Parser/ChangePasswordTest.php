@@ -6,12 +6,12 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUserBundle\Tests\DependencyInjection\Configuration\Parser;
+namespace Ibexa\Tests\Bundle\User\DependencyInjection\Configuration\Parser;
 
 use eZ\Bundle\EzPublishCoreBundle\DependencyInjection\EzPublishCoreExtension;
 use eZ\Bundle\EzPublishCoreBundle\Tests\DependencyInjection\Configuration\Parser\AbstractParserTestCase;
-use EzSystems\EzPlatformUserBundle\DependencyInjection\Configuration\Parser\ChangePassword;
-use EzSystems\EzPlatformUserBundle\DependencyInjection\EzPlatformUserExtension;
+use Ibexa\Bundle\User\DependencyInjection\Configuration\Parser\ChangePassword;
+use Ibexa\Bundle\User\DependencyInjection\IbexaUserExtension;
 
 final class ChangePasswordTest extends AbstractParserTestCase
 {
@@ -78,3 +78,5 @@ final class ChangePasswordTest extends AbstractParserTestCase
         );
     }
 }
+
+class_alias(ChangePasswordTest::class, 'EzSystems\EzPlatformUserBundle\Tests\DependencyInjection\Configuration\Parser\ChangePasswordTest');

@@ -4,9 +4,9 @@
  * @copyright Copyright (C) eZ Systems AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformUser\Form\Type;
+namespace Ibexa\User\Form\Type;
 
-use EzSystems\EzPlatformUser\Form\Data\UserRegisterData;
+use Ibexa\User\Form\Data\UserRegisterData;
 use EzSystems\EzPlatformContentForms\Form\EventSubscriber\UserFieldsSubscriber;
 use EzSystems\EzPlatformContentForms\Form\Type\Content\BaseContentType;
 use Symfony\Component\Form\AbstractType;
@@ -54,3 +54,5 @@ class UserRegisterType extends AbstractType
             ->setRequired(['languageCode']);
     }
 }
+
+class_alias(UserRegisterType::class, 'EzSystems\EzPlatformUser\Form\Type\UserRegisterType');

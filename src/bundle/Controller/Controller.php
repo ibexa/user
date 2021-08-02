@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUserBundle\Controller;
+namespace Ibexa\Bundle\User\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -17,3 +17,5 @@ abstract class Controller extends AbstractController
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
     }
 }
+
+class_alias(Controller::class, 'EzSystems\EzPlatformUserBundle\Controller\Controller');

@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUser\UserSetting;
+namespace Ibexa\User\UserSetting;
 
 use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 use eZ\Publish\API\Repository\UserPreferenceService;
@@ -155,3 +155,5 @@ class UserSettingService
         return $userPreferenceValue;
     }
 }
+
+class_alias(UserSettingService::class, 'EzSystems\EzPlatformUser\UserSetting\UserSettingService');

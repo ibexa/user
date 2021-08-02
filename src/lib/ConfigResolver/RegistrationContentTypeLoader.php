@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUser\ConfigResolver;
+namespace Ibexa\User\ConfigResolver;
 
 /**
  * Loads the content type used by user registration.
@@ -20,3 +20,5 @@ interface RegistrationContentTypeLoader
      */
     public function loadContentType();
 }
+
+class_alias(RegistrationContentTypeLoader::class, 'EzSystems\EzPlatformUser\ConfigResolver\RegistrationContentTypeLoader');

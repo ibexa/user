@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUser\UserSetting\Setting\Value;
+namespace Ibexa\User\UserSetting\Setting\Value;
 
 final class DateTimeFormat
 {
@@ -70,3 +70,5 @@ final class DateTimeFormat
         return implode(' ', $parts);
     }
 }
+
+class_alias(DateTimeFormat::class, 'EzSystems\EzPlatformUser\UserSetting\Setting\Value\DateTimeFormat');

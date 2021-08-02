@@ -6,11 +6,11 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUser\Form\Type;
+namespace Ibexa\User\Form\Type;
 
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
-use EzSystems\EzPlatformUser\Form\Data\UserPasswordChangeData;
-use EzSystems\EzPlatformUser\Validator\Constraints\Password;
+use Ibexa\User\Form\Data\UserPasswordChangeData;
+use Ibexa\User\Validator\Constraints\Password;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
@@ -56,3 +56,5 @@ class UserPasswordChangeType extends AbstractType
         ]);
     }
 }
+
+class_alias(UserPasswordChangeType::class, 'EzSystems\EzPlatformUser\Form\Type\UserPasswordChangeType');
