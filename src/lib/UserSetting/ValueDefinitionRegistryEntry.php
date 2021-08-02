@@ -8,6 +8,8 @@ declare(strict_types=1);
 
 namespace Ibexa\User\UserSetting;
 
+use Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface;
+
 /**
  * @internal
  */

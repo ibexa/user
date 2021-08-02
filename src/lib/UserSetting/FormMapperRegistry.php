@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace Ibexa\User\UserSetting;
 
 use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
+use Ibexa\Contracts\User\UserSetting\FormMapperInterface;
 
 /**
  * @internal

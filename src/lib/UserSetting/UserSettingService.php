@@ -11,6 +11,7 @@ namespace Ibexa\User\UserSetting;
 use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 use eZ\Publish\API\Repository\UserPreferenceService;
 use eZ\Publish\API\Repository\Values\UserPreference\UserPreferenceSetStruct;
+use Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface;
 
 /**
  * @internal
