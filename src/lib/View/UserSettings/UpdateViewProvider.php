@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUser\View\UserSettings;
+namespace Ibexa\User\View\UserSettings;
 
 use eZ\Publish\Core\MVC\Symfony\Matcher\MatcherFactoryInterface;
 use eZ\Publish\Core\MVC\Symfony\View\View;
@@ -64,3 +64,5 @@ class UpdateViewProvider implements ViewProvider
         return $view;
     }
 }
+
+class_alias(UpdateViewProvider::class, 'EzSystems\EzPlatformUser\View\UserSettings\UpdateViewProvider');

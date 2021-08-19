@@ -6,10 +6,12 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUser\View\ForgotPassword;
+namespace Ibexa\User\View\ForgotPassword;
 
 use eZ\Publish\Core\MVC\Symfony\View\BaseView;
 
 class FormView extends BaseView
 {
 }
+
+class_alias(FormView::class, 'EzSystems\EzPlatformUser\View\ForgotPassword\FormView');

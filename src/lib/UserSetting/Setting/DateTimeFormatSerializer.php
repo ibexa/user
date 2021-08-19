@@ -6,9 +6,9 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUser\UserSetting\Setting;
+namespace Ibexa\User\UserSetting\Setting;
 
-use EzSystems\EzPlatformUser\UserSetting\Setting\Value\DateTimeFormat;
+use Ibexa\User\UserSetting\Setting\Value\DateTimeFormat;
 
 final class DateTimeFormatSerializer
 {
@@ -38,3 +38,5 @@ final class DateTimeFormatSerializer
         return $value;
     }
 }
+
+class_alias(DateTimeFormatSerializer::class, 'EzSystems\EzPlatformUser\UserSetting\Setting\DateTimeFormatSerializer');

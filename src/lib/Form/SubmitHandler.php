@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUser\Form;
+namespace Ibexa\User\Form;
 
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,3 +15,5 @@ interface SubmitHandler
 {
     public function handle(FormInterface $form, callable $handler): ?Response;
 }
+
+class_alias(SubmitHandler::class, 'EzSystems\EzPlatformUser\Form\SubmitHandler');

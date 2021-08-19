@@ -6,10 +6,10 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUser\View\UserSettings;
+namespace Ibexa\User\View\UserSettings;
 
 use eZ\Publish\Core\MVC\Symfony\View\BaseView;
-use EzSystems\EzPlatformUser\UserSetting\UserSetting;
+use Ibexa\User\UserSetting\UserSetting;
 
 class UpdateView extends BaseView
 {
@@ -42,3 +42,5 @@ class UpdateView extends BaseView
         ];
     }
 }
+
+class_alias(UpdateView::class, 'EzSystems\EzPlatformUser\View\UserSettings\UpdateView');

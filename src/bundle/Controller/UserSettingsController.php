@@ -6,18 +6,18 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUserBundle\Controller;
+namespace Ibexa\Bundle\User\Controller;
 
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
-use EzSystems\EzPlatformUser\ExceptionHandler\ActionResultHandler;
-use EzSystems\EzPlatformUser\Form\Data\UserSettingUpdateData;
-use EzSystems\EzPlatformUser\Form\Factory\FormFactory;
-use EzSystems\EzPlatformUser\Form\SubmitHandler;
-use EzSystems\EzPlatformUser\Pagination\Pagerfanta\UserSettingsAdapter;
-use EzSystems\EzPlatformUser\UserSetting\UserSettingService;
-use EzSystems\EzPlatformUser\UserSetting\ValueDefinitionRegistry;
-use EzSystems\EzPlatformUser\View\UserSettings\ListView;
-use EzSystems\EzPlatformUser\View\UserSettings\UpdateView;
+use Ibexa\User\ExceptionHandler\ActionResultHandler;
+use Ibexa\User\Form\Data\UserSettingUpdateData;
+use Ibexa\User\Form\Factory\FormFactory;
+use Ibexa\User\Form\SubmitHandler;
+use Ibexa\User\Pagination\Pagerfanta\UserSettingsAdapter;
+use Ibexa\User\UserSetting\UserSettingService;
+use Ibexa\User\UserSetting\ValueDefinitionRegistry;
+use Ibexa\User\View\UserSettings\ListView;
+use Ibexa\User\View\UserSettings\UpdateView;
 use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -122,3 +122,5 @@ class UserSettingsController extends Controller
         return $view;
     }
 }
+
+class_alias(UserSettingsController::class, 'EzSystems\EzPlatformUserBundle\Controller\UserSettingsController');

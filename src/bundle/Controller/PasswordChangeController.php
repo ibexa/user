@@ -6,14 +6,14 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUserBundle\Controller;
+namespace Ibexa\Bundle\User\Controller;
 
 use eZ\Publish\API\Repository\UserService;
 use eZ\Publish\Core\MVC\Symfony\SiteAccess;
-use EzSystems\EzPlatformUser\ExceptionHandler\ActionResultHandler;
-use EzSystems\EzPlatformUser\Form\Factory\FormFactory;
-use EzSystems\EzPlatformUser\View\ChangePassword\FormView;
-use EzSystems\EzPlatformUser\View\ChangePassword\SuccessView;
+use Ibexa\User\ExceptionHandler\ActionResultHandler;
+use Ibexa\User\Form\Factory\FormFactory;
+use Ibexa\User\View\ChangePassword\FormView;
+use Ibexa\User\View\ChangePassword\SuccessView;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -97,3 +97,5 @@ class PasswordChangeController extends Controller
         return in_array($siteAccess->name, $this->siteAccessGroups['admin_group'], true);
     }
 }
+
+class_alias(PasswordChangeController::class, 'EzSystems\EzPlatformUserBundle\Controller\PasswordChangeController');

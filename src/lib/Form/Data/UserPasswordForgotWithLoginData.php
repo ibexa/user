@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUser\Form\Data;
+namespace Ibexa\User\Form\Data;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -43,3 +43,5 @@ class UserPasswordForgotWithLoginData
         return $this->login;
     }
 }
+
+class_alias(UserPasswordForgotWithLoginData::class, 'EzSystems\EzPlatformUser\Form\Data\UserPasswordForgotWithLoginData');

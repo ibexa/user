@@ -6,9 +6,9 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUserBundle\DependencyInjection\Compiler;
+namespace Ibexa\Bundle\User\DependencyInjection\Compiler;
 
-use EzSystems\EzPlatformUserBundle\Security\Authentication\DefaultAuthenticationFailureHandler;
+use Ibexa\Bundle\User\Security\Authentication\DefaultAuthenticationFailureHandler;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
@@ -22,3 +22,5 @@ class SecurityPass implements CompilerPassInterface
         }
     }
 }
+
+class_alias(SecurityPass::class, 'EzSystems\EzPlatformUserBundle\DependencyInjection\Compiler\SecurityPass');

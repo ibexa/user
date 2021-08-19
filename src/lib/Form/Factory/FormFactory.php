@@ -6,19 +6,19 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUser\Form\Factory;
+namespace Ibexa\User\Form\Factory;
 
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
-use EzSystems\EzPlatformUser\Form\Data\UserPasswordForgotData;
-use EzSystems\EzPlatformUser\Form\Data\UserPasswordChangeData;
-use EzSystems\EzPlatformUser\Form\Data\UserSettingUpdateData;
-use EzSystems\EzPlatformUser\Form\Type\UserPasswordChangeType;
-use EzSystems\EzPlatformUser\Form\Type\UserPasswordForgotType;
-use EzSystems\EzPlatformUser\Form\Data\UserPasswordForgotWithLoginData;
-use EzSystems\EzPlatformUser\Form\Type\UserPasswordForgotWithLoginType;
-use EzSystems\EzPlatformUser\Form\Data\UserPasswordResetData;
-use EzSystems\EzPlatformUser\Form\Type\UserPasswordResetType;
-use EzSystems\EzPlatformUser\Form\Type\UserSettingUpdateType;
+use Ibexa\User\Form\Data\UserPasswordForgotData;
+use Ibexa\User\Form\Data\UserPasswordChangeData;
+use Ibexa\User\Form\Data\UserSettingUpdateData;
+use Ibexa\User\Form\Type\UserPasswordChangeType;
+use Ibexa\User\Form\Type\UserPasswordForgotType;
+use Ibexa\User\Form\Data\UserPasswordForgotWithLoginData;
+use Ibexa\User\Form\Type\UserPasswordForgotWithLoginType;
+use Ibexa\User\Form\Data\UserPasswordResetData;
+use Ibexa\User\Form\Type\UserPasswordResetType;
+use Ibexa\User\Form\Type\UserSettingUpdateType;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Form\FormInterface;
@@ -133,3 +133,5 @@ class FormFactory
         );
     }
 }
+
+class_alias(FormFactory::class, 'EzSystems\EzPlatformUser\Form\Factory\FormFactory');

@@ -6,11 +6,11 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUser\View\UserSettings\Matcher;
+namespace Ibexa\User\View\UserSettings\Matcher;
 
 use eZ\Publish\Core\MVC\Symfony\Matcher\ViewMatcherInterface;
 use eZ\Publish\Core\MVC\Symfony\View\View;
-use EzSystems\EzPlatformUser\View\UserSettings\UpdateView;
+use Ibexa\User\View\UserSettings\UpdateView;
 
 /**
  * Match based on the user setting identifier.
@@ -40,3 +40,5 @@ class Identifier implements ViewMatcherInterface
         return \in_array($view->getUserSetting()->identifier, $this->identifiers);
     }
 }
+
+class_alias(Identifier::class, 'EzSystems\EzPlatformUser\View\UserSettings\Matcher\Identifier');

@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUser\Validator\Constraints;
+namespace Ibexa\User\Validator\Constraints;
 
 use eZ\Publish\API\Repository\UserService;
 use eZ\Publish\API\Repository\Values\User\User;
@@ -61,3 +61,5 @@ class UserPasswordValidator extends ConstraintValidator
         }
     }
 }
+
+class_alias(UserPasswordValidator::class, 'EzSystems\EzPlatformUser\Validator\Constraints\UserPasswordValidator');

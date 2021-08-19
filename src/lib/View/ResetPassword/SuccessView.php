@@ -6,10 +6,12 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUser\View\ResetPassword;
+namespace Ibexa\User\View\ResetPassword;
 
 use eZ\Publish\Core\MVC\Symfony\View\BaseView;
 
 class SuccessView extends BaseView
 {
 }
+
+class_alias(SuccessView::class, 'EzSystems\EzPlatformUser\View\ResetPassword\SuccessView');

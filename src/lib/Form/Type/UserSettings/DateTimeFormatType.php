@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUser\Form\Type\UserSettings;
+namespace Ibexa\User\Form\Type\UserSettings;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -47,3 +47,5 @@ class DateTimeFormatType extends AbstractType
         ]);
     }
 }
+
+class_alias(DateTimeFormatType::class, 'EzSystems\EzPlatformUser\Form\Type\UserSettings\DateTimeFormatType');

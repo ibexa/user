@@ -6,9 +6,10 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUser\UserSetting;
+namespace Ibexa\User\UserSetting;
 
 use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
+use Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface;
 
 /**
  * @internal
@@ -93,3 +94,5 @@ class ValueDefinitionRegistry
         return \count($this->valueDefinitions);
     }
 }
+
+class_alias(ValueDefinitionRegistry::class, 'EzSystems\EzPlatformUser\UserSetting\ValueDefinitionRegistry');

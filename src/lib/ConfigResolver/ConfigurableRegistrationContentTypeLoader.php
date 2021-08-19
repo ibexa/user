@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUser\ConfigResolver;
+namespace Ibexa\User\ConfigResolver;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -34,3 +34,5 @@ class ConfigurableRegistrationContentTypeLoader extends ConfigurableSudoReposito
         $optionsResolver->setRequired('contentTypeIdentifier');
     }
 }
+
+class_alias(ConfigurableRegistrationContentTypeLoader::class, 'EzSystems\EzPlatformUser\ConfigResolver\ConfigurableRegistrationContentTypeLoader');

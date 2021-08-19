@@ -6,9 +6,9 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUser\UserSetting\DateTimeFormat;
+namespace Ibexa\User\UserSetting\DateTimeFormat;
 
-use EzSystems\EzPlatformUser\UserSetting\UserSettingService;
+use Ibexa\User\UserSetting\UserSettingService;
 
 abstract class AbstractDateTimeFormatterFactory implements DateTimeFormatterFactoryInterface
 {
@@ -44,3 +44,5 @@ abstract class AbstractDateTimeFormatterFactory implements DateTimeFormatterFact
         );
     }
 }
+
+class_alias(AbstractDateTimeFormatterFactory::class, 'EzSystems\EzPlatformUser\UserSetting\DateTimeFormat\AbstractDateTimeFormatterFactory');

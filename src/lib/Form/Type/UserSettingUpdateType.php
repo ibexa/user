@@ -6,11 +6,11 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUser\Form\Type;
+namespace Ibexa\User\Form\Type;
 
-use EzSystems\EzPlatformUser\Form\Data\UserSettingUpdateData;
-use EzSystems\EzPlatformUser\UserSetting\FormMapperRegistry;
-use EzSystems\EzPlatformUser\UserSetting\ValueDefinitionRegistry;
+use Ibexa\User\Form\Data\UserSettingUpdateData;
+use Ibexa\User\UserSetting\FormMapperRegistry;
+use Ibexa\User\UserSetting\ValueDefinitionRegistry;
 use RuntimeException;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
@@ -75,3 +75,5 @@ class UserSettingUpdateType extends AbstractType
         ;
     }
 }
+
+class_alias(UserSettingUpdateType::class, 'EzSystems\EzPlatformUser\Form\Type\UserSettingUpdateType');

@@ -6,11 +6,11 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUser\Templating\Twig;
+namespace Ibexa\User\Templating\Twig;
 
 use DateTimeImmutable;
-use EzSystems\EzPlatformUser\UserSetting\Setting\DateTimeFormatSerializer;
-use EzSystems\EzPlatformUser\UserSetting\DateTimeFormat\FormatterInterface;
+use Ibexa\User\UserSetting\Setting\DateTimeFormatSerializer;
+use Ibexa\User\UserSetting\DateTimeFormat\FormatterInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 
@@ -105,3 +105,5 @@ class DateTimeExtension extends AbstractExtension
         return $formatter->format($date, $timezone);
     }
 }
+
+class_alias(DateTimeExtension::class, 'EzSystems\EzPlatformUser\Templating\Twig\DateTimeExtension');
