@@ -10,7 +10,7 @@ namespace Ibexa\User\UserSetting\Setting\Value;
 
 final class DateTimeFormat
 {
-    /** @var string |null */
+    /** @var string|null */
     private $dateFormat;
 
     /** @var string|null */
