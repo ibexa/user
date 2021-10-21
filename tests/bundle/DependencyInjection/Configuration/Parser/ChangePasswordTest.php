@@ -21,7 +21,7 @@ final class ChangePasswordTest extends AbstractParserTestCase
             new EzPublishCoreExtension([
                 new ChangePassword(),
             ]),
-            new EzPlatformUserExtension(),
+            new IbexaUserExtension(),
         ];
     }
 

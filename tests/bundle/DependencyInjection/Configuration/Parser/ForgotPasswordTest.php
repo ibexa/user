@@ -21,7 +21,7 @@ final class ForgotPasswordTest extends AbstractParserTestCase
             new EzPublishCoreExtension([
                 new ForgotPassword(),
             ]),
-            new EzPlatformUserExtension(),
+            new IbexaUserExtension(),
         ];
     }
 
