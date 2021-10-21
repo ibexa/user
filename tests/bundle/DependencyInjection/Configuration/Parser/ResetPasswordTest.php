@@ -21,7 +21,7 @@ final class ResetPasswordTest extends AbstractParserTestCase
             new EzPublishCoreExtension([
                 new ResetPassword(),
             ]),
-            new EzPlatformUserExtension(),
+            new IbexaUserExtension(),
         ];
     }
 
