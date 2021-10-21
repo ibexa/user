@@ -6,10 +6,12 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUser\View\UserSettings;
+namespace Ibexa\User\View\UserSettings;
 
 use eZ\Publish\Core\MVC\Symfony\View\BaseView;
 
 class ListView extends BaseView
 {
 }
+
+class_alias(ListView::class, 'EzSystems\EzPlatformUser\View\UserSettings\ListView');

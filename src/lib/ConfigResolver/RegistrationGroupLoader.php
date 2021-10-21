@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUser\ConfigResolver;
+namespace Ibexa\User\ConfigResolver;
 
 /**
  * Used to load a user group during registration.
@@ -20,3 +20,5 @@ interface RegistrationGroupLoader
      */
     public function loadGroup();
 }
+
+class_alias(RegistrationGroupLoader::class, 'EzSystems\EzPlatformUser\ConfigResolver\RegistrationGroupLoader');

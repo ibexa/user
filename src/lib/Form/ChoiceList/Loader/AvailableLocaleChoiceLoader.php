@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUser\Form\ChoiceList\Loader;
+namespace Ibexa\User\Form\ChoiceList\Loader;
 
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use Symfony\Component\Form\ChoiceList\ArrayChoiceList;
@@ -89,3 +89,5 @@ class AvailableLocaleChoiceLoader implements ChoiceLoaderInterface
         return $this->loadChoiceList($value)->getValuesForChoices($choices);
     }
 }
+
+class_alias(AvailableLocaleChoiceLoader::class, 'EzSystems\EzPlatformUser\Form\ChoiceList\Loader\AvailableLocaleChoiceLoader');

@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUser\UserSetting\DateTimeFormat;
+namespace Ibexa\User\UserSetting\DateTimeFormat;
 
 use DateTimeInterface;
 
@@ -20,3 +20,5 @@ interface FormatterInterface
      */
     public function format(DateTimeInterface $datetime, string $timezone = null): string;
 }
+
+class_alias(FormatterInterface::class, 'EzSystems\EzPlatformUser\UserSetting\DateTimeFormat\FormatterInterface');

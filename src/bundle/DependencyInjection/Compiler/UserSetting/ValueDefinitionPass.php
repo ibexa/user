@@ -6,10 +6,10 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUserBundle\DependencyInjection\Compiler\UserSetting;
+namespace Ibexa\Bundle\User\DependencyInjection\Compiler\UserSetting;
 
 use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
-use EzSystems\EzPlatformUser\UserSetting\ValueDefinitionRegistry;
+use Ibexa\User\UserSetting\ValueDefinitionRegistry;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
@@ -52,3 +52,5 @@ class ValueDefinitionPass implements CompilerPassInterface
         }
     }
 }
+
+class_alias(ValueDefinitionPass::class, 'EzSystems\EzPlatformUserBundle\DependencyInjection\Compiler\UserSetting\ValueDefinitionPass');

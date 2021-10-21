@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUser\Validator\Constraints;
+namespace Ibexa\User\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 use JMS\TranslationBundle\Model\Message;
@@ -30,3 +30,5 @@ class UserPassword extends Constraint implements TranslationContainerInterface
         ];
     }
 }
+
+class_alias(UserPassword::class, 'EzSystems\EzPlatformUser\Validator\Constraints\UserPassword');

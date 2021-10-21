@@ -6,10 +6,12 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUser\View\ResetPassword;
+namespace Ibexa\User\View\ResetPassword;
 
 use eZ\Publish\Core\MVC\Symfony\View\BaseView;
 
 class InvalidLinkView extends BaseView
 {
 }
+
+class_alias(InvalidLinkView::class, 'EzSystems\EzPlatformUser\View\ResetPassword\InvalidLinkView');

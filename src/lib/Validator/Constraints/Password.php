@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUser\Validator\Constraints;
+namespace Ibexa\User\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
@@ -29,3 +29,5 @@ class Password extends Constraint
         return [self::CLASS_CONSTRAINT, self::PROPERTY_CONSTRAINT];
     }
 }
+
+class_alias(Password::class, 'EzSystems\EzPlatformUser\Validator\Constraints\Password');

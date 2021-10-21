@@ -6,13 +6,13 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUser\EventListener;
+namespace Ibexa\User\EventListener;
 
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use eZ\Publish\Core\MVC\Symfony\Event\PreContentViewEvent;
 use eZ\Publish\Core\MVC\Symfony\MVCEvents;
 use EzSystems\EzPlatformContentForms\User\View\UserUpdateView;
-use EzSystems\EzPlatformUser\View;
+use Ibexa\User\View;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class ViewTemplatesListener implements EventSubscriberInterface
@@ -87,3 +87,5 @@ class ViewTemplatesListener implements EventSubscriberInterface
         ];
     }
 }
+
+class_alias(ViewTemplatesListener::class, 'EzSystems\EzPlatformUser\EventListener\ViewTemplatesListener');

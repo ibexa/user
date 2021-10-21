@@ -6,10 +6,10 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUser\Tests\Form\Type\ChoiceList\Loader;
+namespace Ibexa\Tests\User\Form\Type\ChoiceList\Loader;
 
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
-use EzSystems\EzPlatformUser\Form\ChoiceList\Loader\AvailableLocaleChoiceLoader;
+use Ibexa\User\Form\ChoiceList\Loader\AvailableLocaleChoiceLoader;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Validator\Constraints\Locale;
 use Symfony\Component\Validator\ConstraintViolationInterface;
@@ -104,3 +104,5 @@ class AvailableLocaleChoiceLoaderTest extends TestCase
         ];
     }
 }
+
+class_alias(AvailableLocaleChoiceLoaderTest::class, 'EzSystems\EzPlatformUser\Tests\Form\Type\ChoiceList\Loader\AvailableLocaleChoiceLoaderTest');

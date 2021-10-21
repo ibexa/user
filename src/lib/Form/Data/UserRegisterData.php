@@ -6,10 +6,12 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUser\Form\Data;
+namespace Ibexa\User\Form\Data;
 
 use EzSystems\EzPlatformContentForms\Data\User\UserCreateData;
 
 class UserRegisterData extends UserCreateData
 {
 }
+
+class_alias(UserRegisterData::class, 'EzSystems\EzPlatformUser\Form\Data\UserRegisterData');

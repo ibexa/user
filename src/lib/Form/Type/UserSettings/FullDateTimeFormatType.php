@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUser\Form\Type\UserSettings;
+namespace Ibexa\User\Form\Type\UserSettings;
 
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use Symfony\Component\Form\AbstractType;
@@ -41,3 +41,5 @@ class FullDateTimeFormatType extends AbstractType
         return DateTimeFormatType::class;
     }
 }
+
+class_alias(FullDateTimeFormatType::class, 'EzSystems\EzPlatformUser\Form\Type\UserSettings\FullDateTimeFormatType');

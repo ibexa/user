@@ -6,10 +6,10 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUser\Form\Data;
+namespace Ibexa\User\Form\Data;
 
 use Symfony\Component\Validator\Constraints as Assert;
-use EzSystems\EzPlatformUser\Validator\Constraints as UserAssert;
+use Ibexa\User\Validator\Constraints as UserAssert;
 
 class UserPasswordChangeData
 {
@@ -70,3 +70,5 @@ class UserPasswordChangeData
         return $this->newPassword;
     }
 }
+
+class_alias(UserPasswordChangeData::class, 'EzSystems\EzPlatformUser\Form\Data\UserPasswordChangeData');

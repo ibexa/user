@@ -6,12 +6,12 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUser\Tests\Validator\Constraint;
+namespace Ibexa\Tests\User\Validator\Constraint;
 
 use eZ\Publish\API\Repository\UserService;
 use eZ\Publish\Core\MVC\Symfony\Security\ReferenceUserInterface;
-use EzSystems\EzPlatformUser\Validator\Constraints\UserPassword;
-use EzSystems\EzPlatformUser\Validator\Constraints\UserPasswordValidator;
+use Ibexa\User\Validator\Constraints\UserPassword;
+use Ibexa\User\Validator\Constraints\UserPasswordValidator;
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -124,3 +124,5 @@ class UserPasswordValidatorTest extends TestCase
         $this->validator->validate('password', new UserPassword());
     }
 }
+
+class_alias(UserPasswordValidatorTest::class, 'EzSystems\EzPlatformUser\Tests\Validator\Constraint\UserPasswordValidatorTest');

@@ -6,10 +6,12 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUser\View\ForgotPassword;
+namespace Ibexa\User\View\ForgotPassword;
 
 use eZ\Publish\Core\MVC\Symfony\View\BaseView;
 
 class SuccessView extends BaseView
 {
 }
+
+class_alias(SuccessView::class, 'EzSystems\EzPlatformUser\View\ForgotPassword\SuccessView');
