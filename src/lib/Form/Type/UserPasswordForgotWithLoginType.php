@@ -6,9 +6,9 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUser\Form\Type;
+namespace Ibexa\User\Form\Type;
 
-use EzSystems\EzPlatformUser\Form\Data\UserPasswordForgotWithLoginData;
+use Ibexa\User\Form\Data\UserPasswordForgotWithLoginData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -39,3 +39,5 @@ class UserPasswordForgotWithLoginType extends AbstractType
         ]);
     }
 }
+
+class_alias(UserPasswordForgotWithLoginType::class, 'EzSystems\EzPlatformUser\Form\Type\UserPasswordForgotWithLoginType');

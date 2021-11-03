@@ -6,10 +6,10 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUser\UserSetting\DateTimeFormat;
+namespace Ibexa\User\UserSetting\DateTimeFormat;
 
-use EzSystems\EzPlatformUser\UserSetting\Setting\DateTimeFormatSerializer;
-use EzSystems\EzPlatformUser\UserSetting\UserSettingService;
+use Ibexa\User\UserSetting\Setting\DateTimeFormatSerializer;
+use Ibexa\User\UserSetting\UserSettingService;
 
 class ShortDateTimeFormatterFactory extends AbstractDateTimeFormatterFactory implements DateTimeFormatterFactoryInterface
 {
@@ -38,3 +38,5 @@ class ShortDateTimeFormatterFactory extends AbstractDateTimeFormatterFactory imp
         );
     }
 }
+
+class_alias(ShortDateTimeFormatterFactory::class, 'EzSystems\EzPlatformUser\UserSetting\DateTimeFormat\ShortDateTimeFormatterFactory');

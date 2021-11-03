@@ -4,15 +4,15 @@ services:
         autoconfigure: true
         public: false
 
-    EzSystems\EzPlatformUser\Form\Type\:
+    Ibexa\User\Form\Type\:
         resource: "../../../lib/Form/Type/*"
 
-    EzSystems\EzPlatformUser\Form\Factory\FormFactory: ~
+    Ibexa\User\Form\Factory\FormFactory: ~
 
-    EzSystems\EzPlatformUser\Form\ChoiceList\Loader\AvailableLocaleChoiceLoader:
+    Ibexa\User\Form\ChoiceList\Loader\AvailableLocaleChoiceLoader:
         arguments:
             $availableTranslations: '%available_translations%'
 
-    EzSystems\EzPlatformUser\Form\Type\UserSettings\FullDateTimeFormatType: ~
+    Ibexa\User\Form\Type\UserSettings\FullDateTimeFormatType: ~
 
-    EzSystems\EzPlatformUser\Form\Type\UserSettings\ShortDateTimeFormatType: ~
+    Ibexa\User\Form\Type\UserSettings\ShortDateTimeFormatType: ~

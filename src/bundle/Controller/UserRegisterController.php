@@ -6,14 +6,14 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUserBundle\Controller;
+namespace Ibexa\Bundle\User\Controller;
 
 use eZ\Publish\Core\MVC\Symfony\Security\Authorization\Attribute;
-use EzSystems\EzPlatformUser\Form\DataMapper\UserRegisterMapper;
-use EzSystems\EzPlatformUser\View\Register\ConfirmView;
-use EzSystems\EzPlatformUser\View\Register\FormView;
+use Ibexa\User\Form\DataMapper\UserRegisterMapper;
+use Ibexa\User\View\Register\ConfirmView;
+use Ibexa\User\View\Register\FormView;
 use EzSystems\EzPlatformContentForms\Form\ActionDispatcher\ActionDispatcherInterface;
-use EzSystems\EzPlatformUser\Form\Type\UserRegisterType;
+use Ibexa\User\Form\Type\UserRegisterType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
@@ -82,3 +82,5 @@ class UserRegisterController extends Controller
         return new ConfirmView();
     }
 }
+
+class_alias(UserRegisterController::class, 'EzSystems\EzPlatformUserBundle\Controller\UserRegisterController');

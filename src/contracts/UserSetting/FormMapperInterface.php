@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUser\UserSetting;
+namespace Ibexa\Contracts\User\UserSetting;
 
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -20,3 +20,5 @@ interface FormMapperInterface
         ValueDefinitionInterface $value
     ): FormBuilderInterface;
 }
+
+class_alias(FormMapperInterface::class, 'EzSystems\EzPlatformUser\UserSetting\FormMapperInterface');

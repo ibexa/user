@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUser\ConfigResolver;
+namespace Ibexa\User\ConfigResolver;
 
 use eZ\Publish\API\Repository\Repository;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
@@ -39,3 +39,5 @@ class ConfigurableRegistrationGroupLoader implements RegistrationGroupLoader
         });
     }
 }
+
+class_alias(ConfigurableRegistrationGroupLoader::class, 'EzSystems\EzPlatformUser\ConfigResolver\ConfigurableRegistrationGroupLoader');

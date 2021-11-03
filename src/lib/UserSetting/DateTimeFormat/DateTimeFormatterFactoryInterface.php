@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUser\UserSetting\DateTimeFormat;
+namespace Ibexa\User\UserSetting\DateTimeFormat;
 
 interface DateTimeFormatterFactoryInterface
 {
@@ -15,3 +15,5 @@ interface DateTimeFormatterFactoryInterface
      */
     public function getFormatter(): FormatterInterface;
 }
+
+class_alias(DateTimeFormatterFactoryInterface::class, 'EzSystems\EzPlatformUser\UserSetting\DateTimeFormat\DateTimeFormatterFactoryInterface');

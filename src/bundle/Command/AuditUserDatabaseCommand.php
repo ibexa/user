@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUserBundle\Command;
+namespace Ibexa\Bundle\User\Command;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\FetchMode;
@@ -159,3 +159,5 @@ final class AuditUserDatabaseCommand extends Command implements BackwardCompatib
         return ['ezplatform:user:audit_database'];
     }
 }
+
+class_alias(AuditUserDatabaseCommand::class, 'EzSystems\EzPlatformUserBundle\Command\AuditUserDatabaseCommand');

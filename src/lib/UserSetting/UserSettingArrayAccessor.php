@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUser\UserSetting;
+namespace Ibexa\User\UserSetting;
 
 use ArrayAccess;
 use eZ\Publish\API\Repository\Exceptions\NotImplementedException;
@@ -63,3 +63,5 @@ class UserSettingArrayAccessor implements ArrayAccess
         throw new NotImplementedException('offsetUnset');
     }
 }
+
+class_alias(UserSettingArrayAccessor::class, 'EzSystems\EzPlatformUser\UserSetting\UserSettingArrayAccessor');

@@ -6,7 +6,9 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUser\UserSetting;
+namespace Ibexa\User\UserSetting;
+
+use Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface;
 
 /**
  * @internal
@@ -45,3 +47,5 @@ final class ValueDefinitionRegistryEntry
         return $this->priority;
     }
 }
+
+class_alias(ValueDefinitionRegistryEntry::class, 'EzSystems\EzPlatformUser\UserSetting\ValueDefinitionRegistryEntry');

@@ -6,9 +6,11 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUserBundle\Type;
+namespace Ibexa\Bundle\User\Type;
 
 class UserForgotPasswordReason
 {
     public const MIGRATION = 'migration';
 }
+
+class_alias(UserForgotPasswordReason::class, 'EzSystems\EzPlatformUserBundle\Type\UserForgotPasswordReason');

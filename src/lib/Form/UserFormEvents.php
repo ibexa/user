@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUser\Form;
+namespace Ibexa\User\Form;
 
 final class UserFormEvents
 {
@@ -15,3 +15,5 @@ final class UserFormEvents
      */
     const USER_REGISTER = 'user.edit.register';
 }
+
+class_alias(UserFormEvents::class, 'EzSystems\EzPlatformUser\Form\UserFormEvents');

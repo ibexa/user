@@ -4,13 +4,13 @@
  * @copyright Copyright (C) eZ Systems AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformUser\Form\DataMapper;
+namespace Ibexa\User\Form\DataMapper;
 
 use eZ\Publish\API\Repository\Values\Content\Field;
-use EzSystems\EzPlatformUser\ConfigResolver\RegistrationContentTypeLoader;
-use EzSystems\EzPlatformUser\ConfigResolver\RegistrationGroupLoader;
+use Ibexa\User\ConfigResolver\RegistrationContentTypeLoader;
+use Ibexa\User\ConfigResolver\RegistrationGroupLoader;
 use EzSystems\EzPlatformContentForms\Data\Content\FieldData;
-use EzSystems\EzPlatformUser\Form\Data\UserRegisterData;
+use Ibexa\User\Form\Data\UserRegisterData;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -85,3 +85,5 @@ class UserRegisterMapper
         $optionsResolver->setRequired('language');
     }
 }
+
+class_alias(UserRegisterMapper::class, 'EzSystems\EzPlatformUser\Form\DataMapper\UserRegisterMapper');

@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUserBundle\DependencyInjection\Configuration\Parser;
+namespace Ibexa\Bundle\User\DependencyInjection\Configuration\Parser;
 
 use eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\AbstractParser;
 use eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\SiteAccessAware\ContextualizerInterface;
@@ -69,3 +69,5 @@ final class ResetPassword extends AbstractParser
         }
     }
 }
+
+class_alias(ResetPassword::class, 'EzSystems\EzPlatformUserBundle\DependencyInjection\Configuration\Parser\ResetPassword');

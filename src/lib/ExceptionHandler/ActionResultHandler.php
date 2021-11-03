@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUser\ExceptionHandler;
+namespace Ibexa\User\ExceptionHandler;
 
 /**
  * @internal
@@ -17,3 +17,5 @@ interface ActionResultHandler
 
     public function success(string $message, array $parameters = [], ?string $domain = null, ?string $locale = null): void;
 }
+
+class_alias(ActionResultHandler::class, 'EzSystems\EzPlatformUser\ExceptionHandler\ActionResultHandler');
