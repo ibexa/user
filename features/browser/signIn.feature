@@ -8,3 +8,11 @@
     When I am viewing the pages on siteaccess "site" as "UnsupportedPasswordUser"
     Then the url should match "/site/user/forgot-password/migration"
     And I should see "Your password has expired"
+
+  @APIUser:admin @lorem
+  Scenario: Create test user with email
+    Given I create a user "testadm" with last name "User" and known email in group "Administrator users"
+
+  Scenario: User can log in on frontend
+
+  Scenario: User can log in to backoffice
