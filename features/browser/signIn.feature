@@ -9,10 +9,14 @@
     Then the url should match "/site/user/forgot-password/migration"
     And I should see "Your password has expired"
 
-  @APIUser:admin @lorem
+  @APIUser:admin
   Scenario: Create test user with email
     Given I create a user "testadm" with last name "User" and known email in group "Administrator users"
 
   Scenario: User can log in on frontend
 
+  @lorem
   Scenario: User can log in to backoffice
+    Given I open Login page in admin SiteAccess
+    When I log in as "testadm@example.com"
+    Then I should be on Dashboard page

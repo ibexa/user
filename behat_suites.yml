@@ -10,3 +10,4 @@ browser:
               - Ibexa\Behat\Browser\Context\BrowserContext
               - Ibexa\Behat\Browser\Context\AuthenticationContext
               - Behat\MinkExtension\Context\MinkContext
+              - Ibexa\AdminUi\Behat\BrowserContext\NavigationContext
