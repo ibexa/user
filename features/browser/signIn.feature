@@ -13,9 +13,10 @@
   Scenario: Create test user with email
     Given I create a user "testadm" with last name "User" and known email in group "Administrator users"
 
-  Scenario: User can log in on frontend
-
   @lorem
+  Scenario: User can log in on frontend
+    Given I am viewing the pages on siteaccess "site" as "testadm@example.com"
+
   Scenario: User can log in to backoffice
     Given I open Login page in admin SiteAccess
     When I log in as "testadm@example.com"
