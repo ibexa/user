@@ -9,15 +9,18 @@
     Then the url should match "/site/user/forgot-password/migration"
     And I should see "Your password has expired"
 
-  @APIUser:admin
-  Scenario: Create test user with email
-    Given I create a user "testadm" with last name "User" and known email in group "Administrator users"
+  @APIUser:admin @lorem
+  Scenario: Create test admin user with known email
+    Given I create a user "testadmin" with last name "User" and known email in group "Administrator users"
 
   @lorem
-  Scenario: User can log in on frontend
-    Given I am viewing the pages on siteaccess "site" as "testadm@example.com"
+  Scenario: User can log in on frontend using email
+    Given I am viewing the pages on siteaccess "site" as "testadmin@example.com"
+    When I go to "users"
+    Then the url should match "/Users"
+    And the response status code should be 200
 
-  Scenario: User can log in to backoffice
+  Scenario: User can log in to backoffice using email
     Given I open Login page in admin SiteAccess
-    When I log in as "testadm@example.com"
+    When I log in as "testadmin@example.com"
     Then I should be on Dashboard page
