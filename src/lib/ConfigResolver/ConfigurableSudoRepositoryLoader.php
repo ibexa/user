@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUser\ConfigResolver;
+namespace Ibexa\User\ConfigResolver;
 
 use Closure;
 use eZ\Publish\API\Repository\Repository;
@@ -98,3 +98,5 @@ abstract class ConfigurableSudoRepositoryLoader
      */
     abstract protected function configureOptions(OptionsResolver $optionsResolver);
 }
+
+class_alias(ConfigurableSudoRepositoryLoader::class, 'EzSystems\EzPlatformUser\ConfigResolver\ConfigurableSudoRepositoryLoader');

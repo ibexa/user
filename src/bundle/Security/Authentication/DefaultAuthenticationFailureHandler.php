@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUserBundle\Security\Authentication;
+namespace Ibexa\Bundle\User\Security\Authentication;
 
 use eZ\Publish\API\Repository\Exceptions\PasswordInUnsupportedFormatException;
 use Symfony\Component\HttpFoundation\Request;
@@ -27,3 +27,5 @@ final class DefaultAuthenticationFailureHandler extends HttpDefaultAuthenticatio
         return parent::onAuthenticationFailure($request, $exception);
     }
 }
+
+class_alias(DefaultAuthenticationFailureHandler::class, 'EzSystems\EzPlatformUserBundle\Security\Authentication\DefaultAuthenticationFailureHandler');

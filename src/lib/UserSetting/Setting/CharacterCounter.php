@@ -6,10 +6,10 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUser\UserSetting\Setting;
+namespace Ibexa\User\UserSetting\Setting;
 
-use EzSystems\EzPlatformUser\UserSetting\FormMapperInterface;
-use EzSystems\EzPlatformUser\UserSetting\ValueDefinitionInterface;
+use Ibexa\Contracts\User\UserSetting\FormMapperInterface;
+use Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface;
 use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -147,3 +147,5 @@ class CharacterCounter implements ValueDefinitionInterface, FormMapperInterface
         );
     }
 }
+
+class_alias(CharacterCounter::class, 'EzSystems\EzPlatformUser\UserSetting\Setting\CharacterCounter');

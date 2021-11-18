@@ -6,12 +6,12 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUser\UserSetting\Setting;
+namespace Ibexa\User\UserSetting\Setting;
 
 use eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface;
-use EzSystems\EzPlatformUser\Form\ChoiceList\Loader\AvailableLocaleChoiceLoader;
-use EzSystems\EzPlatformUser\UserSetting\FormMapperInterface;
-use EzSystems\EzPlatformUser\UserSetting\ValueDefinitionInterface;
+use Ibexa\User\Form\ChoiceList\Loader\AvailableLocaleChoiceLoader;
+use Ibexa\Contracts\User\UserSetting\FormMapperInterface;
+use Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface;
 use Symfony\Component\Form\Extension\Core\Type\LocaleType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -118,3 +118,5 @@ class Language implements ValueDefinitionInterface, FormMapperInterface
         );
     }
 }
+
+class_alias(Language::class, 'EzSystems\EzPlatformUser\UserSetting\Setting\Language');

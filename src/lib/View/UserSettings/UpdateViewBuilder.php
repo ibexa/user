@@ -6,12 +6,12 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUser\View\UserSettings;
+namespace Ibexa\User\View\UserSettings;
 
 use eZ\Publish\Core\MVC\Symfony\View\Builder\ViewBuilder;
 use eZ\Publish\Core\MVC\Symfony\View\Configurator;
 use eZ\Publish\Core\MVC\Symfony\View\ParametersInjector;
-use EzSystems\EzPlatformUser\UserSetting\UserSettingService;
+use Ibexa\User\UserSetting\UserSettingService;
 
 class UpdateViewBuilder implements ViewBuilder
 {
@@ -61,3 +61,5 @@ class UpdateViewBuilder implements ViewBuilder
         return $view;
     }
 }
+
+class_alias(UpdateViewBuilder::class, 'EzSystems\EzPlatformUser\View\UserSettings\UpdateViewBuilder');

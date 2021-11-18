@@ -6,14 +6,14 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUser\Tests\UserSetting;
+namespace Ibexa\Tests\User\UserSetting;
 
 use eZ\Publish\API\Repository\UserPreferenceService;
 use eZ\Publish\API\Repository\Values\UserPreference\UserPreference;
-use EzSystems\EzPlatformUser\UserSetting\UserSetting;
-use EzSystems\EzPlatformUser\UserSetting\UserSettingService;
-use EzSystems\EzPlatformUser\UserSetting\ValueDefinitionInterface;
-use EzSystems\EzPlatformUser\UserSetting\ValueDefinitionRegistry;
+use Ibexa\User\UserSetting\UserSetting;
+use Ibexa\User\UserSetting\UserSettingService;
+use Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface;
+use Ibexa\User\UserSetting\ValueDefinitionRegistry;
 use PHPUnit\Framework\TestCase;
 
 class UserSettingServiceTest extends TestCase
@@ -82,3 +82,5 @@ class UserSettingServiceTest extends TestCase
         return $valueDefinition;
     }
 }
+
+class_alias(UserSettingServiceTest::class, 'EzSystems\EzPlatformUser\Tests\UserSetting\UserSettingServiceTest');

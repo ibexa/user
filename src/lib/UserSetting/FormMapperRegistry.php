@@ -6,9 +6,10 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUser\UserSetting;
+namespace Ibexa\User\UserSetting;
 
 use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
+use Ibexa\Contracts\User\UserSetting\FormMapperInterface;
 
 /**
  * @internal
@@ -64,3 +65,5 @@ class FormMapperRegistry
         return $this->formMappers;
     }
 }
+
+class_alias(FormMapperRegistry::class, 'EzSystems\EzPlatformUser\UserSetting\FormMapperRegistry');

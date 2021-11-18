@@ -4,22 +4,22 @@
  * @copyright Copyright (C) eZ Systems AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformUserBundle;
+namespace Ibexa\Bundle\User;
 
-use EzSystems\EzPlatformUserBundle\DependencyInjection\Compiler\SecurityPass;
-use EzSystems\EzPlatformUserBundle\DependencyInjection\Compiler\UserSetting;
-use EzSystems\EzPlatformUserBundle\DependencyInjection\Configuration\Parser\ChangePassword;
-use EzSystems\EzPlatformUserBundle\DependencyInjection\Configuration\Parser\ForgotPassword;
-use EzSystems\EzPlatformUserBundle\DependencyInjection\Configuration\Parser\Pagination;
-use EzSystems\EzPlatformUserBundle\DependencyInjection\Configuration\Parser\ResetPassword;
-use EzSystems\EzPlatformUserBundle\DependencyInjection\Configuration\Parser\UserPreferences;
-use EzSystems\EzPlatformUserBundle\DependencyInjection\Configuration\Parser\UserRegistration;
-use EzSystems\EzPlatformUserBundle\DependencyInjection\Configuration\Parser\Security;
-use EzSystems\EzPlatformUserBundle\DependencyInjection\Configuration\Parser\UserSettingsUpdateView;
+use Ibexa\Bundle\User\DependencyInjection\Compiler\SecurityPass;
+use Ibexa\Bundle\User\DependencyInjection\Compiler\UserSetting;
+use Ibexa\Bundle\User\DependencyInjection\Configuration\Parser\ChangePassword;
+use Ibexa\Bundle\User\DependencyInjection\Configuration\Parser\ForgotPassword;
+use Ibexa\Bundle\User\DependencyInjection\Configuration\Parser\Pagination;
+use Ibexa\Bundle\User\DependencyInjection\Configuration\Parser\ResetPassword;
+use Ibexa\Bundle\User\DependencyInjection\Configuration\Parser\UserPreferences;
+use Ibexa\Bundle\User\DependencyInjection\Configuration\Parser\UserRegistration;
+use Ibexa\Bundle\User\DependencyInjection\Configuration\Parser\Security;
+use Ibexa\Bundle\User\DependencyInjection\Configuration\Parser\UserSettingsUpdateView;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class EzPlatformUserBundle extends Bundle
+class IbexaUserBundle extends Bundle
 {
     /**
      * {@inheritdoc}
@@ -44,3 +44,5 @@ class EzPlatformUserBundle extends Bundle
         $core->addDefaultSettings(__DIR__ . '/Resources/config', ['ezplatform_default_settings.yaml']);
     }
 }
+
+class_alias(IbexaUserBundle::class, 'EzSystems\EzPlatformUserBundle\EzPlatformUserBundle');

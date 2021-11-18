@@ -6,10 +6,10 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUser\Form\DataTransformer;
+namespace Ibexa\User\Form\DataTransformer;
 
-use EzSystems\EzPlatformUser\UserSetting\Setting\DateTimeFormatSerializer;
-use EzSystems\EzPlatformUser\UserSetting\Setting\Value\DateTimeFormat;
+use Ibexa\User\UserSetting\Setting\DateTimeFormatSerializer;
+use Ibexa\User\UserSetting\Setting\Value\DateTimeFormat;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 
@@ -69,3 +69,5 @@ class DateTimeFormatTransformer implements DataTransformerInterface
         ));
     }
 }
+
+class_alias(DateTimeFormatTransformer::class, 'EzSystems\EzPlatformUser\Form\DataTransformer\DateTimeFormatTransformer');

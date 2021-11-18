@@ -1,4 +1,4 @@
-EzSystems\EzPlatformUser\Form\Data\UserRegisterData:
+Ibexa\User\Form\Data\UserRegisterData:
     properties:
         fieldsData:
             - Valid: ~

@@ -6,14 +6,14 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUser\UserSetting\Setting;
+namespace Ibexa\User\UserSetting\Setting;
 
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
-use EzSystems\EzPlatformUser\Form\DataTransformer\DateTimeFormatTransformer;
-use EzSystems\EzPlatformUser\Form\Type\UserSettings\ShortDateTimeFormatType;
-use EzSystems\EzPlatformUser\UserSetting\Setting\Value\DateTimeFormat;
-use EzSystems\EzPlatformUser\UserSetting\DateTimeFormat\FormatterInterface;
-use EzSystems\EzPlatformUser\UserSetting\ValueDefinitionInterface;
+use Ibexa\User\Form\DataTransformer\DateTimeFormatTransformer;
+use Ibexa\User\Form\Type\UserSettings\ShortDateTimeFormatType;
+use Ibexa\User\UserSetting\Setting\Value\DateTimeFormat;
+use Ibexa\User\UserSetting\DateTimeFormat\FormatterInterface;
+use Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -116,3 +116,5 @@ class ShortDateTimeFormat extends AbstractDateTimeFormat
         return $this->configResolver->getParameter('user_preferences.allowed_short_date_formats');
     }
 }
+
+class_alias(ShortDateTimeFormat::class, 'EzSystems\EzPlatformUser\UserSetting\Setting\ShortDateTimeFormat');

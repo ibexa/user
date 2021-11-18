@@ -6,10 +6,10 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUserBundle\DependencyInjection\Compiler\UserSetting;
+namespace Ibexa\Bundle\User\DependencyInjection\Compiler\UserSetting;
 
 use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
-use EzSystems\EzPlatformUser\UserSetting\FormMapperRegistry;
+use Ibexa\User\UserSetting\FormMapperRegistry;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
@@ -51,3 +51,5 @@ class FormMapperPass implements CompilerPassInterface
         }
     }
 }
+
+class_alias(FormMapperPass::class, 'EzSystems\EzPlatformUserBundle\DependencyInjection\Compiler\UserSetting\FormMapperPass');

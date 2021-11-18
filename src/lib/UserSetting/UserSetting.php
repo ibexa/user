@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUser\UserSetting;
+namespace Ibexa\User\UserSetting;
 
 use eZ\Publish\API\Repository\Values\ValueObject;
 
@@ -30,3 +30,5 @@ class UserSetting extends ValueObject
     /** @var string */
     protected $value;
 }
+
+class_alias(UserSetting::class, 'EzSystems\EzPlatformUser\UserSetting\UserSetting');

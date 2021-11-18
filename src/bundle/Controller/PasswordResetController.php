@@ -6,22 +6,22 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUserBundle\Controller;
+namespace Ibexa\Bundle\User\Controller;
 
 use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\API\Repository\Values\User\User;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
-use EzSystems\EzPlatformUser\ExceptionHandler\ActionResultHandler;
-use EzSystems\EzPlatformUser\Form\Data\UserPasswordResetData;
-use EzSystems\EzPlatformUser\Form\Factory\FormFactory;
-use EzSystems\EzPlatformUser\View\ForgotPassword\FormView;
-use EzSystems\EzPlatformUser\View\ForgotPassword\LoginView;
-use EzSystems\EzPlatformUser\View\ForgotPassword\SuccessView;
-use EzSystems\EzPlatformUser\View\ResetPassword\InvalidLinkView;
-use EzSystems\EzPlatformUser\View\ResetPassword\FormView as UserResetPasswordFormView;
-use EzSystems\EzPlatformUser\View\ResetPassword\SuccessView as UserResetPasswordSuccessView;
-use EzSystems\EzPlatformUserBundle\Type\UserForgotPasswordReason;
+use Ibexa\User\ExceptionHandler\ActionResultHandler;
+use Ibexa\User\Form\Data\UserPasswordResetData;
+use Ibexa\User\Form\Factory\FormFactory;
+use Ibexa\User\View\ForgotPassword\FormView;
+use Ibexa\User\View\ForgotPassword\LoginView;
+use Ibexa\User\View\ForgotPassword\SuccessView;
+use Ibexa\User\View\ResetPassword\InvalidLinkView;
+use Ibexa\User\View\ResetPassword\FormView as UserResetPasswordFormView;
+use Ibexa\User\View\ResetPassword\SuccessView as UserResetPasswordSuccessView;
+use Ibexa\Bundle\User\Type\UserForgotPasswordReason;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use eZ\Publish\API\Repository\UserService;
@@ -249,3 +249,5 @@ class PasswordResetController extends Controller
         $this->mailer->send($message);
     }
 }
+
+class_alias(PasswordResetController::class, 'EzSystems\EzPlatformUserBundle\Controller\PasswordResetController');
