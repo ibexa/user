@@ -20,6 +20,7 @@ matrix:
   - name: "User Integration tests"
     php: 7.3
     env:
+      - SETUP_BEHAT_OPTS="--mode=behat --profile=setup --suite=login-methods -c=behat_ibexa_oss.yaml"
       - BEHAT_OPTS="--profile=browser --suite=user -c=behat_ibexa_oss.yaml"
 
 branches:
