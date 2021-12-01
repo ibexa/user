@@ -1,19 +1,19 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
 namespace Ibexa\Bundle\User\Controller;
 
+use Ibexa\ContentForms\Form\ActionDispatcher\ActionDispatcherInterface;
 use Ibexa\Core\MVC\Symfony\Security\Authorization\Attribute;
 use Ibexa\User\Form\DataMapper\UserRegisterMapper;
+use Ibexa\User\Form\Type\UserRegisterType;
 use Ibexa\User\View\Register\ConfirmView;
 use Ibexa\User\View\Register\FormView;
-use Ibexa\ContentForms\Form\ActionDispatcher\ActionDispatcherInterface;
-use Ibexa\User\Form\Type\UserRegisterType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 

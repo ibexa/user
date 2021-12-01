@@ -1,13 +1,14 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
 namespace Ibexa\Bundle\User\Controller;
 
+use Exception;
 use Ibexa\Contracts\Core\Repository\UserService;
 use Ibexa\Core\MVC\Symfony\SiteAccess;
 use Ibexa\User\ExceptionHandler\ActionResultHandler;
@@ -17,7 +18,6 @@ use Ibexa\User\View\ChangePassword\SuccessView;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Exception;
 
 class PasswordChangeController extends Controller
 {

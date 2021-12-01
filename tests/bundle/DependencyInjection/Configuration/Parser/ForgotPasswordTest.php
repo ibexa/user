@@ -9,9 +9,9 @@ declare(strict_types=1);
 namespace Ibexa\Tests\Bundle\User\DependencyInjection\Configuration\Parser;
 
 use Ibexa\Bundle\Core\DependencyInjection\IbexaCoreExtension;
-use Ibexa\Tests\Bundle\Core\DependencyInjection\Configuration\Parser\AbstractParserTestCase;
 use Ibexa\Bundle\User\DependencyInjection\Configuration\Parser\ForgotPassword;
 use Ibexa\Bundle\User\DependencyInjection\IbexaUserExtension;
+use Ibexa\Tests\Bundle\Core\DependencyInjection\Configuration\Parser\AbstractParserTestCase;
 
 final class ForgotPasswordTest extends AbstractParserTestCase
 {
@@ -33,7 +33,7 @@ final class ForgotPasswordTest extends AbstractParserTestCase
                     'user_forgot_password' => [
                         'templates' => [
                             'form' => 'default/path/template.html.twig',
-                        ]
+                        ],
                     ],
                 ],
             ],
@@ -60,17 +60,17 @@ final class ForgotPasswordTest extends AbstractParserTestCase
                         'templates' => [
                             'form' => '@yourOwnBundle/path/to/template.html.twig',
                             'mail' => '@yourOwnBundle/path/to/mail.html.twig',
-                        ]
+                        ],
                     ],
                     'user_forgot_password_success' => [
                         'templates' => [
                             'form' => '@yourOwnBundle/path/to/template_success.html.twig',
-                        ]
+                        ],
                     ],
                     'user_forgot_password_login' => [
                         'templates' => [
                             'form' => '@yourOwnBundle/path/to/template_login.html.twig',
-                        ]
+                        ],
                     ],
                 ],
             ],

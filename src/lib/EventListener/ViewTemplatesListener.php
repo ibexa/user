@@ -1,17 +1,17 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
 namespace Ibexa\User\EventListener;
 
+use Ibexa\ContentForms\User\View\UserUpdateView;
 use Ibexa\Core\MVC\ConfigResolverInterface;
 use Ibexa\Core\MVC\Symfony\Event\PreContentViewEvent;
 use Ibexa\Core\MVC\Symfony\MVCEvents;
-use Ibexa\ContentForms\User\View\UserUpdateView;
 use Ibexa\User\View;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 

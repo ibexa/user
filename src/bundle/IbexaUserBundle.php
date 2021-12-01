@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace Ibexa\Bundle\User;
@@ -12,9 +12,9 @@ use Ibexa\Bundle\User\DependencyInjection\Configuration\Parser\ChangePassword;
 use Ibexa\Bundle\User\DependencyInjection\Configuration\Parser\ForgotPassword;
 use Ibexa\Bundle\User\DependencyInjection\Configuration\Parser\Pagination;
 use Ibexa\Bundle\User\DependencyInjection\Configuration\Parser\ResetPassword;
+use Ibexa\Bundle\User\DependencyInjection\Configuration\Parser\Security;
 use Ibexa\Bundle\User\DependencyInjection\Configuration\Parser\UserPreferences;
 use Ibexa\Bundle\User\DependencyInjection\Configuration\Parser\UserRegistration;
-use Ibexa\Bundle\User\DependencyInjection\Configuration\Parser\Security;
 use Ibexa\Bundle\User\DependencyInjection\Configuration\Parser\UserSettingsUpdateView;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;

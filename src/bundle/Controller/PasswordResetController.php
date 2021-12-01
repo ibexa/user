@@ -1,16 +1,21 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
 namespace Ibexa\Bundle\User\Controller;
 
+use DateInterval;
+use DateTime;
+use Ibexa\Bundle\User\Type\UserForgotPasswordReason;
 use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
 use Ibexa\Contracts\Core\Repository\PermissionResolver;
+use Ibexa\Contracts\Core\Repository\UserService;
 use Ibexa\Contracts\Core\Repository\Values\User\User;
+use Ibexa\Contracts\Core\Repository\Values\User\UserTokenUpdateStruct;
 use Ibexa\Core\MVC\ConfigResolverInterface;
 use Ibexa\User\ExceptionHandler\ActionResultHandler;
 use Ibexa\User\Form\Data\UserPasswordResetData;
@@ -18,18 +23,13 @@ use Ibexa\User\Form\Factory\FormFactory;
 use Ibexa\User\View\ForgotPassword\FormView;
 use Ibexa\User\View\ForgotPassword\LoginView;
 use Ibexa\User\View\ForgotPassword\SuccessView;
-use Ibexa\User\View\ResetPassword\InvalidLinkView;
 use Ibexa\User\View\ResetPassword\FormView as UserResetPasswordFormView;
+use Ibexa\User\View\ResetPassword\InvalidLinkView;
 use Ibexa\User\View\ResetPassword\SuccessView as UserResetPasswordSuccessView;
-use Ibexa\Bundle\User\Type\UserForgotPasswordReason;
+use Swift_Mailer;
+use Swift_Message;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Ibexa\Contracts\Core\Repository\UserService;
-use Ibexa\Contracts\Core\Repository\Values\User\UserTokenUpdateStruct;
-use Swift_Mailer;
-use DateTime;
-use DateInterval;
-use Swift_Message;
 use Twig\Environment;
 
 class PasswordResetController extends Controller
@@ -40,7 +40,7 @@ class PasswordResetController extends Controller
     /** @var \Ibexa\Contracts\Core\Repository\UserService */
     private $userService;
 
-    /** @var Swift_Mailer */
+    /** @var \Swift_Mailer */
     private $mailer;
 
     /** @var \Twig\Environment */

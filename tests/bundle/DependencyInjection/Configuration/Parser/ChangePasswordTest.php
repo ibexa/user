@@ -9,9 +9,9 @@ declare(strict_types=1);
 namespace Ibexa\Tests\Bundle\User\DependencyInjection\Configuration\Parser;
 
 use Ibexa\Bundle\Core\DependencyInjection\IbexaCoreExtension;
-use Ibexa\Tests\Bundle\Core\DependencyInjection\Configuration\Parser\AbstractParserTestCase;
 use Ibexa\Bundle\User\DependencyInjection\Configuration\Parser\ChangePassword;
 use Ibexa\Bundle\User\DependencyInjection\IbexaUserExtension;
+use Ibexa\Tests\Bundle\Core\DependencyInjection\Configuration\Parser\AbstractParserTestCase;
 
 final class ChangePasswordTest extends AbstractParserTestCase
 {
@@ -33,7 +33,7 @@ final class ChangePasswordTest extends AbstractParserTestCase
                     'user_change_password' => [
                         'templates' => [
                             'form' => 'default/path/template.html.twig',
-                        ]
+                        ],
                     ],
                 ],
             ],
@@ -60,7 +60,7 @@ final class ChangePasswordTest extends AbstractParserTestCase
                         'templates' => [
                             'form' => '@yourOwnBundle/path/to/template.html.twig',
                             'success' => '@yourOwnBundle/path/to/success.html.twig',
-                        ]
+                        ],
                     ],
                 ],
             ],

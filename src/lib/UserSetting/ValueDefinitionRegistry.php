@@ -1,15 +1,15 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
 namespace Ibexa\User\UserSetting;
 
-use Ibexa\Core\Base\Exceptions\InvalidArgumentException;
 use Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface;
+use Ibexa\Core\Base\Exceptions\InvalidArgumentException;
 
 /**
  * @internal
@@ -77,11 +77,11 @@ class ValueDefinitionRegistry
      */
     public function getValueDefinitions(): array
     {
-        uasort($this->valueDefinitions, function (ValueDefinitionRegistryEntry $a, ValueDefinitionRegistryEntry $b) {
+        uasort($this->valueDefinitions, static function (ValueDefinitionRegistryEntry $a, ValueDefinitionRegistryEntry $b) {
             return $b->getPriority() <=> $a->getPriority();
         });
 
-        return array_map(function (ValueDefinitionRegistryEntry $entry) {
+        return array_map(static function (ValueDefinitionRegistryEntry $entry) {
             return $entry->getDefinition();
         }, $this->valueDefinitions);
     }
