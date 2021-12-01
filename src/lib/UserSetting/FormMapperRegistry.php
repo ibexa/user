@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\User\UserSetting;
 
-use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
+use Ibexa\Core\Base\Exceptions\InvalidArgumentException;
 use Ibexa\Contracts\User\UserSetting\FormMapperInterface;
 
 /**
@@ -16,11 +16,11 @@ use Ibexa\Contracts\User\UserSetting\FormMapperInterface;
  */
 class FormMapperRegistry
 {
-    /** @var \EzSystems\EzPlatformUser\UserSetting\FormMapperInterface[] */
+    /** @var \Ibexa\Contracts\User\UserSetting\FormMapperInterface[] */
     protected $formMappers;
 
     /**
-     * @param \EzSystems\EzPlatformUser\UserSetting\FormMapperInterface[] $formMappers
+     * @param \Ibexa\Contracts\User\UserSetting\FormMapperInterface[] $formMappers
      */
     public function __construct(array $formMappers = [])
     {
@@ -29,7 +29,7 @@ class FormMapperRegistry
 
     /**
      * @param string $identifier
-     * @param \EzSystems\EzPlatformUser\UserSetting\FormMapperInterface $formMapper
+     * @param \Ibexa\Contracts\User\UserSetting\FormMapperInterface $formMapper
      */
     public function addFormMapper(
         string $identifier,
@@ -41,9 +41,9 @@ class FormMapperRegistry
     /**
      * @param string $identifier
      *
-     * @return \EzSystems\EzPlatformUser\UserSetting\FormMapperInterface
+     * @return \Ibexa\Contracts\User\UserSetting\FormMapperInterface
      *
-     * @throws \eZ\Publish\Core\Base\Exceptions\InvalidArgumentException
+     * @throws \Ibexa\Core\Base\Exceptions\InvalidArgumentException
      */
     public function getFormMapper(string $identifier): FormMapperInterface
     {
@@ -58,7 +58,7 @@ class FormMapperRegistry
     }
 
     /**
-     * @return \EzSystems\EzPlatformUser\UserSetting\FormMapperInterface[]
+     * @return \Ibexa\Contracts\User\UserSetting\FormMapperInterface[]
      */
     public function getFormMappers(): array
     {

@@ -12,11 +12,11 @@ use Ibexa\User\UserSetting\UserSettingService;
 
 abstract class AbstractDateTimeFormatterFactory implements DateTimeFormatterFactoryInterface
 {
-    /** @var \EzSystems\EzPlatformUser\UserSetting\UserSettingService */
+    /** @var \Ibexa\User\UserSetting\UserSettingService */
     protected $userSettingService;
 
     /**
-     * @param \EzSystems\EzPlatformUser\UserSetting\UserSettingService $userSettingService
+     * @param \Ibexa\User\UserSetting\UserSettingService $userSettingService
      */
     public function __construct(UserSettingService $userSettingService)
     {

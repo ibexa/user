@@ -10,21 +10,21 @@ namespace Ibexa\Bundle\User\Command;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\FetchMode;
-use eZ\Bundle\EzPublishCoreBundle\Command\BackwardCompatibleCommand;
-use eZ\Publish\API\Repository\ContentTypeService;
-use eZ\Publish\API\Repository\UserService;
-use eZ\Publish\Core\FieldType\User\Type;
-use eZ\Publish\Core\FieldType\User\UserStorage\Gateway\DoctrineStorage;
+use Ibexa\Bundle\Core\Command\BackwardCompatibleCommand;
+use Ibexa\Contracts\Core\Repository\ContentTypeService;
+use Ibexa\Contracts\Core\Repository\UserService;
+use Ibexa\Core\FieldType\User\Type;
+use Ibexa\Core\FieldType\User\UserStorage\Gateway\DoctrineStorage;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 final class AuditUserDatabaseCommand extends Command implements BackwardCompatibleCommand
 {
-    /** @var \eZ\Publish\API\Repository\ContentTypeService */
+    /** @var \Ibexa\Contracts\Core\Repository\ContentTypeService */
     private $contentTypeService;
 
-    /** @var \eZ\Publish\API\Repository\UserService */
+    /** @var \Ibexa\Contracts\Core\Repository\UserService */
     private $userService;
 
     /** @var \Doctrine\DBAL\Connection */
@@ -48,7 +48,7 @@ final class AuditUserDatabaseCommand extends Command implements BackwardCompatib
     }
 
     /**
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
      */
     public function execute(
         InputInterface $input,
@@ -119,7 +119,7 @@ final class AuditUserDatabaseCommand extends Command implements BackwardCompatib
     }
 
     /**
-     * @return \eZ\Publish\API\Repository\Values\ContentType\FieldDefinition[]
+     * @return \Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition[]
      */
     private function getUserFieldDefinitions(): array
     {

@@ -15,14 +15,14 @@ use Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface;
  */
 final class ValueDefinitionRegistryEntry
 {
-    /** @var \EzSystems\EzPlatformUser\UserSetting\ValueDefinitionInterface */
+    /** @var \Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface */
     private $definition;
 
     /** @var int */
     private $priority;
 
     /**
-     * @param \EzSystems\EzPlatformUser\UserSetting\ValueDefinitionInterface $definition
+     * @param \Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface $definition
      * @param int $priority
      */
     public function __construct(ValueDefinitionInterface $definition, int $priority = 0)
@@ -32,7 +32,7 @@ final class ValueDefinitionRegistryEntry
     }
 
     /**
-     * @return \EzSystems\EzPlatformUser\UserSetting\ValueDefinitionInterface
+     * @return \Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface
      */
     public function getDefinition(): ValueDefinitionInterface
     {

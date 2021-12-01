@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\Bundle\User\Security\Authentication;
 
-use eZ\Publish\API\Repository\Exceptions\PasswordInUnsupportedFormatException;
+use Ibexa\Contracts\Core\Repository\Exceptions\PasswordInUnsupportedFormatException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Http\Authentication\DefaultAuthenticationFailureHandler as HttpDefaultAuthenticationFailureHandler;

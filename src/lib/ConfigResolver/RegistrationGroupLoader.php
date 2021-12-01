@@ -16,7 +16,7 @@ interface RegistrationGroupLoader
     /**
      * Loads a parent group.
      *
-     * @return \eZ\Publish\API\Repository\Values\User\UserGroup
+     * @return \Ibexa\Contracts\Core\Repository\Values\User\UserGroup
      */
     public function loadGroup();
 }

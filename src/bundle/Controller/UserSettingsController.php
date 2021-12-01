@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\Bundle\User\Controller;
 
-use eZ\Publish\Core\MVC\ConfigResolverInterface;
+use Ibexa\Core\MVC\ConfigResolverInterface;
 use Ibexa\User\ExceptionHandler\ActionResultHandler;
 use Ibexa\User\Form\Data\UserSettingUpdateData;
 use Ibexa\User\Form\Factory\FormFactory;
@@ -25,22 +25,22 @@ use Symfony\Component\HttpFoundation\Response;
 
 class UserSettingsController extends Controller
 {
-    /** @var \EzSystems\EzPlatformUser\Form\Factory\FormFactory */
+    /** @var \Ibexa\User\Form\Factory\FormFactory */
     private $formFactory;
 
-    /** @var \EzSystems\EzPlatformUser\Form\SubmitHandler */
+    /** @var \Ibexa\User\Form\SubmitHandler */
     private $submitHandler;
 
-    /** @var \EzSystems\EzPlatformUser\UserSetting\UserSettingService */
+    /** @var \Ibexa\User\UserSetting\UserSettingService */
     private $userSettingService;
 
-    /** @var \EzSystems\EzPlatformUser\UserSetting\ValueDefinitionRegistry */
+    /** @var \Ibexa\User\UserSetting\ValueDefinitionRegistry */
     private $valueDefinitionRegistry;
 
-    /** @var \EzSystems\EzPlatformUser\ExceptionHandler\ActionResultHandler */
+    /** @var \Ibexa\User\ExceptionHandler\ActionResultHandler */
     private $actionResultHandler;
 
-    /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
+    /** @var \Ibexa\Core\MVC\ConfigResolverInterface */
     private $configResolver;
 
     public function __construct(
@@ -62,9 +62,9 @@ class UserSettingsController extends Controller
     /**
      * @param int $page
      *
-     * @return \EzSystems\EzPlatformUser\View\UserSettings\ListView
+     * @return \Ibexa\User\View\UserSettings\ListView
      *
-     * @throws \eZ\Publish\Core\Base\Exceptions\InvalidArgumentType
+     * @throws \Ibexa\Core\Base\Exceptions\InvalidArgumentType
      */
     public function listAction(int $page = 1): ListView
     {
@@ -83,9 +83,9 @@ class UserSettingsController extends Controller
 
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \EzSystems\EzPlatformUser\View\UserSettings\UpdateView $view
+     * @param \Ibexa\User\View\UserSettings\UpdateView $view
      *
-     * @return \EzSystems\EzPlatformUser\View\UserSettings\UpdateView|\Symfony\Component\HttpFoundation\Response
+     * @return \Ibexa\User\View\UserSettings\UpdateView|\Symfony\Component\HttpFoundation\Response
      */
     public function updateAction(Request $request, UpdateView $view)
     {

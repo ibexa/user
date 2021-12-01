@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\User\View\ChangePassword;
 
-use eZ\Publish\Core\MVC\Symfony\View\BaseView;
+use Ibexa\Core\MVC\Symfony\View\BaseView;
 
 class FormView extends BaseView
 {

@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\User\Form\Type;
 
-use eZ\Publish\API\Repository\Values\ContentType\ContentType;
+use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType;
 use Ibexa\User\Form\Data\UserPasswordResetData;
 use Ibexa\User\Validator\Constraints\Password;
 use Symfony\Component\Form\AbstractType;

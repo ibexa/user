@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\User\UserSetting\Setting;
 
-use eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface;
+use Ibexa\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface;
 use Ibexa\User\Form\ChoiceList\Loader\AvailableLocaleChoiceLoader;
 use Ibexa\Contracts\User\UserSetting\FormMapperInterface;
 use Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface;
@@ -21,16 +21,16 @@ class Language implements ValueDefinitionInterface, FormMapperInterface
     /** @var \Symfony\Contracts\Translation\TranslatorInterface */
     private $translator;
 
-    /** @var \eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface */
+    /** @var \Ibexa\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface */
     private $userLanguagePreferenceProvider;
 
-    /** @var \EzSystems\EzPlatformUser\Form\ChoiceList\Loader\AvailableLocaleChoiceLoader */
+    /** @var \Ibexa\User\Form\ChoiceList\Loader\AvailableLocaleChoiceLoader */
     private $availableLocaleChoiceLoader;
 
     /**
      * @param \Symfony\Contracts\Translation\TranslatorInterface $translator
-     * @param \eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface $userLanguagePreferenceProvider
-     * @param \EzSystems\EzPlatformUser\Form\ChoiceList\Loader\AvailableLocaleChoiceLoader $availableLocaleChoiceLoader
+     * @param \Ibexa\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface $userLanguagePreferenceProvider
+     * @param \Ibexa\User\Form\ChoiceList\Loader\AvailableLocaleChoiceLoader $availableLocaleChoiceLoader
      */
     public function __construct(
         TranslatorInterface $translator,

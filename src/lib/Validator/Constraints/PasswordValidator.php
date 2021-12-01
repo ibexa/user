@@ -8,15 +8,15 @@ declare(strict_types=1);
 
 namespace Ibexa\User\Validator\Constraints;
 
-use eZ\Publish\API\Repository\UserService;
-use eZ\Publish\API\Repository\Values\User\PasswordValidationContext;
-use EzSystems\EzPlatformContentForms\Validator\ValidationErrorsProcessor;
+use Ibexa\Contracts\Core\Repository\UserService;
+use Ibexa\Contracts\Core\Repository\Values\User\PasswordValidationContext;
+use Ibexa\ContentForms\Validator\ValidationErrorsProcessor;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
 class PasswordValidator extends ConstraintValidator
 {
-    /** @var \eZ\Publish\API\Repository\UserService */
+    /** @var \Ibexa\Contracts\Core\Repository\UserService */
     private $userService;
 
     public function __construct(UserService $userService)

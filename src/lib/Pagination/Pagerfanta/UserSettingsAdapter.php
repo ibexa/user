@@ -13,11 +13,11 @@ use Pagerfanta\Adapter\AdapterInterface;
 
 class UserSettingsAdapter implements AdapterInterface
 {
-    /** @var \EzSystems\EzPlatformUser\UserSetting\UserSettingService */
+    /** @var \Ibexa\User\UserSetting\UserSettingService */
     private $userSettingService;
 
     /**
-     * @param \EzSystems\EzPlatformUser\UserSetting\UserSettingService $userSettingService
+     * @param \Ibexa\User\UserSetting\UserSettingService $userSettingService
      */
     public function __construct(UserSettingService $userSettingService)
     {
@@ -27,7 +27,7 @@ class UserSettingsAdapter implements AdapterInterface
     /**
      * {@inheritdoc}
      *
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
      */
     public function getNbResults(): int
     {
@@ -37,7 +37,7 @@ class UserSettingsAdapter implements AdapterInterface
     /**
      * {@inheritdoc}
      *
-     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
      */
     public function getSlice($offset, $length): array
     {

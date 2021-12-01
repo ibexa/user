@@ -15,15 +15,15 @@ use DateTimeImmutable;
 
 abstract class AbstractDateTimeFormat implements ValueDefinitionInterface, FormMapperInterface
 {
-    /** @var \EzSystems\EzPlatformUser\UserSetting\Setting\DateTimeFormatSerializer */
+    /** @var \Ibexa\User\UserSetting\Setting\DateTimeFormatSerializer */
     protected $serializer;
 
-    /** @var \EzSystems\EzPlatformUser\UserSetting\DateTimeFormat\Formatter|null */
+    /** @var \Ibexa\User\UserSetting\DateTimeFormat\Formatter|null */
     protected $formatter;
 
     /**
-     * @param \EzSystems\EzPlatformUser\UserSetting\Setting\DateTimeFormatSerializer $serializer
-     * @param \EzSystems\EzPlatformUser\UserSetting\DateTimeFormat\FormatterInterface $formatter
+     * @param \Ibexa\User\UserSetting\Setting\DateTimeFormatSerializer $serializer
+     * @param \Ibexa\User\UserSetting\DateTimeFormat\FormatterInterface $formatter
      */
     public function __construct(DateTimeFormatSerializer $serializer, FormatterInterface $formatter)
     {

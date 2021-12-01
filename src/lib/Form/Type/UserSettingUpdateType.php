@@ -20,15 +20,15 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class UserSettingUpdateType extends AbstractType
 {
-    /** @var \EzSystems\EzPlatformUser\UserSetting\FormMapperRegistry */
+    /** @var \Ibexa\User\UserSetting\FormMapperRegistry */
     protected $formMapperRegistry;
 
-    /** @var \EzSystems\EzPlatformUser\UserSetting\ValueDefinitionRegistry */
+    /** @var \Ibexa\User\UserSetting\ValueDefinitionRegistry */
     protected $valueDefinitionRegistry;
 
     /**
-     * @param \EzSystems\EzPlatformUser\UserSetting\FormMapperRegistry $formMapperRegistry
-     * @param \EzSystems\EzPlatformUser\UserSetting\ValueDefinitionRegistry $valueDefinitionRegistry
+     * @param \Ibexa\User\UserSetting\FormMapperRegistry $formMapperRegistry
+     * @param \Ibexa\User\UserSetting\ValueDefinitionRegistry $valueDefinitionRegistry
      */
     public function __construct(
         FormMapperRegistry $formMapperRegistry,
@@ -41,7 +41,7 @@ class UserSettingUpdateType extends AbstractType
     /**
      * {@inheritdoc}
      *
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {

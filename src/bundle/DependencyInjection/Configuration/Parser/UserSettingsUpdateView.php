@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\Bundle\User\DependencyInjection\Configuration\Parser;
 
-use eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\Parser\View;
+use Ibexa\Bundle\Core\DependencyInjection\Configuration\Parser\View;
 
 class UserSettingsUpdateView extends View
 {

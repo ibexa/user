@@ -10,7 +10,7 @@ namespace Ibexa\User\UserSetting\Setting;
 
 use Ibexa\Contracts\User\UserSetting\FormMapperInterface;
 use Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface;
-use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
+use Ibexa\Core\Base\Exceptions\InvalidArgumentException;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;

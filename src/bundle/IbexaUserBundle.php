@@ -26,8 +26,8 @@ class IbexaUserBundle extends Bundle
      */
     public function build(ContainerBuilder $container)
     {
-        /** @var \eZ\Bundle\EzPublishCoreBundle\DependencyInjection\EzPublishCoreExtension $core */
-        $core = $container->getExtension('ezpublish');
+        /** @var \Ibexa\Bundle\Core\DependencyInjection\IbexaCoreExtension $core */
+        $core = $container->getExtension('ibexa');
         $core->addConfigParser(new Security());
         $core->addConfigParser(new ChangePassword());
         $core->addConfigParser(new Pagination());

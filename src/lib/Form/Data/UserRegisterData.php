@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\User\Form\Data;
 
-use EzSystems\EzPlatformContentForms\Data\User\UserCreateData;
+use Ibexa\ContentForms\Data\User\UserCreateData;
 
 class UserRegisterData extends UserCreateData
 {

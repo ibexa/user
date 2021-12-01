@@ -8,8 +8,8 @@ declare(strict_types=1);
 
 namespace Ibexa\User\View\UserSettings\Matcher;
 
-use eZ\Publish\Core\MVC\Symfony\Matcher\ViewMatcherInterface;
-use eZ\Publish\Core\MVC\Symfony\View\View;
+use Ibexa\Core\MVC\Symfony\Matcher\ViewMatcherInterface;
+use Ibexa\Core\MVC\Symfony\View\View;
 use Ibexa\User\View\UserSettings\UpdateView;
 
 /**

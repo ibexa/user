@@ -8,8 +8,8 @@ declare(strict_types=1);
 
 namespace Ibexa\Tests\Bundle\User\DependencyInjection\Configuration\Parser;
 
-use eZ\Bundle\EzPublishCoreBundle\DependencyInjection\EzPublishCoreExtension;
-use eZ\Bundle\EzPublishCoreBundle\Tests\DependencyInjection\Configuration\Parser\AbstractParserTestCase;
+use Ibexa\Bundle\Core\DependencyInjection\IbexaCoreExtension;
+use Ibexa\Tests\Bundle\Core\DependencyInjection\Configuration\Parser\AbstractParserTestCase;
 use Ibexa\Bundle\User\DependencyInjection\Configuration\Parser\ForgotPassword;
 use Ibexa\Bundle\User\DependencyInjection\IbexaUserExtension;
 
@@ -18,7 +18,7 @@ final class ForgotPasswordTest extends AbstractParserTestCase
     protected function getContainerExtensions(): array
     {
         return [
-            new EzPublishCoreExtension([
+            new IbexaCoreExtension([
                 new ForgotPassword(),
             ]),
             new IbexaUserExtension(),

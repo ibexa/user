@@ -8,8 +8,8 @@ declare(strict_types=1);
 
 namespace Ibexa\Tests\User\UserSetting;
 
-use eZ\Publish\API\Repository\UserPreferenceService;
-use eZ\Publish\API\Repository\Values\UserPreference\UserPreference;
+use Ibexa\Contracts\Core\Repository\UserPreferenceService;
+use Ibexa\Contracts\Core\Repository\Values\UserPreference\UserPreference;
 use Ibexa\User\UserSetting\UserSetting;
 use Ibexa\User\UserSetting\UserSettingService;
 use Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface;
@@ -71,7 +71,7 @@ class UserSettingServiceTest extends TestCase
      * @param string $name
      * @param string $description
      *
-     * @return \EzSystems\EzPlatformUser\UserSetting\ValueDefinitionInterface
+     * @return \Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface
      */
     private function getValueDefinition(string $name = 'name', string $description = 'description'): ValueDefinitionInterface
     {

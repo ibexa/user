@@ -8,18 +8,18 @@ declare(strict_types=1);
 
 namespace Ibexa\User\View\UserSettings;
 
-use eZ\Publish\Core\MVC\Symfony\Matcher\MatcherFactoryInterface;
-use eZ\Publish\Core\MVC\Symfony\View\View;
-use eZ\Publish\Core\MVC\Symfony\View\ViewProvider;
+use Ibexa\Core\MVC\Symfony\Matcher\MatcherFactoryInterface;
+use Ibexa\Core\MVC\Symfony\View\View;
+use Ibexa\Core\MVC\Symfony\View\ViewProvider;
 use Symfony\Component\HttpKernel\Controller\ControllerReference;
 
 class UpdateViewProvider implements ViewProvider
 {
-    /** @var \eZ\Publish\Core\MVC\Symfony\Matcher\MatcherFactoryInterface */
+    /** @var \Ibexa\Core\MVC\Symfony\Matcher\MatcherFactoryInterface */
     protected $matcherFactory;
 
     /**
-     * @param \eZ\Publish\Core\MVC\Symfony\Matcher\MatcherFactoryInterface $matcherFactory
+     * @param \Ibexa\Core\MVC\Symfony\Matcher\MatcherFactoryInterface $matcherFactory
      */
     public function __construct(MatcherFactoryInterface $matcherFactory)
     {
@@ -41,9 +41,9 @@ class UpdateViewProvider implements ViewProvider
     /**
      * @param array $viewConfig
      *
-     * @return \EzSystems\EzPlatformUser\View\UserSettings\UpdateView
+     * @return \Ibexa\User\View\UserSettings\UpdateView
      *
-     * @throws \eZ\Publish\Core\Base\Exceptions\InvalidArgumentType
+     * @throws \Ibexa\Core\Base\Exceptions\InvalidArgumentType
      */
     protected function buildUpdateSettingView(array $viewConfig): UpdateView
     {

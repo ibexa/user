@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\User\UserSetting\Setting;
 
-use eZ\Publish\Core\MVC\ConfigResolverInterface;
+use Ibexa\Core\MVC\ConfigResolverInterface;
 use Ibexa\Contracts\User\UserSetting\FormMapperInterface;
 use Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
@@ -20,7 +20,7 @@ class SubitemsLimit implements ValueDefinitionInterface, FormMapperInterface
     /** @var \Symfony\Contracts\Translation\TranslatorInterface */
     private $translator;
 
-    /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
+    /** @var \Ibexa\Core\MVC\ConfigResolverInterface */
     private $configResolver;
 
     public function __construct(TranslatorInterface $translator, ConfigResolverInterface $configResolver)

@@ -9,18 +9,18 @@ declare(strict_types=1);
 namespace Ibexa\User\UserSetting;
 
 use ArrayAccess;
-use eZ\Publish\API\Repository\Exceptions\NotImplementedException;
+use Ibexa\Contracts\Core\Repository\Exceptions\NotImplementedException;
 
 /**
  * @internal
  */
 class UserSettingArrayAccessor implements ArrayAccess
 {
-    /** @var \EzSystems\EzPlatformUser\UserSetting\UserSettingService */
+    /** @var \Ibexa\User\UserSetting\UserSettingService */
     protected $userSettingService;
 
     /**
-     * @param \EzSystems\EzPlatformUser\UserSetting\UserSettingService $userSettingService
+     * @param \Ibexa\User\UserSetting\UserSettingService $userSettingService
      */
     public function __construct(UserSettingService $userSettingService)
     {

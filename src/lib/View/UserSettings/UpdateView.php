@@ -8,16 +8,16 @@ declare(strict_types=1);
 
 namespace Ibexa\User\View\UserSettings;
 
-use eZ\Publish\Core\MVC\Symfony\View\BaseView;
+use Ibexa\Core\MVC\Symfony\View\BaseView;
 use Ibexa\User\UserSetting\UserSetting;
 
 class UpdateView extends BaseView
 {
-    /** @var \EzSystems\EzPlatformUser\UserSetting\UserSetting|null */
+    /** @var \Ibexa\User\UserSetting\UserSetting|null */
     private $userSetting;
 
     /**
-     * @return \EzSystems\EzPlatformUser\UserSetting\UserSetting|null
+     * @return \Ibexa\User\UserSetting\UserSetting|null
      */
     public function getUserSetting(): ?UserSetting
     {
@@ -25,7 +25,7 @@ class UpdateView extends BaseView
     }
 
     /**
-     * @param \EzSystems\EzPlatformUser\UserSetting\UserSetting|null $userSetting
+     * @param \Ibexa\User\UserSetting\UserSetting|null $userSetting
      */
     public function setUserSetting(?UserSetting $userSetting): void
     {

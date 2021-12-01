@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\User\Form\Factory;
 
-use eZ\Publish\API\Repository\Values\ContentType\ContentType;
+use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType;
 use Ibexa\User\Form\Data\UserPasswordForgotData;
 use Ibexa\User\Form\Data\UserPasswordChangeData;
 use Ibexa\User\Form\Data\UserSettingUpdateData;
@@ -58,7 +58,7 @@ class FormFactory
     }
 
     /**
-     * @param \EzSystems\EzPlatformUser\Form\Data\UserPasswordForgotData $data
+     * @param \Ibexa\User\Form\Data\UserPasswordForgotData $data
      * @param string|null $name
      *
      * @return \Symfony\Component\Form\FormInterface
@@ -75,7 +75,7 @@ class FormFactory
     }
 
     /**
-     * @param \EzSystems\EzPlatformUser\Form\Data\UserPasswordForgotWithLoginData $data
+     * @param \Ibexa\User\Form\Data\UserPasswordForgotWithLoginData $data
      * @param string|null $name
      *
      * @return \Symfony\Component\Form\FormInterface
@@ -92,7 +92,7 @@ class FormFactory
     }
 
     /**
-     * @param \EzSystems\EzPlatformUser\Form\Data\UserPasswordResetData $data
+     * @param \Ibexa\User\Form\Data\UserPasswordResetData $data
      * @param string|null $name
      *
      * @return \Symfony\Component\Form\FormInterface
@@ -113,7 +113,7 @@ class FormFactory
 
     /**
      * @param string $userSettingIdentifier
-     * @param \EzSystems\EzPlatformUser\Form\Data\UserSettingUpdateData $data
+     * @param \Ibexa\User\Form\Data\UserSettingUpdateData $data
      * @param string|null $name
      *
      * @return \Symfony\Component\Form\FormInterface

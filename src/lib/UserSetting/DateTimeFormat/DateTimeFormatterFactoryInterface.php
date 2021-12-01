@@ -11,7 +11,7 @@ namespace Ibexa\User\UserSetting\DateTimeFormat;
 interface DateTimeFormatterFactoryInterface
 {
     /**
-     * @return \EzSystems\EzPlatformUser\UserSetting\DateTimeFormat\FormatterInterface
+     * @return \Ibexa\User\UserSetting\DateTimeFormat\FormatterInterface
      */
     public function getFormatter(): FormatterInterface;
 }

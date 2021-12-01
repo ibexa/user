@@ -15,11 +15,11 @@ use Symfony\Component\Form\Exception\TransformationFailedException;
 
 class DateTimeFormatTransformer implements DataTransformerInterface
 {
-    /** @var \EzSystems\EzPlatformUser\UserSetting\Setting\DateTimeFormatSerializer */
+    /** @var \Ibexa\User\UserSetting\Setting\DateTimeFormatSerializer */
     private $serializer;
 
     /**
-     * @param \EzSystems\EzPlatformUser\UserSetting\Setting\DateTimeFormatSerializer $serializer
+     * @param \Ibexa\User\UserSetting\Setting\DateTimeFormatSerializer $serializer
      */
     public function __construct(DateTimeFormatSerializer $serializer)
     {

@@ -6,7 +6,7 @@
  */
 namespace Ibexa\User\View\Register;
 
-use eZ\Publish\Core\MVC\Symfony\View\BaseView;
+use Ibexa\Core\MVC\Symfony\View\BaseView;
 
 class ConfirmView extends BaseView
 {

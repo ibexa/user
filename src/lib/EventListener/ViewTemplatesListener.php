@@ -8,16 +8,16 @@ declare(strict_types=1);
 
 namespace Ibexa\User\EventListener;
 
-use eZ\Publish\Core\MVC\ConfigResolverInterface;
-use eZ\Publish\Core\MVC\Symfony\Event\PreContentViewEvent;
-use eZ\Publish\Core\MVC\Symfony\MVCEvents;
-use EzSystems\EzPlatformContentForms\User\View\UserUpdateView;
+use Ibexa\Core\MVC\ConfigResolverInterface;
+use Ibexa\Core\MVC\Symfony\Event\PreContentViewEvent;
+use Ibexa\Core\MVC\Symfony\MVCEvents;
+use Ibexa\ContentForms\User\View\UserUpdateView;
 use Ibexa\User\View;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class ViewTemplatesListener implements EventSubscriberInterface
 {
-    /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
+    /** @var \Ibexa\Core\MVC\ConfigResolverInterface */
     private $configResolver;
 
     public function __construct(ConfigResolverInterface $configResolver)

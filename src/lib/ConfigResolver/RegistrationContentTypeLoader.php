@@ -16,7 +16,7 @@ interface RegistrationContentTypeLoader
     /**
      * Gets the Content Type used by user registration.
      *
-     * @return \eZ\Publish\API\Repository\Values\ContentType\ContentType
+     * @return \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType
      */
     public function loadContentType();
 }

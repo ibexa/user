@@ -13,12 +13,12 @@ use Ibexa\User\UserSetting\UserSettingService;
 
 class FullTimeFormatterFactory extends AbstractDateTimeFormatterFactory implements DateTimeFormatterFactoryInterface
 {
-    /** @var \EzSystems\EzPlatformUser\UserSetting\Setting\DateTimeFormatSerializer */
+    /** @var \Ibexa\User\UserSetting\Setting\DateTimeFormatSerializer */
     private $dateTimeFormatSerializer;
 
     /**
-     * @param \EzSystems\EzPlatformUser\UserSetting\UserSettingService $userSettingService
-     * @param \EzSystems\EzPlatformUser\UserSetting\Setting\DateTimeFormatSerializer $dateTimeFormatSerializer
+     * @param \Ibexa\User\UserSetting\UserSettingService $userSettingService
+     * @param \Ibexa\User\UserSetting\Setting\DateTimeFormatSerializer $dateTimeFormatSerializer
      */
     public function __construct(
         UserSettingService $userSettingService,

@@ -7,8 +7,8 @@
 namespace Ibexa\User\Form\Type;
 
 use Ibexa\User\Form\Data\UserRegisterData;
-use EzSystems\EzPlatformContentForms\Form\EventSubscriber\UserFieldsSubscriber;
-use EzSystems\EzPlatformContentForms\Form\Type\Content\BaseContentType;
+use Ibexa\ContentForms\Form\EventSubscriber\UserFieldsSubscriber;
+use Ibexa\ContentForms\Form\Type\Content\BaseContentType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;

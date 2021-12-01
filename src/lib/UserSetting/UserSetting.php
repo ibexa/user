@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\User\UserSetting;
 
-use eZ\Publish\API\Repository\Values\ValueObject;
+use Ibexa\Contracts\Core\Repository\Values\ValueObject;
 
 /**
  * @property string $identifier

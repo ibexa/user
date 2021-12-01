@@ -16,35 +16,35 @@ use Twig\TwigFilter;
 
 class DateTimeExtension extends AbstractExtension
 {
-    /** @var \EzSystems\EzPlatformUser\UserSetting\Setting\DateTimeFormatSerializer */
+    /** @var \Ibexa\User\UserSetting\Setting\DateTimeFormatSerializer */
     private $dateTimeFormatSerializer;
 
-    /** @var \EzSystems\EzPlatformUser\UserSetting\DateTimeFormat\FormatterInterface */
+    /** @var \Ibexa\User\UserSetting\DateTimeFormat\FormatterInterface */
     private $shortDateTimeFormatter;
 
-    /** @var \EzSystems\EzPlatformUser\UserSetting\DateTimeFormat\FormatterInterface */
+    /** @var \Ibexa\User\UserSetting\DateTimeFormat\FormatterInterface */
     private $shortDateFormatter;
 
-    /** @var \EzSystems\EzPlatformUser\UserSetting\DateTimeFormat\FormatterInterface */
+    /** @var \Ibexa\User\UserSetting\DateTimeFormat\FormatterInterface */
     private $shortTimeFormatter;
 
-    /** @var \EzSystems\EzPlatformUser\UserSetting\DateTimeFormat\FormatterInterface */
+    /** @var \Ibexa\User\UserSetting\DateTimeFormat\FormatterInterface */
     private $fullDateTimeFormatter;
 
-    /** @var \EzSystems\EzPlatformUser\UserSetting\DateTimeFormat\FormatterInterface */
+    /** @var \Ibexa\User\UserSetting\DateTimeFormat\FormatterInterface */
     private $fullDateFormatter;
 
-    /** @var \EzSystems\EzPlatformUser\UserSetting\DateTimeFormat\FormatterInterface */
+    /** @var \Ibexa\User\UserSetting\DateTimeFormat\FormatterInterface */
     private $fullTimeFormatter;
 
     /**
-     * @param \EzSystems\EzPlatformUser\UserSetting\Setting\DateTimeFormatSerializer $dateTimeFormatSerializer
-     * @param \EzSystems\EzPlatformUser\UserSetting\DateTimeFormat\FormatterInterface $shortDateTimeFormatter
-     * @param \EzSystems\EzPlatformUser\UserSetting\DateTimeFormat\FormatterInterface $shortDateFormatter
-     * @param \EzSystems\EzPlatformUser\UserSetting\DateTimeFormat\FormatterInterface $shortTimeFormatter
-     * @param \EzSystems\EzPlatformUser\UserSetting\DateTimeFormat\FormatterInterface $fullDateTimeFormatter
-     * @param \EzSystems\EzPlatformUser\UserSetting\DateTimeFormat\FormatterInterface $fullDateFormatter
-     * @param \EzSystems\EzPlatformUser\UserSetting\DateTimeFormat\FormatterInterface $fullTimeFormatter
+     * @param \Ibexa\User\UserSetting\Setting\DateTimeFormatSerializer $dateTimeFormatSerializer
+     * @param \Ibexa\User\UserSetting\DateTimeFormat\FormatterInterface $shortDateTimeFormatter
+     * @param \Ibexa\User\UserSetting\DateTimeFormat\FormatterInterface $shortDateFormatter
+     * @param \Ibexa\User\UserSetting\DateTimeFormat\FormatterInterface $shortTimeFormatter
+     * @param \Ibexa\User\UserSetting\DateTimeFormat\FormatterInterface $fullDateTimeFormatter
+     * @param \Ibexa\User\UserSetting\DateTimeFormat\FormatterInterface $fullDateFormatter
+     * @param \Ibexa\User\UserSetting\DateTimeFormat\FormatterInterface $fullTimeFormatter
      */
     public function __construct(
         DateTimeFormatSerializer $dateTimeFormatSerializer,
@@ -170,7 +170,7 @@ class DateTimeExtension extends AbstractExtension
     }
 
     /**
-     * @param \EzSystems\EzPlatformUser\UserSetting\DateTimeFormat\FormatterInterface $formatter
+     * @param \Ibexa\User\UserSetting\DateTimeFormat\FormatterInterface $formatter
      * @param mixed|null $date
      * @param string|null $timezone
      *
