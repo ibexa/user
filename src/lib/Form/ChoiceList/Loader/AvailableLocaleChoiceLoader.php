@@ -1,14 +1,14 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
 namespace Ibexa\User\Form\ChoiceList\Loader;
 
-use eZ\Publish\Core\MVC\ConfigResolverInterface;
+use Ibexa\Core\MVC\ConfigResolverInterface;
 use Symfony\Component\Form\ChoiceList\ArrayChoiceList;
 use Symfony\Component\Form\ChoiceList\Loader\ChoiceLoaderInterface;
 use Symfony\Component\Intl\Locales;
@@ -20,7 +20,7 @@ class AvailableLocaleChoiceLoader implements ChoiceLoaderInterface
     /** @var \Symfony\Component\Validator\Validator\ValidatorInterface */
     private $validator;
 
-    /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
+    /** @var \Ibexa\Core\MVC\ConfigResolverInterface */
     private $configResolver;
 
     /** @var string[] */
@@ -28,7 +28,7 @@ class AvailableLocaleChoiceLoader implements ChoiceLoaderInterface
 
     /**
      * @param \Symfony\Component\Validator\Validator\ValidatorInterface $validator
-     * @param \eZ\Publish\Core\MVC\ConfigResolverInterface $configResolver
+     * @param \Ibexa\Core\MVC\ConfigResolverInterface $configResolver
      * @param string[] $availableTranslations
      */
     public function __construct(

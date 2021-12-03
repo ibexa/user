@@ -1,15 +1,15 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
 namespace Ibexa\User\Form\Data;
 
-use Symfony\Component\Validator\Constraints as Assert;
 use Ibexa\User\Validator\Constraints as UserAssert;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class UserPasswordChangeData
 {

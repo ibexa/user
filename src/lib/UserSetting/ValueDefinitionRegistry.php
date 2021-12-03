@@ -1,26 +1,26 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
 namespace Ibexa\User\UserSetting;
 
-use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
 use Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface;
+use Ibexa\Core\Base\Exceptions\InvalidArgumentException;
 
 /**
  * @internal
  */
 class ValueDefinitionRegistry
 {
-    /** @var \EzSystems\EzPlatformUser\UserSetting\ValueDefinitionRegistryEntry[] */
+    /** @var \Ibexa\User\UserSetting\ValueDefinitionRegistryEntry[] */
     protected $valueDefinitions;
 
     /**
-     * @param \EzSystems\EzPlatformUser\UserSetting\ValueDefinitionRegistryEntry[] $valueDefinitions
+     * @param \Ibexa\User\UserSetting\ValueDefinitionRegistryEntry[] $valueDefinitions
      */
     public function __construct(array $valueDefinitions = [])
     {
@@ -32,7 +32,7 @@ class ValueDefinitionRegistry
 
     /**
      * @param string $identifier
-     * @param \EzSystems\EzPlatformUser\UserSetting\ValueDefinitionInterface $valueDefinition
+     * @param \Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface $valueDefinition
      * @param int $priority
      */
     public function addValueDefinition(
@@ -46,9 +46,9 @@ class ValueDefinitionRegistry
     /**
      * @param string $identifier
      *
-     * @return \EzSystems\EzPlatformUser\UserSetting\ValueDefinitionInterface
+     * @return \Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface
      *
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
      */
     public function getValueDefinition(string $identifier): ValueDefinitionInterface
     {
@@ -73,15 +73,15 @@ class ValueDefinitionRegistry
     }
 
     /**
-     * @return \EzSystems\EzPlatformUser\UserSetting\ValueDefinitionInterface[]
+     * @return \Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface[]
      */
     public function getValueDefinitions(): array
     {
-        uasort($this->valueDefinitions, function (ValueDefinitionRegistryEntry $a, ValueDefinitionRegistryEntry $b) {
+        uasort($this->valueDefinitions, static function (ValueDefinitionRegistryEntry $a, ValueDefinitionRegistryEntry $b) {
             return $b->getPriority() <=> $a->getPriority();
         });
 
-        return array_map(function (ValueDefinitionRegistryEntry $entry) {
+        return array_map(static function (ValueDefinitionRegistryEntry $entry) {
             return $entry->getDefinition();
         }, $this->valueDefinitions);
     }

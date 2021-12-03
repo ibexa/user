@@ -1,15 +1,16 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
 namespace Ibexa\Bundle\User\Controller;
 
-use eZ\Publish\API\Repository\UserService;
-use eZ\Publish\Core\MVC\Symfony\SiteAccess;
+use Exception;
+use Ibexa\Contracts\Core\Repository\UserService;
+use Ibexa\Core\MVC\Symfony\SiteAccess;
 use Ibexa\User\ExceptionHandler\ActionResultHandler;
 use Ibexa\User\Form\Factory\FormFactory;
 use Ibexa\User\View\ChangePassword\FormView;
@@ -17,17 +18,16 @@ use Ibexa\User\View\ChangePassword\SuccessView;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Exception;
 
 class PasswordChangeController extends Controller
 {
-    /** @var \EzSystems\EzPlatformUser\ExceptionHandler\ActionResultHandler */
+    /** @var \Ibexa\User\ExceptionHandler\ActionResultHandler */
     private $actionResultHandler;
 
-    /** @var \eZ\Publish\API\Repository\UserService */
+    /** @var \Ibexa\Contracts\Core\Repository\UserService */
     private $userService;
 
-    /** @var \EzSystems\EzPlatformUser\Form\Factory\FormFactory */
+    /** @var \Ibexa\User\Form\Factory\FormFactory */
     private $formFactory;
 
     /** @var \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface */
@@ -53,13 +53,13 @@ class PasswordChangeController extends Controller
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
      *
-     * @return \EzSystems\EzPlatformUser\View\ChangePassword\FormView|\EzSystems\EzPlatformUser\View\ChangePassword\SuccessView|\Symfony\Component\HttpFoundation\RedirectResponse
+     * @return \Ibexa\User\View\ChangePassword\FormView|\Ibexa\User\View\ChangePassword\SuccessView|\Symfony\Component\HttpFoundation\RedirectResponse
      *
-     * @throws \eZ\Publish\Core\Base\Exceptions\InvalidArgumentType
+     * @throws \Ibexa\Core\Base\Exceptions\InvalidArgumentType
      */
     public function userPasswordChangeAction(Request $request)
     {
-        /** @var \eZ\Publish\API\Repository\Values\User\User $user */
+        /** @var \Ibexa\Contracts\Core\Repository\Values\User\User $user */
         $user = $this->tokenStorage->getToken()->getUser()->getAPIUser();
         $form = $this->formFactory->changeUserPassword($user->getContentType());
         $form->handleRequest($request);

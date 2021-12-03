@@ -1,28 +1,28 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
 namespace Ibexa\User\Form\Factory;
 
-use eZ\Publish\API\Repository\Values\ContentType\ContentType;
-use Ibexa\User\Form\Data\UserPasswordForgotData;
+use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType;
 use Ibexa\User\Form\Data\UserPasswordChangeData;
+use Ibexa\User\Form\Data\UserPasswordForgotData;
+use Ibexa\User\Form\Data\UserPasswordForgotWithLoginData;
+use Ibexa\User\Form\Data\UserPasswordResetData;
 use Ibexa\User\Form\Data\UserSettingUpdateData;
 use Ibexa\User\Form\Type\UserPasswordChangeType;
 use Ibexa\User\Form\Type\UserPasswordForgotType;
-use Ibexa\User\Form\Data\UserPasswordForgotWithLoginData;
 use Ibexa\User\Form\Type\UserPasswordForgotWithLoginType;
-use Ibexa\User\Form\Data\UserPasswordResetData;
 use Ibexa\User\Form\Type\UserPasswordResetType;
 use Ibexa\User\Form\Type\UserSettingUpdateType;
 use Symfony\Component\Form\FormFactoryInterface;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\Util\StringUtil;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class FormFactory
 {
@@ -58,7 +58,7 @@ class FormFactory
     }
 
     /**
-     * @param \EzSystems\EzPlatformUser\Form\Data\UserPasswordForgotData $data
+     * @param \Ibexa\User\Form\Data\UserPasswordForgotData $data
      * @param string|null $name
      *
      * @return \Symfony\Component\Form\FormInterface
@@ -75,7 +75,7 @@ class FormFactory
     }
 
     /**
-     * @param \EzSystems\EzPlatformUser\Form\Data\UserPasswordForgotWithLoginData $data
+     * @param \Ibexa\User\Form\Data\UserPasswordForgotWithLoginData $data
      * @param string|null $name
      *
      * @return \Symfony\Component\Form\FormInterface
@@ -92,7 +92,7 @@ class FormFactory
     }
 
     /**
-     * @param \EzSystems\EzPlatformUser\Form\Data\UserPasswordResetData $data
+     * @param \Ibexa\User\Form\Data\UserPasswordResetData $data
      * @param string|null $name
      *
      * @return \Symfony\Component\Form\FormInterface
@@ -113,7 +113,7 @@ class FormFactory
 
     /**
      * @param string $userSettingIdentifier
-     * @param \EzSystems\EzPlatformUser\Form\Data\UserSettingUpdateData $data
+     * @param \Ibexa\User\Form\Data\UserSettingUpdateData $data
      * @param string|null $name
      *
      * @return \Symfony\Component\Form\FormInterface

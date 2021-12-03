@@ -1,45 +1,43 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
 namespace Ibexa\Tests\User\Validator\Constraint;
 
-use eZ\Publish\API\Repository\UserService;
-use eZ\Publish\Core\MVC\Symfony\Security\ReferenceUserInterface;
+use Ibexa\Contracts\Core\Repository\UserService;
+use Ibexa\Contracts\Core\Repository\Values\User\User as APIUser;
+use Ibexa\Core\MVC\Symfony\Security\ReferenceUserInterface;
 use Ibexa\User\Validator\Constraints\UserPassword;
 use Ibexa\User\Validator\Constraints\UserPasswordValidator;
 use PHPUnit\Framework\TestCase;
-use PHPUnit\Framework\MockObject\MockObject;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
-use eZ\Publish\API\Repository\Values\User\User as APIUser;
-use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 
 class UserPasswordValidatorTest extends TestCase
 {
     /**
-     * @var UserService|MockObject
+     * @var \Ibexa\Contracts\Core\Repository\UserService|\PHPUnit\Framework\MockObject\MockObject
      */
     private $userService;
 
     /**
-     * @var TokenStorageInterface|MockObject
+     * @var \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private $tokenStorage;
 
     /**
-     * @var ExecutionContextInterface|MockObject
+     * @var \Symfony\Component\Validator\Context\ExecutionContextInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private $executionContext;
 
     /**
-     * @var UserPasswordValidator
+     * @var \Ibexa\User\Validator\Constraints\UserPasswordValidator
      */
     private $validator;
 

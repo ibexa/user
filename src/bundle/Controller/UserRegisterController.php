@@ -1,33 +1,33 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
 namespace Ibexa\Bundle\User\Controller;
 
-use eZ\Publish\Core\MVC\Symfony\Security\Authorization\Attribute;
+use Ibexa\ContentForms\Form\ActionDispatcher\ActionDispatcherInterface;
+use Ibexa\Core\MVC\Symfony\Security\Authorization\Attribute;
 use Ibexa\User\Form\DataMapper\UserRegisterMapper;
+use Ibexa\User\Form\Type\UserRegisterType;
 use Ibexa\User\View\Register\ConfirmView;
 use Ibexa\User\View\Register\FormView;
-use EzSystems\EzPlatformContentForms\Form\ActionDispatcher\ActionDispatcherInterface;
-use Ibexa\User\Form\Type\UserRegisterType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
 class UserRegisterController extends Controller
 {
-    /** @var \EzSystems\EzPlatformUser\Form\DataMapper\UserRegisterMapper */
+    /** @var \Ibexa\User\Form\DataMapper\UserRegisterMapper */
     private $userRegisterMapper;
 
-    /** @var \EzSystems\EzPlatformContentForms\Form\ActionDispatcher\ActionDispatcherInterface */
+    /** @var \Ibexa\ContentForms\Form\ActionDispatcher\ActionDispatcherInterface */
     private $userActionDispatcher;
 
     /**
-     * @param \EzSystems\EzPlatformUser\Form\DataMapper\UserRegisterMapper $userRegisterMapper
-     * @param \EzSystems\EzPlatformContentForms\Form\ActionDispatcher\ActionDispatcherInterface $userActionDispatcher
+     * @param \Ibexa\User\Form\DataMapper\UserRegisterMapper $userRegisterMapper
+     * @param \Ibexa\ContentForms\Form\ActionDispatcher\ActionDispatcherInterface $userActionDispatcher
      */
     public function __construct(
         UserRegisterMapper $userRegisterMapper,
@@ -40,9 +40,9 @@ class UserRegisterController extends Controller
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
      *
-     * @return \EzSystems\EzPlatformUser\View\Register\FormView|\Symfony\Component\HttpFoundation\Response|null
+     * @return \Ibexa\User\View\Register\FormView|\Symfony\Component\HttpFoundation\Response|null
      *
-     * @throws \eZ\Publish\Core\Base\Exceptions\InvalidArgumentType
+     * @throws \Ibexa\Core\Base\Exceptions\InvalidArgumentType
      */
     public function registerAction(Request $request)
     {
@@ -73,9 +73,9 @@ class UserRegisterController extends Controller
     }
 
     /**
-     * @return \EzSystems\EzPlatformUser\View\Register\ConfirmView
+     * @return \Ibexa\User\View\Register\ConfirmView
      *
-     * @throws \eZ\Publish\Core\Base\Exceptions\InvalidArgumentType
+     * @throws \Ibexa\Core\Base\Exceptions\InvalidArgumentType
      */
     public function registerConfirmAction(): ConfirmView
     {

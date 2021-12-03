@@ -1,33 +1,33 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
 namespace Ibexa\User\View\UserSettings;
 
-use eZ\Publish\Core\MVC\Symfony\View\Builder\ViewBuilder;
-use eZ\Publish\Core\MVC\Symfony\View\Configurator;
-use eZ\Publish\Core\MVC\Symfony\View\ParametersInjector;
+use Ibexa\Core\MVC\Symfony\View\Builder\ViewBuilder;
+use Ibexa\Core\MVC\Symfony\View\Configurator;
+use Ibexa\Core\MVC\Symfony\View\ParametersInjector;
 use Ibexa\User\UserSetting\UserSettingService;
 
 class UpdateViewBuilder implements ViewBuilder
 {
-    /** @var \EzSystems\EzPlatformUser\UserSetting\UserSettingService */
+    /** @var \Ibexa\User\UserSetting\UserSettingService */
     private $userSettingService;
 
-    /** @var \eZ\Publish\Core\MVC\Symfony\View\Configurator */
+    /** @var \Ibexa\Core\MVC\Symfony\View\Configurator */
     private $viewConfigurator;
 
-    /** @var \eZ\Publish\Core\MVC\Symfony\View\ParametersInjector */
+    /** @var \Ibexa\Core\MVC\Symfony\View\ParametersInjector */
     private $viewParametersInjector;
 
     /**
-     * @param \EzSystems\EzPlatformUser\UserSetting\UserSettingService $userSettingService
-     * @param \eZ\Publish\Core\MVC\Symfony\View\Configurator $viewConfigurator
-     * @param \eZ\Publish\Core\MVC\Symfony\View\ParametersInjector $viewParametersInjector
+     * @param \Ibexa\User\UserSetting\UserSettingService $userSettingService
+     * @param \Ibexa\Core\MVC\Symfony\View\Configurator $viewConfigurator
+     * @param \Ibexa\Core\MVC\Symfony\View\ParametersInjector $viewParametersInjector
      */
     public function __construct(
         UserSettingService $userSettingService,

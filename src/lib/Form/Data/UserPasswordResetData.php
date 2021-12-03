@@ -1,15 +1,15 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
 namespace Ibexa\User\Form\Data;
 
+use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType;
 use Symfony\Component\Validator\Constraints as Assert;
-use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 
 class UserPasswordResetData
 {
@@ -23,7 +23,7 @@ class UserPasswordResetData
     /**
      * @deprecated ContentType should be passed as option to FormType.
      *
-     * @var \eZ\Publish\API\Repository\Values\ContentType\ContentType
+     * @var \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType
      */
     private $contentType;
 
@@ -53,7 +53,7 @@ class UserPasswordResetData
     }
 
     /**
-     * @return \eZ\Publish\API\Repository\Values\ContentType\ContentType
+     * @return \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType
      */
     public function getContentType(): ?ContentType
     {
@@ -61,7 +61,7 @@ class UserPasswordResetData
     }
 
     /**
-     * @param \eZ\Publish\API\Repository\Values\ContentType\ContentType $contentType
+     * @param \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType $contentType
      */
     public function setContentType(ContentType $contentType): void
     {
