@@ -44,7 +44,7 @@ class UpdateViewBuilder implements ViewBuilder
      */
     public function matches($argument): bool
     {
-        return 'EzSystems\EzPlatformUserBundle\Controller\UserSettingsController::updateAction' === $argument;
+        return 'Ibexa\Bundle\User\Controller\UserSettingsController::updateAction' === $argument;
     }
 
     /**
