@@ -34,9 +34,7 @@ services:
 
     Ibexa\User\ConfigResolver\ConfigurableRegistrationGroupLoader: ~
 
-    Ibexa\User\ConfigResolver\ConfigurableRegistrationContentTypeLoader:
-        calls:
-            - [setParam, ["contentTypeIdentifier", "%ezplatform.user.content_type_identifier%"]]
+    Ibexa\User\ConfigResolver\ConfigurableRegistrationContentTypeLoader: ~
 
     # Default implementations
     Ibexa\User\ConfigResolver\RegistrationGroupLoader: '@Ibexa\User\ConfigResolver\ConfigurableRegistrationGroupLoader'
