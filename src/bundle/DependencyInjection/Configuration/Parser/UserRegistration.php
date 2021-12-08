@@ -60,7 +60,8 @@ class UserRegistration extends AbstractParser
             $contextualizer->setContextualParameter(
                 'user_registration.user_type_identifier',
                 $currentScope,
-                $settings['user_type_identifier']);
+                $settings['user_type_identifier']
+            );
         }
 
         if (!empty($settings['group_id'])) {

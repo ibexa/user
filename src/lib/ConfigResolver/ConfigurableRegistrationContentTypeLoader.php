@@ -10,7 +10,6 @@ namespace Ibexa\User\ConfigResolver;
 
 use eZ\Publish\API\Repository\Repository;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Loads the registration content type from a configured, injected content type identifier.
