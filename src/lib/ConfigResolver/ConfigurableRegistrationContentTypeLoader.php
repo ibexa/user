@@ -8,18 +8,18 @@ declare(strict_types=1);
 
 namespace Ibexa\User\ConfigResolver;
 
-use eZ\Publish\API\Repository\Repository;
-use eZ\Publish\Core\MVC\ConfigResolverInterface;
+use Ibexa\Contracts\Core\Repository\Repository;
+use Ibexa\Core\MVC\ConfigResolverInterface;
 
 /**
  * Loads the registration content type from a configured, injected content type identifier.
  */
 class ConfigurableRegistrationContentTypeLoader implements RegistrationContentTypeLoader
 {
-    /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
+    /** @var \Ibexa\Core\MVC\ConfigResolverInterface */
     private $configResolver;
 
-    /** @var \eZ\Publish\API\Repository\Repository */
+    /** @var \Ibexa\Contracts\Core\Repository\Repository */
     private $repository;
 
     public function __construct(ConfigResolverInterface $configResolver, Repository $repository)
