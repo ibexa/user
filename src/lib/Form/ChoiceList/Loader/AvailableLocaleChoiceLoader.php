@@ -1,25 +1,26 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUser\Form\ChoiceList\Loader;
+namespace Ibexa\User\Form\ChoiceList\Loader;
 
-use eZ\Publish\Core\MVC\ConfigResolverInterface;
-use EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\BaseChoiceLoader;
+use Ibexa\Core\MVC\ConfigResolverInterface;
+use Symfony\Component\Form\ChoiceList\ArrayChoiceList;
+use Symfony\Component\Form\ChoiceList\Loader\ChoiceLoaderInterface;
 use Symfony\Component\Intl\Locales;
 use Symfony\Component\Validator\Constraints\Locale;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-class AvailableLocaleChoiceLoader extends BaseChoiceLoader
+class AvailableLocaleChoiceLoader implements ChoiceLoaderInterface
 {
     /** @var \Symfony\Component\Validator\Validator\ValidatorInterface */
     private $validator;
 
-    /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
+    /** @var \Ibexa\Core\MVC\ConfigResolverInterface */
     private $configResolver;
 
     /** @var string[] */
@@ -27,7 +28,7 @@ class AvailableLocaleChoiceLoader extends BaseChoiceLoader
 
     /**
      * @param \Symfony\Component\Validator\Validator\ValidatorInterface $validator
-     * @param \eZ\Publish\Core\MVC\ConfigResolverInterface $configResolver
+     * @param \Ibexa\Core\MVC\ConfigResolverInterface $configResolver
      * @param string[] $availableTranslations
      */
     public function __construct(
@@ -40,9 +41,6 @@ class AvailableLocaleChoiceLoader extends BaseChoiceLoader
         $this->configResolver = $configResolver;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getChoiceList(): array
     {
         $choices = [];
@@ -58,4 +56,38 @@ class AvailableLocaleChoiceLoader extends BaseChoiceLoader
 
         return $choices;
     }
+
+    public function loadChoiceList($value = null)
+    {
+        return new ArrayChoiceList($this->getChoiceList(), $value);
+    }
+
+    public function loadChoicesForValues(array $values, $value = null)
+    {
+        // Optimize
+        $values = array_filter($values);
+        if (empty($values)) {
+            return [];
+        }
+
+        return $this->loadChoiceList($value)->getChoicesForValues($values);
+    }
+
+    public function loadValuesForChoices(array $choices, $value = null)
+    {
+        // Optimize
+        $choices = array_filter($choices);
+        if (empty($choices)) {
+            return [];
+        }
+
+        // If no callable is set, choices are the same as values
+        if (null === $value) {
+            return $choices;
+        }
+
+        return $this->loadChoiceList($value)->getValuesForChoices($choices);
+    }
 }
+
+class_alias(AvailableLocaleChoiceLoader::class, 'EzSystems\EzPlatformUser\Form\ChoiceList\Loader\AvailableLocaleChoiceLoader');

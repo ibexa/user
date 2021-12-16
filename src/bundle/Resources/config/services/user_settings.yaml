@@ -4,48 +4,48 @@ services:
         autoconfigure: true
         public: false
 
-    EzSystems\EzPlatformUser\UserSetting\:
+    Ibexa\User\UserSetting\:
         resource: "../../../lib/UserSetting/*"
 
     #
     # Main Service
     #
-    EzSystems\EzPlatformUser\UserSetting\UserSettingService: ~
+    Ibexa\User\UserSetting\UserSettingService: ~
 
-    EzSystems\EzPlatformUser\UserSetting\UserSettingArrayAccessor:
+    Ibexa\User\UserSetting\UserSettingArrayAccessor:
 
     #
     # User Settings Update Form Views
     #
-    EzSystems\EzPlatformUser\View\UserSettings\UpdateViewBuilder:
+    Ibexa\User\View\UserSettings\UpdateViewBuilder:
         arguments:
             $viewConfigurator: '@ezpublish.view.configurator'
             $viewParametersInjector: '@ezpublish.view.view_parameters.injector.dispatcher'
         tags:
             - { name: ibexa.view_builder }
 
-    EzSystems\EzPlatformUser\View\UserSettings\UpdateViewProvider:
+    Ibexa\User\View\UserSettings\UpdateViewProvider:
         arguments:
             $matcherFactory: '@ezplatform.user.view.user_setting.update.matcher_factory'
         tags:
-            - { name: ezpublish.view_provider, type: EzSystems\EzPlatformUser\View\UserSettings\UpdateView, priority: 10 }
+            - { name: ezpublish.view_provider, type: Ibexa\User\View\UserSettings\UpdateView, priority: 10 }
 
     ezplatform.user.view.user_setting.update.default_configured:
         class: '%ezpublish.view_provider.configured.class%'
         arguments:
             $matcherFactory: '@ezplatform.user.view.user_setting.update.default_matcher_factory'
         tags:
-            - { name: ezpublish.view_provider, type: EzSystems\EzPlatformUser\View\UserSettings\UpdateView, priority: -1 }
+            - { name: ezpublish.view_provider, type: Ibexa\User\View\UserSettings\UpdateView, priority: -1 }
 
     ezplatform.user.view.user_setting.update.matcher_factory:
         class: '%ezpublish.view.matcher_factory.class%'
         arguments:
-            - '@eZ\Bundle\EzPublishCoreBundle\Matcher\ViewMatcherRegistry'
+            - '@Ibexa\Bundle\Core\Matcher\ViewMatcherRegistry'
             - '@ezpublish.api.repository'
-            - 'EzSystems\EzPlatformUser\View\UserSettings\Matcher'
+            - 'Ibexa\User\View\UserSettings\Matcher'
 
     ezplatform.user.view.user_setting.update.matcher_factory.dynamically_configured:
-        class: eZ\Publish\Core\MVC\Symfony\Matcher\DynamicallyConfiguredMatcherFactoryDecorator
+        class: Ibexa\Core\MVC\Symfony\Matcher\DynamicallyConfiguredMatcherFactoryDecorator
         decorates: ezplatform.user.view.user_setting.update.matcher_factory
         arguments:
             $innerConfigurableMatcherFactory: '@ezplatform.user.view.user_setting.update.matcher_factory.dynamically_configured.inner'
@@ -55,12 +55,12 @@ services:
     ezplatform.user.view.user_setting.update.default_matcher_factory:
         class: '%ezpublish.view.matcher_factory.class%'
         arguments:
-            - '@eZ\Bundle\EzPublishCoreBundle\Matcher\ViewMatcherRegistry'
+            - '@Ibexa\Bundle\Core\Matcher\ViewMatcherRegistry'
             - '@ezpublish.api.repository'
-            - 'EzSystems\EzPlatformUser\View\UserSettings\Matcher'
+            - 'Ibexa\User\View\UserSettings\Matcher'
 
     ezplatform.user.view.user_setting.update.default_matcher_factory.dynamically_configured:
-        class: eZ\Publish\Core\MVC\Symfony\Matcher\DynamicallyConfiguredMatcherFactoryDecorator
+        class: Ibexa\Core\MVC\Symfony\Matcher\DynamicallyConfiguredMatcherFactoryDecorator
         decorates: ezplatform.user.view.user_setting.update.default_matcher_factory
         arguments:
             $innerConfigurableMatcherFactory: '@ezplatform.user.view.user_setting.update.default_matcher_factory.dynamically_configured.inner'
@@ -70,80 +70,80 @@ services:
     #
     # User Settings Implementations
     #
-    EzSystems\EzPlatformUser\UserSetting\Setting\Timezone:
+    Ibexa\User\UserSetting\Setting\Timezone:
         tags:
             - { name: ezplatform.admin_ui.user_setting.value, identifier: timezone, priority: 50 }
             - { name: ezplatform.admin_ui.user_setting.form_mapper, identifier: timezone }
 
-    EzSystems\EzPlatformUser\UserSetting\Setting\SubitemsLimit:
+    Ibexa\User\UserSetting\Setting\SubitemsLimit:
         tags:
             - { name: ezplatform.admin_ui.user_setting.value, identifier: subitems_limit, priority: 20 }
             - { name: ezplatform.admin_ui.user_setting.form_mapper, identifier: subitems_limit }
 
-    EzSystems\EzPlatformUser\UserSetting\Setting\CharacterCounter:
+    Ibexa\User\UserSetting\Setting\CharacterCounter:
         tags:
             - { name: ezplatform.admin_ui.user_setting.value, identifier: character_counter, priority: 10 }
             - { name: ezplatform.admin_ui.user_setting.form_mapper, identifier: character_counter }
 
-    EzSystems\EzPlatformUser\UserSetting\Setting\Language:
+    Ibexa\User\UserSetting\Setting\Language:
         arguments:
-            $availableLocaleChoiceLoader: '@EzSystems\EzPlatformUser\Form\ChoiceList\Loader\AvailableLocaleChoiceLoader'
+            $availableLocaleChoiceLoader: '@Ibexa\User\Form\ChoiceList\Loader\AvailableLocaleChoiceLoader'
         tags:
             - { name: ezplatform.admin_ui.user_setting.value, identifier: language, priority: 60 }
             - { name: ezplatform.admin_ui.user_setting.form_mapper, identifier: language }
 
-    EzSystems\EzPlatformUser\UserSetting\DateTimeFormat\FullDateTimeFormatterFactory: ~
+    Ibexa\User\UserSetting\DateTimeFormat\FullDateTimeFormatterFactory: ~
 
     ezplatform.user.settings.full_datetime_format.formatter:
         lazy: true
-        factory: ['@EzSystems\EzPlatformUser\UserSetting\DateTimeFormat\FullDateTimeFormatterFactory', 'getFormatter']
-        class: 'EzSystems\EzPlatformUser\UserSetting\DateTimeFormat\Formatter'
+        factory: ['@Ibexa\User\UserSetting\DateTimeFormat\FullDateTimeFormatterFactory', 'getFormatter']
+        class: 'Ibexa\User\UserSetting\DateTimeFormat\Formatter'
 
-    EzSystems\EzPlatformUser\UserSetting\Setting\FullDateTimeFormat:
+    Ibexa\User\UserSetting\Setting\FullDateTimeFormat:
         arguments:
             $formatter: '@ezplatform.user.settings.full_datetime_format.formatter'
         tags:
             - { name: ezplatform.admin_ui.user_setting.value, identifier: full_datetime_format, priority: 30 }
             - { name: ezplatform.admin_ui.user_setting.form_mapper, identifier: full_datetime_format }
 
-    EzSystems\EzPlatformUser\UserSetting\DateTimeFormat\ShortDateTimeFormatterFactory: ~
+    Ibexa\User\UserSetting\DateTimeFormat\ShortDateTimeFormatterFactory: ~
 
     ezplatform.user.settings.short_datetime_format.formatter:
         lazy: true
-        factory: ['@EzSystems\EzPlatformUser\UserSetting\DateTimeFormat\ShortDateTimeFormatterFactory', 'getFormatter']
-        class: 'EzSystems\EzPlatformUser\UserSetting\DateTimeFormat\Formatter'
+        factory: ['@Ibexa\User\UserSetting\DateTimeFormat\ShortDateTimeFormatterFactory', 'getFormatter']
+        class: 'Ibexa\User\UserSetting\DateTimeFormat\Formatter'
 
-    EzSystems\EzPlatformUser\UserSetting\Setting\ShortDateTimeFormat:
+    Ibexa\User\UserSetting\Setting\ShortDateTimeFormat:
         arguments:
             $formatter: '@ezplatform.user.settings.short_datetime_format.formatter'
         tags:
             - { name: ezplatform.admin_ui.user_setting.value, identifier: short_datetime_format, priority: 40 }
             - { name: ezplatform.admin_ui.user_setting.form_mapper, identifier: short_datetime_format }
 
-    EzSystems\EzPlatformUser\UserSetting\DateTimeFormat\FullDateFormatterFactory: ~
+    Ibexa\User\UserSetting\DateTimeFormat\FullDateFormatterFactory: ~
 
     ezplatform.user.settings.full_date_format.formatter:
         lazy: true
-        factory: ['@EzSystems\EzPlatformUser\UserSetting\DateTimeFormat\FullDateFormatterFactory', 'getFormatter']
-        class: 'EzSystems\EzPlatformUser\UserSetting\DateTimeFormat\Formatter'
+        factory: ['@Ibexa\User\UserSetting\DateTimeFormat\FullDateFormatterFactory', 'getFormatter']
+        class: 'Ibexa\User\UserSetting\DateTimeFormat\Formatter'
 
-    EzSystems\EzPlatformUser\UserSetting\DateTimeFormat\FullTimeFormatterFactory: ~
+    Ibexa\User\UserSetting\DateTimeFormat\FullTimeFormatterFactory: ~
 
     ezplatform.user.settings.full_time_format.formatter:
         lazy: true
-        factory: ['@EzSystems\EzPlatformUser\UserSetting\DateTimeFormat\FullTimeFormatterFactory', 'getFormatter']
-        class: 'EzSystems\EzPlatformUser\UserSetting\DateTimeFormat\Formatter'
+        factory: ['@Ibexa\User\UserSetting\DateTimeFormat\FullTimeFormatterFactory', 'getFormatter']
+        class: 'Ibexa\User\UserSetting\DateTimeFormat\Formatter'
 
-    EzSystems\EzPlatformUser\UserSetting\DateTimeFormat\ShortDateFormatterFactory: ~
+    Ibexa\User\UserSetting\DateTimeFormat\ShortDateFormatterFactory: ~
 
     ezplatform.user.settings.short_date_format.formatter:
         lazy: true
-        factory: ['@EzSystems\EzPlatformUser\UserSetting\DateTimeFormat\ShortDateFormatterFactory', 'getFormatter']
-        class: 'EzSystems\EzPlatformUser\UserSetting\DateTimeFormat\Formatter'
+        factory: ['@Ibexa\User\UserSetting\DateTimeFormat\ShortDateFormatterFactory', 'getFormatter']
+        class: 'Ibexa\User\UserSetting\DateTimeFormat\Formatter'
 
-    EzSystems\EzPlatformUser\UserSetting\DateTimeFormat\ShortTimeFormatterFactory: ~
+    Ibexa\User\UserSetting\DateTimeFormat\ShortTimeFormatterFactory: ~
 
     ezplatform.user.settings.short_time_format.formatter:
         lazy: true
-        factory: ['@EzSystems\EzPlatformUser\UserSetting\DateTimeFormat\ShortDateFormatterFactory', 'getFormatter']
-        class: 'EzSystems\EzPlatformUser\UserSetting\DateTimeFormat\Formatter'
+        factory: ['@Ibexa\User\UserSetting\DateTimeFormat\ShortDateFormatterFactory', 'getFormatter']
+        class: 'Ibexa\User\UserSetting\DateTimeFormat\Formatter'

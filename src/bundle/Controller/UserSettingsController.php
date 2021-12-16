@@ -1,23 +1,23 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUserBundle\Controller;
+namespace Ibexa\Bundle\User\Controller;
 
-use eZ\Publish\Core\MVC\ConfigResolverInterface;
-use EzSystems\EzPlatformUser\Form\Data\UserSettingUpdateData;
-use EzSystems\EzPlatformUser\Form\Factory\FormFactory;
-use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
-use EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface;
-use EzSystems\EzPlatformUser\Pagination\Pagerfanta\UserSettingsAdapter;
-use EzSystems\EzPlatformUser\UserSetting\UserSettingService;
-use EzSystems\EzPlatformUser\UserSetting\ValueDefinitionRegistry;
-use EzSystems\EzPlatformUser\View\UserSettings\ListView;
-use EzSystems\EzPlatformUser\View\UserSettings\UpdateView;
+use Ibexa\Core\MVC\ConfigResolverInterface;
+use Ibexa\User\ExceptionHandler\ActionResultHandler;
+use Ibexa\User\Form\Data\UserSettingUpdateData;
+use Ibexa\User\Form\Factory\FormFactory;
+use Ibexa\User\Form\SubmitHandler;
+use Ibexa\User\Pagination\Pagerfanta\UserSettingsAdapter;
+use Ibexa\User\UserSetting\UserSettingService;
+use Ibexa\User\UserSetting\ValueDefinitionRegistry;
+use Ibexa\User\View\UserSettings\ListView;
+use Ibexa\User\View\UserSettings\UpdateView;
 use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,22 +25,22 @@ use Symfony\Component\HttpFoundation\Response;
 
 class UserSettingsController extends Controller
 {
-    /** @var \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory */
+    /** @var \Ibexa\User\Form\Factory\FormFactory */
     private $formFactory;
 
-    /** @var \EzSystems\EzPlatformAdminUi\Form\SubmitHandler */
+    /** @var \Ibexa\User\Form\SubmitHandler */
     private $submitHandler;
 
-    /** @var \EzSystems\EzPlatformUser\UserSetting\UserSettingService */
+    /** @var \Ibexa\User\UserSetting\UserSettingService */
     private $userSettingService;
 
-    /** @var \EzSystems\EzPlatformUser\UserSetting\ValueDefinitionRegistry */
+    /** @var \Ibexa\User\UserSetting\ValueDefinitionRegistry */
     private $valueDefinitionRegistry;
 
-    /** @var \EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface */
-    private $notificationHandler;
+    /** @var \Ibexa\User\ExceptionHandler\ActionResultHandler */
+    private $actionResultHandler;
 
-    /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
+    /** @var \Ibexa\Core\MVC\ConfigResolverInterface */
     private $configResolver;
 
     public function __construct(
@@ -48,23 +48,23 @@ class UserSettingsController extends Controller
         SubmitHandler $submitHandler,
         UserSettingService $userSettingService,
         ValueDefinitionRegistry $valueDefinitionRegistry,
-        TranslatableNotificationHandlerInterface $notificationHandler,
+        ActionResultHandler $actionResultHandler,
         ConfigResolverInterface $configResolver
     ) {
         $this->formFactory = $formFactory;
         $this->submitHandler = $submitHandler;
         $this->userSettingService = $userSettingService;
         $this->valueDefinitionRegistry = $valueDefinitionRegistry;
-        $this->notificationHandler = $notificationHandler;
+        $this->actionResultHandler = $actionResultHandler;
         $this->configResolver = $configResolver;
     }
 
     /**
      * @param int $page
      *
-     * @return \EzSystems\EzPlatformUser\View\UserSettings\ListView
+     * @return \Ibexa\User\View\UserSettings\ListView
      *
-     * @throws \eZ\Publish\Core\Base\Exceptions\InvalidArgumentType
+     * @throws \Ibexa\Core\Base\Exceptions\InvalidArgumentType
      */
     public function listAction(int $page = 1): ListView
     {
@@ -83,9 +83,9 @@ class UserSettingsController extends Controller
 
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \EzSystems\EzPlatformUser\View\UserSettings\UpdateView $view
+     * @param \Ibexa\User\View\UserSettings\UpdateView $view
      *
-     * @return \EzSystems\EzPlatformUser\View\UserSettings\UpdateView|\Symfony\Component\HttpFoundation\Response
+     * @return \Ibexa\User\View\UserSettings\UpdateView|\Symfony\Component\HttpFoundation\Response
      */
     public function updateAction(Request $request, UpdateView $view)
     {
@@ -100,7 +100,7 @@ class UserSettingsController extends Controller
             $result = $this->submitHandler->handle($form, function (UserSettingUpdateData $data) {
                 $this->userSettingService->setUserSetting($data->getIdentifier(), $data->getValue());
 
-                $this->notificationHandler->success(
+                $this->actionResultHandler->success(
                     /** @Desc("User setting '%identifier%' updated.") */
                     'user_setting.update.success',
                     ['%identifier%' => $data->getIdentifier()],
@@ -122,3 +122,5 @@ class UserSettingsController extends Controller
         return $view;
     }
 }
+
+class_alias(UserSettingsController::class, 'EzSystems\EzPlatformUserBundle\Controller\UserSettingsController');

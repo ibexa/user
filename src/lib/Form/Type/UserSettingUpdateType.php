@@ -1,16 +1,16 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUser\Form\Type;
+namespace Ibexa\User\Form\Type;
 
-use EzSystems\EzPlatformUser\Form\Data\UserSettingUpdateData;
-use EzSystems\EzPlatformUser\UserSetting\FormMapperRegistry;
-use EzSystems\EzPlatformUser\UserSetting\ValueDefinitionRegistry;
+use Ibexa\User\Form\Data\UserSettingUpdateData;
+use Ibexa\User\UserSetting\FormMapperRegistry;
+use Ibexa\User\UserSetting\ValueDefinitionRegistry;
 use RuntimeException;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
@@ -20,15 +20,15 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class UserSettingUpdateType extends AbstractType
 {
-    /** @var \EzSystems\EzPlatformUser\UserSetting\FormMapperRegistry */
+    /** @var \Ibexa\User\UserSetting\FormMapperRegistry */
     protected $formMapperRegistry;
 
-    /** @var \EzSystems\EzPlatformUser\UserSetting\ValueDefinitionRegistry */
+    /** @var \Ibexa\User\UserSetting\ValueDefinitionRegistry */
     protected $valueDefinitionRegistry;
 
     /**
-     * @param \EzSystems\EzPlatformUser\UserSetting\FormMapperRegistry $formMapperRegistry
-     * @param \EzSystems\EzPlatformUser\UserSetting\ValueDefinitionRegistry $valueDefinitionRegistry
+     * @param \Ibexa\User\UserSetting\FormMapperRegistry $formMapperRegistry
+     * @param \Ibexa\User\UserSetting\ValueDefinitionRegistry $valueDefinitionRegistry
      */
     public function __construct(
         FormMapperRegistry $formMapperRegistry,
@@ -41,7 +41,7 @@ class UserSettingUpdateType extends AbstractType
     /**
      * {@inheritdoc}
      *
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -75,3 +75,5 @@ class UserSettingUpdateType extends AbstractType
         ;
     }
 }
+
+class_alias(UserSettingUpdateType::class, 'EzSystems\EzPlatformUser\Form\Type\UserSettingUpdateType');

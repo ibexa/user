@@ -1,19 +1,19 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUser\UserSetting\Setting;
+namespace Ibexa\User\UserSetting\Setting;
 
-use eZ\Publish\Core\MVC\ConfigResolverInterface;
-use EzSystems\EzPlatformUser\Form\DataTransformer\DateTimeFormatTransformer;
-use EzSystems\EzPlatformUser\Form\Type\UserSettings\FullDateTimeFormatType;
-use EzSystems\EzPlatformUser\UserSetting\Setting\Value\DateTimeFormat;
-use EzSystems\EzPlatformUser\UserSetting\DateTimeFormat\FormatterInterface;
-use EzSystems\EzPlatformUser\UserSetting\ValueDefinitionInterface;
+use Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface;
+use Ibexa\Core\MVC\ConfigResolverInterface;
+use Ibexa\User\Form\DataTransformer\DateTimeFormatTransformer;
+use Ibexa\User\Form\Type\UserSettings\FullDateTimeFormatType;
+use Ibexa\User\UserSetting\DateTimeFormat\FormatterInterface;
+use Ibexa\User\UserSetting\Setting\Value\DateTimeFormat;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -22,14 +22,14 @@ class FullDateTimeFormat extends AbstractDateTimeFormat
     /** @var \Symfony\Contracts\Translation\TranslatorInterface */
     private $translator;
 
-    /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
+    /** @var \Ibexa\Core\MVC\ConfigResolverInterface */
     private $configResolver;
 
     /**
-     * @param \EzSystems\EzPlatformUser\UserSetting\Setting\DateTimeFormatSerializer $serializer
+     * @param \Ibexa\User\UserSetting\Setting\DateTimeFormatSerializer $serializer
      * @param \Symfony\Contracts\Translation\TranslatorInterface $translator
-     * @param \eZ\Publish\Core\MVC\ConfigResolverInterface $configResolver
-     * @param \EzSystems\EzPlatformUser\UserSetting\DateTimeFormat\FormatterInterface $formatter
+     * @param \Ibexa\Core\MVC\ConfigResolverInterface $configResolver
+     * @param \Ibexa\User\UserSetting\DateTimeFormat\FormatterInterface $formatter
      */
     public function __construct(
         DateTimeFormatSerializer $serializer,
@@ -117,3 +117,5 @@ class FullDateTimeFormat extends AbstractDateTimeFormat
         return $this->configResolver->getParameter('user_preferences.allowed_full_date_formats');
     }
 }
+
+class_alias(FullDateTimeFormat::class, 'EzSystems\EzPlatformUser\UserSetting\Setting\FullDateTimeFormat');

@@ -1,12 +1,12 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUser\UserSetting\DateTimeFormat;
+namespace Ibexa\User\UserSetting\DateTimeFormat;
 
 use DateTimeInterface;
 use IntlDateFormatter;
@@ -52,3 +52,5 @@ class Formatter implements FormatterInterface
         return $result;
     }
 }
+
+class_alias(Formatter::class, 'EzSystems\EzPlatformUser\UserSetting\DateTimeFormat\Formatter');

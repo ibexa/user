@@ -1,15 +1,15 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUser\Tests\UserSetting;
+namespace Ibexa\Tests\User\UserSetting;
 
-use EzSystems\EzPlatformUser\UserSetting\ValueDefinitionRegistry;
-use EzSystems\EzPlatformUser\UserSetting\ValueDefinitionInterface;
+use Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface;
+use Ibexa\User\UserSetting\ValueDefinitionRegistry;
 use PHPUnit\Framework\TestCase;
 
 class ValueDefinitionRegistryTest extends TestCase
@@ -77,3 +77,5 @@ class ValueDefinitionRegistryTest extends TestCase
         $this->assertEquals(0, $registry->countValueDefinitions());
     }
 }
+
+class_alias(ValueDefinitionRegistryTest::class, 'EzSystems\EzPlatformUser\Tests\UserSetting\ValueDefinitionRegistryTest');

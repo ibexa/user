@@ -1,12 +1,12 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUserBundle\Controller;
+namespace Ibexa\Bundle\User\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -17,3 +17,5 @@ abstract class Controller extends AbstractController
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
     }
 }
+
+class_alias(Controller::class, 'EzSystems\EzPlatformUserBundle\Controller\Controller');

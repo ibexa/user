@@ -1,23 +1,23 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUser\View\UserSettings;
+namespace Ibexa\User\View\UserSettings;
 
-use eZ\Publish\Core\MVC\Symfony\View\BaseView;
-use EzSystems\EzPlatformUser\UserSetting\UserSetting;
+use Ibexa\Core\MVC\Symfony\View\BaseView;
+use Ibexa\User\UserSetting\UserSetting;
 
 class UpdateView extends BaseView
 {
-    /** @var \EzSystems\EzPlatformUser\UserSetting\UserSetting|null */
+    /** @var \Ibexa\User\UserSetting\UserSetting|null */
     private $userSetting;
 
     /**
-     * @return \EzSystems\EzPlatformUser\UserSetting\UserSetting|null
+     * @return \Ibexa\User\UserSetting\UserSetting|null
      */
     public function getUserSetting(): ?UserSetting
     {
@@ -25,7 +25,7 @@ class UpdateView extends BaseView
     }
 
     /**
-     * @param \EzSystems\EzPlatformUser\UserSetting\UserSetting|null $userSetting
+     * @param \Ibexa\User\UserSetting\UserSetting|null $userSetting
      */
     public function setUserSetting(?UserSetting $userSetting): void
     {
@@ -42,3 +42,5 @@ class UpdateView extends BaseView
         ];
     }
 }
+
+class_alias(UpdateView::class, 'EzSystems\EzPlatformUser\View\UserSettings\UpdateView');
