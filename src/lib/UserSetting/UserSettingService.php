@@ -76,7 +76,7 @@ class UserSettingService
 
         $userPreferences = [];
         foreach ($group->getValues() as $settingIdentifier => $userSettingDefinition) {
-            $userPreferences[$settingIdentifier] = $this->getUserSettingValue($identifier, $userSettingDefinition);
+            $userPreferences[$settingIdentifier] = $this->getUserSettingValue($settingIdentifier, $userSettingDefinition);
         }
         return $this->createUserSettings($identifier, $group, $userPreferences);
     }
