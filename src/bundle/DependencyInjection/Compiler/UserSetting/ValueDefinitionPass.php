@@ -9,13 +9,18 @@ declare(strict_types=1);
 namespace Ibexa\Bundle\User\DependencyInjection\Compiler\UserSetting;
 
 use Ibexa\Core\Base\Exceptions\InvalidArgumentException;
+use Ibexa\User\UserSetting\Setting\GenericGroup;
 use Ibexa\User\UserSetting\ValueDefinitionRegistry;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use Symfony\Component\DependencyInjection\Compiler\PriorityTaggedServiceTrait;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
 
 class ValueDefinitionPass implements CompilerPassInterface
 {
+    use PriorityTaggedServiceTrait;
+
     public const TAG_NAME = 'ezplatform.admin_ui.user_setting.value';
 
     /**
@@ -32,21 +37,43 @@ class ValueDefinitionPass implements CompilerPassInterface
         }
 
         $registryDefinition = $container->getDefinition(ValueDefinitionRegistry::class);
-        $taggedServiceIds = $container->findTaggedServiceIds(self::TAG_NAME);
+        $taggedServiceIds = $this->findAndSortTaggedServices(self::TAG_NAME, $container);
+        $groupServices = $this->findAndSortTaggedServices('ibexa.user.user_setting.group', $container);
 
-        foreach ($taggedServiceIds as $taggedServiceId => $tags) {
+        foreach ($groupServices as $groupService) {
+            $groupServiceId = (string)$groupService;
+            $tags = $container->getDefinition($groupServiceId)->getTag('ibexa.user.user_setting.group');
             foreach ($tags as $tag) {
                 if (!isset($tag['identifier'])) {
                     throw new InvalidArgumentException(
-                        $taggedServiceId,
+                        $groupServiceId,
+                        sprintf("Tag '%s' must contain an 'identifier' argument.", 'ibexa.user.user_setting.group')
+                    );
+                }
+
+                $registryDefinition->addMethodCall('addValueDefinitionGroup', [
+                    $tag['identifier'],
+                    $groupService
+                ]);
+            }
+        }
+
+
+        foreach ($taggedServiceIds as $taggedService) {
+            $settingServiceId = (string)$taggedService;
+            $tags = $container->getDefinition($settingServiceId)->getTag(self::TAG_NAME);
+            foreach ($tags as $tag) {
+                if (!isset($tag['identifier'])) {
+                    throw new InvalidArgumentException(
+                        $settingServiceId,
                         sprintf("Tag '%s' must contain an 'identifier' argument.", self::TAG_NAME)
                     );
                 }
 
                 $registryDefinition->addMethodCall('addValueDefinition', [
                     $tag['identifier'],
-                    new Reference($taggedServiceId),
-                    $tag['priority'] ?? 0,
+                    $taggedService,
+                    $tag['group'] ?? 'generic',
                 ]);
             }
         }

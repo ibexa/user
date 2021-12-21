@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\User\UserSetting;
 
+use Ibexa\Contracts\User\UserSetting\ValueDefinitionGroupInterface;
 use Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface;
 use Ibexa\Core\Base\Exceptions\InvalidArgumentException;
 
@@ -16,18 +17,19 @@ use Ibexa\Core\Base\Exceptions\InvalidArgumentException;
  */
 class ValueDefinitionRegistry
 {
-    /** @var \Ibexa\User\UserSetting\ValueDefinitionRegistryEntry[] */
+    /** @var \Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface[] */
     protected $valueDefinitions;
 
-    /**
-     * @param \Ibexa\User\UserSetting\ValueDefinitionRegistryEntry[] $valueDefinitions
-     */
+    /** @var \Ibexa\Contracts\User\UserSetting\ValueDefinitionGroupInterface[] */
+    protected $groupedDefinitions;
+
     public function __construct(array $valueDefinitions = [])
     {
         $this->valueDefinitions = [];
         foreach ($valueDefinitions as $identifier => $valueDefinition) {
             $this->valueDefinitions[$identifier] = new ValueDefinitionRegistryEntry($valueDefinition);
         }
+        $this->groupedDefinitions = [];
     }
 
     /**
@@ -38,9 +40,28 @@ class ValueDefinitionRegistry
     public function addValueDefinition(
         string $identifier,
         ValueDefinitionInterface $valueDefinition,
-        int $priority = 0
+        ?string $groupIdentifier = null
     ): void {
-        $this->valueDefinitions[$identifier] = new ValueDefinitionRegistryEntry($valueDefinition, $priority);
+        $this->valueDefinitions[$identifier] = $valueDefinition;
+
+        if ($groupIdentifier) {
+            $this->groupedDefinitions[$groupIdentifier]->addToGroup(
+                $identifier,
+                $valueDefinition
+            );
+        }
+    }
+
+    public function addValueDefinitionGroup(
+        string $groupIdentifier,
+        ValueDefinitionGroupInterface $valueDefinition
+    ): void {
+        $this->groupedDefinitions[$groupIdentifier] = $valueDefinition;
+    }
+
+    public function getValueDefinitionGroups(): array
+    {
+        return $this->groupedDefinitions;
     }
 
     /**
@@ -59,7 +80,20 @@ class ValueDefinitionRegistry
             );
         }
 
-        return $this->valueDefinitions[$identifier]->getDefinition();
+        return $this->valueDefinitions[$identifier];
+    }
+
+
+    public function getValueDefinitionGroup(string $identifier): ValueDefinitionGroupInterface
+    {
+        if (!isset($this->groupedDefinitions[$identifier])) {
+            throw new InvalidArgumentException(
+                '$identifier',
+                sprintf('There is no ValueDefinition service registered for \'%s\' identifier', $identifier)
+            );
+        }
+
+        return $this->groupedDefinitions[$identifier];
     }
 
     /**
@@ -77,13 +111,7 @@ class ValueDefinitionRegistry
      */
     public function getValueDefinitions(): array
     {
-        uasort($this->valueDefinitions, static function (ValueDefinitionRegistryEntry $a, ValueDefinitionRegistryEntry $b) {
-            return $b->getPriority() <=> $a->getPriority();
-        });
-
-        return array_map(static function (ValueDefinitionRegistryEntry $entry) {
-            return $entry->getDefinition();
-        }, $this->valueDefinitions);
+        return $this->valueDefinitions;
     }
 
     /**
@@ -93,6 +121,12 @@ class ValueDefinitionRegistry
     {
         return \count($this->valueDefinitions);
     }
+
+    public function countValueDefinitionGroups(): int
+    {
+        return \count($this->groupedDefinitions);
+    }
+
 }
 
 class_alias(ValueDefinitionRegistry::class, 'EzSystems\EzPlatformUser\UserSetting\ValueDefinitionRegistry');

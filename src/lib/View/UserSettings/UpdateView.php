@@ -10,11 +10,14 @@ namespace Ibexa\User\View\UserSettings;
 
 use Ibexa\Core\MVC\Symfony\View\BaseView;
 use Ibexa\User\UserSetting\UserSetting;
+use Ibexa\User\UserSetting\UserSettingGroup;
 
 class UpdateView extends BaseView
 {
     /** @var \Ibexa\User\UserSetting\UserSetting|null */
     private $userSetting;
+
+    private ?UserSettingGroup $userSettingGroup = null;
 
     /**
      * @return \Ibexa\User\UserSetting\UserSetting|null
@@ -32,6 +35,16 @@ class UpdateView extends BaseView
         $this->userSetting = $userSetting;
     }
 
+    public function getUserSettingGroup(): ?UserSettingGroup
+    {
+        return $this->userSettingGroup;
+    }
+
+    public function setUserSettingGroup(?UserSettingGroup $userSettingGroup): void
+    {
+        $this->userSettingGroup = $userSettingGroup;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -39,6 +52,7 @@ class UpdateView extends BaseView
     {
         return [
             'user_setting' => $this->getUserSetting(),
+            'user_setting_group' => $this->getUserSettingGroup(),
         ];
     }
 }

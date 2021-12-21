@@ -82,14 +82,14 @@ services:
 
     Ibexa\User\UserSetting\Setting\CharacterCounter:
         tags:
-            - { name: ezplatform.admin_ui.user_setting.value, identifier: character_counter, priority: 10 }
+            - { name: ezplatform.admin_ui.user_setting.value, identifier: character_counter, group: edit_content, priority: 10 }
             - { name: ezplatform.admin_ui.user_setting.form_mapper, identifier: character_counter }
 
     Ibexa\User\UserSetting\Setting\Language:
         arguments:
             $availableLocaleChoiceLoader: '@Ibexa\User\Form\ChoiceList\Loader\AvailableLocaleChoiceLoader'
         tags:
-            - { name: ezplatform.admin_ui.user_setting.value, identifier: language, priority: 60 }
+            - { name: ezplatform.admin_ui.user_setting.value, identifier: language, group: location, priority: 30 }
             - { name: ezplatform.admin_ui.user_setting.form_mapper, identifier: language }
 
     Ibexa\User\UserSetting\DateTimeFormat\FullDateTimeFormatterFactory: ~
@@ -117,7 +117,7 @@ services:
         arguments:
             $formatter: '@ezplatform.user.settings.short_datetime_format.formatter'
         tags:
-            - { name: ezplatform.admin_ui.user_setting.value, identifier: short_datetime_format, priority: 40 }
+            - { name: ezplatform.admin_ui.user_setting.value, identifier: short_datetime_format, group: location, priority: 40 }
             - { name: ezplatform.admin_ui.user_setting.form_mapper, identifier: short_datetime_format }
 
     Ibexa\User\UserSetting\DateTimeFormat\FullDateFormatterFactory: ~
@@ -147,3 +147,25 @@ services:
         lazy: true
         factory: ['@Ibexa\User\UserSetting\DateTimeFormat\ShortDateFormatterFactory', 'getFormatter']
         class: 'Ibexa\User\UserSetting\DateTimeFormat\Formatter'
+
+    Ibexa\User\UserSetting\Setting\LocationGroup:
+        tags:
+            - { name: ibexa.user.user_setting.group, identifier: location, priority: 30 }
+
+    Ibexa\User\UserSetting\Setting\EditContentGroup:
+        tags:
+            - { name: ibexa.user.user_setting.group, identifier: edit_content, priority: 10 }
+
+    Ibexa\User\UserSetting\Setting\GenericGroup:
+        tags:
+            - { name: ibexa.user.user_setting.group, identifier: generic, priority: 0 }
+
+
+#    Ibexa\User\UserSetting\Setting\EditContentGroup:
+#        arguments:
+#            $settings:
+#                - autosave: '@EzSystems\EzPlatformAdminUi\UserSetting\Autosave'
+#                - autosave_interval: '@EzSystems\EzPlatformAdminUi\UserSetting\AutosaveInterval'
+#        tags:
+#            - { name: ibexa.user.user_setting.group, identifier: edit_content, priority: 40 }
+#

@@ -10,6 +10,7 @@ namespace Ibexa\User\View\UserSettings\Matcher;
 
 use Ibexa\Core\MVC\Symfony\Matcher\ViewMatcherInterface;
 use Ibexa\Core\MVC\Symfony\View\View;
+use Ibexa\User\UserSetting\UserSetting;
 use Ibexa\User\View\UserSettings\UpdateView;
 
 /**
@@ -33,11 +34,15 @@ class Identifier implements ViewMatcherInterface
      */
     public function match(View $view): bool
     {
-        if (!$view instanceof UpdateView || $view->getUserSetting() === null) {
+        if (!$view instanceof UpdateView || $view->getUserSettingGroup() === null) {
             return false;
         }
 
-        return \in_array($view->getUserSetting()->identifier, $this->identifiers);
+        $identifiersInGroup = array_map(static function (UserSetting $userSetting) {
+            return $userSetting->identifier;
+        }, $view->getUserSettingGroup()->settings);
+
+        return !empty(array_intersect($identifiersInGroup, $this->identifiers));
     }
 }
 

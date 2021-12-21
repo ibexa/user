@@ -11,6 +11,7 @@ namespace Ibexa\User\UserSetting;
 use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
 use Ibexa\Contracts\Core\Repository\UserPreferenceService;
 use Ibexa\Contracts\Core\Repository\Values\UserPreference\UserPreferenceSetStruct;
+use Ibexa\Contracts\User\UserSetting\ValueDefinitionGroupInterface;
 use Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface;
 
 /**
@@ -69,6 +70,17 @@ class UserSettingService
         return $this->createUserSetting($identifier, $valueDefinition, $userPreferenceValue);
     }
 
+    public function getUserSettingGroup(string $identifier): UserSettingGroup
+    {
+        $group = $this->valueRegistry->getValueDefinitionGroup($identifier);
+
+        $userPreferences = [];
+        foreach ($group->getValues() as $settingIdentifier => $userSettingDefinition) {
+            $userPreferences[$settingIdentifier] = $this->getUserSettingValue($identifier, $userSettingDefinition);
+        }
+        return $this->createUserSettings($identifier, $group, $userPreferences);
+    }
+
     /**
      * @param int $offset
      * @param int $limit
@@ -88,7 +100,29 @@ class UserSettingService
             $userPreferences[$identifier] = $this->getUserSettingValue($identifier, $userSettingDefinition);
         }
 
-        return $this->createUserSettings($slice, $userPreferences);
+        $userSettings = [];
+        foreach ($slice as $identifier => $value) {
+            $userSettings[] = $this->createUserSetting($identifier, $value, $userPreferences[$identifier]);
+        }
+        return $userSettings;
+    }
+
+    public function loadGroupedUserSettings(int $offset = 0, int $limit = 25): array
+    {
+        $groups = $this->valueRegistry->getValueDefinitionGroups();
+
+        $slice = \array_slice($groups, $offset, $limit, true);
+
+        $settings = [];
+        foreach ($slice as $groupId => $group) {
+            $userPreferences = [];
+            foreach ($group->getValues() as $identifier => $userSettingDefinition) {
+                $userPreferences[$identifier] = $this->getUserSettingValue($identifier, $userSettingDefinition);
+            }
+            $settings[$groupId] = $this->createUserSettings($groupId, $group, $userPreferences);
+        }
+
+        return $settings;
     }
 
     /**
@@ -99,21 +133,19 @@ class UserSettingService
         return $this->valueRegistry->countValueDefinitions();
     }
 
-    /**
-     * @param \Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface[] $values
-     * @param array $userPreferences
-     *
-     * @return \Ibexa\User\UserSetting\UserSetting[]
-     */
-    private function createUserSettings(array $values, array $userPreferences): array
+    private function createUserSettings(string $groupId, ValueDefinitionGroupInterface $group, array $userPreferences): UserSettingGroup
     {
         $userSettings = [];
-
-        foreach ($values as $identifier => $value) {
+        foreach ($group->getValues() as $identifier => $value) {
             $userSettings[] = $this->createUserSetting($identifier, $value, $userPreferences[$identifier]);
         }
 
-        return $userSettings;
+        return new UserSettingGroup([
+            'identifier' => $groupId,
+            'name' => $group->getName(),
+            'description' => $group->getDescription(),
+            'settings' => $userSettings,
+        ]);
     }
 
     /**
@@ -155,6 +187,12 @@ class UserSettingService
 
         return $userPreferenceValue;
     }
+
+    public function countGroupedUserSettings()
+    {
+        return $this->valueRegistry->countValueDefinitionGroups();
+    }
+
 }
 
 class_alias(UserSettingService::class, 'EzSystems\EzPlatformUser\UserSetting\UserSettingService');

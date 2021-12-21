@@ -10,9 +10,11 @@ namespace Ibexa\Bundle\User\Controller;
 
 use Ibexa\Core\MVC\ConfigResolverInterface;
 use Ibexa\User\ExceptionHandler\ActionResultHandler;
+use Ibexa\User\Form\Data\UserSettingGroupUpdateData;
 use Ibexa\User\Form\Data\UserSettingUpdateData;
 use Ibexa\User\Form\Factory\FormFactory;
 use Ibexa\User\Form\SubmitHandler;
+use Ibexa\User\Pagination\Pagerfanta\GroupedUserSettingsAdapter;
 use Ibexa\User\Pagination\Pagerfanta\UserSettingsAdapter;
 use Ibexa\User\UserSetting\UserSettingService;
 use Ibexa\User\UserSetting\ValueDefinitionRegistry;
@@ -69,9 +71,8 @@ class UserSettingsController extends Controller
     public function listAction(int $page = 1): ListView
     {
         $pagerfanta = new Pagerfanta(
-            new UserSettingsAdapter($this->userSettingService)
+            new GroupedUserSettingsAdapter($this->userSettingService)
         );
-
         $pagerfanta->setMaxPerPage($this->configResolver->getParameter('pagination_user.user_settings_limit'));
         $pagerfanta->setCurrentPage(min($page, $pagerfanta->getNbPages()));
 
@@ -102,6 +103,47 @@ class UserSettingsController extends Controller
 
                 $this->actionResultHandler->success(
                     /** @Desc("User setting '%identifier%' updated.") */
+                    'user_setting.update.success',
+                    ['%identifier%' => $data->getIdentifier()],
+                    'user_settings'
+                );
+
+                return new RedirectResponse($this->generateUrl('ezplatform.user_settings.list'));
+            });
+
+            if ($result instanceof Response) {
+                return $result;
+            }
+        }
+
+        $view->addParameters([
+            'form' => $form->createView(),
+        ]);
+
+        return $view;
+    }
+
+    public function updateGroupAction(Request $request, UpdateView $view)
+    {
+        $userSettingGroup = $view->getUserSettingGroup();
+
+        $transformed = [];
+        foreach ($userSettingGroup->settings as $setting) {
+            $transformed[$setting->identifier] = ['value' => $setting->value];
+        }
+
+        $data = new UserSettingGroupUpdateData($userSettingGroup->identifier, $transformed);
+        $form = $this->formFactory->updateUserSettingGroup($userSettingGroup->identifier, $data);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()) {
+            $result = $this->submitHandler->handle($form, function (UserSettingGroupUpdateData $data) {
+                foreach ($data->getValues() as $identifier => $value) {
+                    $this->userSettingService->setUserSetting($identifier, $value['value']);
+                }
+
+                $this->actionResultHandler->success(
+                /** @Desc("User setting '%identifier%' updated.") */
                     'user_setting.update.success',
                     ['%identifier%' => $data->getIdentifier()],
                     'user_settings'
