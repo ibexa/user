@@ -22,6 +22,7 @@ class ValueDefinitionPass implements CompilerPassInterface
     use PriorityTaggedServiceTrait;
 
     public const TAG_NAME = 'ezplatform.admin_ui.user_setting.value';
+    public const GROUP_TAG_NAME = 'ibexa.user.user_setting.group';
 
     /**
      * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
@@ -38,16 +39,16 @@ class ValueDefinitionPass implements CompilerPassInterface
 
         $registryDefinition = $container->getDefinition(ValueDefinitionRegistry::class);
         $taggedServiceIds = $this->findAndSortTaggedServices(self::TAG_NAME, $container);
-        $groupServices = $this->findAndSortTaggedServices('ibexa.user.user_setting.group', $container);
+        $groupServices = $this->findAndSortTaggedServices(self::GROUP_TAG_NAME, $container);
 
         foreach ($groupServices as $groupService) {
             $groupServiceId = (string)$groupService;
-            $tags = $container->getDefinition($groupServiceId)->getTag('ibexa.user.user_setting.group');
+            $tags = $container->getDefinition($groupServiceId)->getTag(self::GROUP_TAG_NAME);
             foreach ($tags as $tag) {
                 if (!isset($tag['identifier'])) {
                     throw new InvalidArgumentException(
                         $groupServiceId,
-                        sprintf("Tag '%s' must contain an 'identifier' argument.", 'ibexa.user.user_setting.group')
+                        sprintf("Tag '%s' must contain an 'identifier' argument.", self::GROUP_TAG_NAME)
                     );
                 }
 
