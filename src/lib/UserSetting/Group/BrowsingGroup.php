@@ -6,30 +6,27 @@
  */
 declare(strict_types=1);
 
-namespace Ibexa\User\UserSetting\Setting;
+namespace Ibexa\User\UserSetting\Group;
 
-use Ibexa\Contracts\User\UserSetting\ValueDefinitionGroupInterface;
-use Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-class LocationGroup implements ValueDefinitionGroupInterface
+final class BrowsingGroup extends AbstractGroup
 {
     private TranslatorInterface $translator;
-    private array $values;
 
     public function __construct(
         TranslatorInterface $translator,
         array $values = []
     ) {
         $this->translator = $translator;
-        $this->values = $values;
+        parent::__construct($values);
     }
 
     public function getName(): string
     {
         return $this->translator->trans(
-            /** @Desc("Location") */
-            'settings.group.location.name',
+            /** @Desc("Browsing") */
+            'settings.group.browsing.name',
             [],
             'user_settings'
         );
@@ -39,19 +36,9 @@ class LocationGroup implements ValueDefinitionGroupInterface
     {
         return $this->translator->trans(
             /** @Desc("") */
-            'settings.group.location.description',
+            'settings.group.browsing.description',
             [],
             'user_settings'
         );
-    }
-
-    public function addToGroup(string $identifier, ValueDefinitionInterface $valueDefinition): void
-    {
-        $this->values[$identifier] = $valueDefinition;
-    }
-
-    public function getValues(): array
-    {
-        return $this->values;
     }
 }

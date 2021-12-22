@@ -6,23 +6,20 @@
  */
 declare(strict_types=1);
 
-namespace Ibexa\User\UserSetting\Setting;
+namespace Ibexa\User\UserSetting\Group;
 
-use Ibexa\Contracts\User\UserSetting\ValueDefinitionGroupInterface;
-use Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-class EditContentGroup implements ValueDefinitionGroupInterface
+final class EditContentGroup extends AbstractGroup
 {
     private TranslatorInterface $translator;
-    private array $values;
 
     public function __construct(
         TranslatorInterface $translator,
         array $values = []
     ) {
         $this->translator = $translator;
-        $this->values = $values;
+        parent::__construct($values);
     }
 
     public function getName(): string
@@ -43,15 +40,5 @@ class EditContentGroup implements ValueDefinitionGroupInterface
             [],
             'user_settings'
         );
-    }
-
-    public function addToGroup(string $identifier, ValueDefinitionInterface $valueDefinition): void
-    {
-        $this->values[$identifier] = $valueDefinition;
-    }
-
-    public function getValues(): array
-    {
-        return $this->values;
     }
 }

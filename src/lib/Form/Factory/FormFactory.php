@@ -13,13 +13,11 @@ use Ibexa\User\Form\Data\UserPasswordChangeData;
 use Ibexa\User\Form\Data\UserPasswordForgotData;
 use Ibexa\User\Form\Data\UserPasswordForgotWithLoginData;
 use Ibexa\User\Form\Data\UserPasswordResetData;
-use Ibexa\User\Form\Data\UserSettingGroupUpdateData;
 use Ibexa\User\Form\Data\UserSettingUpdateData;
 use Ibexa\User\Form\Type\UserPasswordChangeType;
 use Ibexa\User\Form\Type\UserPasswordForgotType;
 use Ibexa\User\Form\Type\UserPasswordForgotWithLoginType;
 use Ibexa\User\Form\Type\UserPasswordResetType;
-use Ibexa\User\Form\Type\UserSettingGroupUpdateType;
 use Ibexa\User\Form\Type\UserSettingUpdateType;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
@@ -113,13 +111,6 @@ class FormFactory
         return $this->formFactory->createNamed($name, UserPasswordResetType::class, $data, ['content_type' => $userContentType]);
     }
 
-    /**
-     * @param string $userSettingIdentifier
-     * @param \Ibexa\User\Form\Data\UserSettingUpdateData $data
-     * @param string|null $name
-     *
-     * @return \Symfony\Component\Form\FormInterface
-     */
     public function updateUserSetting(
         string $userSettingIdentifier,
         UserSettingUpdateData $data = null,
@@ -131,22 +122,7 @@ class FormFactory
             $name,
             UserSettingUpdateType::class,
             $data,
-            ['user_setting_identifier' => $userSettingIdentifier]
-        );
-    }
-
-    public function updateUserSettingGroup(
-        string $userSettingIdentifier,
-        UserSettingGroupUpdateData $data = null,
-        ?string $name = null
-    ): FormInterface {
-        $name = $name ?: StringUtil::fqcnToBlockPrefix(UserSettingUpdateType::class);
-
-        return $this->formFactory->createNamed(
-            $name,
-            UserSettingGroupUpdateType::class,
-            $data,
-            ['user_setting_identifier' => $userSettingIdentifier]
+            ['user_setting_group_identifier' => $userSettingIdentifier]
         );
     }
 }

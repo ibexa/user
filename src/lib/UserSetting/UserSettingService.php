@@ -192,7 +192,6 @@ class UserSettingService
     {
         return $this->valueRegistry->countValueDefinitionGroups();
     }
-
 }
 
 class_alias(UserSettingService::class, 'EzSystems\EzPlatformUser\UserSetting\UserSettingService');

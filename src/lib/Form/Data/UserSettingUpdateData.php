@@ -14,56 +14,38 @@ class UserSettingUpdateData
 {
     /**
      * @Assert\NotBlank()
-     *
-     * @var string
      */
-    private $identifier;
+    private string $identifier;
 
     /**
-     * @var string|null
+     * @var array<string, mixed>
      */
-    private $value;
+    private array $values;
 
-    /**
-     * @param string $identifier
-     * @param string $value
-     */
-    public function __construct(?string $identifier = null, ?string $value = null)
+    public function __construct(string $identifier, array $values)
     {
         $this->identifier = $identifier;
-        $this->value = $value;
+        $this->values = $values;
     }
 
-    /**
-     * @return string
-     */
-    public function getIdentifier(): ?string
+    public function getIdentifier(): string
     {
         return $this->identifier;
     }
 
-    /**
-     * @param string $identifier
-     */
     public function setIdentifier(string $identifier): void
     {
         $this->identifier = $identifier;
     }
 
-    /**
-     * @return string
-     */
-    public function getValue(): ?string
+    public function getValues(): array
     {
-        return $this->value;
+        return $this->values;
     }
 
-    /**
-     * @param string $value
-     */
-    public function setValue(?string $value): void
+    public function setValues(array $values): void
     {
-        $this->value = $value;
+        $this->values = $values;
     }
 }
 
