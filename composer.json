@@ -8,19 +8,19 @@
     },
     "autoload": {
         "psr-4": {
-            "EzSystems\\EzPlatformUserBundle\\": "src/bundle/",
-            "EzSystems\\EzPlatformUser\\": "src/lib/",
             "Ibexa\\User\\": "src/lib/",
             "Ibexa\\Bundle\\User\\": "src/bundle/",
-            "Ibexa\\Contracts\\User\\": "src/contracts/"
+            "Ibexa\\Contracts\\User\\": "src/contracts/",
+            "EzSystems\\EzPlatformUserBundle\\": "src/bundle/",
+            "EzSystems\\EzPlatformUser\\": "src/lib/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "EzSystems\\EzPlatformUserBundle\\Tests\\": "tests/bundle/",
-            "EzSystems\\EzPlatformUser\\Tests\\": "tests/lib/",
             "Ibexa\\Tests\\Bundle\\User\\": "tests/bundle/",
-            "Ibexa\\Tests\\User\\": "tests/lib/"
+            "Ibexa\\Tests\\User\\": "tests/lib/",
+            "EzSystems\\EzPlatformUserBundle\\Tests\\": "tests/bundle/",
+            "EzSystems\\EzPlatformUser\\Tests\\": "tests/lib/"
         }
     },
     "require": {
