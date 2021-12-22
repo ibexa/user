@@ -163,5 +163,5 @@ services:
 
     Ibexa\User\UserSetting\Group\CustomGroup:
         tags:
-            - { name: ibexa.user.user_setting.group, identifier: generic, priority: 0 }
+            - { name: ibexa.user.user_setting.group, identifier: custom, priority: 0 }
 

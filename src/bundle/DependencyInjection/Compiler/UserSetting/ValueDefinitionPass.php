@@ -74,7 +74,7 @@ class ValueDefinitionPass implements CompilerPassInterface
                 $registryDefinition->addMethodCall('addValueDefinition', [
                     $tag['identifier'],
                     $taggedService,
-                    $tag['group'] ?? 'generic',
+                    $tag['group'] ?? 'custom',
                 ]);
             }
         }
