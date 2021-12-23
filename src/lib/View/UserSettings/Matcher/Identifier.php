@@ -10,7 +10,6 @@ namespace Ibexa\User\View\UserSettings\Matcher;
 
 use Ibexa\Core\MVC\Symfony\Matcher\ViewMatcherInterface;
 use Ibexa\Core\MVC\Symfony\View\View;
-use Ibexa\User\UserSetting\UserSetting;
 use Ibexa\User\View\UserSettings\UpdateView;
 
 /**
