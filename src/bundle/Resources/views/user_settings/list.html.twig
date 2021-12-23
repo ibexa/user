@@ -9,8 +9,10 @@
             <p>{{ settings_group.description }}</p>
         {% endif %}
         {% if settings_group.settings is not empty %}
-            <a title="{{ 'list.action.edit'|trans|desc('Edit') }}"
-               href="{{ path('ezplatform.user_settings.update', { 'identifier': settings_group.identifier }) }}">
+            <a
+                title="{{ 'list.action.edit'|trans|desc('Edit') }}"
+                href="{{ path('ezplatform.user_settings.update', { 'identifier': settings_group.identifier }) }}"
+            >
                 {{ 'list.action.edit'|trans|desc('Edit') }}
             </a>
         {% endif %}
