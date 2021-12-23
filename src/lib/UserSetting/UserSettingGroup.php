@@ -18,5 +18,36 @@ class UserSettingGroup extends ValueObject
 
     protected string $description;
 
+    /** @var array<string, \Ibexa\User\UserSetting\UserSetting> */
     protected array $settings;
+
+    public function __construct(string $identifier, string $name = '', string $description = '', array $settings = [])
+    {
+        parent::__construct([
+            'identifier' => $identifier,
+            'name' => $name,
+            'description' => $description,
+            'settings' => $settings,
+        ]);
+    }
+
+    public function getIdentifier(): string
+    {
+        return $this->identifier;
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function getDescription(): string
+    {
+        return $this->description;
+    }
+
+    public function getSettings(): array
+    {
+        return $this->settings;
+    }
 }

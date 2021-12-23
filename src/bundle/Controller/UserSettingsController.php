@@ -77,12 +77,12 @@ class UserSettingsController extends Controller
         $userSettingGroup = $view->getUserSettingGroup();
 
         $values = [];
-        foreach ($userSettingGroup->settings as $setting) {
+        foreach ($userSettingGroup->getSettings() as $setting) {
             $values[$setting->identifier] = ['value' => $setting->value];
         }
 
-        $data = new UserSettingUpdateData($userSettingGroup->identifier, $values);
-        $form = $this->formFactory->updateUserSetting($userSettingGroup->identifier, $data);
+        $data = new UserSettingUpdateData($userSettingGroup->getIdentifier(), $values);
+        $form = $this->formFactory->updateUserSetting($userSettingGroup->getIdentifier(), $data);
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
