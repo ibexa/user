@@ -8,10 +8,8 @@ declare(strict_types=1);
 
 namespace Ibexa\User\UserSetting;
 
-use Exception;
 use Ibexa\Contracts\User\UserSetting\ValueDefinitionGroupInterface;
 use Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface;
-use Traversable;
 
 /**
  * @internal

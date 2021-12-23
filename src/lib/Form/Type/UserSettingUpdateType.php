@@ -59,7 +59,7 @@ class UserSettingUpdateType extends AbstractType
             $sub = $builder->create(
                 $identifier,
                 FormType::class,
-            )->setPropertyPath('values['. $identifier . ']');
+            )->setPropertyPath('values[' . $identifier . ']');
 
             $sub->add(
                 $valueField

@@ -14,8 +14,6 @@ use Ibexa\User\UserSetting\ValueDefinitionRegistry;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\Compiler\PriorityTaggedServiceTrait;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Definition;
-use Symfony\Component\DependencyInjection\Reference;
 
 class ValueDefinitionPass implements CompilerPassInterface
 {
@@ -54,11 +52,10 @@ class ValueDefinitionPass implements CompilerPassInterface
 
                 $registryDefinition->addMethodCall('addValueDefinitionGroup', [
                     $tag['identifier'],
-                    $groupService
+                    $groupService,
                 ]);
             }
         }
-
 
         foreach ($taggedServiceIds as $taggedService) {
             $settingServiceId = (string)$taggedService;

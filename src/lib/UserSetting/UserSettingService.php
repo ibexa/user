@@ -78,6 +78,7 @@ class UserSettingService
         foreach ($group->getValues() as $settingIdentifier => $userSettingDefinition) {
             $userPreferences[$settingIdentifier] = $this->getUserSettingValue($settingIdentifier, $userSettingDefinition);
         }
+
         return $this->createUserSettings($identifier, $group, $userPreferences);
     }
 
@@ -104,6 +105,7 @@ class UserSettingService
         foreach ($slice as $identifier => $value) {
             $userSettings[] = $this->createUserSetting($identifier, $value, $userPreferences[$identifier]);
         }
+
         return $userSettings;
     }
 

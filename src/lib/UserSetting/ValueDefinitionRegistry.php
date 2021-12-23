@@ -84,7 +84,6 @@ class ValueDefinitionRegistry
         return $this->valueDefinitions[$identifier];
     }
 
-
     public function getValueDefinitionGroup(string $identifier): ValueDefinitionGroupInterface
     {
         if (!isset($this->groupedDefinitions[$identifier])) {
@@ -127,7 +126,6 @@ class ValueDefinitionRegistry
     {
         return \count($this->groupedDefinitions);
     }
-
 }
 
 class_alias(ValueDefinitionRegistry::class, 'EzSystems\EzPlatformUser\UserSetting\ValueDefinitionRegistry');

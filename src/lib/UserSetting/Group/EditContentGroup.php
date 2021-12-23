@@ -25,7 +25,7 @@ final class EditContentGroup extends AbstractGroup
     public function getName(): string
     {
         return $this->translator->trans(
-        /** @Desc("Edit Content") */
+            /** @Desc("Edit Content") */
             'settings.group.edit_content.name',
             [],
             'user_settings'
@@ -35,7 +35,7 @@ final class EditContentGroup extends AbstractGroup
     public function getDescription(): string
     {
         return $this->translator->trans(
-        /** @Desc("") */
+            /** @Desc("") */
             'settings.group.edit_content.description',
             [],
             'user_settings'

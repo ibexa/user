@@ -27,7 +27,7 @@ final class CustomGroup extends AbstractGroup
     public function getName(): string
     {
         return $this->translator->trans(
-        /** @Desc("Custom Group") */
+            /** @Desc("Custom Group") */
             'settings.group.generic.name',
             [],
             'user_settings'
@@ -37,7 +37,7 @@ final class CustomGroup extends AbstractGroup
     public function getDescription(): string
     {
         return $this->translator->trans(
-        /** @Desc("") */
+            /** @Desc("") */
             'settings.group.generic.description',
             [],
             'user_settings'
