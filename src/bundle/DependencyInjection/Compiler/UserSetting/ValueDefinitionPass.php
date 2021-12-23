@@ -9,7 +9,7 @@ declare(strict_types=1);
 namespace Ibexa\Bundle\User\DependencyInjection\Compiler\UserSetting;
 
 use Ibexa\Core\Base\Exceptions\InvalidArgumentException;
-use Ibexa\User\UserSetting\Setting\GenericGroup;
+use Ibexa\User\UserSetting\Group\CustomGroup;
 use Ibexa\User\UserSetting\ValueDefinitionRegistry;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\Compiler\PriorityTaggedServiceTrait;
@@ -74,7 +74,7 @@ class ValueDefinitionPass implements CompilerPassInterface
                 $registryDefinition->addMethodCall('addValueDefinition', [
                     $tag['identifier'],
                     $taggedService,
-                    $tag['group'] ?? 'custom',
+                    $tag['group'] ?? CustomGroup::CUSTOM_GROUP_IDENTIFIER,
                 ]);
             }
         }

@@ -12,6 +12,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class CustomGroup extends AbstractGroup
 {
+    public const CUSTOM_GROUP_IDENTIFIER = 'custom';
+
     private TranslatorInterface $translator;
 
     public function __construct(

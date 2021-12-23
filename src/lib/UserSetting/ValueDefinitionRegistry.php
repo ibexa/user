@@ -11,6 +11,7 @@ namespace Ibexa\User\UserSetting;
 use Ibexa\Contracts\User\UserSetting\ValueDefinitionGroupInterface;
 use Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface;
 use Ibexa\Core\Base\Exceptions\InvalidArgumentException;
+use Ibexa\User\UserSetting\Group\CustomGroup;
 
 /**
  * @internal
@@ -27,9 +28,9 @@ class ValueDefinitionRegistry
     {
         $this->valueDefinitions = [];
         foreach ($valueDefinitions as $identifier => $valueDefinition) {
-            $this->valueDefinitions[$identifier] = new ValueDefinitionRegistryEntry($valueDefinition);
+            $this->valueDefinitions[$identifier] = $valueDefinition;
         }
-        $this->groupedDefinitions = [];
+        $this->groupedDefinitions[CustomGroup::CUSTOM_GROUP_IDENTIFIER] = $valueDefinitions;
     }
 
     /**
