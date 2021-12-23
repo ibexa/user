@@ -6,11 +6,13 @@
     {{ form_start(form) }}
     {{ form_widget(form.identifier, {'attr': {'hidden': 'hidden'}}) }}
     {% include '@ibexadesign/ui/component/table/table_header.html.twig' with {
-        headline: user_setting.name,
+        headline: user_setting_group.name
     } %}
-    <div class="bg-white p-4">
-        {{ form_row(form.value) }}
-    </div>
+    {% for user_setting in user_setting_group.settings %}
+        <div class="bg-white p-4">
+            {{ form_widget(attribute(form, user_setting.identifier)) }}
+        </div>
+    {% endfor %}
     {{ form_widget(form.update) }}
     {{ form_end(form) }}
 {% endblock %}

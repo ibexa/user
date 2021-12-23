@@ -111,13 +111,6 @@ class FormFactory
         return $this->formFactory->createNamed($name, UserPasswordResetType::class, $data, ['content_type' => $userContentType]);
     }
 
-    /**
-     * @param string $userSettingIdentifier
-     * @param \Ibexa\User\Form\Data\UserSettingUpdateData $data
-     * @param string|null $name
-     *
-     * @return \Symfony\Component\Form\FormInterface
-     */
     public function updateUserSetting(
         string $userSettingIdentifier,
         UserSettingUpdateData $data = null,
@@ -129,7 +122,7 @@ class FormFactory
             $name,
             UserSettingUpdateType::class,
             $data,
-            ['user_setting_identifier' => $userSettingIdentifier]
+            ['user_setting_group_identifier' => $userSettingIdentifier]
         );
     }
 }

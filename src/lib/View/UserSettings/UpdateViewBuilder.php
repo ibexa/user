@@ -54,7 +54,7 @@ class UpdateViewBuilder implements ViewBuilder
     {
         $view = new UpdateView();
 
-        $view->setUserSetting($this->userSettingService->getUserSetting($parameters['identifier']));
+        $view->setUserSettingGroup($this->userSettingService->getUserSettingGroup($parameters['identifier']));
         $this->viewParametersInjector->injectViewParameters($view, $parameters);
         $this->viewConfigurator->configure($view);
 

@@ -33,11 +33,13 @@ class Identifier implements ViewMatcherInterface
      */
     public function match(View $view): bool
     {
-        if (!$view instanceof UpdateView || $view->getUserSetting() === null) {
+        if (!$view instanceof UpdateView || $view->getUserSettingGroup() === null) {
             return false;
         }
 
-        return \in_array($view->getUserSetting()->identifier, $this->identifiers);
+        $identifiersInGroup = array_column($view->getUserSettingGroup()->getSettings(), 'identifier');
+
+        return !empty(array_intersect($identifiersInGroup, $this->identifiers));
     }
 }
 
