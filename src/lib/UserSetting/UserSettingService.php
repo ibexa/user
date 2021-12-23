@@ -75,7 +75,7 @@ class UserSettingService
         $group = $this->valueRegistry->getValueDefinitionGroup($identifier);
 
         $userPreferences = [];
-        foreach ($group->getValues() as $settingIdentifier => $userSettingDefinition) {
+        foreach ($group->getValueDefinitions() as $settingIdentifier => $userSettingDefinition) {
             $userPreferences[$settingIdentifier] = $this->getUserSettingValue($settingIdentifier, $userSettingDefinition);
         }
 
@@ -116,7 +116,7 @@ class UserSettingService
         $settings = [];
         foreach ($groups as $groupId => $group) {
             $userPreferences = [];
-            foreach ($group->getValues() as $identifier => $userSettingDefinition) {
+            foreach ($group->getValueDefinitions() as $identifier => $userSettingDefinition) {
                 $userPreferences[$identifier] = $this->getUserSettingValue($identifier, $userSettingDefinition);
             }
             $settings[$groupId] = $this->createUserSettings($groupId, $group, $userPreferences);
@@ -136,7 +136,7 @@ class UserSettingService
     private function createUserSettings(string $groupId, ValueDefinitionGroupInterface $group, array $userPreferences): UserSettingGroup
     {
         $userSettings = [];
-        foreach ($group->getValues() as $identifier => $value) {
+        foreach ($group->getValueDefinitions() as $identifier => $value) {
             $userSettings[] = $this->createUserSetting($identifier, $value, $userPreferences[$identifier]);
         }
 

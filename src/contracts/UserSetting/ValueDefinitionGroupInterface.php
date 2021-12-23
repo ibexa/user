@@ -9,7 +9,7 @@ declare(strict_types=1);
 namespace Ibexa\Contracts\User\UserSetting;
 
 /**
- * Interface for displaying User Preferences in the Admin UI.
+ * Interface for displaying User Settings in the Admin UI.
  *
  * User Preferences are not displayed by default unless
  * ValueDefinitionInterface implementation is provided.
@@ -17,16 +17,17 @@ namespace Ibexa\Contracts\User\UserSetting;
 interface ValueDefinitionGroupInterface
 {
     /**
-     * Returns name of a User Preference Group displayed in UI.
+     * Returns name of a User Settings Group displayed in UI.
      */
     public function getName(): string;
 
     /**
-     * Returns description of a User Preference Group displayed in UI.
+     * Returns description of a User Settings Group displayed in UI.
      */
     public function getDescription(): string;
 
-    public function addToGroup(string $identifier, ValueDefinitionInterface $valueDefinition): void;
+    public function addValueDefinition(string $identifier, ValueDefinitionInterface $valueDefinition): void;
 
-    public function getValues(): array;
+    /** @return array<string, ValueDefinitionInterface> */
+    public function getValueDefinitions(): array;
 }

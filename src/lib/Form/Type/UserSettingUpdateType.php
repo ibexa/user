@@ -52,7 +52,7 @@ class UserSettingUpdateType extends AbstractType
         $builder
             ->add('identifier', HiddenType::class, []);
 
-        foreach ($groupDefinition->getValues() as $identifier => $valueDefinition) {
+        foreach ($groupDefinition->getValueDefinitions() as $identifier => $valueDefinition) {
             $formMapper = $this->formMapperRegistry->getFormMapper($identifier);
             $valueField = $formMapper->mapFieldForm($builder, $valueDefinition);
 
