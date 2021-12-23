@@ -13,12 +13,10 @@ use Ibexa\User\ExceptionHandler\ActionResultHandler;
 use Ibexa\User\Form\Data\UserSettingUpdateData;
 use Ibexa\User\Form\Factory\FormFactory;
 use Ibexa\User\Form\SubmitHandler;
-use Ibexa\User\Pagination\Pagerfanta\GroupedUserSettingsAdapter;
 use Ibexa\User\UserSetting\UserSettingService;
 use Ibexa\User\UserSetting\ValueDefinitionRegistry;
 use Ibexa\User\View\UserSettings\ListView;
 use Ibexa\User\View\UserSettings\UpdateView;
-use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -68,14 +66,8 @@ class UserSettingsController extends Controller
      */
     public function listAction(int $page = 1): ListView
     {
-        $pagerfanta = new Pagerfanta(
-            new GroupedUserSettingsAdapter($this->userSettingService)
-        );
-        $pagerfanta->setMaxPerPage($this->configResolver->getParameter('pagination_user.user_settings_limit'));
-        $pagerfanta->setCurrentPage(min($page, $pagerfanta->getNbPages()));
-
         return new ListView(null, [
-            'pager' => $pagerfanta,
+            'grouped_settings' => $this->userSettingService->loadGroupedUserSettings(),
             'value_definitions' => $this->valueDefinitionRegistry->getValueDefinitions(),
         ]);
     }

@@ -3,7 +3,7 @@
 {% trans_default_domain 'user_settings' %}
 
 {%- block content -%}
-    {% for settings_group in pager %}
+    {% for settings_group in grouped_settings %}
         <h2>{{ settings_group.name }}</h2>
         {% if settings_group.description is not empty %}
             <p>{{ settings_group.description }}</p>
@@ -26,14 +26,6 @@
             </tbody>
         </table>
     {% endfor %}
-
-    {% if pager.haveToPaginate %}
-        {{ 'pagination.viewing'|trans({
-            '%viewing%': pager.currentPageResults|length,
-            '%total%': pager.nbResults}, 'pagination')|desc('Viewing %viewing% out of %total% items')|raw }}
-        {{ pagerfanta(pager, 'ez') }}
-    {% endif %}
-
     <h2>{{ 'my_account_settings.password.title'|trans|desc('Password') }}</h2>
     <table class="table table-hover">
         <tbody>

@@ -109,14 +109,12 @@ class UserSettingService
         return $userSettings;
     }
 
-    public function loadGroupedUserSettings(int $offset = 0, int $limit = 25): array
+    public function loadGroupedUserSettings(): array
     {
         $groups = $this->valueRegistry->getValueDefinitionGroups();
 
-        $slice = \array_slice($groups, $offset, $limit, true);
-
         $settings = [];
-        foreach ($slice as $groupId => $group) {
+        foreach ($groups as $groupId => $group) {
             $userPreferences = [];
             foreach ($group->getValues() as $identifier => $userSettingDefinition) {
                 $userPreferences[$identifier] = $this->getUserSettingValue($identifier, $userSettingDefinition);
