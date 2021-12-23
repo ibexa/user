@@ -45,7 +45,7 @@ class ValueDefinitionRegistry
     ): void {
         $this->valueDefinitions[$identifier] = $valueDefinition;
 
-        if ($groupIdentifier) {
+        if ($groupIdentifier !== null) {
             $this->groupedDefinitions[$groupIdentifier]->addValueDefinition(
                 $identifier,
                 $valueDefinition

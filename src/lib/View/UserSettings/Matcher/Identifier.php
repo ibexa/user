@@ -38,9 +38,7 @@ class Identifier implements ViewMatcherInterface
             return false;
         }
 
-        $identifiersInGroup = array_map(static function (UserSetting $userSetting) {
-            return $userSetting->identifier;
-        }, $view->getUserSettingGroup()->settings);
+        $identifiersInGroup = array_column($view->getUserSettingGroup()->getSettings(), 'identifier');
 
         return !empty(array_intersect($identifiersInGroup, $this->identifiers));
     }

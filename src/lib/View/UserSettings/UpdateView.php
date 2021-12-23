@@ -14,10 +14,19 @@ use Ibexa\User\UserSetting\UserSettingGroup;
 
 class UpdateView extends BaseView
 {
-    /** @var \Ibexa\User\UserSetting\UserSetting|null */
-    private $userSetting;
+    private ?UserSetting $userSetting;
 
-    private ?UserSettingGroup $userSettingGroup = null;
+    private ?UserSettingGroup $userSettingGroup;
+
+    public function __construct(
+        $templateIdentifier = null,
+        array $parameters = [],
+        $viewType = 'full'
+    ) {
+        $this->userSetting = null;
+        $this->userSettingGroup = null;
+        parent::__construct($templateIdentifier, $parameters, $viewType);
+    }
 
     /**
      * @return \Ibexa\User\UserSetting\UserSetting|null

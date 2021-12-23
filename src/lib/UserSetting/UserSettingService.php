@@ -79,7 +79,7 @@ class UserSettingService
             $userPreferences[$settingIdentifier] = $this->getUserSettingValue($settingIdentifier, $userSettingDefinition);
         }
 
-        return $this->createUserSettings($identifier, $group, $userPreferences);
+        return $this->createUserSettingsGroup($identifier, $group, $userPreferences);
     }
 
     /**
@@ -115,11 +115,11 @@ class UserSettingService
 
         $settings = [];
         foreach ($groups as $groupId => $group) {
-            $userPreferences = [];
+            $userSettingsValues = [];
             foreach ($group->getValueDefinitions() as $identifier => $userSettingDefinition) {
-                $userPreferences[$identifier] = $this->getUserSettingValue($identifier, $userSettingDefinition);
+                $userSettingsValues[$identifier] = $this->getUserSettingValue($identifier, $userSettingDefinition);
             }
-            $settings[$groupId] = $this->createUserSettings($groupId, $group, $userPreferences);
+            $settings[$groupId] = $this->createUserSettingsGroup($groupId, $group, $userSettingsValues);
         }
 
         return $settings;
@@ -133,19 +133,22 @@ class UserSettingService
         return $this->valueRegistry->countValueDefinitions();
     }
 
-    private function createUserSettings(string $groupId, ValueDefinitionGroupInterface $group, array $userPreferences): UserSettingGroup
-    {
+    private function createUserSettingsGroup(
+        string $groupId,
+        ValueDefinitionGroupInterface $group,
+        array $userPreferences
+    ): UserSettingGroup {
         $userSettings = [];
         foreach ($group->getValueDefinitions() as $identifier => $value) {
             $userSettings[] = $this->createUserSetting($identifier, $value, $userPreferences[$identifier]);
         }
 
-        return new UserSettingGroup([
-            'identifier' => $groupId,
-            'name' => $group->getName(),
-            'description' => $group->getDescription(),
-            'settings' => $userSettings,
-        ]);
+        return new UserSettingGroup(
+            $groupId,
+            $group->getName(),
+            $group->getDescription(),
+            $userSettings
+        );
     }
 
     /**

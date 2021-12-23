@@ -83,7 +83,7 @@ services:
 
     Ibexa\User\UserSetting\Setting\CharacterCounter:
         tags:
-            - { name: ezplatform.admin_ui.user_setting.value, identifier: character_counter, group: edit_content, priority: 10 }
+            - { name: ezplatform.admin_ui.user_setting.value, identifier: character_counter, group: content_edit, priority: 10 }
             - { name: ezplatform.admin_ui.user_setting.form_mapper, identifier: character_counter }
 
     Ibexa\User\UserSetting\Setting\Language:
@@ -155,7 +155,7 @@ services:
 
     Ibexa\User\UserSetting\Group\EditContentGroup:
         tags:
-            - { name: ibexa.user.setting.group, identifier: edit_content, priority: 20 }
+            - { name: ibexa.user.setting.group, identifier: content_edit, priority: 20 }
 
     Ibexa\User\UserSetting\Group\BrowsingGroup:
         tags:
