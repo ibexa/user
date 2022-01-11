@@ -23,20 +23,20 @@ services:
             $viewConfigurator: '@ezpublish.view.configurator'
             $viewParametersInjector: '@ezpublish.view.view_parameters.injector.dispatcher'
         tags:
-            - { name: ibexa.view_builder }
+            - { name: ibexa.view.builder }
 
     Ibexa\User\View\UserSettings\UpdateViewProvider:
         arguments:
             $matcherFactory: '@ezplatform.user.view.user_setting.update.matcher_factory'
         tags:
-            - { name: ezpublish.view_provider, type: Ibexa\User\View\UserSettings\UpdateView, priority: 10 }
+            - { name: ibexa.view.provider, type: Ibexa\User\View\UserSettings\UpdateView, priority: 10 }
 
     ezplatform.user.view.user_setting.update.default_configured:
         class: '%ezpublish.view_provider.configured.class%'
         arguments:
             $matcherFactory: '@ezplatform.user.view.user_setting.update.default_matcher_factory'
         tags:
-            - { name: ezpublish.view_provider, type: Ibexa\User\View\UserSettings\UpdateView, priority: -1 }
+            - { name: ibexa.view.provider, type: Ibexa\User\View\UserSettings\UpdateView, priority: -1 }
 
     ezplatform.user.view.user_setting.update.matcher_factory:
         class: '%ezpublish.view.matcher_factory.class%'
@@ -73,25 +73,25 @@ services:
     #
     Ibexa\User\UserSetting\Setting\Timezone:
         tags:
-            - { name: ezplatform.admin_ui.user_setting.value, identifier: timezone, group: location, priority: 50 }
-            - { name: ezplatform.admin_ui.user_setting.form_mapper, identifier: timezone }
+            - { name: ibexa.user.setting.value, identifier: timezone, group: location, priority: 50 }
+            - { name: ibexa.user.setting.mapper.form, identifier: timezone }
 
     Ibexa\User\UserSetting\Setting\SubitemsLimit:
         tags:
-            - { name: ezplatform.admin_ui.user_setting.value, identifier: subitems_limit, group: browsing, priority: 20 }
-            - { name: ezplatform.admin_ui.user_setting.form_mapper, identifier: subitems_limit }
+            - { name: ibexa.user.setting.value, identifier: subitems_limit, group: browsing, priority: 20 }
+            - { name: ibexa.user.setting.mapper.form, identifier: subitems_limit }
 
     Ibexa\User\UserSetting\Setting\CharacterCounter:
         tags:
-            - { name: ezplatform.admin_ui.user_setting.value, identifier: character_counter, group: content_edit, priority: 10 }
-            - { name: ezplatform.admin_ui.user_setting.form_mapper, identifier: character_counter }
+            - { name: ibexa.user.setting.value, identifier: character_counter, group: content_edit, priority: 10 }
+            - { name: ibexa.user.setting.mapper.form, identifier: character_counter }
 
     Ibexa\User\UserSetting\Setting\Language:
         arguments:
             $availableLocaleChoiceLoader: '@Ibexa\User\Form\ChoiceList\Loader\AvailableLocaleChoiceLoader'
         tags:
-            - { name: ezplatform.admin_ui.user_setting.value, identifier: language, group: location, priority: 10 }
-            - { name: ezplatform.admin_ui.user_setting.form_mapper, identifier: language }
+            - { name: ibexa.user.setting.value, identifier: language, group: location, priority: 10 }
+            - { name: ibexa.user.setting.mapper.form, identifier: language }
 
     Ibexa\User\UserSetting\DateTimeFormat\FullDateTimeFormatterFactory: ~
 
@@ -104,8 +104,8 @@ services:
         arguments:
             $formatter: '@ezplatform.user.settings.full_datetime_format.formatter'
         tags:
-            - { name: ezplatform.admin_ui.user_setting.value, identifier: full_datetime_format, group: location, priority: 20 }
-            - { name: ezplatform.admin_ui.user_setting.form_mapper, identifier: full_datetime_format }
+            - { name: ibexa.user.setting.value, identifier: full_datetime_format, group: location, priority: 20 }
+            - { name: ibexa.user.setting.mapper.form, identifier: full_datetime_format }
 
     Ibexa\User\UserSetting\DateTimeFormat\ShortDateTimeFormatterFactory: ~
 
@@ -118,8 +118,8 @@ services:
         arguments:
             $formatter: '@ezplatform.user.settings.short_datetime_format.formatter'
         tags:
-            - { name: ezplatform.admin_ui.user_setting.value, identifier: short_datetime_format, group: location, priority: 30 }
-            - { name: ezplatform.admin_ui.user_setting.form_mapper, identifier: short_datetime_format }
+            - { name: ibexa.user.setting.value, identifier: short_datetime_format, group: location, priority: 30 }
+            - { name: ibexa.user.setting.mapper.form, identifier: short_datetime_format }
 
     Ibexa\User\UserSetting\DateTimeFormat\FullDateFormatterFactory: ~
 

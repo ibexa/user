@@ -19,7 +19,7 @@ class ValueDefinitionPass implements CompilerPassInterface
 {
     use PriorityTaggedServiceTrait;
 
-    public const TAG_NAME = 'ezplatform.admin_ui.user_setting.value';
+    public const TAG_NAME = 'ibexa.user.setting.value';
     public const GROUP_TAG_NAME = 'ibexa.user.setting.group';
 
     /**
