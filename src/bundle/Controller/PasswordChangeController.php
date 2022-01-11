@@ -1,33 +1,33 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUserBundle\Controller;
+namespace Ibexa\Bundle\User\Controller;
 
-use eZ\Publish\API\Repository\UserService;
-use EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface;
-use EzSystems\EzPlatformAdminUi\Specification\SiteAccess\IsAdmin;
-use EzSystems\EzPlatformUser\Form\Factory\FormFactory;
-use EzSystems\EzPlatformUser\View\ChangePassword\FormView;
-use EzSystems\EzPlatformUser\View\ChangePassword\SuccessView;
+use Exception;
+use Ibexa\Contracts\Core\Repository\UserService;
+use Ibexa\Core\MVC\Symfony\SiteAccess;
+use Ibexa\User\ExceptionHandler\ActionResultHandler;
+use Ibexa\User\Form\Factory\FormFactory;
+use Ibexa\User\View\ChangePassword\FormView;
+use Ibexa\User\View\ChangePassword\SuccessView;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Exception;
 
 class PasswordChangeController extends Controller
 {
-    /** @var \EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface */
-    private $notificationHandler;
+    /** @var \Ibexa\User\ExceptionHandler\ActionResultHandler */
+    private $actionResultHandler;
 
-    /** @var \eZ\Publish\API\Repository\UserService */
+    /** @var \Ibexa\Contracts\Core\Repository\UserService */
     private $userService;
 
-    /** @var \EzSystems\EzPlatformUser\Form\Factory\FormFactory */
+    /** @var \Ibexa\User\Form\Factory\FormFactory */
     private $formFactory;
 
     /** @var \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface */
@@ -36,21 +36,14 @@ class PasswordChangeController extends Controller
     /** @var array */
     private $siteAccessGroups;
 
-    /**
-     * @param \EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface $notificationHandler
-     * @param \eZ\Publish\API\Repository\UserService $userService
-     * @param \EzSystems\EzPlatformUser\Form\Factory\FormFactory $formFactory
-     * @param \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface $tokenStorage
-     * @param array $siteAccessGroups
-     */
     public function __construct(
-        TranslatableNotificationHandlerInterface $notificationHandler,
+        ActionResultHandler $actionResultHandler,
         UserService $userService,
         FormFactory $formFactory,
         TokenStorageInterface $tokenStorage,
         array $siteAccessGroups
     ) {
-        $this->notificationHandler = $notificationHandler;
+        $this->actionResultHandler = $actionResultHandler;
         $this->userService = $userService;
         $this->formFactory = $formFactory;
         $this->tokenStorage = $tokenStorage;
@@ -60,13 +53,13 @@ class PasswordChangeController extends Controller
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
      *
-     * @return \EzSystems\EzPlatformUser\View\ChangePassword\FormView|\EzSystems\EzPlatformUser\View\ChangePassword\SuccessView|\Symfony\Component\HttpFoundation\RedirectResponse
+     * @return \Ibexa\User\View\ChangePassword\FormView|\Ibexa\User\View\ChangePassword\SuccessView|\Symfony\Component\HttpFoundation\RedirectResponse
      *
-     * @throws \eZ\Publish\Core\Base\Exceptions\InvalidArgumentType
+     * @throws \Ibexa\Core\Base\Exceptions\InvalidArgumentType
      */
     public function userPasswordChangeAction(Request $request)
     {
-        /** @var \eZ\Publish\API\Repository\Values\User\User $user */
+        /** @var \Ibexa\Contracts\Core\Repository\Values\User\User $user */
         $user = $this->tokenStorage->getToken()->getUser()->getAPIUser();
         $form = $this->formFactory->changeUserPassword($user->getContentType());
         $form->handleRequest($request);
@@ -77,8 +70,8 @@ class PasswordChangeController extends Controller
             try {
                 $this->userService->updateUserPassword($user, $data->getNewPassword());
 
-                if ((new IsAdmin($this->siteAccessGroups))->isSatisfiedBy($request->attributes->get('siteaccess'))) {
-                    $this->notificationHandler->success(
+                if ($this->isInAdminGroup($request->attributes->get('siteaccess'))) {
+                    $this->actionResultHandler->success(
                         /** @Desc("Your password has been successfully changed.") */
                         'ezplatform.change_password.success',
                         [],
@@ -90,7 +83,7 @@ class PasswordChangeController extends Controller
 
                 return new SuccessView(null);
             } catch (Exception $e) {
-                $this->notificationHandler->error($e->getMessage());
+                $this->actionResultHandler->error($e->getMessage());
             }
         }
 
@@ -98,4 +91,11 @@ class PasswordChangeController extends Controller
             'form_change_user_password' => $form->createView(),
         ]);
     }
+
+    private function isInAdminGroup(SiteAccess $siteAccess): bool
+    {
+        return in_array($siteAccess->name, $this->siteAccessGroups['admin_group'], true);
+    }
 }
+
+class_alias(PasswordChangeController::class, 'EzSystems\EzPlatformUserBundle\Controller\PasswordChangeController');

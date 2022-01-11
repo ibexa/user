@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUser\Form\Type;
+namespace Ibexa\User\Form\Type;
 
-use EzSystems\EzPlatformUser\Form\Data\UserSettingUpdateData;
-use EzSystems\EzPlatformUser\UserSetting\FormMapperRegistry;
-use EzSystems\EzPlatformUser\UserSetting\ValueDefinitionRegistry;
-use RuntimeException;
+use Ibexa\User\Form\Data\UserSettingUpdateData;
+use Ibexa\User\UserSetting\FormMapperRegistry;
+use Ibexa\User\UserSetting\ValueDefinitionRegistry;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -20,15 +20,15 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class UserSettingUpdateType extends AbstractType
 {
-    /** @var \EzSystems\EzPlatformUser\UserSetting\FormMapperRegistry */
+    /** @var \Ibexa\User\UserSetting\FormMapperRegistry */
     protected $formMapperRegistry;
 
-    /** @var \EzSystems\EzPlatformUser\UserSetting\ValueDefinitionRegistry */
+    /** @var \Ibexa\User\UserSetting\ValueDefinitionRegistry */
     protected $valueDefinitionRegistry;
 
     /**
-     * @param \EzSystems\EzPlatformUser\UserSetting\FormMapperRegistry $formMapperRegistry
-     * @param \EzSystems\EzPlatformUser\UserSetting\ValueDefinitionRegistry $valueDefinitionRegistry
+     * @param \Ibexa\User\UserSetting\FormMapperRegistry $formMapperRegistry
+     * @param \Ibexa\User\UserSetting\ValueDefinitionRegistry $valueDefinitionRegistry
      */
     public function __construct(
         FormMapperRegistry $formMapperRegistry,
@@ -41,22 +41,33 @@ class UserSettingUpdateType extends AbstractType
     /**
      * {@inheritdoc}
      *
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $formMapper = $this->formMapperRegistry->getFormMapper($options['user_setting_identifier']);
-        $valueDefinition = $this->valueDefinitionRegistry->getValueDefinition($options['user_setting_identifier']);
+        $groupDefinition = $this->valueDefinitionRegistry->getValueDefinitionGroup(
+            $options['user_setting_group_identifier']
+        );
 
         $builder
-            ->add('identifier', HiddenType::class, [])
-            ->add($formMapper->mapFieldForm($builder, $valueDefinition))
-            ->add('update', SubmitType::class, [])
-        ;
+            ->add('identifier', HiddenType::class, []);
 
-        if (!$builder->has('value')) {
-            throw new RuntimeException("FormMapper should create a 'value' field");
+        foreach ($groupDefinition->getValueDefinitions() as $identifier => $valueDefinition) {
+            $formMapper = $this->formMapperRegistry->getFormMapper($identifier);
+            $valueField = $formMapper->mapFieldForm($builder, $valueDefinition);
+
+            $sub = $builder->create(
+                $identifier,
+                FormType::class,
+            )->setPropertyPath('values[' . $identifier . ']');
+
+            $sub->add(
+                $valueField
+            );
+
+            $builder->add($sub);
         }
+        $builder->add('update', SubmitType::class, []);
     }
 
     /**
@@ -65,9 +76,12 @@ class UserSettingUpdateType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver
-            ->setRequired('user_setting_identifier')
-            ->setAllowedTypes('user_setting_identifier', 'string')
-            ->setAllowedValues('user_setting_identifier', array_keys($this->formMapperRegistry->getFormMappers()))
+            ->setRequired('user_setting_group_identifier')
+            ->setAllowedTypes('user_setting_group_identifier', 'string')
+            ->setAllowedValues(
+                'user_setting_group_identifier',
+                array_keys($this->valueDefinitionRegistry->getValueDefinitionGroups())
+            )
             ->setDefaults([
                 'data_class' => UserSettingUpdateData::class,
                 'translation_domain' => 'forms',
@@ -75,3 +89,5 @@ class UserSettingUpdateType extends AbstractType
         ;
     }
 }
+
+class_alias(UserSettingUpdateType::class, 'EzSystems\EzPlatformUser\Form\Type\UserSettingUpdateType');

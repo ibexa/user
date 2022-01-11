@@ -5,12 +5,14 @@
 {% block content %}
     {{ form_start(form) }}
     {{ form_widget(form.identifier, {'attr': {'hidden': 'hidden'}}) }}
-    <div class="ez-table-header ground-base">
-        <div class="ez-table-header__headline">{{ user_setting.name }}</div>
-    </div>
-    <div class="bg-white p-4">
-        {{ form_row(form.value, {'label_attr': {'class': 'ez-label'}}) }}
-    </div>
+    {% include '@ibexadesign/ui/component/table/table_header.html.twig' with {
+        headline: user_setting_group.name
+    } %}
+    {% for user_setting in user_setting_group.settings %}
+        <div class="bg-white p-4">
+            {{ form_widget(attribute(form, user_setting.identifier)) }}
+        </div>
+    {% endfor %}
     {{ form_widget(form.update) }}
     {{ form_end(form) }}
 {% endblock %}

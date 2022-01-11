@@ -1,16 +1,16 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUser\View\UserSettings\Matcher;
+namespace Ibexa\User\View\UserSettings\Matcher;
 
-use eZ\Publish\Core\MVC\Symfony\Matcher\ViewMatcherInterface;
-use eZ\Publish\Core\MVC\Symfony\View\View;
-use EzSystems\EzPlatformUser\View\UserSettings\UpdateView;
+use Ibexa\Core\MVC\Symfony\Matcher\ViewMatcherInterface;
+use Ibexa\Core\MVC\Symfony\View\View;
+use Ibexa\User\View\UserSettings\UpdateView;
 
 /**
  * Match based on the user setting identifier.
@@ -33,10 +33,14 @@ class Identifier implements ViewMatcherInterface
      */
     public function match(View $view): bool
     {
-        if (!$view instanceof UpdateView || $view->getUserSetting() === null) {
+        if (!$view instanceof UpdateView || $view->getUserSettingGroup() === null) {
             return false;
         }
 
-        return \in_array($view->getUserSetting()->identifier, $this->identifiers);
+        $identifiersInGroup = array_column($view->getUserSettingGroup()->getSettings(), 'identifier');
+
+        return !empty(array_intersect($identifiersInGroup, $this->identifiers));
     }
 }
+
+class_alias(Identifier::class, 'EzSystems\EzPlatformUser\View\UserSettings\Matcher\Identifier');

@@ -1,15 +1,15 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUser\UserSetting\Setting;
+namespace Ibexa\User\UserSetting\Setting;
 
-use EzSystems\EzPlatformUser\UserSetting\FormMapperInterface;
-use EzSystems\EzPlatformUser\UserSetting\ValueDefinitionInterface;
+use Ibexa\Contracts\User\UserSetting\FormMapperInterface;
+use Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface;
 use Symfony\Component\Form\Extension\Core\Type\TimezoneType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -101,3 +101,5 @@ class Timezone implements ValueDefinitionInterface, FormMapperInterface
         );
     }
 }
+
+class_alias(Timezone::class, 'EzSystems\EzPlatformUser\UserSetting\Setting\Timezone');

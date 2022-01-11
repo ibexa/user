@@ -1,19 +1,19 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUser\Tests\UserSetting;
+namespace Ibexa\Tests\User\UserSetting;
 
-use eZ\Publish\API\Repository\UserPreferenceService;
-use eZ\Publish\API\Repository\Values\UserPreference\UserPreference;
-use EzSystems\EzPlatformUser\UserSetting\UserSetting;
-use EzSystems\EzPlatformUser\UserSetting\UserSettingService;
-use EzSystems\EzPlatformUser\UserSetting\ValueDefinitionInterface;
-use EzSystems\EzPlatformUser\UserSetting\ValueDefinitionRegistry;
+use Ibexa\Contracts\Core\Repository\UserPreferenceService;
+use Ibexa\Contracts\Core\Repository\Values\UserPreference\UserPreference;
+use Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface;
+use Ibexa\User\UserSetting\UserSetting;
+use Ibexa\User\UserSetting\UserSettingService;
+use Ibexa\User\UserSetting\ValueDefinitionRegistry;
 use PHPUnit\Framework\TestCase;
 
 class UserSettingServiceTest extends TestCase
@@ -32,13 +32,14 @@ class UserSettingServiceTest extends TestCase
     {
         $userPreferenceService = $this->createMock(UserPreferenceService::class);
         $userPreferenceService->method('getUserPreference')
-            ->willReturnMap([
+            ->willReturnMap(
+                [
                 ['identifier_1', new UserPreference(['value' => '1'])],
                 ['identifier_2', new UserPreference(['value' => '2'])],
                 ['identifier_3', new UserPreference(['value' => '3'])],
                 ['identifier_4', new UserPreference(['value' => '4'])],
             ]
-        );
+            );
 
         $valueRegistry = $this->createMock(ValueDefinitionRegistry::class);
         $valueRegistry->method('getValueDefinitions')->willReturn([
@@ -71,7 +72,7 @@ class UserSettingServiceTest extends TestCase
      * @param string $name
      * @param string $description
      *
-     * @return \EzSystems\EzPlatformUser\UserSetting\ValueDefinitionInterface
+     * @return \Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface
      */
     private function getValueDefinition(string $name = 'name', string $description = 'description'): ValueDefinitionInterface
     {
@@ -82,3 +83,5 @@ class UserSettingServiceTest extends TestCase
         return $valueDefinition;
     }
 }
+
+class_alias(UserSettingServiceTest::class, 'EzSystems\EzPlatformUser\Tests\UserSetting\UserSettingServiceTest');

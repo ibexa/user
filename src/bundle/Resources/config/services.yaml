@@ -13,44 +13,44 @@ services:
         autoconfigure: true
         public: false
 
-    EzSystems\EzPlatformUser\EventListener\:
+    Ibexa\User\EventListener\:
         resource: "../../../lib/EventListener/*"
         public: true
         tags:
             - { name: kernel.event_subscriber }
 
-    EzSystems\EzPlatformUserBundle\Command\:
+    Ibexa\Bundle\User\Command\:
         resource: "../../Command/*"
         tags:
             - { name: console.command }
 
-    EzSystems\EzPlatformUserBundle\Command\AuditUserDatabaseCommand:
+    Ibexa\Bundle\User\Command\AuditUserDatabaseCommand:
         arguments:
             $connection: '@ezpublish.persistence.connection'
 
-    EzSystems\EzPlatformUser\EventListener\ViewTemplatesListener:
+    Ibexa\User\EventListener\ViewTemplatesListener:
         tags:
             - { name: kernel.event_subscriber }
 
-    EzSystems\EzPlatformUser\ConfigResolver\ConfigurableRegistrationGroupLoader: ~
+    Ibexa\User\ConfigResolver\ConfigurableRegistrationGroupLoader: ~
 
-    EzSystems\EzPlatformUser\ConfigResolver\ConfigurableRegistrationContentTypeLoader:
+    Ibexa\User\ConfigResolver\ConfigurableRegistrationContentTypeLoader:
         calls:
             - [setParam, ["contentTypeIdentifier", "%ezplatform.user.content_type_identifier%"]]
 
     # Default implementations
-    EzSystems\EzPlatformUser\ConfigResolver\RegistrationGroupLoader: '@EzSystems\EzPlatformUser\ConfigResolver\ConfigurableRegistrationGroupLoader'
-    EzSystems\EzPlatformUser\ConfigResolver\RegistrationContentTypeLoader: '@EzSystems\EzPlatformUser\ConfigResolver\ConfigurableRegistrationContentTypeLoader'
+    Ibexa\User\ConfigResolver\RegistrationGroupLoader: '@Ibexa\User\ConfigResolver\ConfigurableRegistrationGroupLoader'
+    Ibexa\User\ConfigResolver\RegistrationContentTypeLoader: '@Ibexa\User\ConfigResolver\ConfigurableRegistrationContentTypeLoader'
 
-    EzSystems\EzPlatformUser\Form\DataMapper\UserRegisterMapper:
+    Ibexa\User\Form\DataMapper\UserRegisterMapper:
         calls:
             - [setParam, ["language", "@=service('ezpublish.config.resolver').getParameter('languages', null, null)[0]"]]
 
-    EzSystems\EzPlatformUser\Form\Processor\UserRegisterFormProcessor:
+    Ibexa\User\Form\Processor\UserRegisterFormProcessor:
         tags:
             - { name: kernel.event_subscriber }
 
-    EzSystems\EzPlatformUser\Templating\Twig\DateTimeExtension:
+    Ibexa\User\Templating\Twig\DateTimeExtension:
         arguments:
             $shortDateTimeFormatter: '@ezplatform.user.settings.short_datetime_format.formatter'
             $shortDateFormatter: '@ezplatform.user.settings.short_date_format.formatter'
@@ -60,8 +60,9 @@ services:
             $fullTimeFormatter: '@ezplatform.user.settings.full_time_format.formatter'
         tags:
             - { name: twig.extension }
-    
-    ezplatform.user.listener.reorder_by_order_number_listener:
-        class: EzSystems\EzPlatformAdminUi\Menu\Listener\ReorderByOrderNumberListener
-        tags:
-            - { name: kernel.event_listener, event: ezplatform_admin_ui.menu_configure.user_menu, method: reorderMenuItems, priority: -50 }
+
+    Ibexa\User\ExceptionHandler\NullActionResultHandler: ~
+    Ibexa\User\ExceptionHandler\ActionResultHandler: '@Ibexa\User\ExceptionHandler\NullActionResultHandler'
+
+    Ibexa\User\Form\BaseSubmitHandler: ~
+    Ibexa\User\Form\SubmitHandler: '@Ibexa\User\Form\BaseSubmitHandler'

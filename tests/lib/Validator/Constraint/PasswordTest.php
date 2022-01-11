@@ -1,20 +1,20 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUser\Tests\Validator\Constraint;
+namespace Ibexa\Tests\User\Validator\Constraint;
 
-use EzSystems\EzPlatformUser\Validator\Constraints\Password;
-use EzSystems\EzPlatformUser\Validator\Constraints\PasswordValidator;
+use Ibexa\User\Validator\Constraints\Password;
+use Ibexa\User\Validator\Constraints\PasswordValidator;
 use PHPUnit\Framework\TestCase;
 
 class PasswordTest extends TestCase
 {
-    /** @var \EzSystems\EzPlatformUser\Validator\Constraints\Password */
+    /** @var \Ibexa\User\Validator\Constraints\Password */
     private $constraint;
 
     protected function setUp(): void
@@ -37,3 +37,5 @@ class PasswordTest extends TestCase
         $this->assertSame([Password::CLASS_CONSTRAINT, Password::PROPERTY_CONSTRAINT], $this->constraint->getTargets());
     }
 }
+
+class_alias(PasswordTest::class, 'EzSystems\EzPlatformUser\Tests\Validator\Constraint\PasswordTest');

@@ -7,10 +7,10 @@
         convertWarningsToExceptions="true"
         colors="true">
     <testsuites>
-        <testsuite name="EzSystems\EzPlatformUserBundle">
+        <testsuite name="Ibexa\Bundle\User">
             <directory>tests/bundle/</directory>
         </testsuite>
-        <testsuite name="EzSystems\EzPlatformUser">
+        <testsuite name="Ibexa\User">
             <directory>tests/lib/</directory>
         </testsuite>
     </testsuites>

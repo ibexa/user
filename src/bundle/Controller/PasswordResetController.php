@@ -1,58 +1,58 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUserBundle\Controller;
+namespace Ibexa\Bundle\User\Controller;
 
-use eZ\Publish\API\Repository\Exceptions\NotFoundException;
-use eZ\Publish\API\Repository\PermissionResolver;
-use eZ\Publish\API\Repository\Values\User\User;
-use eZ\Publish\Core\MVC\ConfigResolverInterface;
-use EzSystems\EzPlatformUser\Form\Data\UserPasswordResetData;
-use EzSystems\EzPlatformUser\Form\Factory\FormFactory;
-use EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface;
-use EzSystems\EzPlatformUser\View\ForgotPassword\FormView;
-use EzSystems\EzPlatformUser\View\ForgotPassword\LoginView;
-use EzSystems\EzPlatformUser\View\ForgotPassword\SuccessView;
-use EzSystems\EzPlatformUser\View\ResetPassword\InvalidLinkView;
-use EzSystems\EzPlatformUser\View\ResetPassword\FormView as UserResetPasswordFormView;
-use EzSystems\EzPlatformUser\View\ResetPassword\SuccessView as UserResetPasswordSuccessView;
-use EzSystems\EzPlatformUserBundle\Type\UserForgotPasswordReason;
+use DateInterval;
+use DateTime;
+use Ibexa\Bundle\User\Type\UserForgotPasswordReason;
+use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
+use Ibexa\Contracts\Core\Repository\PermissionResolver;
+use Ibexa\Contracts\Core\Repository\UserService;
+use Ibexa\Contracts\Core\Repository\Values\User\User;
+use Ibexa\Contracts\Core\Repository\Values\User\UserTokenUpdateStruct;
+use Ibexa\Core\MVC\ConfigResolverInterface;
+use Ibexa\User\ExceptionHandler\ActionResultHandler;
+use Ibexa\User\Form\Data\UserPasswordResetData;
+use Ibexa\User\Form\Factory\FormFactory;
+use Ibexa\User\View\ForgotPassword\FormView;
+use Ibexa\User\View\ForgotPassword\LoginView;
+use Ibexa\User\View\ForgotPassword\SuccessView;
+use Ibexa\User\View\ResetPassword\FormView as UserResetPasswordFormView;
+use Ibexa\User\View\ResetPassword\InvalidLinkView;
+use Ibexa\User\View\ResetPassword\SuccessView as UserResetPasswordSuccessView;
+use Swift_Mailer;
+use Swift_Message;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use eZ\Publish\API\Repository\UserService;
-use eZ\Publish\API\Repository\Values\User\UserTokenUpdateStruct;
-use Swift_Mailer;
-use DateTime;
-use DateInterval;
-use Swift_Message;
 use Twig\Environment;
 
 class PasswordResetController extends Controller
 {
-    /** @var \EzSystems\EzPlatformUser\Form\Factory\FormFactory */
+    /** @var \Ibexa\User\Form\Factory\FormFactory */
     private $formFactory;
 
-    /** @var \eZ\Publish\API\Repository\UserService */
+    /** @var \Ibexa\Contracts\Core\Repository\UserService */
     private $userService;
 
-    /** @var Swift_Mailer */
+    /** @var \Swift_Mailer */
     private $mailer;
 
     /** @var \Twig\Environment */
     private $twig;
 
-    /** @var \EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface */
-    private $notificationHandler;
+    /** @var \Ibexa\User\ExceptionHandler\ActionResultHandler */
+    private $actionResultHandler;
 
-    /** @var \eZ\Publish\API\Repository\PermissionResolver */
+    /** @var \Ibexa\Contracts\Core\Repository\PermissionResolver */
     private $permissionResolver;
 
-    /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
+    /** @var \Ibexa\Core\MVC\ConfigResolverInterface */
     private $configResolver;
 
     public function __construct(
@@ -60,7 +60,7 @@ class PasswordResetController extends Controller
         UserService $userService,
         Swift_Mailer $mailer,
         Environment $twig,
-        TranslatableNotificationHandlerInterface $notificationHandler,
+        ActionResultHandler $actionResultHandler,
         PermissionResolver $permissionResolver,
         ConfigResolverInterface $configResolver
     ) {
@@ -68,15 +68,15 @@ class PasswordResetController extends Controller
         $this->userService = $userService;
         $this->mailer = $mailer;
         $this->twig = $twig;
-        $this->notificationHandler = $notificationHandler;
+        $this->actionResultHandler = $actionResultHandler;
         $this->permissionResolver = $permissionResolver;
         $this->configResolver = $configResolver;
     }
 
     /**
-     * @return \EzSystems\EzPlatformUser\View\ForgotPassword\FormView|\EzSystems\EzPlatformUser\View\ForgotPassword\SuccessView|\Symfony\Component\HttpFoundation\RedirectResponse
+     * @return \Ibexa\User\View\ForgotPassword\FormView|\Ibexa\User\View\ForgotPassword\SuccessView|\Symfony\Component\HttpFoundation\RedirectResponse
      *
-     * @throws \eZ\Publish\Core\Base\Exceptions\InvalidArgumentType
+     * @throws \Ibexa\Core\Base\Exceptions\InvalidArgumentType
      */
     public function userForgotPasswordAction(Request $request, ?string $reason = null)
     {
@@ -112,9 +112,9 @@ class PasswordResetController extends Controller
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
      *
-     * @return \EzSystems\EzPlatformUser\View\ForgotPassword\LoginView|\EzSystems\EzPlatformUser\View\ForgotPassword\SuccessView
+     * @return \Ibexa\User\View\ForgotPassword\LoginView|\Ibexa\User\View\ForgotPassword\SuccessView
      *
-     * @throws \eZ\Publish\Core\Base\Exceptions\InvalidArgumentType
+     * @throws \Ibexa\Core\Base\Exceptions\InvalidArgumentType
      */
     public function userForgotPasswordLoginAction(Request $request)
     {
@@ -150,9 +150,9 @@ class PasswordResetController extends Controller
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @param string $hashKey
      *
-     * @return \EzSystems\EzPlatformUser\View\ResetPassword\FormView|\EzSystems\EzPlatformUser\View\ResetPassword\InvalidLinkView|\EzSystems\EzPlatformUser\View\ResetPassword\SuccessView
+     * @return \Ibexa\User\View\ResetPassword\FormView|\Ibexa\User\View\ResetPassword\InvalidLinkView|\Ibexa\User\View\ResetPassword\SuccessView
      *
-     * @throws \eZ\Publish\Core\Base\Exceptions\InvalidArgumentType
+     * @throws \Ibexa\Core\Base\Exceptions\InvalidArgumentType
      */
     public function userResetPasswordAction(Request $request, string $hashKey)
     {
@@ -194,7 +194,7 @@ class PasswordResetController extends Controller
 
                 return $view;
             } catch (\Exception $e) {
-                $this->notificationHandler->error(/** @Ignore */ $e->getMessage());
+                $this->actionResultHandler->error($e->getMessage());
             }
         }
 
@@ -207,7 +207,7 @@ class PasswordResetController extends Controller
     }
 
     /**
-     * @param \eZ\Publish\API\Repository\Values\User\User $user
+     * @param \Ibexa\Contracts\Core\Repository\Values\User\User $user
      *
      * @return string
      *
@@ -249,3 +249,5 @@ class PasswordResetController extends Controller
         $this->mailer->send($message);
     }
 }
+
+class_alias(PasswordResetController::class, 'EzSystems\EzPlatformUserBundle\Controller\PasswordResetController');
