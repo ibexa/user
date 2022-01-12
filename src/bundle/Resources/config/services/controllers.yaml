@@ -1,23 +1,23 @@
 services:
 
-    EzSystems\EzPlatformUserBundle\Controller\:
+    Ibexa\Bundle\User\Controller\:
         resource: "../../Controller/*"
         exclude: "../../Controller/{Controller}"
-        parent: EzSystems\EzPlatformUserBundle\Controller\Controller
+        parent: Ibexa\Bundle\User\Controller\Controller
 
-    EzSystems\EzPlatformUserBundle\Controller\Controller:
+    Ibexa\Bundle\User\Controller\Controller:
         calls:
             - [setContainer, ["@service_container"]]
             - [performAccessCheck, []]
         tags: [controller.service_arguments]
 
-    EzSystems\EzPlatformUserBundle\Controller\PasswordResetController:
+    Ibexa\Bundle\User\Controller\PasswordResetController:
         autowire: true
         calls:
             - [setContainer, ['@service_container']]
         tags: [controller.service_arguments]
 
-    EzSystems\EzPlatformUserBundle\Controller\PasswordChangeController:
+    Ibexa\Bundle\User\Controller\PasswordChangeController:
         autowire: true
         arguments:
             $siteAccessGroups: '%ezpublish.siteaccess.groups%'
@@ -26,12 +26,14 @@ services:
             - [performAccessCheck, []]
         tags: [controller.service_arguments]
 
-    EzSystems\EzPlatformUserBundle\Controller\UserRegisterController:
+    Ibexa\Bundle\User\Controller\UserRegisterController:
         autowire: true
         arguments:
             $userActionDispatcher: '@ezplatform.content_forms.action_dispatcher.user'
         tags: [controller.service_arguments]
 
-    EzSystems\EzPlatformUserBundle\Controller\UserSettingsController:
-        parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
+    Ibexa\Bundle\User\Controller\UserSettingsController:
+        autowire: true
+        calls:
+            - [ setContainer, [ '@service_container' ] ]
         tags: [controller.service_arguments]

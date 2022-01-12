@@ -1,29 +1,29 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUser\UserSetting\Setting;
+namespace Ibexa\User\UserSetting\Setting;
 
-use EzSystems\EzPlatformUser\UserSetting\FormMapperInterface;
-use EzSystems\EzPlatformUser\UserSetting\DateTimeFormat\FormatterInterface;
-use EzSystems\EzPlatformUser\UserSetting\ValueDefinitionInterface;
 use DateTimeImmutable;
+use Ibexa\Contracts\User\UserSetting\FormMapperInterface;
+use Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface;
+use Ibexa\User\UserSetting\DateTimeFormat\FormatterInterface;
 
 abstract class AbstractDateTimeFormat implements ValueDefinitionInterface, FormMapperInterface
 {
-    /** @var \EzSystems\EzPlatformUser\UserSetting\Setting\DateTimeFormatSerializer */
+    /** @var \Ibexa\User\UserSetting\Setting\DateTimeFormatSerializer */
     protected $serializer;
 
-    /** @var \EzSystems\EzPlatformUser\UserSetting\DateTimeFormat\Formatter|null */
+    /** @var \Ibexa\User\UserSetting\DateTimeFormat\Formatter|null */
     protected $formatter;
 
     /**
-     * @param \EzSystems\EzPlatformUser\UserSetting\Setting\DateTimeFormatSerializer $serializer
-     * @param \EzSystems\EzPlatformUser\UserSetting\DateTimeFormat\FormatterInterface $formatter
+     * @param \Ibexa\User\UserSetting\Setting\DateTimeFormatSerializer $serializer
+     * @param \Ibexa\User\UserSetting\DateTimeFormat\FormatterInterface $formatter
      */
     public function __construct(DateTimeFormatSerializer $serializer, FormatterInterface $formatter)
     {
@@ -92,3 +92,5 @@ abstract class AbstractDateTimeFormat implements ValueDefinitionInterface, FormM
      */
     abstract protected function getTranslatedDescription(): string;
 }
+
+class_alias(AbstractDateTimeFormat::class, 'EzSystems\EzPlatformUser\UserSetting\Setting\AbstractDateTimeFormat');

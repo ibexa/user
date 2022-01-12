@@ -1,31 +1,33 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUser\UserSetting;
+namespace Ibexa\User\UserSetting;
 
-use eZ\Publish\API\Repository\Exceptions\NotFoundException;
-use eZ\Publish\API\Repository\UserPreferenceService;
-use eZ\Publish\API\Repository\Values\UserPreference\UserPreferenceSetStruct;
+use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
+use Ibexa\Contracts\Core\Repository\UserPreferenceService;
+use Ibexa\Contracts\Core\Repository\Values\UserPreference\UserPreferenceSetStruct;
+use Ibexa\Contracts\User\UserSetting\ValueDefinitionGroupInterface;
+use Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface;
 
 /**
  * @internal
  */
 class UserSettingService
 {
-    /** @var \eZ\Publish\API\Repository\UserPreferenceService */
+    /** @var \Ibexa\Contracts\Core\Repository\UserPreferenceService */
     protected $userPreferenceService;
 
-    /** @var \EzSystems\EzPlatformUser\UserSetting\ValueDefinitionRegistry */
+    /** @var \Ibexa\User\UserSetting\ValueDefinitionRegistry */
     protected $valueRegistry;
 
     /**
-     * @param \eZ\Publish\API\Repository\UserPreferenceService $userPreferenceService
-     * @param \EzSystems\EzPlatformUser\UserSetting\ValueDefinitionRegistry $valueRegistry
+     * @param \Ibexa\Contracts\Core\Repository\UserPreferenceService $userPreferenceService
+     * @param \Ibexa\User\UserSetting\ValueDefinitionRegistry $valueRegistry
      */
     public function __construct(
         UserPreferenceService $userPreferenceService,
@@ -39,8 +41,8 @@ class UserSettingService
      * @param string $identifier
      * @param string $value
      *
-     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
-     * @throws \eZ\Publish\Core\Base\Exceptions\InvalidArgumentException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
+     * @throws \Ibexa\Core\Base\Exceptions\InvalidArgumentException
      */
     public function setUserSetting(string $identifier, string $value): void
     {
@@ -54,10 +56,10 @@ class UserSettingService
     /**
      * @param string $identifier
      *
-     * @return \EzSystems\EzPlatformUser\UserSetting\UserSetting
+     * @return \Ibexa\User\UserSetting\UserSetting
      *
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
-     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
      */
     public function getUserSetting(string $identifier): UserSetting
     {
@@ -68,18 +70,30 @@ class UserSettingService
         return $this->createUserSetting($identifier, $valueDefinition, $userPreferenceValue);
     }
 
+    public function getUserSettingGroup(string $identifier): UserSettingGroup
+    {
+        $group = $this->valueRegistry->getValueDefinitionGroup($identifier);
+
+        $userPreferences = [];
+        foreach ($group->getValueDefinitions() as $settingIdentifier => $userSettingDefinition) {
+            $userPreferences[$settingIdentifier] = $this->getUserSettingValue($settingIdentifier, $userSettingDefinition);
+        }
+
+        return $this->createUserSettingsGroup($identifier, $group, $userPreferences);
+    }
+
     /**
      * @param int $offset
      * @param int $limit
      *
      * @return array
      *
-     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
      */
     public function loadUserSettings(int $offset = 0, int $limit = 25): array
     {
         $values = $this->valueRegistry->getValueDefinitions();
-        /** @var \EzSystems\EzPlatformUser\UserSetting\ValueDefinitionInterface[] $slice */
+        /** @var \Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface[] $slice */
         $slice = \array_slice($values, $offset, $limit, true);
 
         $userPreferences = [];
@@ -87,7 +101,28 @@ class UserSettingService
             $userPreferences[$identifier] = $this->getUserSettingValue($identifier, $userSettingDefinition);
         }
 
-        return $this->createUserSettings($slice, $userPreferences);
+        $userSettings = [];
+        foreach ($slice as $identifier => $value) {
+            $userSettings[] = $this->createUserSetting($identifier, $value, $userPreferences[$identifier]);
+        }
+
+        return $userSettings;
+    }
+
+    public function loadGroupedUserSettings(): array
+    {
+        $groups = $this->valueRegistry->getValueDefinitionGroups();
+
+        $settings = [];
+        foreach ($groups as $groupId => $group) {
+            $userSettingsValues = [];
+            foreach ($group->getValueDefinitions() as $identifier => $userSettingDefinition) {
+                $userSettingsValues[$identifier] = $this->getUserSettingValue($identifier, $userSettingDefinition);
+            }
+            $settings[$groupId] = $this->createUserSettingsGroup($groupId, $group, $userSettingsValues);
+        }
+
+        return $settings;
     }
 
     /**
@@ -98,29 +133,30 @@ class UserSettingService
         return $this->valueRegistry->countValueDefinitions();
     }
 
-    /**
-     * @param \EzSystems\EzPlatformUser\UserSetting\ValueDefinitionInterface[] $values
-     * @param array $userPreferences
-     *
-     * @return \EzSystems\EzPlatformUser\UserSetting\UserSetting[]
-     */
-    private function createUserSettings(array $values, array $userPreferences): array
-    {
+    private function createUserSettingsGroup(
+        string $groupId,
+        ValueDefinitionGroupInterface $group,
+        array $userPreferences
+    ): UserSettingGroup {
         $userSettings = [];
-
-        foreach ($values as $identifier => $value) {
+        foreach ($group->getValueDefinitions() as $identifier => $value) {
             $userSettings[] = $this->createUserSetting($identifier, $value, $userPreferences[$identifier]);
         }
 
-        return $userSettings;
+        return new UserSettingGroup(
+            $groupId,
+            $group->getName(),
+            $group->getDescription(),
+            $userSettings
+        );
     }
 
     /**
      * @param string $identifier
-     * @param \EzSystems\EzPlatformUser\UserSetting\ValueDefinitionInterface $value
+     * @param \Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface $value
      * @param string $userPreferenceValue
      *
-     * @return \EzSystems\EzPlatformUser\UserSetting\UserSetting
+     * @return \Ibexa\User\UserSetting\UserSetting
      */
     private function createUserSetting(
         string $identifier,
@@ -137,11 +173,11 @@ class UserSettingService
 
     /**
      * @param string $identifier
-     * @param \EzSystems\EzPlatformUser\UserSetting\ValueDefinitionInterface $value
+     * @param \Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface $value
      *
      * @return string
      *
-     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
      */
     private function getUserSettingValue(string $identifier, ValueDefinitionInterface $value): string
     {
@@ -154,4 +190,11 @@ class UserSettingService
 
         return $userPreferenceValue;
     }
+
+    public function countGroupedUserSettings()
+    {
+        return $this->valueRegistry->countValueDefinitionGroups();
+    }
 }
+
+class_alias(UserSettingService::class, 'EzSystems\EzPlatformUser\UserSetting\UserSettingService');

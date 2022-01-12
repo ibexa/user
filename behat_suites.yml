@@ -2,7 +2,7 @@ browser:
     suites:
         password:
             paths:
-              - '%paths.base%/vendor/ezsystems/ezplatform-user/features/browser/formats.feature'
+              - '%paths.base%/vendor/ibexa/user/features/browser/formats.feature'
             contexts:
               - EzSystems\Behat\API\Context\TestContext
               - EzSystems\Behat\API\Context\UserContext
@@ -12,7 +12,7 @@ browser:
               - Behat\MinkExtension\Context\MinkContext
         providers:
             paths:
-              - '%paths.base%/vendor/ezsystems/ezplatform-user/features/browser/loginMethods.feature'
+              - '%paths.base%/vendor/ibexa/user/features/browser/loginMethods.feature'
             contexts:
               - EzSystems\Behat\API\Context\TestContext
               - EzSystems\Behat\API\Context\UserContext

@@ -1,20 +1,20 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUser\Form\Type\UserSettings;
+namespace Ibexa\User\Form\Type\UserSettings;
 
-use eZ\Publish\Core\MVC\ConfigResolverInterface;
+use Ibexa\Core\MVC\ConfigResolverInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ShortDateTimeFormatType extends AbstractType
 {
-    /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
+    /** @var \Ibexa\Core\MVC\ConfigResolverInterface */
     private $configResolver;
 
     public function __construct(ConfigResolverInterface $configResolver)
@@ -41,3 +41,5 @@ class ShortDateTimeFormatType extends AbstractType
         return DateTimeFormatType::class;
     }
 }
+
+class_alias(ShortDateTimeFormatType::class, 'EzSystems\EzPlatformUser\Form\Type\UserSettings\ShortDateTimeFormatType');

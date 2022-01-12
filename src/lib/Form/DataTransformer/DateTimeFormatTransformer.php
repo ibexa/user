@@ -1,25 +1,25 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUser\Form\DataTransformer;
+namespace Ibexa\User\Form\DataTransformer;
 
-use EzSystems\EzPlatformUser\UserSetting\Setting\DateTimeFormatSerializer;
-use EzSystems\EzPlatformUser\UserSetting\Setting\Value\DateTimeFormat;
+use Ibexa\User\UserSetting\Setting\DateTimeFormatSerializer;
+use Ibexa\User\UserSetting\Setting\Value\DateTimeFormat;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 
 class DateTimeFormatTransformer implements DataTransformerInterface
 {
-    /** @var \EzSystems\EzPlatformUser\UserSetting\Setting\DateTimeFormatSerializer */
+    /** @var \Ibexa\User\UserSetting\Setting\DateTimeFormatSerializer */
     private $serializer;
 
     /**
-     * @param \EzSystems\EzPlatformUser\UserSetting\Setting\DateTimeFormatSerializer $serializer
+     * @param \Ibexa\User\UserSetting\Setting\DateTimeFormatSerializer $serializer
      */
     public function __construct(DateTimeFormatSerializer $serializer)
     {
@@ -65,7 +65,10 @@ class DateTimeFormatTransformer implements DataTransformerInterface
         }
 
         return $this->serializer->serialize(new DateTimeFormat(
-            $value['date_format'], $value['time_format']
+            $value['date_format'],
+            $value['time_format']
         ));
     }
 }
+
+class_alias(DateTimeFormatTransformer::class, 'EzSystems\EzPlatformUser\Form\DataTransformer\DateTimeFormatTransformer');

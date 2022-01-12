@@ -1,23 +1,35 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUser\View\UserSettings;
+namespace Ibexa\User\View\UserSettings;
 
-use eZ\Publish\Core\MVC\Symfony\View\BaseView;
-use EzSystems\EzPlatformUser\UserSetting\UserSetting;
+use Ibexa\Core\MVC\Symfony\View\BaseView;
+use Ibexa\User\UserSetting\UserSetting;
+use Ibexa\User\UserSetting\UserSettingGroup;
 
 class UpdateView extends BaseView
 {
-    /** @var \EzSystems\EzPlatformUser\UserSetting\UserSetting|null */
-    private $userSetting;
+    private ?UserSetting $userSetting;
+
+    private ?UserSettingGroup $userSettingGroup;
+
+    public function __construct(
+        $templateIdentifier = null,
+        array $parameters = [],
+        $viewType = 'full'
+    ) {
+        $this->userSetting = null;
+        $this->userSettingGroup = null;
+        parent::__construct($templateIdentifier, $parameters, $viewType);
+    }
 
     /**
-     * @return \EzSystems\EzPlatformUser\UserSetting\UserSetting|null
+     * @return \Ibexa\User\UserSetting\UserSetting|null
      */
     public function getUserSetting(): ?UserSetting
     {
@@ -25,11 +37,21 @@ class UpdateView extends BaseView
     }
 
     /**
-     * @param \EzSystems\EzPlatformUser\UserSetting\UserSetting|null $userSetting
+     * @param \Ibexa\User\UserSetting\UserSetting|null $userSetting
      */
     public function setUserSetting(?UserSetting $userSetting): void
     {
         $this->userSetting = $userSetting;
+    }
+
+    public function getUserSettingGroup(): ?UserSettingGroup
+    {
+        return $this->userSettingGroup;
+    }
+
+    public function setUserSettingGroup(?UserSettingGroup $userSettingGroup): void
+    {
+        $this->userSettingGroup = $userSettingGroup;
     }
 
     /**
@@ -39,6 +61,9 @@ class UpdateView extends BaseView
     {
         return [
             'user_setting' => $this->getUserSetting(),
+            'user_setting_group' => $this->getUserSettingGroup(),
         ];
     }
 }
+
+class_alias(UpdateView::class, 'EzSystems\EzPlatformUser\View\UserSettings\UpdateView');
