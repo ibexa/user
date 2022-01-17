@@ -16,7 +16,7 @@ use Symfony\Component\DependencyInjection\Reference;
 
 class FormMapperPass implements CompilerPassInterface
 {
-    public const TAG_NAME = 'ezplatform.admin_ui.user_setting.form_mapper';
+    public const TAG_NAME = 'ibexa.user.setting.mapper.form';
 
     /**
      * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
