@@ -20,52 +20,52 @@ services:
     #
     Ibexa\User\View\UserSettings\UpdateViewBuilder:
         arguments:
-            $viewConfigurator: '@ezpublish.view.configurator'
-            $viewParametersInjector: '@ezpublish.view.view_parameters.injector.dispatcher'
+            $viewConfigurator: '@Ibexa\Core\MVC\Symfony\View\Configurator\ViewProvider'
+            $viewParametersInjector: '@Ibexa\Core\MVC\Symfony\View\ParametersInjector\EventDispatcherInjector'
         tags:
             - { name: ibexa.view_builder }
 
     Ibexa\User\View\UserSettings\UpdateViewProvider:
         arguments:
-            $matcherFactory: '@ezplatform.user.view.user_setting.update.matcher_factory'
+            $matcherFactory: '@ibexa.user.view.user_setting.update.matcher_factory'
         tags:
             - { name: ezpublish.view_provider, type: Ibexa\User\View\UserSettings\UpdateView, priority: 10 }
 
-    ezplatform.user.view.user_setting.update.default_configured:
+    ibexa.user.view.user_setting.update.default_configured:
         class: '%ezpublish.view_provider.configured.class%'
         arguments:
-            $matcherFactory: '@ezplatform.user.view.user_setting.update.default_matcher_factory'
+            $matcherFactory: '@ibexa.user.view.user_setting.update.default_matcher_factory'
         tags:
             - { name: ezpublish.view_provider, type: Ibexa\User\View\UserSettings\UpdateView, priority: -1 }
 
-    ezplatform.user.view.user_setting.update.matcher_factory:
+    ibexa.user.view.user_setting.update.matcher_factory:
         class: '%ezpublish.view.matcher_factory.class%'
         arguments:
             - '@Ibexa\Bundle\Core\Matcher\ViewMatcherRegistry'
-            - '@ezpublish.api.repository'
+            - '@ibexa.api.repository'
             - 'Ibexa\User\View\UserSettings\Matcher'
 
-    ezplatform.user.view.user_setting.update.matcher_factory.dynamically_configured:
+    ibexa.user.view.user_setting.update.matcher_factory.dynamically_configured:
         class: Ibexa\Core\MVC\Symfony\Matcher\DynamicallyConfiguredMatcherFactoryDecorator
-        decorates: ezplatform.user.view.user_setting.update.matcher_factory
+        decorates: ibexa.user.view.user_setting.update.matcher_factory
         arguments:
-            $innerConfigurableMatcherFactory: '@ezplatform.user.view.user_setting.update.matcher_factory.dynamically_configured.inner'
-            $configResolver: '@ezpublish.config.resolver'
+            $innerConfigurableMatcherFactory: '@ibexa.user.view.user_setting.update.matcher_factory.dynamically_configured.inner'
+            $configResolver: '@ibexa.config.resolver'
             $parameterName: user_settings_update_view
 
-    ezplatform.user.view.user_setting.update.default_matcher_factory:
+    ibexa.user.view.user_setting.update.default_matcher_factory:
         class: '%ezpublish.view.matcher_factory.class%'
         arguments:
             - '@Ibexa\Bundle\Core\Matcher\ViewMatcherRegistry'
-            - '@ezpublish.api.repository'
+            - '@ibexa.api.repository'
             - 'Ibexa\User\View\UserSettings\Matcher'
 
-    ezplatform.user.view.user_setting.update.default_matcher_factory.dynamically_configured:
+    ibexa.user.view.user_setting.update.default_matcher_factory.dynamically_configured:
         class: Ibexa\Core\MVC\Symfony\Matcher\DynamicallyConfiguredMatcherFactoryDecorator
-        decorates: ezplatform.user.view.user_setting.update.default_matcher_factory
+        decorates: ibexa.user.view.user_setting.update.default_matcher_factory
         arguments:
-            $innerConfigurableMatcherFactory: '@ezplatform.user.view.user_setting.update.default_matcher_factory.dynamically_configured.inner'
-            $configResolver: '@ezpublish.config.resolver'
+            $innerConfigurableMatcherFactory: '@ibexa.user.view.user_setting.update.default_matcher_factory.dynamically_configured.inner'
+            $configResolver: '@ibexa.config.resolver'
             $parameterName: user_settings_update_view_defaults
 
     #
@@ -95,56 +95,56 @@ services:
 
     Ibexa\User\UserSetting\DateTimeFormat\FullDateTimeFormatterFactory: ~
 
-    ezplatform.user.settings.full_datetime_format.formatter:
+    ibexa.user.settings.full_datetime_format.formatter:
         lazy: true
         factory: ['@Ibexa\User\UserSetting\DateTimeFormat\FullDateTimeFormatterFactory', 'getFormatter']
         class: 'Ibexa\User\UserSetting\DateTimeFormat\Formatter'
 
     Ibexa\User\UserSetting\Setting\FullDateTimeFormat:
         arguments:
-            $formatter: '@ezplatform.user.settings.full_datetime_format.formatter'
+            $formatter: '@ibexa.user.settings.full_datetime_format.formatter'
         tags:
             - { name: ezplatform.admin_ui.user_setting.value, identifier: full_datetime_format, group: location, priority: 20 }
             - { name: ezplatform.admin_ui.user_setting.form_mapper, identifier: full_datetime_format }
 
     Ibexa\User\UserSetting\DateTimeFormat\ShortDateTimeFormatterFactory: ~
 
-    ezplatform.user.settings.short_datetime_format.formatter:
+    ibexa.user.settings.short_datetime_format.formatter:
         lazy: true
         factory: ['@Ibexa\User\UserSetting\DateTimeFormat\ShortDateTimeFormatterFactory', 'getFormatter']
         class: 'Ibexa\User\UserSetting\DateTimeFormat\Formatter'
 
     Ibexa\User\UserSetting\Setting\ShortDateTimeFormat:
         arguments:
-            $formatter: '@ezplatform.user.settings.short_datetime_format.formatter'
+            $formatter: '@ibexa.user.settings.short_datetime_format.formatter'
         tags:
             - { name: ezplatform.admin_ui.user_setting.value, identifier: short_datetime_format, group: location, priority: 30 }
             - { name: ezplatform.admin_ui.user_setting.form_mapper, identifier: short_datetime_format }
 
     Ibexa\User\UserSetting\DateTimeFormat\FullDateFormatterFactory: ~
 
-    ezplatform.user.settings.full_date_format.formatter:
+    ibexa.user.settings.full_date_format.formatter:
         lazy: true
         factory: ['@Ibexa\User\UserSetting\DateTimeFormat\FullDateFormatterFactory', 'getFormatter']
         class: 'Ibexa\User\UserSetting\DateTimeFormat\Formatter'
 
     Ibexa\User\UserSetting\DateTimeFormat\FullTimeFormatterFactory: ~
 
-    ezplatform.user.settings.full_time_format.formatter:
+    ibexa.user.settings.full_time_format.formatter:
         lazy: true
         factory: ['@Ibexa\User\UserSetting\DateTimeFormat\FullTimeFormatterFactory', 'getFormatter']
         class: 'Ibexa\User\UserSetting\DateTimeFormat\Formatter'
 
     Ibexa\User\UserSetting\DateTimeFormat\ShortDateFormatterFactory: ~
 
-    ezplatform.user.settings.short_date_format.formatter:
+    ibexa.user.settings.short_date_format.formatter:
         lazy: true
         factory: ['@Ibexa\User\UserSetting\DateTimeFormat\ShortDateFormatterFactory', 'getFormatter']
         class: 'Ibexa\User\UserSetting\DateTimeFormat\Formatter'
 
     Ibexa\User\UserSetting\DateTimeFormat\ShortTimeFormatterFactory: ~
 
-    ezplatform.user.settings.short_time_format.formatter:
+    ibexa.user.settings.short_time_format.formatter:
         lazy: true
         factory: ['@Ibexa\User\UserSetting\DateTimeFormat\ShortDateFormatterFactory', 'getFormatter']
         class: 'Ibexa\User\UserSetting\DateTimeFormat\Formatter'
