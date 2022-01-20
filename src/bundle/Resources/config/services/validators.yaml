@@ -13,6 +13,6 @@ services:
 
     Ibexa\User\Validator\Constraints\PasswordValidator:
         arguments:
-            $userService: '@ezpublish.api.service.user'
+            $userService: '@ibexa.api.service.user'
         tags:
             - { name: validator.constraint_validator }

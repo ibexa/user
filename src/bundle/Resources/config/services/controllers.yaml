@@ -29,7 +29,7 @@ services:
     Ibexa\Bundle\User\Controller\UserRegisterController:
         autowire: true
         arguments:
-            $userActionDispatcher: '@ezplatform.content_forms.action_dispatcher.user'
+            $userActionDispatcher: '@Ibexa\ContentForms\Form\ActionDispatcher\UserDispatcher'
         tags: [controller.service_arguments]
 
     Ibexa\Bundle\User\Controller\UserSettingsController:
