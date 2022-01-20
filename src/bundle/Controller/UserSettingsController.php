@@ -98,7 +98,7 @@ class UserSettingsController extends Controller
                     'user_settings'
                 );
 
-                return new RedirectResponse($this->generateUrl('ezplatform.user_settings.list'));
+                return new RedirectResponse($this->generateUrl('ibexa.user_settings.list'));
             });
 
             if ($result instanceof Response) {

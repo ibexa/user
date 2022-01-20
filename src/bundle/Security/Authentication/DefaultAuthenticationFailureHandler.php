@@ -18,7 +18,7 @@ final class DefaultAuthenticationFailureHandler extends HttpDefaultAuthenticatio
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
     {
         if ($exception instanceof PasswordInUnsupportedFormatException) {
-            $resetPasswordUrl = $this->httpUtils->generateUri($request, 'ezplatform.user.forgot_password.migration');
+            $resetPasswordUrl = $this->httpUtils->generateUri($request, 'ibexa.user.forgot_password.migration');
             $this->setOptions([
                 'failure_path' => $resetPasswordUrl,
             ]);

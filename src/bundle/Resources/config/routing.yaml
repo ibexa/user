@@ -2,28 +2,28 @@
 # Profile
 #
 
-ezplatform.user_profile.change_password:
+ibexa.user_profile.change_password:
     path: /user/change-password
     defaults:
         _controller: 'Ibexa\Bundle\User\Controller\PasswordChangeController::userPasswordChangeAction'
 
-ezplatform.user.forgot_password:
+ibexa.user.forgot_password:
     path: /user/forgot-password
     defaults:
         _controller: 'Ibexa\Bundle\User\Controller\PasswordResetController::userForgotPasswordAction'
 
-ezplatform.user.forgot_password.migration:
+ibexa.user.forgot_password.migration:
     path: /user/forgot-password/migration
     defaults:
         _controller: 'Ibexa\Bundle\User\Controller\PasswordResetController::userForgotPasswordAction'
         reason: 'migration'
 
-ezplatform.user.forgot_password.login:
+ibexa.user.forgot_password.login:
     path: /user/forgot-password/login
     defaults:
         _controller: 'Ibexa\Bundle\User\Controller\PasswordResetController::userForgotPasswordLoginAction'
 
-ezplatform.user.reset_password:
+ibexa.user.reset_password:
     path: /user/reset-password/{hashKey}
     defaults:
         _controller: 'Ibexa\Bundle\User\Controller\PasswordResetController::userResetPasswordAction'
@@ -33,7 +33,7 @@ ezplatform.user.register: &user_register
     defaults:
         _controller: 'Ibexa\Bundle\User\Controller\UserRegisterController::registerAction'
 
-ezplatform.user.user_register:
+ibexa.user.user_register:
     <<: *user_register
     path: /user/register
 
@@ -42,11 +42,11 @@ ezplatform.user.register_confirmation: &user_register_confirmation
     defaults:
         _controller: 'Ibexa\Bundle\User\Controller\UserRegisterController::registerConfirmAction'
 
-ezplatform.user.user_register_confirmation:
+ibexa.user.user_register_confirmation:
     <<: *user_register_confirmation
     path: /user/register-confirm
 
-ezplatform.user_settings.list:
+ibexa.user_settings.list:
     path: /user/settings/list/{page}
     defaults:
         _controller: 'Ibexa\Bundle\User\Controller\UserSettingsController::listAction'
@@ -54,7 +54,7 @@ ezplatform.user_settings.list:
     requirements:
         page: \d+
 
-ezplatform.user_settings.update:
+ibexa.user_settings.update:
     path: /user/settings/update/{identifier}
     defaults:
         _controller: 'Ibexa\Bundle\User\Controller\UserSettingsController::updateAction'

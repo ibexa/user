@@ -11,7 +11,7 @@
         {% if settings_group.settings is not empty %}
             <a
                 title="{{ 'list.action.edit'|trans|desc('Edit') }}"
-                href="{{ path('ezplatform.user_settings.update', { 'identifier': settings_group.identifier }) }}"
+                href="{{ path('ibexa.user_settings.update', { 'identifier': settings_group.identifier }) }}"
             >
                 {{ 'list.action.edit'|trans|desc('Edit') }}
             </a>
@@ -37,7 +37,7 @@
                 </td>
                 <td>
                     <a title="{{ 'my_account_settings.password.action.edit'|trans|desc('Edit') }}"
-                       href="{{ path('ezplatform.user_profile.change_password') }}">
+                       href="{{ path('ibexa.user_profile.change_password') }}">
                         {{ 'my_account_settings.password.action.edit'|trans|desc('Edit') }}
                     </a>
                 </td>
