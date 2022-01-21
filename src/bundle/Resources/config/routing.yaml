@@ -28,15 +28,23 @@ ibexa.user.reset_password:
     defaults:
         _controller: 'Ibexa\Bundle\User\Controller\PasswordResetController::userResetPasswordAction'
 
-ibexa.user.user_register:
-    path: /user/register
+ibexa.user.register: &user.register
+    path: /register
     defaults:
         _controller: 'Ibexa\Bundle\User\Controller\UserRegisterController::registerAction'
 
-ibexa.user.user_register_confirmation:
-    path: /user/register-confirm
+ibexa.user.user_register:
+    <<: *user.register
+    path: /user/register
+
+ibexa.user.register_confirmation: &user.register_confirmation
+    path: /register-confirm
     defaults:
         _controller: 'Ibexa\Bundle\User\Controller\UserRegisterController::registerConfirmAction'
+
+ibexa.user.user_register_confirmation:
+    <<: *user.register_confirmation
+    path: /user/register-confirm
 
 ibexa.user_settings.list:
     path: /user/settings/list/{page}
