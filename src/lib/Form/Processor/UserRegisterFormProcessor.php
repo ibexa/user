@@ -58,7 +58,7 @@ class UserRegisterFormProcessor implements EventSubscriberInterface
 
         $this->createUser($data, $form->getConfig()->getOption('languageCode'));
 
-        $redirectUrl = $this->urlGenerator->generate('ezplatform.user.register_confirmation');
+        $redirectUrl = $this->urlGenerator->generate('ibexa.user.register_confirmation');
         $event->setResponse(new RedirectResponse($redirectUrl));
         $event->stopPropagation();
     }

@@ -78,7 +78,7 @@ class PasswordChangeController extends Controller
                         'change_password'
                     );
 
-                    return new RedirectResponse($this->generateUrl('ezplatform.dashboard'));
+                    return new RedirectResponse($this->generateUrl('ibexa.dashboard'));
                 }
 
                 return new SuccessView(null);

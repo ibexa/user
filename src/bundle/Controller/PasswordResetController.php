@@ -89,7 +89,7 @@ class PasswordResetController extends Controller
 
             /** Because is is possible to have multiple user accounts with same email address we must gain a user login. */
             if (\count($users) > 1) {
-                return $this->redirectToRoute('ezplatform.user.forgot_password.login');
+                return $this->redirectToRoute('ibexa.user.forgot_password.login');
             }
 
             if (!empty($users)) {
