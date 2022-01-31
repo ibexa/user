@@ -8,8 +8,8 @@ declare(strict_types=1);
 
 namespace Ibexa\User\UserSetting\Setting;
 
-use Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface;
 use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
+use Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface;
 use Ibexa\User\Form\DataTransformer\DateTimeFormatTransformer;
 use Ibexa\User\Form\Type\UserSettings\FullDateTimeFormatType;
 use Ibexa\User\UserSetting\DateTimeFormat\FormatterInterface;
