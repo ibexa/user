@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\User\Form\ChoiceList\Loader;
 
-use Ibexa\Core\MVC\ConfigResolverInterface;
+use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 use Symfony\Component\Form\ChoiceList\ArrayChoiceList;
 use Symfony\Component\Form\ChoiceList\Loader\ChoiceLoaderInterface;
 use Symfony\Component\Intl\Locales;
@@ -20,7 +20,7 @@ class AvailableLocaleChoiceLoader implements ChoiceLoaderInterface
     /** @var \Symfony\Component\Validator\Validator\ValidatorInterface */
     private $validator;
 
-    /** @var \Ibexa\Core\MVC\ConfigResolverInterface */
+    /** @var \Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface */
     private $configResolver;
 
     /** @var string[] */
@@ -28,7 +28,7 @@ class AvailableLocaleChoiceLoader implements ChoiceLoaderInterface
 
     /**
      * @param \Symfony\Component\Validator\Validator\ValidatorInterface $validator
-     * @param \Ibexa\Core\MVC\ConfigResolverInterface $configResolver
+     * @param \Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface $configResolver
      * @param string[] $availableTranslations
      */
     public function __construct(

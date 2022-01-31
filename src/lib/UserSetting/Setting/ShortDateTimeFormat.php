@@ -8,8 +8,8 @@ declare(strict_types=1);
 
 namespace Ibexa\User\UserSetting\Setting;
 
+use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 use Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface;
-use Ibexa\Core\MVC\ConfigResolverInterface;
 use Ibexa\User\Form\DataTransformer\DateTimeFormatTransformer;
 use Ibexa\User\Form\Type\UserSettings\ShortDateTimeFormatType;
 use Ibexa\User\UserSetting\DateTimeFormat\FormatterInterface;
@@ -22,13 +22,13 @@ class ShortDateTimeFormat extends AbstractDateTimeFormat
     /** @var \Symfony\Contracts\Translation\TranslatorInterface */
     private $translator;
 
-    /** @var \Ibexa\Core\MVC\ConfigResolverInterface */
+    /** @var \Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface */
     private $configResolver;
 
     /**
      * @param \Ibexa\User\UserSetting\Setting\DateTimeFormatSerializer $serializer
      * @param \Symfony\Contracts\Translation\TranslatorInterface $translator
-     * @param \Ibexa\Core\MVC\ConfigResolverInterface $configResolver
+     * @param \Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface $configResolver
      * @param \Ibexa\User\UserSetting\DateTimeFormat\FormatterInterface $formatter
      */
     public function __construct(
