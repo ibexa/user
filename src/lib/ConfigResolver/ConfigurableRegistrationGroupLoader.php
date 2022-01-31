@@ -9,14 +9,14 @@ declare(strict_types=1);
 namespace Ibexa\User\ConfigResolver;
 
 use Ibexa\Contracts\Core\Repository\Repository;
-use Ibexa\Core\MVC\ConfigResolverInterface;
+use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 
 /**
  * Loads the registration user group from a configured, injected group ID.
  */
 class ConfigurableRegistrationGroupLoader implements RegistrationGroupLoader
 {
-    /** @var \Ibexa\Core\MVC\ConfigResolverInterface */
+    /** @var \Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface */
     private $configResolver;
 
     /** @var \Ibexa\Contracts\Core\Repository\Repository */

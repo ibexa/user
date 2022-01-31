@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\Tests\User\Form\Type\ChoiceList\Loader;
 
-use Ibexa\Core\MVC\ConfigResolverInterface;
+use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 use Ibexa\User\Form\ChoiceList\Loader\AvailableLocaleChoiceLoader;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Validator\Constraints\Locale;
@@ -27,7 +27,7 @@ class AvailableLocaleChoiceLoaderTest extends TestCase
     /** @var \Symfony\Component\Validator\ConstraintViolationInterface|\PHPUnit\Framework\MockObject\MockObject */
     private $constraintViolation;
 
-    /** @var \Ibexa\Core\MVC\ConfigResolverInterface|\PHPUnit\Framework\MockObject\MockObject */
+    /** @var \Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface|\PHPUnit\Framework\MockObject\MockObject */
     private $configResolver;
 
     protected function setUp(): void
