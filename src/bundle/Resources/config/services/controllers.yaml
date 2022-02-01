@@ -20,7 +20,7 @@ services:
     Ibexa\Bundle\User\Controller\PasswordChangeController:
         autowire: true
         arguments:
-            $siteAccessGroups: '%ezpublish.siteaccess.groups%'
+            $siteAccessGroups: '%ibexa.site_access.groups%'
         calls:
             - [setContainer, ['@service_container']]
             - [performAccessCheck, []]
