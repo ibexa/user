@@ -5,7 +5,7 @@ imports:
     - { resource: services/forms.yaml }
 
 parameters:
-    ezplatform.user.content_type_identifier: user
+    ibexa.user.content_type_identifier: user
 
 services:
     _defaults:
@@ -36,7 +36,7 @@ services:
 
     Ibexa\User\ConfigResolver\ConfigurableRegistrationContentTypeLoader:
         calls:
-            - [setParam, ["contentTypeIdentifier", "%ezplatform.user.content_type_identifier%"]]
+            - [setParam, ["contentTypeIdentifier", '%ibexa.user.content_type_identifier%']]
 
     # Default implementations
     Ibexa\User\ConfigResolver\RegistrationGroupLoader: '@Ibexa\User\ConfigResolver\ConfigurableRegistrationGroupLoader'
