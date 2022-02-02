@@ -47,7 +47,7 @@ final class ForgotPasswordTest extends AbstractParserTestCase
         $this->assertConfigResolverParameterValue(
             'user_forgot_password.templates.form',
             'default/path/template.html.twig',
-            'ezdemo_site'
+            'ibexa_demo_site'
         );
     }
 
@@ -55,7 +55,7 @@ final class ForgotPasswordTest extends AbstractParserTestCase
     {
         $this->load([
             'system' => [
-                'ezdemo_site' => [
+                'ibexa_demo_site' => [
                     'user_forgot_password' => [
                         'templates' => [
                             'form' => '@yourOwnBundle/path/to/template.html.twig',
@@ -79,22 +79,22 @@ final class ForgotPasswordTest extends AbstractParserTestCase
         $this->assertConfigResolverParameterValue(
             'user_forgot_password.templates.form',
             '@yourOwnBundle/path/to/template.html.twig',
-            'ezdemo_site'
+            'ibexa_demo_site'
         );
         $this->assertConfigResolverParameterValue(
             'user_forgot_password.templates.mail',
             '@yourOwnBundle/path/to/mail.html.twig',
-            'ezdemo_site'
+            'ibexa_demo_site'
         );
         $this->assertConfigResolverParameterValue(
             'user_forgot_password_success.templates.form',
             '@yourOwnBundle/path/to/template_success.html.twig',
-            'ezdemo_site'
+            'ibexa_demo_site'
         );
         $this->assertConfigResolverParameterValue(
             'user_forgot_password_login.templates.form',
             '@yourOwnBundle/path/to/template_login.html.twig',
-            'ezdemo_site'
+            'ibexa_demo_site'
         );
     }
 }
