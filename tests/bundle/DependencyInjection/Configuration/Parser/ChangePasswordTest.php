@@ -47,7 +47,7 @@ final class ChangePasswordTest extends AbstractParserTestCase
         $this->assertConfigResolverParameterValue(
             'user_change_password.templates.form',
             'default/path/template.html.twig',
-            'ezdemo_site'
+            'ibexa_demo_site'
         );
     }
 
@@ -55,7 +55,7 @@ final class ChangePasswordTest extends AbstractParserTestCase
     {
         $this->load([
             'system' => [
-                'ezdemo_site' => [
+                'ibexa_demo_site' => [
                     'user_change_password' => [
                         'templates' => [
                             'form' => '@yourOwnBundle/path/to/template.html.twig',
@@ -69,12 +69,12 @@ final class ChangePasswordTest extends AbstractParserTestCase
         $this->assertConfigResolverParameterValue(
             'user_change_password.templates.form',
             '@yourOwnBundle/path/to/template.html.twig',
-            'ezdemo_site'
+            'ibexa_demo_site'
         );
         $this->assertConfigResolverParameterValue(
             'user_change_password.templates.success',
             '@yourOwnBundle/path/to/success.html.twig',
-            'ezdemo_site'
+            'ibexa_demo_site'
         );
     }
 }
