@@ -46,7 +46,7 @@ final class DefaultThumbnailStrategy implements ThumbnailStrategy
         return new Thumbnail([
             'resource' => $this->urlGenerator->generate('ibexa.user.default_profile_image.initials', [
                 'initials' => $initials,
-            ]),
+            ]) . '#profile_image',
             'mimeType' => self::THUMBNAIL_MIME_TYPE,
         ]);
     }
