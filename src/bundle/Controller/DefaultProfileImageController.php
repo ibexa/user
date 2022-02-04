@@ -31,7 +31,9 @@ final class DefaultProfileImageController extends Controller
             'initials' => $initials,
             'text' => $colors['text'],
             'background' => $colors['background'],
-        ]);
+        ], new Response(null, Response::HTTP_OK, [
+            'Content-Type' => 'image/svg+xml',
+        ]));
     }
 
     private function getInitialsColors(string $initials): array
