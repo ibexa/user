@@ -5,5 +5,9 @@ services:
         public: false
 
     Ibexa\User\Strategy\DefaultThumbnailStrategy:
+        arguments:
+            $initialsFieldDefIdentifiers:
+                - first_name
+                - last_name
         tags:
             - { name: ibexa.repository.thumbnail.strategy.content, priority: -50 }

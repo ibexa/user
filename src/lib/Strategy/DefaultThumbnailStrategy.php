@@ -17,13 +17,19 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 final class DefaultThumbnailStrategy implements ThumbnailStrategy
 {
     private const THUMBNAIL_MIME_TYPE = 'image/svg+xml';
+    private const USER_TYPE_IDENTIFIER = 'ezuser';
 
     private UrlGeneratorInterface $urlGenerator;
 
+    /** @var string[] */
+    private array $initialsFieldDefIdentifiers;
+
     public function __construct(
-        UrlGeneratorInterface $urlGenerator
+        UrlGeneratorInterface $urlGenerator,
+        array $initialsFieldDefIdentifiers
     ) {
         $this->urlGenerator = $urlGenerator;
+        $this->initialsFieldDefIdentifiers = $initialsFieldDefIdentifiers;
     }
 
     public function getThumbnail(
@@ -31,7 +37,7 @@ final class DefaultThumbnailStrategy implements ThumbnailStrategy
         array $fields,
         ?VersionInfo $versionInfo = null
     ): ?Thumbnail {
-        if ($contentType->identifier !== 'user') {
+        if (!$this->isUser($contentType)) {
             return null;
         }
 
@@ -48,8 +54,7 @@ final class DefaultThumbnailStrategy implements ThumbnailStrategy
     private function getInitials(array $fields): string
     {
         $initials = '';
-        $identifiers = ['first_name', 'last_name'];
-        foreach ($identifiers as $identifier) {
+        foreach ($this->initialsFieldDefIdentifiers as $identifier) {
             /** @var \Ibexa\Contracts\Core\Repository\Values\Content\Field $field */
             foreach ($fields as $field) {
                 if ($field->fieldDefIdentifier === $identifier) {
@@ -59,5 +64,10 @@ final class DefaultThumbnailStrategy implements ThumbnailStrategy
         }
 
         return strtoupper($initials);
+    }
+
+    private function isUser(ContentType $contentType): bool
+    {
+        return $contentType->hasFieldDefinitionOfType(self::USER_TYPE_IDENTIFIER);
     }
 }
