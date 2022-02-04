@@ -59,3 +59,13 @@ parameters:
 
     # Pagination limits
     ibexa.site_access.config.default.pagination_user.user_settings_limit: 10
+
+    ibexa.site_access.config.default.user.default_profile_image.colors:
+        - { background: '#FFF7EC', text: '#FCAE42' }
+        - { background: '#FDF3F0', text: '#F18A6B' }
+        - { background: '#FFECE7', text: '#FF4713' }
+        - { background: '#F6E7EF', text: '#AE1164' }
+        - { background: '#E5EDEE', text: '#004D5D' }
+        - { background: '#ECF8FB', text: '#47BEDB' }
+        - { background: '#E5F5E9', text: '#00A42B' }
+        - { background: '#ECF4FF', text: '#4191FF' }
