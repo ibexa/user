@@ -12,7 +12,7 @@ use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class DefaultProfileImageController extends Controller
+final class DefaultProfileImageController extends Controller
 {
     private ConfigResolverInterface $configResolver;
 
