@@ -24,12 +24,7 @@ class DefaultProfileImageController extends Controller
 
     public function initialsAction(Request $request): Response
     {
-        $initials = substr(
-            $request->query->get('initials', ''),
-            0,
-            2
-        );
-
+        $initials = substr($request->query->get('initials', ''), 0, 2);
         $colors = $this->getInitialsColors($initials);
 
         return $this->render('@IbexaUser/profile_image/initials.svg.twig', [
