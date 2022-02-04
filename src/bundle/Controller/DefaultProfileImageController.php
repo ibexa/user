@@ -27,11 +27,14 @@ final class DefaultProfileImageController extends Controller
         $initials = substr($request->query->get('initials', ''), 0, 2);
         $colors = $this->getInitialsColors($initials);
 
+        $response = new Response();
+        $response->headers->set('content-type', 'image/svg+xml');
+
         return $this->render('@IbexaUser/profile_image/initials.svg.twig', [
             'initials' => $initials,
             'text' => $colors['text'],
             'background' => $colors['background'],
-        ]);
+        ], $response);
     }
 
     private function getInitialsColors(string $initials): array
