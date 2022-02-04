@@ -37,3 +37,9 @@ services:
         calls:
             - [ setContainer, [ '@service_container' ] ]
         tags: [controller.service_arguments]
+
+    Ibexa\Bundle\User\Controller\DefaultProfileImageController:
+        autowire: true
+        calls:
+            - [ setContainer, [ '@service_container' ] ]
+        tags: [controller.service_arguments]

@@ -3,6 +3,7 @@ imports:
     - { resource: services/validators.yaml }
     - { resource: services/user_settings.yaml }
     - { resource: services/forms.yaml }
+    - { resource: services/profile_image.yaml }
 
 parameters:
     ibexa.user.content_type_identifier: user

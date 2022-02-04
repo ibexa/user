@@ -1,0 +1,9 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    Ibexa\User\Strategy\DefaultThumbnailStrategy:
+        tags:
+            - { name: ibexa.repository.thumbnail.strategy.content, priority: -50 }
