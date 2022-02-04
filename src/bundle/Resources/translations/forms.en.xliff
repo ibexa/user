@@ -36,7 +36,12 @@
         <target state="new">Enter your login:</target>
         <note>key: ezplatform.forgot_user_password.login</note>
       </trans-unit>
-      <trans-unit id="0f7bbe027d2c53c78c7b3ce938af6c0ef6c1c2e2" resname="ezplatform.forgot_user_password.send">
+      <trans-unit id="0f7bbe027d2c53c78c7b3ce938af6c0ef6c1c2e2" resname="ezplatform.forgot_user_password.reset">
+        <source>Reset</source>
+        <target state="new">Reset</target>
+        <note>key: ezplatform.forgot_user_password.reset</note>
+      </trans-unit>
+      <trans-unit id="44c91aa5708f9b819f7f84b00925dc19d6798341" resname="ezplatform.forgot_user_password.send">
         <source>Send</source>
         <target state="new">Send</target>
         <note>key: ezplatform.forgot_user_password.send</note>

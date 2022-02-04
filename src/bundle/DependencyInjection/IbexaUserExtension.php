@@ -55,7 +55,7 @@ class IbexaUserExtension extends Extension implements PrependExtensionInterface
                     ],
                     'output_dir' => __DIR__ . '/../Resources/translations/',
                     'output_format' => 'xliff',
-                    'excluded_dirs' => ['tests'],
+                    'excluded_dirs' => ['tests', 'Behat'],
                     'extractors' => [],
                 ],
             ],
