@@ -8,6 +8,7 @@ namespace Ibexa\User\Form\DataMapper;
 
 use Ibexa\Contracts\ContentForms\Data\Content\FieldData;
 use Ibexa\Contracts\Core\Repository\Values\Content\Field;
+use Ibexa\Contracts\User\Invitation\Invitation;
 use Ibexa\User\ConfigResolver\RegistrationContentTypeLoader;
 use Ibexa\User\ConfigResolver\RegistrationGroupLoader;
 use Ibexa\User\Form\Data\UserRegisterData;
@@ -57,23 +58,43 @@ class UserRegisterMapper
         $this->configureOptions($resolver);
         $this->params = $resolver->resolve($this->params);
 
-        $contentType = $this->contentTypeLoader->loadContentType();
+        /** @var \Ibexa\Contracts\User\Invitation\Invitation|null $invitation */
+        $invitation = $this->params['invitation'] ?? null;
+        $contentType = $this->contentTypeLoader->loadContentType(
+            $invitation ? $invitation->getSiteAccess() : null
+        );
 
         $data = new UserRegisterData([
             'contentType' => $contentType,
             'mainLanguageCode' => $this->params['language'],
             'enabled' => true,
         ]);
-        $data->addParentGroup($this->parentGroupLoader->loadGroup());
+        $targetGroup = $this->parentGroupLoader->loadGroup();
 
+        if ($invitation && $invitation->getUserGroup()) {
+            $targetGroup = $invitation->getUserGroup();
+        }
+        $data->addParentGroup($targetGroup);
+
+        if ($invitation) {
+            $data->setRole($invitation->getRole());
+            $data->setRoleLimitation($invitation->getLimitation());
+            $data->email = $invitation->getEmail();
+        }
+
+        /** @var \Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition $fieldDef */
         foreach ($contentType->fieldDefinitions as $fieldDef) {
+            $value = $fieldDef->defaultValue;
+            if ($invitation && $fieldDef->fieldTypeIdentifier === 'ezuser') {
+                $value->email = $invitation->getEmail();
+            }
             $data->addFieldData(new FieldData([
                 'fieldDefinition' => $fieldDef,
                 'field' => new Field([
                     'fieldDefIdentifier' => $fieldDef->identifier,
                     'languageCode' => $this->params['language'],
                 ]),
-                'value' => $fieldDef->defaultValue,
+                'value' => $value,
             ]));
         }
 
@@ -82,7 +103,10 @@ class UserRegisterMapper
 
     private function configureOptions(OptionsResolver $optionsResolver)
     {
-        $optionsResolver->setRequired('language');
+        $optionsResolver
+            ->setRequired('language')
+            ->setDefined(['invitation'])
+            ->setAllowedTypes('invitation', Invitation::class);
     }
 }
 
