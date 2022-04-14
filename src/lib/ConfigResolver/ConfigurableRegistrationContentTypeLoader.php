@@ -8,30 +8,43 @@ declare(strict_types=1);
 
 namespace Ibexa\User\ConfigResolver;
 
-use Symfony\Component\OptionsResolver\OptionsResolver;
+use Ibexa\Contracts\Core\Repository\ContentTypeService;
+use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
+use Ibexa\Core\MVC\Symfony\SiteAccess;
+use Ibexa\Core\Repository\Repository;
 
 /**
  * Loads the registration content type from a configured, injected content type identifier.
  */
-class ConfigurableRegistrationContentTypeLoader extends ConfigurableSudoRepositoryLoader implements RegistrationContentTypeLoader
+class ConfigurableRegistrationContentTypeLoader implements RegistrationContentTypeLoader
 {
-    public function loadContentType()
-    {
-        return $this->sudo(
-            function () {
-                return
-                    $this->getRepository()
-                        ->getContentTypeService()
-                        ->loadContentTypeByIdentifier(
-                            $this->getParam('contentTypeIdentifier')
-                        );
-            }
-        );
+    private ConfigResolverInterface $configResolver;
+
+    private Repository $repository;
+
+    private ContentTypeService $contentTypeService;
+
+    public function __construct(
+        ConfigResolverInterface $configResolver,
+        Repository $repository,
+        ContentTypeService $contentTypeService
+    ) {
+        $this->configResolver = $configResolver;
+        $this->repository = $repository;
+        $this->contentTypeService = $contentTypeService;
     }
 
-    protected function configureOptions(OptionsResolver $optionsResolver)
+    public function loadContentType(?SiteAccess $siteAccess = null)
     {
-        $optionsResolver->setRequired('contentTypeIdentifier');
+        return $this->repository->sudo(
+            fn () => $this->contentTypeService->loadContentTypeByIdentifier(
+                $this->configResolver->getParameter(
+                    'user_registration.user_type_identifier',
+                    null,
+                    $siteAccess ? $siteAccess->name : null
+                )
+            )
+        );
     }
 }
 
