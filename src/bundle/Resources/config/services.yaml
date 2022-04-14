@@ -4,6 +4,7 @@ imports:
     - { resource: services/user_settings.yaml }
     - { resource: services/forms.yaml }
     - { resource: services/profile_image.yaml }
+    - { resource: services/invitation.yaml }
 
 parameters:
     ibexa.user.content_type_identifier: user
@@ -16,6 +17,7 @@ services:
 
     Ibexa\User\EventListener\:
         resource: "../../../lib/EventListener/*"
+        exclude: '../../../lib/EventListener/{BuildSchemaSubscriber.php}'
         public: true
         tags:
             - { name: kernel.event_subscriber }
@@ -35,9 +37,7 @@ services:
 
     Ibexa\User\ConfigResolver\ConfigurableRegistrationGroupLoader: ~
 
-    Ibexa\User\ConfigResolver\ConfigurableRegistrationContentTypeLoader:
-        calls:
-            - [setParam, ["contentTypeIdentifier", '%ibexa.user.content_type_identifier%']]
+    Ibexa\User\ConfigResolver\ConfigurableRegistrationContentTypeLoader: ~
 
     # Default implementations
     Ibexa\User\ConfigResolver\RegistrationGroupLoader: '@Ibexa\User\ConfigResolver\ConfigurableRegistrationGroupLoader'

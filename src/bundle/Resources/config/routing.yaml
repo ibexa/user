@@ -37,6 +37,15 @@ ibexa.user.user_register:
     <<: *user.register
     path: /user/register
 
+ibexa.user.from_invite.register: &user.from_invite.register
+    path: /from-invite/register/{inviteHash}
+    defaults:
+        _controller: 'Ibexa\Bundle\User\Controller\UserRegisterController::registerFromInvitationAction'
+
+ibexa.user.from_invite.user_register:
+    <<: *user.from_invite.register
+    path: /user/from-invite/register/{inviteHash}
+
 ibexa.user.register_confirmation: &user.register_confirmation
     path: /register-confirm
     defaults:
@@ -45,6 +54,12 @@ ibexa.user.register_confirmation: &user.register_confirmation
 ibexa.user.user_register_confirmation:
     <<: *user.register_confirmation
     path: /user/register-confirm
+
+ibexa.user.invite_user:
+    path: /user/invite
+    methods: [POST, GET]
+    defaults:
+        _controller: 'Ibexa\Bundle\User\Controller\UserInvitationController::inviteUser'
 
 ibexa.user_settings.list:
     path: /user/settings/list/{page}

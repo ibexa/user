@@ -43,3 +43,11 @@ services:
         calls:
             - [ setContainer, [ '@service_container' ] ]
         tags: [controller.service_arguments]
+
+    Ibexa\Bundle\User\Controller\UserInvitationController:
+        autowire: true
+        arguments:
+            $mailSender: '@Ibexa\User\Invitation\MailSender'
+        calls:
+            - [ setContainer, [ '@service_container' ] ]
+        tags: [ controller.service_arguments ]

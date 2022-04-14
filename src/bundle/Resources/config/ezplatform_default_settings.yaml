@@ -17,6 +17,11 @@ parameters:
     ibexa.site_access.config.default.user_registration.templates.form: "@@IbexaContentForms/Content/content_edit.html.twig"
     ibexa.site_access.config.default.user_registration.templates.confirmation: "@@IbexaUser/register/register_confirmation.html.twig"
 
+    # Invitation
+    ibexa.site_access.config.default.user_invitation.templates.form: "@@IbexaUser/invitation/form.html.twig"
+    ibexa.site_access.config.default.user_invitation.templates.mail: "@@IbexaUser/invitation/mail/user_invitation.html.twig"
+    ibexa.site_access.config.default.user_invitation.hash_expiration_time: 'P2D'
+
     # User Settings
     ibexa.site_access.config.default.user_settings_update_view: {}
     ibexa.site_access.config.default.user_settings_update_view_defaults:

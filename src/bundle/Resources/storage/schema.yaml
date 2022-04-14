@@ -1,0 +1,80 @@
+tables:
+    ibexa_user_invitations:
+        indexes:
+            ibexa_user_invitations_email_idx:
+                fields:
+                    - email
+            ibexa_user_invitations_hash_idx:
+                fields:
+                    - hash
+        id:
+            id:
+                type: integer
+                nullable: false
+                options:
+                    autoincrement: true
+        fields:
+            email:
+                type: string
+                nullable: false
+                length: 255
+            site_access_name:
+                type: string
+                nullable: false
+                length: 255
+            hash:
+                type: string
+                nullable: false
+                length: 255
+            creation_date:
+                type: integer
+                nullable: false
+            used:
+                type: boolean
+                options:
+                    default: false
+        uniqueConstraints:
+            ibexa_user_invitations_email_uindex:
+                fields:
+                    - email
+            ibexa_user_invitations_hash_uindex:
+                fields:
+                    - hash
+    ibexa_user_invitations_assignments:
+        id:
+            id:
+                type: integer
+                nullable: false
+                options:
+                    autoincrement: true
+        fields:
+            invitation_id:
+                type: integer
+                nullable: false
+            user_group_id:
+                type: integer
+                nullable: true
+            role_id:
+                type: integer
+                nullable: true
+            limitation_type:
+                type: string
+                nullable: false
+                length: 255
+            limitation_value:
+                type: string
+                nullable: false
+                length: 255
+            foreignKeys:
+                ibexa_user_invitations_assignments_ibexa_user_invitations_id_fk:
+                    foreignTable: ibexa_user_invitations
+                    fields:
+                        - invitation_id
+                    foreignFields:
+                        - id
+                    options:
+                        onDelete: CASCADE
+                        onUpdate: CASCADE
+
+
+
