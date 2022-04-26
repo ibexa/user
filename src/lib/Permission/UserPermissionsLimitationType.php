@@ -39,6 +39,36 @@ class UserPermissionsLimitationType extends AbstractPersistenceLimitationType im
                 $limitationValue
             );
         }
+
+        if (!array_key_exists('roles', $limitationValue->limitationValues)
+            || !array_key_exists('user_groups', $limitationValue->limitationValues)
+        ) {
+            throw new InvalidArgumentType(
+                "\$limitationValue->limitationValues",
+                'array',
+                $limitationValue->limitationValues
+            );
+        }
+
+        if (!is_array($limitationValue->limitationValues['roles'])
+            && $limitationValue->limitationValues['roles'] !== null
+        ) {
+            throw new InvalidArgumentType(
+                "\$limitationValue->limitationValues['roles']",
+                'array|null',
+                $limitationValue->limitationValues
+            );
+        }
+
+        if (!is_array($limitationValue->limitationValues['user_groups'])
+            && $limitationValue->limitationValues['user_groups'] !== null
+        ) {
+            throw new InvalidArgumentType(
+                "\$limitationValue->limitationValues['user_groups']",
+                'array|null',
+                $limitationValue->limitationValues
+            );
+        }
     }
 
     /**
@@ -54,52 +84,37 @@ class UserPermissionsLimitationType extends AbstractPersistenceLimitationType im
     {
         $validationErrors = [];
 
-        if (!array_key_exists('roles', $limitationValue->limitationValues)) {
-            $validationErrors[] = new ValidationError(
-                "limitationValues[%key%] does not exist in the backend",
-                null,
-                [
-                    'key' => 'roles',
-                ]
-            );
-        }
-        if (!array_key_exists('user_groups', $limitationValue->limitationValues)) {
-            $validationErrors[] = new ValidationError(
-                "limitationValues[%key%] does not exist in the backend",
-                null,
-                [
-                    'key' => 'user_groups',
-                ]
-            );
-        }
-
-        foreach ($limitationValue->limitationValues['roles'] as $key => $id) {
-            try {
-                $this->persistence->userHandler()->loadRole($id);
-            } catch (NotFoundException $e) {
-                $validationErrors[] = new ValidationError(
-                    "limitationValues[%key%] => '%value%' does not exist in the backend",
-                    null,
-                    [
-                        'value' => $id,
-                        'key' => $key,
-                    ]
-                );
+        if ($limitationValue->limitationValues['roles'] !== null) {
+            foreach ($limitationValue->limitationValues['roles'] as $key => $id) {
+                try {
+                    $this->persistence->userHandler()->loadRole($id);
+                } catch (NotFoundException $e) {
+                    $validationErrors[] = new ValidationError(
+                        "limitationValues[%key%] => '%value%' does not exist in the backend",
+                        null,
+                        [
+                            'value' => $id,
+                            'key' => $key,
+                        ]
+                    );
+                }
             }
         }
 
-        foreach ($limitationValue->limitationValues['user_groups'] as $key => $id) {
-            try {
-                $this->persistence->contentHandler()->loadContentInfo($id);
-            } catch (NotFoundException $e) {
-                $validationErrors[] = new ValidationError(
-                    "limitationValues[%key%] => '%value%' does not exist in the backend",
-                    null,
-                    [
-                        'value' => $id,
-                        'key' => $key,
-                    ]
-                );
+        if ($limitationValue->limitationValues['user_groups'] !== null) {
+            foreach ($limitationValue->limitationValues['user_groups'] as $key => $id) {
+                try {
+                    $this->persistence->contentHandler()->loadContentInfo($id);
+                } catch (NotFoundException $e) {
+                    $validationErrors[] = new ValidationError(
+                        "limitationValues[%key%] => '%value%' does not exist in the backend",
+                        null,
+                        [
+                            'value' => $id,
+                            'key' => $key,
+                        ]
+                    );
+                }
             }
         }
 
@@ -144,13 +159,13 @@ class UserPermissionsLimitationType extends AbstractPersistenceLimitationType im
         }
 
         if ($object instanceof Role
-            && (empty($value->limitationValues['roles']) || in_array($object->id, $value->limitationValues['roles']))
+            && ($value->limitationValues['roles'] === null || in_array($object->id, $value->limitationValues['roles']))
         ) {
             return self::ACCESS_GRANTED;
         }
 
         if ($object instanceof UserGroup
-            && (empty($value->limitationValues['user_groups']) || in_array($object->id, $value->limitationValues['user_groups']))
+            && ($value->limitationValues['user_groups'] === null || in_array($object->id, $value->limitationValues['user_groups']))
         ) {
             return self::ACCESS_GRANTED;
         }
