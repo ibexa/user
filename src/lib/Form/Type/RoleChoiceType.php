@@ -49,23 +49,8 @@ class RoleChoiceType extends AbstractType
 
     protected function loadFilteredRoles(): array
     {
-        return $this->repository->sudo(fn() => $this->roleService->loadRoles());
-        $hasAccess = $this->permissionResolver->hasAccess('user', 'invite');
-        $filtered = array_filter(
-            $roles,
-            fn($role) => $this->permissionResolver->canUser('user', 'invite', $role)
-        );
-
-        $filtered = array_filter(
-            $roles,
-            function ($role) {
-                $v =  $this->permissionResolver->canUser('user', 'invite', $role);
-                return $v;
-            }
-        );
-
         return array_filter(
-            $roles,
+            $this->repository->sudo(fn() => $this->roleService->loadRoles()),
             fn($role) => $this->permissionResolver->canUser('user', 'invite', $role)
         );
     }
