@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\User\Form\Type;
 
+use Ibexa\Contracts\Core\Repository\PermissionResolver;
 use Ibexa\Contracts\Core\Repository\Repository;
 use Ibexa\Contracts\Core\Repository\SearchService;
 use Ibexa\Contracts\Core\Repository\UserService;
@@ -27,14 +28,18 @@ class UserGroupChoiceType extends AbstractType
 
     private Repository $repository;
 
+    private PermissionResolver $permissionResolver;
+
     public function __construct(
         Repository $repository,
         UserService $userService,
-        SearchService $searchService
+        SearchService $searchService,
+        PermissionResolver $permissionResolver
     ) {
         $this->userService = $userService;
         $this->searchService = $searchService;
         $this->repository = $repository;
+        $this->permissionResolver = $permissionResolver;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
@@ -42,7 +47,7 @@ class UserGroupChoiceType extends AbstractType
         $resolver
             ->setDefaults([
                 'choice_loader' => ChoiceList::lazy(
-                    $this, fn() => $this->getUserGroups(),
+                    $this, fn() => $this->loadFilteredGroups(),
                 ),
                 'choice_label' => 'name',
                 'choice_name' => 'id',
@@ -56,6 +61,14 @@ class UserGroupChoiceType extends AbstractType
     public function getParent(): ?string
     {
         return ChoiceType::class;
+    }
+
+    protected function loadFilteredGroups(): array
+    {
+        return array_filter(
+            $this->getUserGroups(),
+            fn($group) => $this->permissionResolver->canUser('user', 'invite', $group)
+        );
     }
 
     protected function getUserGroups(): array
