@@ -8,14 +8,13 @@ declare(strict_types=1);
 
 namespace Ibexa\User\Invitation\Persistence;
 
-use Ibexa\Contracts\Core\HashGenerator;
 use Ibexa\Contracts\User\Invitation\Invitation;
 use Ibexa\Core\Base\Exceptions\NotFoundException;
-use Ibexa\PageBuilder\Siteaccess\ReverseMatcher;
 
 class Handler
 {
     private DoctrineGateway $gateway;
+
     /** @var \Ibexa\User\Invitation\Persistence\Mapper */
     private Mapper $mapper;
 
@@ -51,7 +50,7 @@ class Handler
 
     public function getInvitation(
         string $hash
-    ): Invitation  {
+    ): Invitation {
         $invitationRow = $this->gateway->getInvitation($hash);
 
         if (empty($invitationRow)) {
@@ -63,7 +62,7 @@ class Handler
 
     public function getInvitationForEmail(
         string $email
-    ): Invitation  {
+    ): Invitation {
         $invitationRow = $this->gateway->getInvitationForEmail($email);
 
         if (empty($invitationRow)) {

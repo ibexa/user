@@ -73,7 +73,6 @@ class UserInvitationType extends AbstractType
             ]);
 
         $builder->addModelTransformer(new LimitationValueTransformer());
-
     }
 
     public function configureOptions(OptionsResolver $resolver)

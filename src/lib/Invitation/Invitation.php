@@ -9,7 +9,6 @@ declare(strict_types=1);
 namespace Ibexa\User\Invitation;
 
 use DateTime;
-use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType;
 use Ibexa\Contracts\Core\Repository\Values\User\Limitation\RoleLimitation;
 use Ibexa\Contracts\Core\Repository\Values\User\Role;
 use Ibexa\Contracts\Core\Repository\Values\User\UserGroup;
@@ -45,13 +44,13 @@ class Invitation extends ValueObject implements \Ibexa\Contracts\User\Invitation
         ?RoleLimitation $limitation = null
     ) {
         parent::__construct([
-            'email' =>$email,
-            'hash' =>$hash,
-            'createdAt' =>$createdAt,
-            'siteAccess' =>$siteAccess,
+            'email' => $email,
+            'hash' => $hash,
+            'createdAt' => $createdAt,
+            'siteAccess' => $siteAccess,
             'used' => $used,
             'role' => $role,
-            'userGroup' =>$userGroup,
+            'userGroup' => $userGroup,
             'limitation' => $limitation,
         ]);
     }

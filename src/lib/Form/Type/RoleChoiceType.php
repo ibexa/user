@@ -39,7 +39,8 @@ class RoleChoiceType extends AbstractType
         $resolver
             ->setDefaults([
                 'choice_loader' => ChoiceList::lazy(
-                    $this, fn() => $this->loadFilteredRoles(),
+                    $this,
+                    fn () => $this->loadFilteredRoles(),
                 ),
                 'choice_label' => 'identifier',
                 'choice_name' => 'id',
@@ -50,8 +51,8 @@ class RoleChoiceType extends AbstractType
     protected function loadFilteredRoles(): array
     {
         return array_filter(
-            $this->repository->sudo(fn() => $this->roleService->loadRoles()),
-            fn($role) => $this->permissionResolver->canUser('user', 'invite', $role)
+            $this->repository->sudo(fn () => $this->roleService->loadRoles()),
+            fn ($role) => $this->permissionResolver->canUser('user', 'invite', $role)
         );
     }
 

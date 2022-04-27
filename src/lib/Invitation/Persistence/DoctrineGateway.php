@@ -45,7 +45,7 @@ final class DoctrineGateway
                     'site_access_name' => $query->createPositionalParameter($siteAccessName),
                     'hash' => $query->createPositionalParameter($hash),
                     'creation_date' => time(),
-                    'used' => 0
+                    'used' => 0,
                 ]
             );
 
@@ -87,7 +87,7 @@ final class DoctrineGateway
 
     public function invitationExistsForEmail(
         string $email
-    ) {
+    ): bool {
         $query = $this->connection->createQueryBuilder();
         $query
             ->select(1)
@@ -122,6 +122,7 @@ final class DoctrineGateway
     private function getSelectQuery(): QueryBuilder
     {
         $query = $this->connection->createQueryBuilder();
+
         return $query
             ->select(
                 't1.email',
@@ -150,12 +151,11 @@ final class DoctrineGateway
             ->update(self::TABLE_USER_INVITATIONS)
             ->set('used', 1)
             ->where(
-             $query->expr()->eq(
-                 'hash',
-                 $query->createPositionalParameter($hash)
-             )
-         );
+                $query->expr()->eq(
+                    'hash',
+                    $query->createPositionalParameter($hash)
+                )
+            );
         $query->execute();
     }
 }
-

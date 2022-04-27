@@ -28,7 +28,8 @@ class SiteAccessChoiceType extends AbstractType
         $resolver
             ->setDefaults([
                 'choice_loader' => ChoiceList::lazy(
-                    $this, fn() => $this->siteAccessService->getAll(),
+                    $this,
+                    fn () => $this->siteAccessService->getAll(),
                 ),
                 'choice_label' => 'name',
                 'choice_name' => 'name',

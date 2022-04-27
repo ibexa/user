@@ -10,7 +10,6 @@ namespace Ibexa\User\Invitation;
 
 use DateTime;
 use Exception;
-use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 use Ibexa\Contracts\Core\HashGenerator;
 use Ibexa\Contracts\Core\Persistence\TransactionHandler;
 use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
@@ -19,6 +18,7 @@ use Ibexa\Contracts\Core\Repository\UserService;
 use Ibexa\Contracts\Core\Repository\Values\User\Limitation\RoleLimitation;
 use Ibexa\Contracts\Core\Repository\Values\User\Role;
 use Ibexa\Contracts\Core\Repository\Values\User\UserGroup;
+use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 use Ibexa\Contracts\User\Invitation\Exception\InvitationExist;
 use Ibexa\Contracts\User\Invitation\Exception\UserExist;
 use Ibexa\Contracts\User\Invitation\Invitation;
@@ -69,7 +69,6 @@ final class InvitationService implements InvitationServiceInterface
         ?Role $role = null,
         ?RoleLimitation $roleLimitation = null
     ): Invitation {
-
         if (!$this->permissionResolver->hasAccess('user', 'invite')) {
             throw new UnauthorizedException('user', 'invite');
         }
@@ -109,7 +108,7 @@ final class InvitationService implements InvitationServiceInterface
                 $this->hashGenerator->generate(),
                 $role ? $role->id : null,
                 $userGroup ? $userGroup->id : null,
-                $roleLimitation ? $roleLimitation->getIdentifier(): null,
+                $roleLimitation ? $roleLimitation->getIdentifier() : null,
                 $roleLimitation ? json_encode($roleLimitation->limitationValues) : null
             );
 

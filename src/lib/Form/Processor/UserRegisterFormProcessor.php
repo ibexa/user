@@ -91,6 +91,7 @@ class UserRegisterFormProcessor implements EventSubscriberInterface
                 if ($data->getRole() !== null) {
                     $this->roleService->assignRoleToUser($data->getRole(), $user, $data->getRoleLimitation());
                 }
+
                 return $user;
             }
         );

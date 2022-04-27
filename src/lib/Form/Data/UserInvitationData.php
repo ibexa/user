@@ -8,8 +8,6 @@ declare(strict_types=1);
 
 namespace Ibexa\User\Form\Data;
 
-use Ibexa\Contracts\Core\Persistence\Content\Section;
-use Ibexa\Contracts\Core\Repository\Values\Content\Location;
 use Ibexa\Contracts\Core\Repository\Values\User\Limitation\RoleLimitation;
 use Ibexa\Contracts\Core\Repository\Values\User\Role;
 use Ibexa\Contracts\Core\Repository\Values\User\UserGroup;
@@ -25,7 +23,7 @@ class UserInvitationData
 
     private ?UserGroup $userGroup;
 
-    /** @var \Ibexa\Contracts\Core\Persistence\Content\Section[]|null  */
+    /** @var \Ibexa\Contracts\Core\Persistence\Content\Section[]|null */
     private ?array $sections;
 
     private ?string $locationPath;
@@ -38,7 +36,7 @@ class UserInvitationData
 
     public function __construct(
         ?string $email = null,
-        ?Role $role = null ,
+        ?Role $role = null,
         ?SiteAccess $siteaccess = null,
         ?UserGroup $userGroup = null,
         ?array $sections = null,
@@ -57,7 +55,6 @@ class UserInvitationData
         $this->limitationValue = $limitationValue;
         $this->roleLimitation = $roleLimitation;
     }
-
 
     public function getLimitationType(): ?string
     {

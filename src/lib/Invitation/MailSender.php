@@ -17,7 +17,9 @@ use Twig\Environment;
 final class MailSender implements \Ibexa\Contracts\User\Invitation\MailSender
 {
     private Environment $twig;
+
     private ConfigResolverInterface $configResolver;
+
     private Swift_Mailer $mailer;
 
     public function __construct(Environment $twig, ConfigResolverInterface $configResolver, Swift_Mailer $mailer)
@@ -46,7 +48,7 @@ final class MailSender implements \Ibexa\Contracts\User\Invitation\MailSender
         $body = $template->renderBlock('body', [
             'invite_hash' => $invitation->getHash(),
             'siteaccess' => $invitation->getSiteAccess()->name,
-            'invitation' => $invitation
+            'invitation' => $invitation,
         ]);
 
         $message = (new Swift_Message())

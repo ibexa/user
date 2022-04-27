@@ -9,7 +9,6 @@ namespace Ibexa\User\Permission;
 use Ibexa\Contracts\Core\Persistence\User\Policy;
 use Ibexa\Core\Persistence\Legacy\User\Role\LimitationHandler;
 
-
 class UserPermissionsLimitationHandler extends LimitationHandler
 {
     public const USER_GROUP_PREFIX = 'UserGroup_';
@@ -45,7 +44,7 @@ class UserPermissionsLimitationHandler extends LimitationHandler
         }
         $values = [
             'roles' => [],
-            'user_groups' => []
+            'user_groups' => [],
         ];
         foreach ($policy->limitations[UserPermissionsLimitation::IDENTIFIER] as $value) {
             if (strpos($value, self::ROLE_PREFIX) === 0) {

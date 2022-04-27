@@ -30,7 +30,7 @@ class LimitationValueTransformer implements DataTransformerInterface
         $roleLimitation = null;
 
         if ($value->getLimitationType() === UserInvitationType::LIMITATION_TYPE_SECTION) {
-            $limitationValues = array_map(fn ($section) => $section->id , $value->getSections());
+            $limitationValues = array_map(static fn ($section) => $section->id, $value->getSections());
             $roleLimitation = new SectionLimitation(['limitationValues' => $limitationValues]);
         }
 

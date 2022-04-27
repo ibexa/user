@@ -112,6 +112,7 @@ class UserRegisterController extends Controller
             $this->userActionDispatcher->dispatchFormAction($form, $data, $form->getClickedButton()->getName());
             if ($response = $this->userActionDispatcher->getResponse()) {
                 $this->invitationService->markAsUsed($invite);
+
                 return $response;
             }
         }

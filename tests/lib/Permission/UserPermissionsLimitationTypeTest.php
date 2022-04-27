@@ -9,15 +9,15 @@ declare(strict_types=1);
 namespace Ibexa\Tests\User\Permission;
 
 use Ibexa\Contracts\Core\Exception\InvalidArgumentType;
+use Ibexa\Contracts\Core\Persistence\Content\Handler as ContentHandlerInterface;
+use Ibexa\Contracts\Core\Persistence\User\Handler as UserHandlerInterface;
 use Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo;
+use Ibexa\Contracts\Core\Repository\Values\ValueObject;
+use Ibexa\Core\Base\Exceptions\NotFoundException;
 use Ibexa\Core\Repository\Values\Content\Content;
 use Ibexa\Core\Repository\Values\Content\VersionInfo;
 use Ibexa\Core\Repository\Values\User\Role;
 use Ibexa\Core\Repository\Values\User\UserGroup;
-use Ibexa\Contracts\Core\Persistence\User\Handler as UserHandlerInterface;
-use Ibexa\Contracts\Core\Persistence\Content\Handler as ContentHandlerInterface;
-use Ibexa\Contracts\Core\Repository\Values\ValueObject;
-use Ibexa\Core\Base\Exceptions\NotFoundException;
 use Ibexa\Tests\Core\Limitation\Base;
 use Ibexa\User\Permission\UserPermissionsLimitation;
 use Ibexa\User\Permission\UserPermissionsLimitationType;
@@ -41,30 +41,30 @@ class UserPermissionsLimitationTypeTest extends Base
                     [
                         'limitationValues' => [
                             'roles' => null,
-                            'user_groups' => null
-                        ]
+                            'user_groups' => null,
+                        ],
                     ]
-                )
+                ),
             ],
             [
                 new UserPermissionsLimitation(
                     [
                         'limitationValues' => [
                             'roles' => [],
-                            'user_groups' => []
-                        ]
+                            'user_groups' => [],
+                        ],
                     ]
-                )
+                ),
             ],
             [
                 new UserPermissionsLimitation(
                     [
                         'limitationValues' => [
                             'roles' => [4, 8],
-                            'user_groups' => [14, 21]
-                        ]
+                            'user_groups' => [14, 21],
+                        ],
                     ]
-                )
+                ),
             ],
         ];
     }
@@ -82,25 +82,25 @@ class UserPermissionsLimitationTypeTest extends Base
     {
         return [
             [
-                new UserPermissionsLimitation()
+                new UserPermissionsLimitation(),
             ],
             [
-                new UserPermissionsLimitation([])
+                new UserPermissionsLimitation([]),
             ],
             [
                 new UserPermissionsLimitation([
                     'limitationValues' => [
-                        'user_groups' => []
-                    ]
-                ])
+                        'user_groups' => [],
+                    ],
+                ]),
             ],
             [
                 new UserPermissionsLimitation([
                     'limitationValues' => [
                         'roles' => 1,
-                        'user_groups' => [14, 21]
-                    ]
-                ])
+                        'user_groups' => [14, 21],
+                    ],
+                ]),
             ],
         ];
     }
@@ -155,7 +155,6 @@ class UserPermissionsLimitationTypeTest extends Base
                     new Role()
                 );
 
-
             $this->getPersistenceMock()
                 ->method('userHandler')
                 ->willReturn($userHandlerMock);
@@ -187,18 +186,18 @@ class UserPermissionsLimitationTypeTest extends Base
                     'limitationValues' => [
                         'roles' => [4, 8],
                         'user_groups' => null,
-                    ]
+                    ],
                 ]),
-                1
+                1,
             ],
             [
                 new UserPermissionsLimitation([
                     'limitationValues' => [
                         'roles' => null,
                         'user_groups' => [14, 18],
-                    ]
+                    ],
                 ]),
-                1
+                1,
             ],
             [
                 new UserPermissionsLimitation(
@@ -206,10 +205,10 @@ class UserPermissionsLimitationTypeTest extends Base
                         'limitationValues' => [
                             'roles' => [4, 8],
                             'user_groups' => [14, 18],
-                        ]
+                        ],
                     ]
                 ),
-                2
+                2,
             ],
         ];
     }
@@ -239,7 +238,7 @@ class UserPermissionsLimitationTypeTest extends Base
                     'limitationValues' => [
                         'roles' => [4, 8],
                         'user_groups' => [14, 18],
-                    ]
+                    ],
                 ]),
                 'object' => new Role(['id' => 4]),
                 'expected' => true,
@@ -249,16 +248,16 @@ class UserPermissionsLimitationTypeTest extends Base
                     'limitationValues' => [
                         'roles' => [4, 8],
                         'user_groups' => [14, 18],
-                    ]
+                    ],
                 ]),
                 'object' => new UserGroup([
                     'content' => new Content([
                         'versionInfo' => new VersionInfo([
                             'contentInfo' => new ContentInfo([
-                                'id' => 14
-                            ])
-                        ])
-                    ])
+                                'id' => 14,
+                            ]),
+                        ]),
+                    ]),
                 ]),
                 'expected' => true,
             ],
@@ -267,7 +266,7 @@ class UserPermissionsLimitationTypeTest extends Base
                     'limitationValues' => [
                         'roles' => null,
                         'user_groups' => [14, 18],
-                    ]
+                    ],
                 ]),
                 'object' => new Role(['id' => 4]),
                 'expected' => true,
@@ -277,7 +276,7 @@ class UserPermissionsLimitationTypeTest extends Base
                     'limitationValues' => [
                         'roles' => [],
                         'user_groups' => [14, 18],
-                    ]
+                    ],
                 ]),
                 'object' => new Role(['id' => 4]),
                 'expected' => false,
@@ -287,7 +286,7 @@ class UserPermissionsLimitationTypeTest extends Base
                     'limitationValues' => [
                         'roles' => [4, 8],
                         'user_groups' => [14, 18],
-                    ]
+                    ],
                 ]),
                 'object' => new Role(['id' => 14]),
                 'expected' => false,
@@ -297,14 +296,14 @@ class UserPermissionsLimitationTypeTest extends Base
                     'limitationValues' => [
                         'roles' => [4, 8],
                         'user_groups' => [14, 18],
-                    ]
+                    ],
                 ]),
                 'object' => new Content([
                     'versionInfo' => new VersionInfo([
                         'contentInfo' => new ContentInfo([
-                            'id' => 14
-                        ])
-                    ])
+                            'id' => 14,
+                        ]),
+                    ]),
                 ]),
                 'expected' => null,
             ],

@@ -47,7 +47,8 @@ class UserGroupChoiceType extends AbstractType
         $resolver
             ->setDefaults([
                 'choice_loader' => ChoiceList::lazy(
-                    $this, fn() => $this->loadFilteredGroups(),
+                    $this,
+                    fn () => $this->loadFilteredGroups(),
                 ),
                 'choice_label' => 'name',
                 'choice_name' => 'id',
@@ -67,13 +68,13 @@ class UserGroupChoiceType extends AbstractType
     {
         return array_filter(
             $this->getUserGroups(),
-            fn($group) => $this->permissionResolver->canUser('user', 'invite', $group)
+            fn ($group) => $this->permissionResolver->canUser('user', 'invite', $group)
         );
     }
 
     protected function getUserGroups(): array
     {
-        return $this->repository->sudo(function() {
+        return $this->repository->sudo(function () {
             $query = new LocationQuery();
             $query->filter = new ContentTypeIdentifier('user_group');
             $query->offset = 0;

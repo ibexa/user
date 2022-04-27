@@ -18,6 +18,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class SectionsChoiceType extends AbstractType
 {
     private SectionService $sectionService;
+
     /** @var \Ibexa\Contracts\Core\Repository\Repository */
     private Repository $repository;
 
@@ -34,7 +35,8 @@ class SectionsChoiceType extends AbstractType
         $resolver
             ->setDefaults([
                 'choice_loader' => ChoiceList::lazy(
-                    $this, fn() => $this->repository->sudo(fn () => $this->sectionService->loadSections())
+                    $this,
+                    fn () => $this->repository->sudo(fn () => $this->sectionService->loadSections())
                 ),
                 'choice_label' => 'name',
                 'choice_value' => 'id',

@@ -44,7 +44,7 @@ class UserPermissionsLimitationType extends AbstractPersistenceLimitationType im
             || !array_key_exists('user_groups', $limitationValue->limitationValues)
         ) {
             throw new InvalidArgumentType(
-                "\$limitationValue->limitationValues",
+                '$limitationValue->limitationValues',
                 'array',
                 $limitationValue->limitationValues
             );

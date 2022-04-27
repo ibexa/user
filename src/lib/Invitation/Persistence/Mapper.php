@@ -53,6 +53,7 @@ final class Mapper
                 json_decode($row['limitation_value'], true)
             );
         }
+
         return new \Ibexa\User\Invitation\Invitation(
             $row['email'],
             $row['hash'],
@@ -67,12 +68,12 @@ final class Mapper
 
     private function loadUserGroup(int $userGroupId): UserGroup
     {
-        return $this->repository->sudo(fn() => $this->userService->loadUserGroup($userGroupId));
+        return $this->repository->sudo(fn () => $this->userService->loadUserGroup($userGroupId));
     }
 
     private function loadRole(int $roleId): Role
     {
-        return $this->repository->sudo(fn() => $this->roleService->loadRole($roleId));
+        return $this->repository->sudo(fn () => $this->roleService->loadRole($roleId));
     }
 
     private function mapRoleLimitation(string $type, array $values): RoleLimitation
