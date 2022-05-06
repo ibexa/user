@@ -7,3 +7,4 @@ services:
     Ibexa\User\Behat\Context\UserSetupContext:
         arguments:
             - '@ibexa.persistence.connection'
+    Ibexa\User\Behat\Context\UserSettingsContext: ~
