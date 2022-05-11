@@ -16,6 +16,10 @@ parameters:
     ibexa.site_access.config.default.user_registration.user_type_identifier: 'user'
     ibexa.site_access.config.default.user_registration.templates.form: "@@IbexaContentForms/Content/content_edit.html.twig"
     ibexa.site_access.config.default.user_registration.templates.confirmation: "@@IbexaUser/register/register_confirmation.html.twig"
+    ibexa.site_access.config.default.user_registration.form.allowed_field_definitions_id:
+        - first_name
+        - last_name
+        - user_account
 
     # Invitation
     ibexa.site_access.config.default.user_invitation.templates.form: "@@IbexaUser/invitation/form.html.twig"

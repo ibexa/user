@@ -44,6 +44,15 @@ class UserRegistration extends AbstractParser
                             ->end()
                         ->end()
                     ->end()
+                    ->arrayNode('form')
+                        ->info('User registration form configuration.')
+                        ->children()
+                            ->arrayNode('allowed_field_definitions_id')
+                            ->requiresAtLeastOneElement()
+                            ->defaultValue(['user_account'])
+                            ->prototype('scalar')->end()
+                        ->end()
+                    ->end()
                 ->end()
             ->end();
     }
@@ -85,6 +94,14 @@ class UserRegistration extends AbstractParser
                 'user_registration.templates.confirmation',
                 $currentScope,
                 $settings['templates']['confirmation']
+            );
+        }
+
+        if (!empty($settings['form']['allowed_field_definitions_id'])) {
+            $contextualizer->setContextualParameter(
+                'user_registration.form.allowed_field_definitions_id',
+                $currentScope,
+                $settings['form']['allowed_field_definitions_id']
             );
         }
     }
