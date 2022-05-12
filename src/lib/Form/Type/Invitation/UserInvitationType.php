@@ -4,10 +4,12 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace Ibexa\User\Form\Type;
+namespace Ibexa\User\Form\Type\Invitation;
 
 use Ibexa\User\Form\Data\UserInvitationData;
 use Ibexa\User\Form\DataTransformer\LimitationValueTransformer;
+use Ibexa\User\Form\Type\SectionsChoiceType;
+use Ibexa\User\Form\Type\SiteAccessChoiceType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;

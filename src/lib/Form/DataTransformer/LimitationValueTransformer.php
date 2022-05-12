@@ -10,7 +10,7 @@ namespace Ibexa\User\Form\DataTransformer;
 
 use Ibexa\Contracts\Core\Repository\Values\User\Limitation\SectionLimitation;
 use Ibexa\Contracts\Core\Repository\Values\User\Limitation\SubtreeLimitation;
-use Ibexa\User\Form\Type\UserInvitationType;
+use Ibexa\User\Form\Type\Invitation\UserInvitationType;
 use Symfony\Component\Form\DataTransformerInterface;
 
 class LimitationValueTransformer implements DataTransformerInterface

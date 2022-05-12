@@ -13,7 +13,7 @@ use Ibexa\Contracts\User\Invitation\Exception\UserExist;
 use Ibexa\Contracts\User\Invitation\InvitationService;
 use Ibexa\Contracts\User\Invitation\MailSender;
 use Ibexa\User\ExceptionHandler\ActionResultHandler;
-use Ibexa\User\Form\Type\UserInvitationType;
+use Ibexa\User\Form\Type\Invitation\UserInvitationType;
 use Ibexa\User\View\Invitation\FormView;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;

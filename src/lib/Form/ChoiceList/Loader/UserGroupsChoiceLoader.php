@@ -6,73 +6,35 @@
  */
 declare(strict_types=1);
 
-namespace Ibexa\User\Form\Type;
+namespace Ibexa\User\Form\ChoiceList\Loader;
 
-use Ibexa\Contracts\Core\Repository\PermissionResolver;
 use Ibexa\Contracts\Core\Repository\Repository;
 use Ibexa\Contracts\Core\Repository\SearchService;
 use Ibexa\Contracts\Core\Repository\UserService;
 use Ibexa\Contracts\Core\Repository\Values\Content\LocationQuery;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\ContentTypeIdentifier;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\ContentName;
-use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\ChoiceList\ChoiceList;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\ChoiceList\Loader\AbstractChoiceLoader;
 
-class UserGroupChoiceType extends AbstractType
+final class UserGroupsChoiceLoader extends AbstractChoiceLoader
 {
-    private UserService $userService;
+    private Repository $repository;
 
     private SearchService $searchService;
 
-    private Repository $repository;
-
-    private PermissionResolver $permissionResolver;
+    private UserService $userService;
 
     public function __construct(
         Repository $repository,
-        UserService $userService,
         SearchService $searchService,
-        PermissionResolver $permissionResolver
+        UserService $userService
     ) {
-        $this->userService = $userService;
-        $this->searchService = $searchService;
         $this->repository = $repository;
-        $this->permissionResolver = $permissionResolver;
+        $this->searchService = $searchService;
+        $this->userService = $userService;
     }
 
-    public function configureOptions(OptionsResolver $resolver): void
-    {
-        $resolver
-            ->setDefaults([
-                'choice_loader' => ChoiceList::lazy(
-                    $this,
-                    fn () => $this->loadFilteredGroups(),
-                ),
-                'choice_label' => 'name',
-                'choice_name' => 'id',
-                'choice_value' => 'id',
-            ]);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getParent(): ?string
-    {
-        return ChoiceType::class;
-    }
-
-    protected function loadFilteredGroups(): array
-    {
-        return array_filter(
-            $this->getUserGroups(),
-            fn ($group) => $this->permissionResolver->canUser('user', 'invite', $group)
-        );
-    }
-
-    protected function getUserGroups(): array
+    protected function loadChoices(): array
     {
         return $this->repository->sudo(function () {
             $query = new LocationQuery();

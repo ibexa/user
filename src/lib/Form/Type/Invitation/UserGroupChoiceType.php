@@ -6,30 +6,36 @@
  */
 declare(strict_types=1);
 
-namespace Ibexa\User\Form\Type;
+namespace Ibexa\User\Form\Type\Invitation;
 
 use Ibexa\Contracts\Core\Repository\PermissionResolver;
-use Ibexa\Contracts\Core\Repository\RoleService;
-use Ibexa\Core\Repository\Repository;
+use Ibexa\Contracts\Core\Repository\Repository;
+use Ibexa\Contracts\Core\Repository\SearchService;
+use Ibexa\Contracts\Core\Repository\UserService;
+use Ibexa\User\Form\ChoiceList\Loader\UserGroupsChoiceLoader;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\ChoiceList\ChoiceList;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class RoleChoiceType extends AbstractType
+class UserGroupChoiceType extends AbstractType
 {
-    private RoleService $roleService;
+    private UserService $userService;
+
+    private SearchService $searchService;
 
     private Repository $repository;
 
     private PermissionResolver $permissionResolver;
 
     public function __construct(
-        RoleService $roleService,
         Repository $repository,
+        UserService $userService,
+        SearchService $searchService,
         PermissionResolver $permissionResolver
     ) {
-        $this->roleService = $roleService;
+        $this->userService = $userService;
+        $this->searchService = $searchService;
         $this->repository = $repository;
         $this->permissionResolver = $permissionResolver;
     }
@@ -40,20 +46,12 @@ class RoleChoiceType extends AbstractType
             ->setDefaults([
                 'choice_loader' => ChoiceList::lazy(
                     $this,
-                    fn () => $this->loadFilteredRoles(),
+                    fn () => $this->loadFilteredGroups(),
                 ),
-                'choice_label' => 'identifier',
+                'choice_label' => 'name',
                 'choice_name' => 'id',
                 'choice_value' => 'id',
             ]);
-    }
-
-    protected function loadFilteredRoles(): array
-    {
-        return array_filter(
-            $this->repository->sudo(fn () => $this->roleService->loadRoles()),
-            fn ($role) => $this->permissionResolver->canUser('user', 'invite', $role)
-        );
     }
 
     /**
@@ -62,5 +60,17 @@ class RoleChoiceType extends AbstractType
     public function getParent(): ?string
     {
         return ChoiceType::class;
+    }
+
+    protected function loadFilteredGroups(): array
+    {
+        return array_filter(
+            (new UserGroupsChoiceLoader(
+                $this->repository,
+                $this->searchService,
+                $this->userService
+            ))->loadChoiceList()->getChoices(),
+            fn ($group) => $this->permissionResolver->canUser('user', 'invite', $group)
+        );
     }
 }
