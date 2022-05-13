@@ -22,6 +22,7 @@ use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 use Ibexa\Contracts\User\Invitation\Exception\InvitationExist;
 use Ibexa\Contracts\User\Invitation\Exception\UserExist;
 use Ibexa\Contracts\User\Invitation\Invitation;
+use Ibexa\Contracts\User\Invitation\InvitationCreateStruct;
 use Ibexa\Contracts\User\Invitation\InvitationService as InvitationServiceInterface;
 use Ibexa\Core\Base\Exceptions\UnauthorizedException;
 use Ibexa\Core\MVC\Symfony\SiteAccess;
@@ -63,22 +64,20 @@ final class InvitationService implements InvitationServiceInterface
     }
 
     public function createInvitation(
-        string $email,
-        SiteAccess $siteAccess,
-        ?UserGroup $userGroup = null,
-        ?Role $role = null,
-        ?RoleLimitation $roleLimitation = null
+        InvitationCreateStruct $createStruct
     ): Invitation {
         if (!$this->permissionResolver->hasAccess('user', 'invite')) {
             throw new UnauthorizedException('user', 'invite');
         }
 
+        $userGroup = $createStruct->getUserGroup();
         if ($userGroup
             && !$this->permissionResolver->canUser('user', 'invite', $userGroup)
         ) {
             throw new UnauthorizedException('user', 'invite', ['user_group' => $userGroup->getName()]);
         }
 
+        $role = $createStruct->getRole();
         if ($role
             && !$this->permissionResolver->canUser('user', 'invite', $role)
         ) {
@@ -86,25 +85,27 @@ final class InvitationService implements InvitationServiceInterface
         }
 
         if (
-            $this->handler->invitationExistsForEmail($email)
+            $this->handler->invitationExistsForEmail($createStruct->getEmail())
         ) {
             throw new InvitationExist();
         }
         $userExists = false;
         try {
-            $userExists = $this->userService->loadUserByEmail($email);
+            $userExists = $this->userService->loadUserByEmail($createStruct->getEmail());
         } catch (NotFoundException $exception) {
         }
         if ($userExists) {
             throw new UserExist();
         }
 
+        $roleLimitation = $createStruct->getRoleLimitation();
+
         $this->transactionHandler->beginTransaction();
 
         try {
             $invitation = $this->handler->createInvitation(
-                $email,
-                $siteAccess->name,
+                $createStruct->getEmail(),
+                $createStruct->getSiteAccess()->name,
                 $this->hashGenerator->generate(),
                 $role ? $role->id : null,
                 $userGroup ? $userGroup->id : null,

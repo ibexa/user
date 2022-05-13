@@ -16,11 +16,7 @@ use Ibexa\Core\MVC\Symfony\SiteAccess;
 interface InvitationService
 {
     public function createInvitation(
-        string $email,
-        SiteAccess $siteAccess,
-        ?UserGroup $userGroup = null,
-        ?Role $role = null,
-        ?RoleLimitation $roleLimitation = null
+        InvitationCreateStruct $createStruct
     ): Invitation;
 
     public function isValid(Invitation $invitation): bool;

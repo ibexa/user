@@ -10,6 +10,7 @@ namespace Ibexa\Bundle\User\Controller;
 
 use Ibexa\Contracts\User\Invitation\Exception\InvitationExist;
 use Ibexa\Contracts\User\Invitation\Exception\UserExist;
+use Ibexa\Contracts\User\Invitation\InvitationCreateStruct;
 use Ibexa\Contracts\User\Invitation\InvitationService;
 use Ibexa\Contracts\User\Invitation\InvitationSender;
 use Ibexa\User\ExceptionHandler\ActionResultHandler;
@@ -50,11 +51,13 @@ class UserInvitationController extends Controller
             $data = $form->getData();
             try {
                 $invitation = $this->invitationService->createInvitation(
-                    $data->getEmail(),
-                    $data->getSiteaccess(),
-                    $data->getUserGroup(),
-                    $data->getRole(),
-                    $data->getRoleLimitation(),
+                    new InvitationCreateStruct(
+                        $data->getEmail(),
+                        $data->getSiteaccess(),
+                        $data->getUserGroup(),
+                        $data->getRole(),
+                        $data->getRoleLimitation(),
+                    )
                 );
 
                 $this->mailSender->sendInvitation($invitation);
