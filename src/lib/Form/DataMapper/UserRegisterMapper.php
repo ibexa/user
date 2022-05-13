@@ -69,11 +69,13 @@ class UserRegisterMapper
             'mainLanguageCode' => $this->params['language'],
             'enabled' => true,
         ]);
-        $targetGroup = $this->parentGroupLoader->loadGroup();
 
         if ($invitation && $invitation->getUserGroup()) {
             $targetGroup = $invitation->getUserGroup();
+        } else {
+            $targetGroup = $this->parentGroupLoader->loadGroup();
         }
+
         $data->addParentGroup($targetGroup);
 
         if ($invitation) {

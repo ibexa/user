@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\Contracts\User\Invitation;
 
-interface MailSender
+interface InvitationSender
 {
     public function sendInvitation(Invitation $invitation): void;
 }

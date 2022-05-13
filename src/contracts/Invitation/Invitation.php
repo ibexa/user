@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\Contracts\User\Invitation;
 
+use DateTime;
 use Ibexa\Contracts\Core\Repository\Values\User\Limitation\RoleLimitation;
 use Ibexa\Contracts\Core\Repository\Values\User\Role;
 use Ibexa\Contracts\Core\Repository\Values\User\UserGroup;
@@ -21,7 +22,7 @@ interface Invitation
 
     public function getSiteAccess(): SiteAccess;
 
-    public function createdAt(): \DateTime;
+    public function createdAt(): DateTime;
 
     public function isUsed(): bool;
 

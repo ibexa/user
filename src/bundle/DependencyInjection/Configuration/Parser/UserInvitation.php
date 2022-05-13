@@ -12,6 +12,18 @@ use Ibexa\Bundle\Core\DependencyInjection\Configuration\AbstractParser;
 use Ibexa\Bundle\Core\DependencyInjection\Configuration\SiteAccessAware\ContextualizerInterface;
 use Symfony\Component\Config\Definition\Builder\NodeBuilder;
 
+/*
+ * Example configuration:
+ * ```yaml
+ * ibexa:
+ *   system:
+ *      default: # configuration per siteaccess or siteaccess group
+ *          user_invitation:
+ *              hash_expiration_time: P1D
+ *              templates:
+ *                  mail: "@@App/invitation/mail.html.twig"
+ * ```
+ */
 class UserInvitation extends AbstractParser
 {
     /**

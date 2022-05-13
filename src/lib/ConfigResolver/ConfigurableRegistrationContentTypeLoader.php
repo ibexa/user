@@ -41,7 +41,7 @@ class ConfigurableRegistrationContentTypeLoader implements RegistrationContentTy
                 $this->configResolver->getParameter(
                     'user_registration.user_type_identifier',
                     null,
-                    $siteAccess ? $siteAccess->name : null
+                    $siteAccess->name ?? null
                 )
             )
         );

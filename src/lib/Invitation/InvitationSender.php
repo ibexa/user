@@ -14,7 +14,7 @@ use Swift_Mailer;
 use Swift_Message;
 use Twig\Environment;
 
-final class MailSender implements \Ibexa\Contracts\User\Invitation\MailSender
+final class InvitationSender implements \Ibexa\Contracts\User\Invitation\InvitationSender
 {
     private Environment $twig;
 

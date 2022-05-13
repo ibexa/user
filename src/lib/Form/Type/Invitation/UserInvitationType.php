@@ -28,11 +28,9 @@ class UserInvitationType extends AbstractType
     {
         $builder
             ->add('email', EmailType::class, [
-                'required' => true,
                 'label' => /** @Desc("Enter email") */ 'ibexa.user.invitation.email',
             ])
             ->add('siteaccess', SiteAccessChoiceType::class, [
-                'required' => true,
                 'label' => /** @Desc("Select Site") */ 'ibexa.user.invitation.site_access',
             ])
             ->add('role', RoleChoiceType::class, [
@@ -44,7 +42,6 @@ class UserInvitationType extends AbstractType
                 'label' => /** @Desc("Select Group") */ 'ibexa.user.invitation.group',
             ])
             ->add('limitation_type', ChoiceType::class, [
-                'required' => true,
                 'multiple' => false,
                 'expanded' => true,
                 'choices' => [

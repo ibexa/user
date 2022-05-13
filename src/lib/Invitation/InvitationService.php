@@ -150,7 +150,7 @@ final class InvitationService implements InvitationServiceInterface
         return $this->handler->getInvitation($hash);
     }
 
-    public function getInviteForEmail(string $email): Invitation
+    public function getInvitationByEmail(string $email): Invitation
     {
         return $this->handler->getInvitationForEmail($email);
     }

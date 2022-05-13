@@ -27,7 +27,7 @@ interface InvitationService
 
     public function getInvitation(string $hash): Invitation;
 
-    public function getInviteForEmail(string $email): Invitation;
+    public function getInvitationByEmail(string $email): Invitation;
 
     public function markAsUsed(Invitation $invitation): void;
 }

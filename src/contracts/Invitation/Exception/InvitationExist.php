@@ -8,6 +8,8 @@ declare(strict_types=1);
 
 namespace Ibexa\Contracts\User\Invitation\Exception;
 
-class InvitationExist extends \RuntimeException
+use RuntimeException;
+
+class InvitationExist extends RuntimeException
 {
 }

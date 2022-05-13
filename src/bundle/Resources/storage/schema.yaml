@@ -75,6 +75,3 @@ tables:
                     options:
                         onDelete: CASCADE
                         onUpdate: CASCADE
-
-
-

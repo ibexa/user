@@ -11,7 +11,7 @@ namespace Ibexa\Bundle\User\Controller;
 use Ibexa\Contracts\User\Invitation\Exception\InvitationExist;
 use Ibexa\Contracts\User\Invitation\Exception\UserExist;
 use Ibexa\Contracts\User\Invitation\InvitationService;
-use Ibexa\Contracts\User\Invitation\MailSender;
+use Ibexa\Contracts\User\Invitation\InvitationSender;
 use Ibexa\User\ExceptionHandler\ActionResultHandler;
 use Ibexa\User\Form\Type\Invitation\UserInvitationType;
 use Ibexa\User\View\Invitation\FormView;
@@ -22,7 +22,7 @@ class UserInvitationController extends Controller
 {
     private InvitationService $invitationService;
 
-    private MailSender $mailSender;
+    private InvitationSender $mailSender;
 
     private FormFactoryInterface $formFactory;
 
@@ -30,7 +30,7 @@ class UserInvitationController extends Controller
 
     public function __construct(
         InvitationService $invitationService,
-        MailSender $mailSender,
+        InvitationSender $mailSender,
         FormFactoryInterface $formFactory,
         ActionResultHandler $actionResultHandler
     ) {
