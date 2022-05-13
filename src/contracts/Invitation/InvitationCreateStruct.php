@@ -17,9 +17,13 @@ use Ibexa\Core\MVC\Symfony\SiteAccess;
 class InvitationCreateStruct extends ValueObject
 {
     protected string $email;
+
     protected SiteAccess $siteAccess;
+
     protected ?UserGroup $userGroup;
+
     protected ?Role $role;
+
     protected ?RoleLimitation $roleLimitation;
 
     public function __construct(

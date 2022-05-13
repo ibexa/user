@@ -15,9 +15,6 @@ use Ibexa\Contracts\Core\Persistence\TransactionHandler;
 use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
 use Ibexa\Contracts\Core\Repository\PermissionResolver;
 use Ibexa\Contracts\Core\Repository\UserService;
-use Ibexa\Contracts\Core\Repository\Values\User\Limitation\RoleLimitation;
-use Ibexa\Contracts\Core\Repository\Values\User\Role;
-use Ibexa\Contracts\Core\Repository\Values\User\UserGroup;
 use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 use Ibexa\Contracts\User\Invitation\Exception\InvitationExist;
 use Ibexa\Contracts\User\Invitation\Exception\UserExist;
@@ -25,7 +22,6 @@ use Ibexa\Contracts\User\Invitation\Invitation;
 use Ibexa\Contracts\User\Invitation\InvitationCreateStruct;
 use Ibexa\Contracts\User\Invitation\InvitationService as InvitationServiceInterface;
 use Ibexa\Core\Base\Exceptions\UnauthorizedException;
-use Ibexa\Core\MVC\Symfony\SiteAccess;
 use Ibexa\Core\MVC\Symfony\SiteAccess\SiteAccessServiceInterface;
 use Ibexa\User\Invitation\Persistence\Handler;
 

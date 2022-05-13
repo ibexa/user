@@ -8,11 +8,6 @@ declare(strict_types=1);
 
 namespace Ibexa\Contracts\User\Invitation;
 
-use Ibexa\Contracts\Core\Repository\Values\User\Limitation\RoleLimitation;
-use Ibexa\Contracts\Core\Repository\Values\User\Role;
-use Ibexa\Contracts\Core\Repository\Values\User\UserGroup;
-use Ibexa\Core\MVC\Symfony\SiteAccess;
-
 interface InvitationService
 {
     public function createInvitation(
