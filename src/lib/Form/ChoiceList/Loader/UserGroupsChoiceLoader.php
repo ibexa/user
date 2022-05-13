@@ -8,10 +8,13 @@ declare(strict_types=1);
 
 namespace Ibexa\User\Form\ChoiceList\Loader;
 
+use Ibexa\Contracts\Core\Repository\Iterator\BatchIterator;
+use Ibexa\Contracts\Core\Repository\Iterator\BatchIteratorAdapter\ContentSearchAdapter;
 use Ibexa\Contracts\Core\Repository\Repository;
 use Ibexa\Contracts\Core\Repository\SearchService;
 use Ibexa\Contracts\Core\Repository\UserService;
 use Ibexa\Contracts\Core\Repository\Values\Content\LocationQuery;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\ContentTypeIdentifier;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\ContentName;
 use Symfony\Component\Form\ChoiceList\Loader\AbstractChoiceLoader;
@@ -37,7 +40,7 @@ final class UserGroupsChoiceLoader extends AbstractChoiceLoader
     protected function loadChoices(): array
     {
         return $this->repository->sudo(function () {
-            $query = new LocationQuery();
+            $query = new Query();
             $query->filter = new ContentTypeIdentifier('user_group');
             $query->offset = 0;
             $query->limit = 100;
@@ -45,14 +48,10 @@ final class UserGroupsChoiceLoader extends AbstractChoiceLoader
             $query->sortClauses[] = new ContentName();
 
             $groups = [];
-            do {
-                $results = $this->searchService->findContent($query);
-                foreach ($results->searchHits as $hit) {
-                    $groups[] = $this->userService->loadUserGroup($hit->valueObject->id);
-                }
-
-                $query->offset += $query->limit;
-            } while ($query->offset < $results->totalCount);
+            $iterator = new BatchIterator(new ContentSearchAdapter($this->searchService, $query));
+            foreach ($iterator as $result) {
+                $groups[] = $this->userService->loadUserGroup($result->valueObject->id);
+            }
 
             return $groups;
         });
