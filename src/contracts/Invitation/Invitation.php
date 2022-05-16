@@ -12,7 +12,6 @@ use DateTime;
 use Ibexa\Contracts\Core\Repository\Values\User\Limitation\RoleLimitation;
 use Ibexa\Contracts\Core\Repository\Values\User\Role;
 use Ibexa\Contracts\Core\Repository\Values\User\UserGroup;
-use Ibexa\Core\MVC\Symfony\SiteAccess;
 
 interface Invitation
 {
@@ -20,7 +19,7 @@ interface Invitation
 
     public function getHash(): string;
 
-    public function getSiteAccess(): SiteAccess;
+    public function getSiteAccessIdentifier(): string;
 
     public function createdAt(): DateTime;
 

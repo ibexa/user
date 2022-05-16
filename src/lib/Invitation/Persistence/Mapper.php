@@ -8,21 +8,18 @@ declare(strict_types=1);
 
 namespace Ibexa\User\Invitation\Persistence;
 
-use eZ\Publish\Core\Repository\Values\User\Role;
 use Ibexa\Contracts\Core\Repository\Repository;
 use Ibexa\Contracts\Core\Repository\RoleService;
 use Ibexa\Contracts\Core\Repository\UserService;
 use Ibexa\Contracts\Core\Repository\Values\User\Limitation\RoleLimitation;
 use Ibexa\Contracts\Core\Repository\Values\User\Limitation\SectionLimitation;
 use Ibexa\Contracts\Core\Repository\Values\User\Limitation\SubtreeLimitation;
+use Ibexa\Contracts\Core\Repository\Values\User\Role;
 use Ibexa\Contracts\Core\Repository\Values\User\UserGroup;
 use Ibexa\Contracts\User\Invitation\Invitation;
-use Ibexa\Core\MVC\Symfony\SiteAccess\SiteAccessServiceInterface;
 
 final class Mapper
 {
-    private SiteAccessServiceInterface $siteAccessService;
-
     private UserService $userService;
 
     private RoleService $roleService;
@@ -31,11 +28,9 @@ final class Mapper
 
     public function __construct(
         Repository $repository,
-        SiteAccessServiceInterface $siteAccessService,
         UserService $userService,
         RoleService $roleService
     ) {
-        $this->siteAccessService = $siteAccessService;
         $this->userService = $userService;
         $this->roleService = $roleService;
         $this->repository = $repository;
@@ -58,7 +53,7 @@ final class Mapper
             $row['email'],
             $row['hash'],
             new \DateTime('@' . $row['creation_date']),
-            $this->siteAccessService->get($row['site_access_name']),
+            $row['site_access_name'],
             (bool)$row['used'],
             $role,
             $userGroup,

@@ -11,7 +11,7 @@ namespace Ibexa\User\Form\Data;
 use Ibexa\Contracts\Core\Repository\Values\User\Limitation\RoleLimitation;
 use Ibexa\Contracts\Core\Repository\Values\User\Role;
 use Ibexa\Contracts\Core\Repository\Values\User\UserGroup;
-use Ibexa\Core\MVC\Symfony\SiteAccess;
+use Ibexa\Core\MVC\Symfony\string;
 
 class UserInvitationData
 {
@@ -19,7 +19,7 @@ class UserInvitationData
 
     private ?Role $role;
 
-    private ?SiteAccess $siteaccess;
+    private ?string $siteaccess;
 
     private ?UserGroup $userGroup;
 
@@ -37,7 +37,7 @@ class UserInvitationData
     public function __construct(
         ?string $email = null,
         ?Role $role = null,
-        ?SiteAccess $siteaccess = null,
+        ?string $siteaccess = null,
         ?UserGroup $userGroup = null,
         ?array $sections = null,
         ?string $locationId = null,
@@ -106,12 +106,12 @@ class UserInvitationData
         $this->userGroup = $userGroup;
     }
 
-    public function getSiteaccess(): ?SiteAccess
+    public function getSiteaccess(): ?string
     {
         return $this->siteaccess;
     }
 
-    public function setSiteaccess(?SiteAccess $siteaccess): void
+    public function setSiteaccess(?string $siteaccess): void
     {
         $this->siteaccess = $siteaccess;
     }

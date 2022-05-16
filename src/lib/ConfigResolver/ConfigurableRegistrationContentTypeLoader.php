@@ -10,8 +10,8 @@ namespace Ibexa\User\ConfigResolver;
 
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
 use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
-use Ibexa\Core\MVC\Symfony\SiteAccess;
-use Ibexa\Core\Repository\Repository;
+use Ibexa\Contracts\Core\Repository\Repository;
+use Ibexa\Core\MVC\Symfony\string;
 
 /**
  * Loads the registration content type from a configured, injected content type identifier.
@@ -34,14 +34,14 @@ class ConfigurableRegistrationContentTypeLoader implements RegistrationContentTy
         $this->contentTypeService = $contentTypeService;
     }
 
-    public function loadContentType(?SiteAccess $siteAccess = null)
+    public function loadContentType(?string $siteAccessIdentifier = null)
     {
         return $this->repository->sudo(
             fn () => $this->contentTypeService->loadContentTypeByIdentifier(
                 $this->configResolver->getParameter(
                     'user_registration.user_type_identifier',
                     null,
-                    $siteAccess->name ?? null
+                    $siteAccessIdentifier
                 )
             )
         );

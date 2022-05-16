@@ -59,7 +59,7 @@ class InvitationServiceTest extends TestCase
             ->with(
                 'user_invitation.hash_expiration_time',
                 null,
-                $invitation->getSiteAccess()->name
+                $invitation->getSiteAccessIdentifier()
             )->willReturn('P2D');
 
         $this->assertSame(
@@ -76,7 +76,7 @@ class InvitationServiceTest extends TestCase
                     'test@ibexa.co',
                     'random_hash',
                     (new \DateTime())->sub(new \DateInterval('PT2H')),
-                    new SiteAccess('admin'),
+                    'admin',
                     false,
                 ),
                 'admin',
@@ -87,7 +87,7 @@ class InvitationServiceTest extends TestCase
                     'test@ibexa.co',
                     'random_hash',
                     (new \DateTime())->sub(new \DateInterval('P3D')),
-                    new SiteAccess('admin'),
+                    'admin',
                     false,
                 ),
                 'admin',
@@ -98,7 +98,7 @@ class InvitationServiceTest extends TestCase
                     'test@ibexa.co',
                     'random_hash',
                     (new \DateTime())->sub(new \DateInterval('PT2H')),
-                    new SiteAccess('admin'),
+                    'admin',
                     false,
                 ),
                 'site',
@@ -109,7 +109,7 @@ class InvitationServiceTest extends TestCase
                     'test@ibexa.co',
                     'random_hash',
                     (new \DateTime())->sub(new \DateInterval('PT2H')),
-                    new SiteAccess('admin'),
+                    'admin',
                     true,
                 ),
                 'admin',

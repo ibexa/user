@@ -8,8 +8,8 @@ declare(strict_types=1);
 
 namespace Ibexa\Bundle\User\Controller;
 
-use Ibexa\Contracts\User\Invitation\Exception\InvitationExist;
-use Ibexa\Contracts\User\Invitation\Exception\UserExist;
+use Ibexa\Contracts\User\Invitation\Exception\InvitationAlreadyExistsException;
+use Ibexa\Contracts\User\Invitation\Exception\UserAlreadyExistsException;
 use Ibexa\Contracts\User\Invitation\InvitationCreateStruct;
 use Ibexa\Contracts\User\Invitation\InvitationSender;
 use Ibexa\Contracts\User\Invitation\InvitationService;
@@ -68,14 +68,14 @@ class UserInvitationController extends Controller
                     ['%email%' => $data->getEmail()],
                     'user_invitation'
                 );
-            } catch (InvitationExist $e) {
+            } catch (InvitationAlreadyExistsException $e) {
                 $this->actionResultHandler->error(
                     /** @Desc("Invitation for '%email%' already exist.") */
                     'user_invitation.send.invitation_exist',
                     ['%email%' => $data->getEmail()],
                     'user_invitation'
                 );
-            } catch (UserExist $e) {
+            } catch (UserAlreadyExistsException $e) {
                 $this->actionResultHandler->error(
                     /** @Desc("User with '%email%' already exist.") */
                     'user_invitation.send.user_exist',

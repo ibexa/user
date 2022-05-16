@@ -13,7 +13,6 @@ use Ibexa\Contracts\Core\Repository\Values\User\Limitation\RoleLimitation;
 use Ibexa\Contracts\Core\Repository\Values\User\Role;
 use Ibexa\Contracts\Core\Repository\Values\User\UserGroup;
 use Ibexa\Contracts\Core\Repository\Values\ValueObject;
-use Ibexa\Core\MVC\Symfony\SiteAccess;
 
 class Invitation extends ValueObject implements \Ibexa\Contracts\User\Invitation\Invitation
 {
@@ -23,7 +22,7 @@ class Invitation extends ValueObject implements \Ibexa\Contracts\User\Invitation
 
     protected DateTime $createdAt;
 
-    protected SiteAccess $siteAccess;
+    protected string $siteAccess;
 
     protected bool $used;
 
@@ -37,7 +36,7 @@ class Invitation extends ValueObject implements \Ibexa\Contracts\User\Invitation
         string $email,
         string $hash,
         DateTime $createdAt,
-        SiteAccess $siteAccess,
+        string $siteAccessIdentifier,
         bool $used,
         ?Role $role = null,
         ?UserGroup $userGroup = null,
@@ -47,7 +46,7 @@ class Invitation extends ValueObject implements \Ibexa\Contracts\User\Invitation
             'email' => $email,
             'hash' => $hash,
             'createdAt' => $createdAt,
-            'siteAccess' => $siteAccess,
+            'siteAccessIdentifier' => $siteAccessIdentifier,
             'used' => $used,
             'role' => $role,
             'userGroup' => $userGroup,
@@ -65,7 +64,7 @@ class Invitation extends ValueObject implements \Ibexa\Contracts\User\Invitation
         return $this->hash;
     }
 
-    public function getSiteAccess(): SiteAccess
+    public function getSiteAccessIdentifier(): string
     {
         return $this->siteAccess;
     }

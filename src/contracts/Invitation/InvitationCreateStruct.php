@@ -12,13 +12,13 @@ use Ibexa\Contracts\Core\Repository\Values\User\Limitation\RoleLimitation;
 use Ibexa\Contracts\Core\Repository\Values\User\Role;
 use Ibexa\Contracts\Core\Repository\Values\User\UserGroup;
 use Ibexa\Contracts\Core\Repository\Values\ValueObject;
-use Ibexa\Core\MVC\Symfony\SiteAccess;
+use Ibexa\Core\MVC\Symfony\string;
 
 class InvitationCreateStruct extends ValueObject
 {
     protected string $email;
 
-    protected SiteAccess $siteAccess;
+    protected string $siteAccessIdentifier;
 
     protected ?UserGroup $userGroup;
 
@@ -28,14 +28,14 @@ class InvitationCreateStruct extends ValueObject
 
     public function __construct(
         string $email,
-        SiteAccess $siteAccess,
+        string $siteAccessIdentifier,
         ?UserGroup $userGroup = null,
         ?Role $role = null,
         ?RoleLimitation $roleLimitation = null
     ) {
         parent::__construct([
             'email' => $email,
-            'siteAccess' => $siteAccess,
+            'siteAccessIdentifier' => $siteAccessIdentifier,
             'userGroup' => $userGroup,
             'role' => $role,
             'roleLimitation' => $roleLimitation,
@@ -47,9 +47,9 @@ class InvitationCreateStruct extends ValueObject
         return $this->email;
     }
 
-    public function getSiteAccess(): SiteAccess
+    public function getSiteAccessIdentifier(): string
     {
-        return $this->siteAccess;
+        return $this->siteAccessIdentifier;
     }
 
     public function getUserGroup(): ?UserGroup

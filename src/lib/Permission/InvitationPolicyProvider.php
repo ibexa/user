@@ -11,7 +11,7 @@ namespace Ibexa\User\Permission;
 use Ibexa\Bundle\Core\DependencyInjection\Configuration\ConfigBuilderInterface;
 use Ibexa\Bundle\Core\DependencyInjection\Security\PolicyProvider\PolicyProviderInterface;
 
-class InvitationPolicyProvider implements PolicyProviderInterface
+final class InvitationPolicyProvider implements PolicyProviderInterface
 {
     public function addPolicies(ConfigBuilderInterface $configBuilder)
     {

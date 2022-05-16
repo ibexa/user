@@ -54,7 +54,6 @@ class UserRegisterController extends Controller
         $data = $this->userRegisterMapper->mapToFormData();
         $language = $data->mainLanguageCode;
 
-        /** @var \Symfony\Component\Form\Form $form */
         $form = $this->createForm(
             UserRegisterType::class,
             $data,
@@ -95,7 +94,6 @@ class UserRegisterController extends Controller
         $data = $this->userRegisterMapper->mapToFormData();
         $language = $data->mainLanguageCode;
 
-        /** @var \Symfony\Component\Form\Form $form */
         $form = $this->createForm(
             UserRegisterType::class,
             $data,

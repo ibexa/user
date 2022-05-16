@@ -16,8 +16,8 @@ use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
 use Ibexa\Contracts\Core\Repository\PermissionResolver;
 use Ibexa\Contracts\Core\Repository\UserService;
 use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
-use Ibexa\Contracts\User\Invitation\Exception\InvitationExist;
-use Ibexa\Contracts\User\Invitation\Exception\UserExist;
+use Ibexa\Contracts\User\Invitation\Exception\InvitationAlreadyExistsException;
+use Ibexa\Contracts\User\Invitation\Exception\UserAlreadyExistsException;
 use Ibexa\Contracts\User\Invitation\Invitation;
 use Ibexa\Contracts\User\Invitation\InvitationCreateStruct;
 use Ibexa\Contracts\User\Invitation\InvitationService as InvitationServiceInterface;
@@ -83,7 +83,7 @@ final class InvitationService implements InvitationServiceInterface
         if (
             $this->handler->invitationExistsForEmail($createStruct->getEmail())
         ) {
-            throw new InvitationExist();
+            throw new InvitationAlreadyExistsException();
         }
         $userExists = false;
         try {
@@ -91,7 +91,7 @@ final class InvitationService implements InvitationServiceInterface
         } catch (NotFoundException $exception) {
         }
         if ($userExists) {
-            throw new UserExist();
+            throw new UserAlreadyExistsException();
         }
 
         $roleLimitation = $createStruct->getRoleLimitation();
@@ -101,7 +101,7 @@ final class InvitationService implements InvitationServiceInterface
         try {
             $invitation = $this->handler->createInvitation(
                 $createStruct->getEmail(),
-                $createStruct->getSiteAccess()->name,
+                $createStruct->getSiteAccessIdentifier(),
                 $this->hashGenerator->generate(),
                 $role ? $role->id : null,
                 $userGroup ? $userGroup->id : null,
@@ -124,14 +124,14 @@ final class InvitationService implements InvitationServiceInterface
         $expirationTime = $this->configResolver->getParameter(
             'user_invitation.hash_expiration_time',
             null,
-            $invitation->getSiteAccess()->name
+            $invitation->getSiteAccessIdentifier()
         );
 
         if ($invitation->createdAt()->add(new \DateInterval($expirationTime)) <= $current) {
             return false;
         }
 
-        if ($invitation->getSiteAccess()->name !== $this->siteAccessService->getCurrent()->name) {
+        if ($invitation->getSiteAccessIdentifier() !== $this->siteAccessService->getCurrent()->name) {
             return false;
         }
 
