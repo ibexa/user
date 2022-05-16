@@ -10,11 +10,12 @@ namespace Ibexa\User\Invitation;
 
 use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 use Ibexa\Contracts\User\Invitation\Invitation;
+use Ibexa\Contracts\User\Invitation\InvitationSender;
 use Swift_Mailer;
 use Swift_Message;
 use Twig\Environment;
 
-final class InvitationSender implements \Ibexa\Contracts\User\Invitation\InvitationSender
+final class MailSender implements InvitationSender
 {
     private Environment $twig;
 
