@@ -8,77 +8,22 @@ declare(strict_types=1);
 
 namespace Ibexa\User\Invitation\Persistence;
 
-use Ibexa\Contracts\Core\Repository\Repository;
-use Ibexa\Contracts\Core\Repository\RoleService;
-use Ibexa\Contracts\Core\Repository\UserService;
-use Ibexa\Contracts\Core\Repository\Values\User\Limitation\RoleLimitation;
-use Ibexa\Contracts\Core\Repository\Values\User\Limitation\SectionLimitation;
-use Ibexa\Contracts\Core\Repository\Values\User\Limitation\SubtreeLimitation;
-use Ibexa\Contracts\Core\Repository\Values\User\Role;
-use Ibexa\Contracts\Core\Repository\Values\User\UserGroup;
-use Ibexa\Contracts\User\Invitation\Invitation;
+use Ibexa\Contracts\User\Invitation\Persistence\Invitation;
 
-final class Mapper
+final class Mapper implements \Ibexa\Contracts\User\Invitation\Persistence\Mapper
 {
-    private UserService $userService;
-
-    private RoleService $roleService;
-
-    private Repository $repository;
-
-    public function __construct(
-        Repository $repository,
-        UserService $userService,
-        RoleService $roleService
-    ) {
-        $this->userService = $userService;
-        $this->roleService = $roleService;
-        $this->repository = $repository;
-    }
-
     public function extractInvitationFromRow(array $row): Invitation
     {
-        $userGroup = $row['user_group_id'] !== null ? $this->loadUserGroup((int) $row['user_group_id']) : null;
-        $role = $row['role_id'] !== null ? $this->loadRole((int) $row['role_id']) : null;
-
-        $roleLimitation = null;
-        if ($row['limitation_type']) {
-            $roleLimitation = $this->mapRoleLimitation(
-                $row['limitation_type'],
-                json_decode($row['limitation_value'], true)
-            );
-        }
-
-        return new \Ibexa\User\Invitation\Invitation(
+        return new Invitation(
             $row['email'],
             $row['hash'],
-            new \DateTime('@' . $row['creation_date']),
             $row['site_access_name'],
+            $row['creation_date'],
             (bool)$row['used'],
-            $role,
-            $userGroup,
-            $roleLimitation
+            $row['role_id'] !== null ? (int) $row['role_id'] : null,
+            $row['user_group_id'] !== null ? (int) $row['user_group_id'] : null,
+            $row['limitation_type'],
+            $row['limitation_value'] !== null ? json_decode($row['limitation_value'], true) : null
         );
-    }
-
-    private function loadUserGroup(int $userGroupId): UserGroup
-    {
-        return $this->repository->sudo(fn () => $this->userService->loadUserGroup($userGroupId));
-    }
-
-    private function loadRole(int $roleId): Role
-    {
-        return $this->repository->sudo(fn () => $this->roleService->loadRole($roleId));
-    }
-
-    private function mapRoleLimitation(string $type, array $values): RoleLimitation
-    {
-        if ($type === 'Section') {
-            return new SectionLimitation(['limitationValues' => $values]);
-        }
-
-        if ($type === 'Subtree') {
-            return new SubtreeLimitation(['limitationValues' => $values]);
-        }
     }
 }

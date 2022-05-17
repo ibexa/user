@@ -12,7 +12,6 @@ use Ibexa\Contracts\Core\Repository\Values\User\Limitation\RoleLimitation;
 use Ibexa\Contracts\Core\Repository\Values\User\Role;
 use Ibexa\Contracts\Core\Repository\Values\User\UserGroup;
 use Ibexa\Contracts\Core\Repository\Values\ValueObject;
-use Ibexa\Core\MVC\Symfony\string;
 
 class InvitationCreateStruct extends ValueObject
 {

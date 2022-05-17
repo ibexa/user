@@ -13,10 +13,11 @@ use Ibexa\Contracts\Core\Persistence\TransactionHandler;
 use Ibexa\Contracts\Core\Repository\PermissionResolver;
 use Ibexa\Contracts\Core\Repository\UserService;
 use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
+use Ibexa\Contracts\User\Invitation\DomainMapper;
+use Ibexa\Contracts\User\Invitation\Invitation;
 use Ibexa\Contracts\User\Invitation\Invitation as InvitationContract;
 use Ibexa\Core\MVC\Symfony\SiteAccess;
 use Ibexa\Core\MVC\Symfony\SiteAccess\SiteAccessServiceInterface;
-use Ibexa\User\Invitation\Invitation;
 use Ibexa\User\Invitation\InvitationService;
 use Ibexa\User\Invitation\Persistence\Handler;
 use PHPUnit\Framework\TestCase;
@@ -38,7 +39,8 @@ class InvitationServiceTest extends TestCase
             $this->createMock(UserService::class),
             $this->siteAccessService,
             $this->createMock(TransactionHandler::class),
-            $this->configResolver
+            $this->configResolver,
+            $this->createMock(DomainMapper::class)
         );
     }
 

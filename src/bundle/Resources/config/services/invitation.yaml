@@ -9,12 +9,19 @@ services:
     Ibexa\User\Invitation\InvitationService:
         arguments:
             $hashGenerator: '@Ibexa\User\Invitation\InvitationHashGenerator'
+            $domainMapper: '@Ibexa\User\Invitation\DomainMapper'
+            $handler: '@Ibexa\User\Invitation\Persistence\Handler'
 
     Ibexa\User\Invitation\InvitationHashGenerator: ~
-    Ibexa\User\Invitation\Persistence\Handler: ~
+    Ibexa\User\Invitation\Persistence\Handler:
+        arguments:
+            $mapper: '@Ibexa\User\Invitation\Persistence\Mapper'
+            $gateway: '@Ibexa\User\Invitation\Persistence\DoctrineGateway'
+
     Ibexa\User\Invitation\Persistence\DoctrineGateway: ~
     Ibexa\User\Invitation\MailSender: ~
     Ibexa\User\Invitation\Persistence\Mapper: ~
+    Ibexa\User\Invitation\DomainMapper: ~
 
     Ibexa\User\Permission\UserPermissionsLimitationType:
         tags:

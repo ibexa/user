@@ -16,6 +16,7 @@ use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
 use Ibexa\Contracts\Core\Repository\PermissionResolver;
 use Ibexa\Contracts\Core\Repository\UserService;
 use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
+use Ibexa\Contracts\User\Invitation\DomainMapper;
 use Ibexa\Contracts\User\Invitation\Exception\InvitationAlreadyExistsException;
 use Ibexa\Contracts\User\Invitation\Exception\UserAlreadyExistsException;
 use Ibexa\Contracts\User\Invitation\Invitation;
@@ -41,6 +42,8 @@ final class InvitationService implements InvitationServiceInterface
 
     private ConfigResolverInterface $configResolver;
 
+    private DomainMapper $domainMapper;
+
     public function __construct(
         PermissionResolver $permissionResolver,
         Handler $handler,
@@ -48,7 +51,8 @@ final class InvitationService implements InvitationServiceInterface
         UserService $userService,
         SiteAccessServiceInterface $siteAccessService,
         TransactionHandler $transactionHandler,
-        ConfigResolverInterface $configResolver
+        ConfigResolverInterface $configResolver,
+        DomainMapper $domainMapper
     ) {
         $this->handler = $handler;
         $this->hashGenerator = $hashGenerator;
@@ -57,6 +61,7 @@ final class InvitationService implements InvitationServiceInterface
         $this->userService = $userService;
         $this->transactionHandler = $transactionHandler;
         $this->configResolver = $configResolver;
+        $this->domainMapper = $domainMapper;
     }
 
     public function createInvitation(
@@ -115,7 +120,7 @@ final class InvitationService implements InvitationServiceInterface
             throw $e;
         }
 
-        return $invitation;
+        return $this->domainMapper->buildDomainObject($invitation);
     }
 
     public function isValid(Invitation $invitation): bool
@@ -144,16 +149,20 @@ final class InvitationService implements InvitationServiceInterface
 
     public function getInvitation(string $hash): Invitation
     {
-        return $this->handler->getInvitation($hash);
+        return $this->domainMapper->buildDomainObject(
+            $this->handler->getInvitation($hash)
+        );
     }
 
     public function getInvitationByEmail(string $email): Invitation
     {
-        return $this->handler->getInvitationForEmail($email);
+        return $this->domainMapper->buildDomainObject(
+            $this->handler->getInvitationForEmail($email)
+        );
     }
 
     public function markAsUsed(Invitation $invitation): void
     {
-        $this->handler->markAsUsed($invitation);
+        $this->handler->markAsUsed($invitation->getHash());
     }
 }

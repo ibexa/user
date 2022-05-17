@@ -11,11 +11,12 @@ namespace Ibexa\User\Invitation\Persistence;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\ParameterType;
 use Doctrine\DBAL\Query\QueryBuilder;
+use Ibexa\Contracts\User\Invitation\Persistence\Gateway;
 
 /**
  * @internal
  */
-final class DoctrineGateway
+final class DoctrineGateway implements Gateway
 {
     private const TABLE_USER_INVITATIONS = 'ibexa_user_invitations';
     private const TABLE_USER_INVITATIONS_ASSIGNMENTS = 'ibexa_user_invitations_assignments';

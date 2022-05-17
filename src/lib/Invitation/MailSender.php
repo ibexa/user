@@ -36,7 +36,7 @@ final class MailSender implements InvitationSender
             $this->configResolver->getParameter(
                 'user_invitation.templates.mail',
                 null,
-                $invitation->getSiteAccess()->name
+                $invitation->getSiteAccessIdentifier()
             )
         );
 
@@ -48,7 +48,7 @@ final class MailSender implements InvitationSender
         $from = $template->renderBlock('from', []) ?: $senderAddress;
         $body = $template->renderBlock('body', [
             'invite_hash' => $invitation->getHash(),
-            'siteaccess' => $invitation->getSiteAccess()->name,
+            'siteaccess' => $invitation->getSiteAccessIdentifier(),
             'invitation' => $invitation,
         ]);
 

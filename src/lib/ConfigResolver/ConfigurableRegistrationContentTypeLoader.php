@@ -9,9 +9,8 @@ declare(strict_types=1);
 namespace Ibexa\User\ConfigResolver;
 
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
-use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 use Ibexa\Contracts\Core\Repository\Repository;
-use Ibexa\Core\MVC\Symfony\string;
+use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 
 /**
  * Loads the registration content type from a configured, injected content type identifier.

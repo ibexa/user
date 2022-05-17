@@ -8,18 +8,20 @@ declare(strict_types=1);
 
 namespace Ibexa\User\Invitation\Persistence;
 
-use Ibexa\Contracts\User\Invitation\Invitation;
+use Ibexa\Contracts\User\Invitation\Persistence\Gateway;
+use Ibexa\Contracts\User\Invitation\Persistence\Handler as HandlerInterface;
+use Ibexa\Contracts\User\Invitation\Persistence\Invitation;
+use Ibexa\Contracts\User\Invitation\Persistence\Mapper;
 use Ibexa\Core\Base\Exceptions\NotFoundException;
 
-class Handler
+class Handler implements HandlerInterface
 {
     private DoctrineGateway $gateway;
 
-    /** @var \Ibexa\User\Invitation\Persistence\Mapper */
     private Mapper $mapper;
 
     public function __construct(
-        DoctrineGateway $gateway,
+        Gateway $gateway,
         Mapper $mapper
     ) {
         $this->gateway = $gateway;
@@ -78,8 +80,8 @@ class Handler
         return $this->gateway->invitationExistsForEmail($email);
     }
 
-    public function markAsUsed(Invitation $invitation): void
+    public function markAsUsed(string $hash): void
     {
-        $this->gateway->markAsUsed($invitation->getHash());
+        $this->gateway->markAsUsed($hash);
     }
 }

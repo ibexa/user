@@ -53,7 +53,7 @@ class UserInvitationController extends Controller
                 $invitation = $this->invitationService->createInvitation(
                     new InvitationCreateStruct(
                         $data->getEmail(),
-                        $data->getSiteaccess(),
+                        $data->getSiteaccess()->name,
                         $data->getUserGroup(),
                         $data->getRole(),
                         $data->getRoleLimitation(),

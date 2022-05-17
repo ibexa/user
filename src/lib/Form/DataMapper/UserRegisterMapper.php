@@ -61,7 +61,7 @@ class UserRegisterMapper
         /** @var \Ibexa\Contracts\User\Invitation\Invitation|null $invitation */
         $invitation = $this->params['invitation'] ?? null;
         $contentType = $this->contentTypeLoader->loadContentType(
-            $invitation ? $invitation->getSiteAccess() : null
+            $invitation ? $invitation->getSiteAccessIdentifier() : null
         );
 
         $data = new UserRegisterData([
