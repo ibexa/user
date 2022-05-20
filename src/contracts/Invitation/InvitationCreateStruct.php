@@ -13,17 +13,17 @@ use Ibexa\Contracts\Core\Repository\Values\User\Role;
 use Ibexa\Contracts\Core\Repository\Values\User\UserGroup;
 use Ibexa\Contracts\Core\Repository\Values\ValueObject;
 
-class InvitationCreateStruct extends ValueObject
+final class InvitationCreateStruct extends ValueObject
 {
-    protected string $email;
+    private string $email;
 
-    protected string $siteAccessIdentifier;
+    private string $siteAccessIdentifier;
 
-    protected ?UserGroup $userGroup;
+    private ?UserGroup $userGroup;
 
-    protected ?Role $role;
+    private ?Role $role;
 
-    protected ?RoleLimitation $roleLimitation;
+    private ?RoleLimitation $roleLimitation;
 
     public function __construct(
         string $email,
@@ -32,13 +32,13 @@ class InvitationCreateStruct extends ValueObject
         ?Role $role = null,
         ?RoleLimitation $roleLimitation = null
     ) {
-        parent::__construct([
-            'email' => $email,
-            'siteAccessIdentifier' => $siteAccessIdentifier,
-            'userGroup' => $userGroup,
-            'role' => $role,
-            'roleLimitation' => $roleLimitation,
-        ]);
+        parent::__construct();
+
+        $this->email = $email;
+        $this->siteAccessIdentifier = $siteAccessIdentifier;
+        $this->userGroup = $userGroup;
+        $this->role = $role;
+        $this->roleLimitation = $roleLimitation;
     }
 
     public function getEmail(): string

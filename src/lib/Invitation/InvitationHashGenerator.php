@@ -10,7 +10,7 @@ namespace Ibexa\User\Invitation;
 
 use Ibexa\Contracts\Core\HashGenerator;
 
-class InvitationHashGenerator implements HashGenerator
+final class InvitationHashGenerator implements HashGenerator
 {
     public function generate()
     {

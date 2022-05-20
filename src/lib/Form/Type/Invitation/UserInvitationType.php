@@ -18,7 +18,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class UserInvitationType extends AbstractType
+final class UserInvitationType extends AbstractType
 {
     public const LIMITATION_TYPE_NONE = 'none';
     public const LIMITATION_TYPE_SECTION = 'section';

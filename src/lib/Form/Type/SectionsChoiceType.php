@@ -15,7 +15,7 @@ use Symfony\Component\Form\ChoiceList\ChoiceList;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class SectionsChoiceType extends AbstractType
+final class SectionsChoiceType extends AbstractType
 {
     private SectionService $sectionService;
 

@@ -12,7 +12,7 @@ use Ibexa\Contracts\DoctrineSchema\Event\SchemaBuilderEvent;
 use Ibexa\Contracts\DoctrineSchema\SchemaBuilderEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class BuildSchemaSubscriber implements EventSubscriberInterface
+final class BuildSchemaSubscriber implements EventSubscriberInterface
 {
     private string $schemaFilePath;
 

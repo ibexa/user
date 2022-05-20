@@ -13,7 +13,7 @@ use Ibexa\Contracts\Core\Repository\Values\User\Limitation\SubtreeLimitation;
 use Ibexa\User\Form\Type\Invitation\UserInvitationType;
 use Symfony\Component\Form\DataTransformerInterface;
 
-class LimitationValueTransformer implements DataTransformerInterface
+final class LimitationValueTransformer implements DataTransformerInterface
 {
     public function transform($value): ?array
     {

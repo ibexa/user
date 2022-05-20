@@ -67,7 +67,7 @@ final class DoctrineGateway implements Gateway
             );
         $assigmentQuery->execute();
 
-        return $this->getInvitationForEmail($email);
+        return $this->getInvitationByEmail($email);
     }
 
     public function getInvitation(
@@ -105,7 +105,7 @@ final class DoctrineGateway implements Gateway
         return (bool) $statement->fetchOne();
     }
 
-    public function getInvitationForEmail(string $email)
+    public function getInvitationByEmail(string $email)
     {
         $query = $this->getSelectQuery();
         $query->where(

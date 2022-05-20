@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\User\Invitation;
 
+use DateTime;
 use Ibexa\Contracts\Core\Exception\InvalidArgumentException;
 use Ibexa\Contracts\Core\Repository\Repository;
 use Ibexa\Contracts\Core\Repository\RoleService;
@@ -15,11 +16,12 @@ use Ibexa\Contracts\Core\Repository\UserService;
 use Ibexa\Contracts\Core\Repository\Values\User\Limitation\RoleLimitation;
 use Ibexa\Contracts\Core\Repository\Values\User\Role;
 use Ibexa\Contracts\Core\Repository\Values\User\UserGroup;
+use Ibexa\Contracts\User\Invitation\DomainMapper as DomainMapperInterface;
 use Ibexa\Contracts\User\Invitation\Invitation;
 use Ibexa\Contracts\User\Invitation\Persistence\Invitation as PersistenceInvitation;
 use Ibexa\Core\Repository\Permission\LimitationService;
 
-final class DomainMapper implements \Ibexa\Contracts\User\Invitation\DomainMapper
+final class DomainMapper implements DomainMapperInterface
 {
     private UserService $userService;
 
@@ -57,7 +59,7 @@ final class DomainMapper implements \Ibexa\Contracts\User\Invitation\DomainMappe
         return new Invitation(
             $invitation->getEmail(),
             $invitation->getHash(),
-            new \DateTime('@' . $invitation->getCreatedAtTimestamp()),
+            new DateTime('@' . $invitation->getCreatedAtTimestamp()),
             $invitation->getSiteAccessIdentifier(),
             $invitation->isUsed(),
             $role,

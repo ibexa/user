@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\User\Invitation;
 
+use DateInterval;
 use DateTime;
 use Exception;
 use Ibexa\Contracts\Core\HashGenerator;
@@ -90,13 +91,11 @@ final class InvitationService implements InvitationServiceInterface
         ) {
             throw new InvitationAlreadyExistsException();
         }
-        $userExists = false;
         try {
-            $userExists = $this->userService->loadUserByEmail($createStruct->getEmail());
+            if ($this->userService->loadUserByEmail($createStruct->getEmail())) {
+                throw new UserAlreadyExistsException();
+            }
         } catch (NotFoundException $exception) {
-        }
-        if ($userExists) {
-            throw new UserAlreadyExistsException();
         }
 
         $roleLimitation = $createStruct->getRoleLimitation();
@@ -132,7 +131,7 @@ final class InvitationService implements InvitationServiceInterface
             $invitation->getSiteAccessIdentifier()
         );
 
-        if ($invitation->createdAt()->add(new \DateInterval($expirationTime)) <= $current) {
+        if ($invitation->createdAt()->add(new DateInterval($expirationTime)) <= $current) {
             return false;
         }
 

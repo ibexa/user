@@ -65,7 +65,7 @@ class Handler implements HandlerInterface
     public function getInvitationForEmail(
         string $email
     ): Invitation {
-        $invitationRow = $this->gateway->getInvitationForEmail($email);
+        $invitationRow = $this->gateway->getInvitationByEmail($email);
 
         if (empty($invitationRow)) {
             throw new NotFoundException('invitation', $email);

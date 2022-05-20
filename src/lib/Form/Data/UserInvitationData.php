@@ -12,13 +12,21 @@ use Ibexa\Contracts\Core\Repository\Values\User\Limitation\RoleLimitation;
 use Ibexa\Contracts\Core\Repository\Values\User\Role;
 use Ibexa\Contracts\Core\Repository\Values\User\UserGroup;
 use Ibexa\Core\MVC\Symfony\SiteAccess;
+use Symfony\Component\Validator\Constraints as Assert;
 
-class UserInvitationData
+final class UserInvitationData
 {
-    private ?string $email;
+    /**
+     * @Assert\NotBlank()
+     * @Assert\Email()
+     */
+    private string $email;
 
     private ?Role $role;
 
+    /**
+     * @Assert\NotBlank()
+     */
     private ?SiteAccess $siteaccess;
 
     private ?UserGroup $userGroup;
@@ -35,9 +43,9 @@ class UserInvitationData
     private ?array $limitationValue;
 
     public function __construct(
-        ?string $email = null,
+        string $email = null,
+        SiteAccess $siteaccess = null,
         ?Role $role = null,
-        ?SiteAccess $siteaccess = null,
         ?UserGroup $userGroup = null,
         ?array $sections = null,
         ?string $locationId = null,
@@ -76,12 +84,12 @@ class UserInvitationData
         $this->limitationValue = $limitationValue;
     }
 
-    public function getEmail(): ?string
+    public function getEmail(): string
     {
         return $this->email;
     }
 
-    public function setEmail(?string $email): void
+    public function setEmail(string $email): void
     {
         $this->email = $email;
     }
@@ -106,12 +114,12 @@ class UserInvitationData
         $this->userGroup = $userGroup;
     }
 
-    public function getSiteaccess(): ?SiteAccess
+    public function getSiteaccess(): SiteAccess
     {
         return $this->siteaccess;
     }
 
-    public function setSiteaccess(?SiteAccess $siteaccess): void
+    public function setSiteaccess(SiteAccess $siteaccess): void
     {
         $this->siteaccess = $siteaccess;
     }

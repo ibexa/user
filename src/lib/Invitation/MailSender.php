@@ -23,8 +23,11 @@ final class MailSender implements InvitationSender
 
     private Swift_Mailer $mailer;
 
-    public function __construct(Environment $twig, ConfigResolverInterface $configResolver, Swift_Mailer $mailer)
-    {
+    public function __construct(
+        Environment $twig,
+        ConfigResolverInterface $configResolver,
+        Swift_Mailer $mailer
+    ) {
         $this->twig = $twig;
         $this->configResolver = $configResolver;
         $this->mailer = $mailer;

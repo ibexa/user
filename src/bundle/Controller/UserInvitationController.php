@@ -19,7 +19,7 @@ use Ibexa\User\View\Invitation\FormView;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-class UserInvitationController extends Controller
+final class UserInvitationController extends Controller
 {
     private InvitationService $invitationService;
 
@@ -41,7 +41,7 @@ class UserInvitationController extends Controller
         $this->actionResultHandler = $actionResultHandler;
     }
 
-    public function inviteUser(Request $request)
+    public function inviteUser(Request $request): FormView
     {
         $form = $this->formFactory->create(UserInvitationType::class);
         $form->handleRequest($request);

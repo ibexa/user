@@ -14,7 +14,7 @@ use Symfony\Component\Form\ChoiceList\ChoiceList;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class SiteAccessChoiceType extends AbstractType
+final class SiteAccessChoiceType extends AbstractType
 {
     private SiteAccessServiceInterface $siteAccessService;
 

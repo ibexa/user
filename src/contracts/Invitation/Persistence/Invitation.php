@@ -10,25 +10,25 @@ namespace Ibexa\Contracts\User\Invitation\Persistence;
 
 use Ibexa\Contracts\Core\Repository\Values\ValueObject;
 
-class Invitation extends ValueObject
+final class Invitation extends ValueObject
 {
-    protected string $email;
+    private string $email;
 
-    protected string $hash;
+    private string $hash;
 
-    protected string $siteAccessIdentifier;
+    private string $siteAccessIdentifier;
 
-    protected string $createdAtTimestamp;
+    private string $createdAtTimestamp;
 
-    protected bool $isUsed;
+    private bool $isUsed;
 
-    protected ?int $roleId;
+    private ?int $roleId;
 
-    protected ?int $groupId;
+    private ?int $groupId;
 
-    protected ?string $limitation;
+    private ?string $limitation;
 
-    protected ?array $limitationValue;
+    private ?array $limitationValue;
 
     public function __construct(
         string $email,
@@ -41,17 +41,17 @@ class Invitation extends ValueObject
         ?string $limitation = null,
         ?array $limitationValue = null
     ) {
-        parent::__construct([
-            'email' => $email,
-            'hash' => $hash,
-            'siteAccessIdentifier' => $siteAccessIdentifier,
-            'createdAtTimestamp' => $createdAtTimestamp,
-            'isUsed' => $isUsed,
-            'roleId' => $roleId,
-            'groupId' => $groupId,
-            'limitation' => $limitation,
-            'limitationValue' => $limitationValue,
-        ]);
+        parent::__construct();
+
+        $this->email = $email;
+        $this->hash = $hash;
+        $this->siteAccessIdentifier = $siteAccessIdentifier;
+        $this->createdAtTimestamp = $createdAtTimestamp;
+        $this->isUsed = $isUsed;
+        $this->roleId = $roleId;
+        $this->groupId = $groupId;
+        $this->limitation = $limitation;
+        $this->limitationValue = $limitationValue;
     }
 
     public function getEmail(): string

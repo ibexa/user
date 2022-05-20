@@ -82,15 +82,18 @@ class UserRegisterController extends Controller
         return new ConfirmView();
     }
 
+    /**
+     * @return \Ibexa\User\View\Register\FormView|\Symfony\Component\HttpFoundation\Response
+     */
     public function registerFromInvitationAction(Request $request)
     {
-        $invite = $this->invitationService->getInvitation($request->get('inviteHash'));
+        $invitation = $this->invitationService->getInvitation($request->get('inviteHash'));
 
-        if (!$this->invitationService->isValid($invite)) {
+        if (!$this->invitationService->isValid($invitation)) {
             throw new UnauthorizedHttpException('You are not allowed to register a new account');
         }
 
-        $this->userRegisterMapper->setParam('invitation', $invite);
+        $this->userRegisterMapper->setParam('invitation', $invitation);
         $data = $this->userRegisterMapper->mapToFormData();
         $language = $data->mainLanguageCode;
 
@@ -109,7 +112,7 @@ class UserRegisterController extends Controller
         if ($form->isSubmitted() && $form->isValid() && null !== $form->getClickedButton()) {
             $this->userActionDispatcher->dispatchFormAction($form, $data, $form->getClickedButton()->getName());
             if ($response = $this->userActionDispatcher->getResponse()) {
-                $this->invitationService->markAsUsed($invite);
+                $this->invitationService->markAsUsed($invitation);
 
                 return $response;
             }

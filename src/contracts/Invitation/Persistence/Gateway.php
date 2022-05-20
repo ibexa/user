@@ -24,7 +24,7 @@ interface Gateway
 
     public function invitationExistsForEmail(string $email): bool;
 
-    public function getInvitationForEmail(string $email);
+    public function getInvitationByEmail(string $email);
 
     public function markAsUsed(string $hash): void;
 }
