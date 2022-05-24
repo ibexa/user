@@ -1,11 +1,12 @@
 <?php
 
-
+/**
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ */
 namespace Ibexa\User\Behat\Context;
 
-
 use Behat\Behat\Context\Context;
-
 use Ibexa\Contracts\Core\Repository\PermissionResolver;
 use Ibexa\Contracts\Core\Repository\UserService;
 use Ibexa\User\UserSetting\UserSettingService;
@@ -13,15 +14,17 @@ use Ibexa\User\UserSetting\UserSettingService;
 class UserSettingsContext implements Context
 {
     /**
-     * @var UserSettingService
+     * @var \Ibexa\User\UserSetting\UserSettingService
      */
     private $userSettingService;
+
     /**
-     * @var PermissionResolver
+     * @var \Ibexa\Contracts\Core\Repository\PermissionResolver
      */
     private $permissionResolver;
+
     /**
-     * @var UserService
+     * @var \Ibexa\Contracts\Core\Repository\UserService
      */
     private $userService;
 
