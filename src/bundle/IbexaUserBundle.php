@@ -13,9 +13,11 @@ use Ibexa\Bundle\User\DependencyInjection\Configuration\Parser\ForgotPassword;
 use Ibexa\Bundle\User\DependencyInjection\Configuration\Parser\Pagination;
 use Ibexa\Bundle\User\DependencyInjection\Configuration\Parser\ResetPassword;
 use Ibexa\Bundle\User\DependencyInjection\Configuration\Parser\Security;
+use Ibexa\Bundle\User\DependencyInjection\Configuration\Parser\UserInvitation;
 use Ibexa\Bundle\User\DependencyInjection\Configuration\Parser\UserPreferences;
 use Ibexa\Bundle\User\DependencyInjection\Configuration\Parser\UserRegistration;
 use Ibexa\Bundle\User\DependencyInjection\Configuration\Parser\UserSettingsUpdateView;
+use Ibexa\User\Permission\InvitationPolicyProvider;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
@@ -36,6 +38,9 @@ class IbexaUserBundle extends Bundle
         $core->addConfigParser(new UserSettingsUpdateView());
         $core->addConfigParser(new ForgotPassword());
         $core->addConfigParser(new ResetPassword());
+        $core->addConfigParser(new UserInvitation());
+
+        $core->addPolicyProvider(new InvitationPolicyProvider());
 
         $container->addCompilerPass(new UserSetting\ValueDefinitionPass());
         $container->addCompilerPass(new UserSetting\FormMapperPass());

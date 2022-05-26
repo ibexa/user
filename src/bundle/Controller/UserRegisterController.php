@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace Ibexa\Bundle\User\Controller;
 
 use Ibexa\ContentForms\Form\ActionDispatcher\ActionDispatcherInterface;
+use Ibexa\Contracts\User\Invitation\InvitationService;
 use Ibexa\Core\MVC\Symfony\Security\Authorization\Attribute;
 use Ibexa\User\Form\DataMapper\UserRegisterMapper;
 use Ibexa\User\Form\Type\UserRegisterType;
@@ -25,16 +26,16 @@ class UserRegisterController extends Controller
     /** @var \Ibexa\ContentForms\Form\ActionDispatcher\ActionDispatcherInterface */
     private $userActionDispatcher;
 
-    /**
-     * @param \Ibexa\User\Form\DataMapper\UserRegisterMapper $userRegisterMapper
-     * @param \Ibexa\ContentForms\Form\ActionDispatcher\ActionDispatcherInterface $userActionDispatcher
-     */
+    private InvitationService $invitationService;
+
     public function __construct(
         UserRegisterMapper $userRegisterMapper,
-        ActionDispatcherInterface $userActionDispatcher
+        ActionDispatcherInterface $userActionDispatcher,
+        InvitationService $invitationService
     ) {
         $this->userRegisterMapper = $userRegisterMapper;
         $this->userActionDispatcher = $userActionDispatcher;
+        $this->invitationService = $invitationService;
     }
 
     /**
@@ -53,7 +54,6 @@ class UserRegisterController extends Controller
         $data = $this->userRegisterMapper->mapToFormData();
         $language = $data->mainLanguageCode;
 
-        /** @var \Symfony\Component\Form\Form $form */
         $form = $this->createForm(
             UserRegisterType::class,
             $data,
@@ -80,6 +80,45 @@ class UserRegisterController extends Controller
     public function registerConfirmAction(): ConfirmView
     {
         return new ConfirmView();
+    }
+
+    /**
+     * @return \Ibexa\User\View\Register\FormView|\Symfony\Component\HttpFoundation\Response
+     */
+    public function registerFromInvitationAction(Request $request)
+    {
+        $invitation = $this->invitationService->getInvitation($request->get('inviteHash'));
+
+        if (!$this->invitationService->isValid($invitation)) {
+            throw new UnauthorizedHttpException('You are not allowed to register a new account');
+        }
+
+        $this->userRegisterMapper->setParam('invitation', $invitation);
+        $data = $this->userRegisterMapper->mapToFormData();
+        $language = $data->mainLanguageCode;
+
+        $form = $this->createForm(
+            UserRegisterType::class,
+            $data,
+            [
+                'languageCode' => $language,
+                'mainLanguageCode' => $language,
+                'intent' => 'invitation',
+            ]
+        );
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid() && null !== $form->getClickedButton()) {
+            $this->userActionDispatcher->dispatchFormAction($form, $data, $form->getClickedButton()->getName());
+            if ($response = $this->userActionDispatcher->getResponse()) {
+                $this->invitationService->markAsUsed($invitation);
+
+                return $response;
+            }
+        }
+
+        return new FormView(null, ['form' => $form->createView()]);
     }
 }
 

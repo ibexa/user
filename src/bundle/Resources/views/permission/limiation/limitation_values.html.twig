@@ -1,0 +1,5 @@
+{% block ez_limitation_hash_value %}
+    {% apply spaceless %}
+        {{ values|join(', ') }}
+    {% endapply %}
+{% endblock %}

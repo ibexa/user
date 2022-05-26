@@ -12,7 +12,19 @@ use Ibexa\Bundle\Core\DependencyInjection\Configuration\AbstractParser;
 use Ibexa\Bundle\Core\DependencyInjection\Configuration\SiteAccessAware\ContextualizerInterface;
 use Symfony\Component\Config\Definition\Builder\NodeBuilder;
 
-class UserRegistration extends AbstractParser
+/*
+ * Example configuration:
+ * ```yaml
+ * ibexa:
+ *   system:
+ *      default: # configuration per siteaccess or siteaccess group
+ *          user_invitation:
+ *              hash_expiration_time: P1D
+ *              templates:
+ *                  mail: "@@App/invitation/mail.html.twig"
+ * ```
+ */
+class UserInvitation extends AbstractParser
 {
     /**
      * Adds semantic configuration definition.
@@ -22,24 +34,19 @@ class UserRegistration extends AbstractParser
     public function addSemanticConfig(NodeBuilder $nodeBuilder)
     {
         $nodeBuilder
-            ->arrayNode('user_registration')
-                ->info('User registration configuration')
+            ->arrayNode('user_invitation')
+                ->info('User invitation configuration')
                 ->children()
-                    ->scalarNode('user_type_identifier')
-                        ->info('Content type identifier used for registration.')
-                        ->defaultValue('user')
-                    ->end()
-                    ->scalarNode('group_id')
-                        ->info('Content id of the user group where users who register are created.')
-                        ->defaultValue(11)
+                    ->scalarNode('hash_expiration_time')
+                        ->defaultValue('P2D')
                     ->end()
                     ->arrayNode('templates')
-                        ->info('User registration templates.')
+                        ->info('User invitation templates.')
                         ->children()
                             ->scalarNode('form')
                                 ->info('Template to use for registration form rendering.')
                             ->end()
-                            ->scalarNode('confirmation')
+                            ->scalarNode('mail')
                                 ->info('Template to use for registration confirmation rendering.')
                             ->end()
                         ->end()
@@ -50,44 +57,34 @@ class UserRegistration extends AbstractParser
 
     public function mapConfig(array &$scopeSettings, $currentScope, ContextualizerInterface $contextualizer)
     {
-        if (empty($scopeSettings['user_registration'])) {
+        if (empty($scopeSettings['user_invitation'])) {
             return;
         }
 
-        $settings = $scopeSettings['user_registration'];
+        $settings = $scopeSettings['user_invitation'];
 
-        if (!empty($settings['user_type_identifier'])) {
+        if (!empty($settings['hash_expiration_time'])) {
             $contextualizer->setContextualParameter(
-                'user_registration.user_type_identifier',
+                'user_invitation.hash_expiration_time',
                 $currentScope,
-                $settings['user_type_identifier']
-            );
-        }
-
-        if (!empty($settings['group_id'])) {
-            $contextualizer->setContextualParameter(
-                'user_registration.group_id',
-                $currentScope,
-                $settings['group_id']
+                $settings['hash_expiration_time']
             );
         }
 
         if (!empty($settings['templates']['form'])) {
             $contextualizer->setContextualParameter(
-                'user_registration.templates.form',
+                'user_invitation.templates.form',
                 $currentScope,
                 $settings['templates']['form']
             );
         }
 
-        if (!empty($settings['templates']['confirmation'])) {
+        if (!empty($settings['templates']['mail'])) {
             $contextualizer->setContextualParameter(
-                'user_registration.templates.confirmation',
+                'user_invitation.templates.mail',
                 $currentScope,
-                $settings['templates']['confirmation']
+                $settings['templates']['mail']
             );
         }
     }
 }
-
-class_alias(UserRegistration::class, 'EzSystems\EzPlatformUserBundle\DependencyInjection\Configuration\Parser\UserRegistration');

@@ -43,3 +43,7 @@ services:
         calls:
             - [ setContainer, [ '@service_container' ] ]
         tags: [controller.service_arguments]
+
+    Ibexa\Bundle\User\Controller\UserInvitationController:
+        autowire: true
+        tags: [ controller.service_arguments ]

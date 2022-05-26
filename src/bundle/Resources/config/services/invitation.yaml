@@ -1,0 +1,35 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    Ibexa\Contracts\User\Invitation\InvitationService: '@Ibexa\User\Invitation\InvitationService'
+
+    Ibexa\User\Invitation\InvitationService:
+        arguments:
+            $hashGenerator: '@Ibexa\User\Invitation\InvitationHashGenerator'
+            $domainMapper: '@Ibexa\User\Invitation\DomainMapper'
+            $handler: '@Ibexa\User\Invitation\Persistence\Handler'
+
+    Ibexa\User\Invitation\InvitationHashGenerator: ~
+    Ibexa\User\Invitation\Persistence\Handler:
+        arguments:
+            $mapper: '@Ibexa\User\Invitation\Persistence\Mapper'
+            $gateway: '@Ibexa\User\Invitation\Persistence\DoctrineGateway'
+
+    Ibexa\User\Invitation\Persistence\DoctrineGateway: ~
+    Ibexa\User\Invitation\MailSender: ~
+    Ibexa\User\Invitation\Persistence\Mapper: ~
+    Ibexa\User\Invitation\DomainMapper: ~
+
+    Ibexa\Contracts\User\Invitation\InvitationSender: '@Ibexa\User\Invitation\MailSender'
+
+    Ibexa\User\Permission\UserPermissionsLimitationType:
+        tags:
+            - { name: ibexa.permissions.limitation_type, alias: UserPermissions }
+
+    Ibexa\User\Permission\UserPermissionsLimitationHandler:
+        parent: Ibexa\Core\Persistence\Legacy\User\Role\LimitationHandler
+        tags:
+            - { name: ibexa.storage.legacy.role.limitation.handler }

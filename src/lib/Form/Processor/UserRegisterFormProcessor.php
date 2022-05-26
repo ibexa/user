@@ -8,6 +8,7 @@ namespace Ibexa\User\Form\Processor;
 
 use Ibexa\ContentForms\Event\FormActionEvent;
 use Ibexa\Contracts\Core\Repository\Repository;
+use Ibexa\Contracts\Core\Repository\RoleService;
 use Ibexa\Contracts\Core\Repository\UserService;
 use Ibexa\User\Form\Data\UserRegisterData;
 use Ibexa\User\Form\UserFormEvents;
@@ -29,11 +30,18 @@ class UserRegisterFormProcessor implements EventSubscriberInterface
     /** @var \Ibexa\Core\Repository\Repository */
     private $repository;
 
-    public function __construct(Repository $repository, UserService $userService, RouterInterface $router)
-    {
+    private RoleService $roleService;
+
+    public function __construct(
+        Repository $repository,
+        UserService $userService,
+        RouterInterface $router,
+        RoleService $roleService
+    ) {
         $this->userService = $userService;
         $this->urlGenerator = $router;
         $this->repository = $repository;
+        $this->roleService = $roleService;
     }
 
     public static function getSubscribedEvents()
@@ -79,7 +87,12 @@ class UserRegisterFormProcessor implements EventSubscriberInterface
 
         return $this->repository->sudo(
             function () use ($data) {
-                return $this->userService->createUser($data, $data->getParentGroups());
+                $user = $this->userService->createUser($data, $data->getParentGroups());
+                if ($data->getRole() !== null) {
+                    $this->roleService->assignRoleToUser($data->getRole(), $user, $data->getRoleLimitation());
+                }
+
+                return $user;
             }
         );
     }

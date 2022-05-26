@@ -84,6 +84,7 @@ class ViewTemplatesListener implements EventSubscriberInterface
             View\UserSettings\ListView::class => $this->configResolver->getParameter('user_settings.templates.list'),
             View\Register\FormView::class => $this->configResolver->getParameter('user_registration.templates.form'),
             View\Register\ConfirmView::class => $this->configResolver->getParameter('user_registration.templates.confirmation'),
+            View\Invitation\FormView::class => $this->configResolver->getParameter('user_invitation.templates.form'),
         ];
     }
 }
