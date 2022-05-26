@@ -110,7 +110,7 @@ final class InvitationService implements InvitationServiceInterface
                 $role ? $role->id : null,
                 $userGroup ? $userGroup->id : null,
                 $roleLimitation ? $roleLimitation->getIdentifier() : null,
-                $roleLimitation ? json_encode($roleLimitation->limitationValues) : null
+                $roleLimitation ? json_encode($roleLimitation->limitationValues, JSON_THROW_ON_ERROR) : null
             );
 
             $this->transactionHandler->commit();

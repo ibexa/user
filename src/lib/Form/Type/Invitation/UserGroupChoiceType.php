@@ -14,7 +14,7 @@ use Ibexa\Contracts\Core\Repository\SearchService;
 use Ibexa\Contracts\Core\Repository\UserService;
 use Ibexa\User\Form\ChoiceList\Loader\UserGroupsChoiceLoader;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\ChoiceList\ChoiceList;
+use Symfony\Component\Form\ChoiceList\Loader\CallbackChoiceLoader;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -44,10 +44,7 @@ final class UserGroupChoiceType extends AbstractType
     {
         $resolver
             ->setDefaults([
-                'choice_loader' => ChoiceList::lazy(
-                    $this,
-                    fn () => $this->loadFilteredGroups(),
-                ),
+                'choice_loader' => new CallbackChoiceLoader([$this, 'loadFilteredGroups']),
                 'choice_label' => 'name',
                 'choice_name' => 'id',
                 'choice_value' => 'id',

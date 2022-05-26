@@ -28,7 +28,6 @@ class InvitationServiceTest extends TestCase
 
     protected function setUp(): void
     {
-        parent::setUp();
         $this->siteAccessService = $this->createMock(SiteAccessServiceInterface::class);
         $this->configResolver = $this->createMock(ConfigResolverInterface::class);
 

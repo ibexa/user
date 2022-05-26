@@ -6,21 +6,27 @@
  */
 declare(strict_types=1);
 
-namespace Ibexa\User\Form\Type;
+namespace Ibexa\User\Form\Type\Invitation;
 
-use Ibexa\Core\MVC\Symfony\SiteAccess\SiteAccessServiceInterface;
+use Ibexa\Contracts\Core\Repository\Repository;
+use Ibexa\Contracts\Core\Repository\SectionService;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\ChoiceList\ChoiceList;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-final class SiteAccessChoiceType extends AbstractType
+final class SectionsChoiceType extends AbstractType
 {
-    private SiteAccessServiceInterface $siteAccessService;
+    private SectionService $sectionService;
 
-    public function __construct(SiteAccessServiceInterface $siteAccessService)
-    {
-        $this->siteAccessService = $siteAccessService;
+    private Repository $repository;
+
+    public function __construct(
+        Repository $repository,
+        SectionService $sectionService
+    ) {
+        $this->sectionService = $sectionService;
+        $this->repository = $repository;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
@@ -29,11 +35,10 @@ final class SiteAccessChoiceType extends AbstractType
             ->setDefaults([
                 'choice_loader' => ChoiceList::lazy(
                     $this,
-                    fn () => $this->siteAccessService->getAll(),
+                    fn () => $this->repository->sudo(fn () => $this->sectionService->loadSections())
                 ),
                 'choice_label' => 'name',
-                'choice_name' => 'name',
-                'choice_value' => 'name',
+                'choice_value' => 'id',
             ]);
     }
 

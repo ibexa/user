@@ -12,7 +12,7 @@ use Ibexa\Contracts\Core\Repository\PermissionResolver;
 use Ibexa\Contracts\Core\Repository\RoleService;
 use Ibexa\Core\Repository\Repository;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\ChoiceList\ChoiceList;
+use Symfony\Component\Form\ChoiceList\Loader\CallbackChoiceLoader;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -38,10 +38,7 @@ final class RoleChoiceType extends AbstractType
     {
         $resolver
             ->setDefaults([
-                'choice_loader' => ChoiceList::lazy(
-                    $this,
-                    fn () => $this->loadFilteredRoles(),
-                ),
+                'choice_loader' => new CallbackChoiceLoader([$this, 'loadFilteredRoles']),
                 'choice_label' => 'identifier',
                 'choice_name' => 'id',
                 'choice_value' => 'id',

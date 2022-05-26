@@ -8,8 +8,6 @@ namespace Ibexa\User\Form\Type\Invitation;
 
 use Ibexa\User\Form\Data\UserInvitationData;
 use Ibexa\User\Form\DataTransformer\LimitationValueTransformer;
-use Ibexa\User\Form\Type\SectionsChoiceType;
-use Ibexa\User\Form\Type\SiteAccessChoiceType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;

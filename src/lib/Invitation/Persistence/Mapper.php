@@ -23,7 +23,9 @@ final class Mapper implements \Ibexa\Contracts\User\Invitation\Persistence\Mappe
             $row['role_id'] !== null ? (int) $row['role_id'] : null,
             $row['user_group_id'] !== null ? (int) $row['user_group_id'] : null,
             $row['limitation_type'],
-            $row['limitation_value'] !== null ? json_decode($row['limitation_value'], true) : null
+            $row['limitation_value'] !== null
+                ? json_decode($row['limitation_value'], true, 512, JSON_THROW_ON_ERROR)
+                : null
         );
     }
 }
