@@ -59,7 +59,7 @@ final class UserGroupChoiceType extends AbstractType
         return ChoiceType::class;
     }
 
-    protected function loadFilteredGroups(): array
+    public function loadFilteredGroups(): array
     {
         return array_filter(
             (new UserGroupsChoiceLoader(

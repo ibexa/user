@@ -45,7 +45,7 @@ final class RoleChoiceType extends AbstractType
             ]);
     }
 
-    protected function loadFilteredRoles(): array
+    public function loadFilteredRoles(): array
     {
         return array_filter(
             $this->repository->sudo(fn () => $this->roleService->loadRoles()),
