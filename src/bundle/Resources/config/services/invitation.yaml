@@ -23,6 +23,8 @@ services:
     Ibexa\User\Invitation\Persistence\Mapper: ~
     Ibexa\User\Invitation\DomainMapper: ~
 
+    Ibexa\Contracts\User\Invitation\InvitationSender: '@Ibexa\User\Invitation\MailSender'
+
     Ibexa\User\Permission\UserPermissionsLimitationType:
         tags:
             - { name: ibexa.permissions.limitation_type, alias: UserPermissions }

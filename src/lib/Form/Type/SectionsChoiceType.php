@@ -19,7 +19,6 @@ final class SectionsChoiceType extends AbstractType
 {
     private SectionService $sectionService;
 
-    /** @var \Ibexa\Contracts\Core\Repository\Repository */
     private Repository $repository;
 
     public function __construct(

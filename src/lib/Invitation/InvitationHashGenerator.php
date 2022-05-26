@@ -12,8 +12,15 @@ use Ibexa\Contracts\Core\HashGenerator;
 
 final class InvitationHashGenerator implements HashGenerator
 {
+    private int $length;
+
+    public function __construct(int $length = 16)
+    {
+        $this->length = $length;
+    }
+
     public function generate()
     {
-        return bin2hex(random_bytes(16));
+        return bin2hex(random_bytes($this->length));
     }
 }

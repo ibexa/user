@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\Contracts\User\Invitation;
 
-use DateTime;
+use DateTimeInterface;
 use Ibexa\Contracts\Core\Repository\Values\User\Limitation\RoleLimitation;
 use Ibexa\Contracts\Core\Repository\Values\User\Role;
 use Ibexa\Contracts\Core\Repository\Values\User\UserGroup;
@@ -20,7 +20,7 @@ final class Invitation extends ValueObject
 
     private string $hash;
 
-    private DateTime $createdAt;
+    private DateTimeInterface $createdAt;
 
     private string $siteAccessIdentifier;
 

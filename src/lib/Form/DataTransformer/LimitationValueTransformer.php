@@ -20,9 +20,13 @@ final class LimitationValueTransformer implements DataTransformerInterface
         return $value;
     }
 
+    /**
+     * @param \Ibexa\User\Form\Data\UserInvitationData $value
+     *
+     * @return \Ibexa\User\Form\Data\UserInvitationData|null
+     */
     public function reverseTransform($value)
     {
-        /** @var \Ibexa\User\Form\Data\UserInvitationData $value */
         if (null === $value) {
             return null;
         }
