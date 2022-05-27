@@ -35,7 +35,7 @@ final class Invitation extends ValueObject
     public function __construct(
         string $email,
         string $hash,
-        DateTime $createdAt,
+        DateTimeInterface $createdAt,
         string $siteAccessIdentifier,
         bool $used,
         ?Role $role = null,
@@ -69,7 +69,7 @@ final class Invitation extends ValueObject
         return $this->siteAccessIdentifier;
     }
 
-    public function createdAt(): DateTime
+    public function createdAt(): DateTimeInterface
     {
         return $this->createdAt;
     }
