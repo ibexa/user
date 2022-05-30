@@ -58,14 +58,16 @@ class UserRegisterType extends AbstractType
 
         $builder->get('fieldsData')->addEventListener(
             FormEvents::PRE_SET_DATA,
-            function (FormEvent $event) use ($allowedFieldsId) {
+            static function (FormEvent $event) use ($allowedFieldsId) {
                 $fieldsData = $event->getForm();
                 foreach ($fieldsData as $fieldData) {
                     if (!in_array($fieldData->getName(), $allowedFieldsId, true)) {
                         $fieldsData->remove($fieldData->getName());
                     }
                 }
-        }, -10);
+            },
+            -10
+        );
     }
 
     public function configureOptions(OptionsResolver $resolver)
