@@ -19,6 +19,7 @@
         "psr-4": {
             "Ibexa\\Tests\\Bundle\\User\\": "tests/bundle/",
             "Ibexa\\Tests\\User\\": "tests/lib/",
+            "Ibexa\\Tests\\Integration\\User\\": "tests/integration/",
             "EzSystems\\EzPlatformUserBundle\\Tests\\": "tests/bundle/",
             "EzSystems\\EzPlatformUser\\Tests\\": "tests/lib/"
         }
@@ -52,6 +53,8 @@
         "ibexa/http-cache": "~4.2.0@dev",
         "ibexa/fieldtype-richtext": "~4.2.0@dev",
         "ibexa/rest": "~4.2.0@dev",
+        "league/flysystem-memory": "^1.0",
+        "symfony/proxy-manager-bridge": "^5.0",
         "friendsofphp/php-cs-fixer": "^3.0",
         "ibexa/code-style": "^1.0",
         "phpunit/phpunit": "^8.2",
