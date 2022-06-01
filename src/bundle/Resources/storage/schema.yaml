@@ -59,19 +59,19 @@ tables:
                 nullable: true
             limitation_type:
                 type: string
-                nullable: false
+                nullable: true
                 length: 255
             limitation_value:
                 type: string
-                nullable: false
+                nullable: true
                 length: 255
-            foreignKeys:
-                ibexa_user_invitations_assignments_ibexa_user_invitations_id_fk:
-                    foreignTable: ibexa_user_invitations
-                    fields:
-                        - invitation_id
-                    foreignFields:
-                        - id
-                    options:
-                        onDelete: CASCADE
-                        onUpdate: CASCADE
+        foreignKeys:
+            ibexa_user_invitations_assignments_ibexa_user_invitations_id_fk:
+                foreignTable: ibexa_user_invitations
+                fields:
+                    - invitation_id
+                foreignFields:
+                    - id
+                options:
+                    onDelete: CASCADE
+                    onUpdate: CASCADE

@@ -8,6 +8,8 @@ declare(strict_types=1);
 
 namespace Ibexa\Contracts\User\Invitation;
 
+use Ibexa\Contracts\User\Invitation\Query\InvitationFilter;
+
 interface InvitationService
 {
     public function createInvitation(
@@ -21,4 +23,7 @@ interface InvitationService
     public function getInvitationByEmail(string $email): Invitation;
 
     public function markAsUsed(Invitation $invitation): void;
+
+    /** @return \Ibexa\Contracts\User\Invitation\Invitation[] */
+    public function findInvitations(?InvitationFilter $invitationsFilter = null): array;
 }
