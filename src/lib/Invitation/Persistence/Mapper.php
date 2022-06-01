@@ -18,7 +18,7 @@ final class Mapper implements \Ibexa\Contracts\User\Invitation\Persistence\Mappe
             $row['email'],
             $row['hash'],
             $row['site_access_name'],
-            $row['creation_date'],
+            (int)$row['creation_date'],
             (bool)$row['used'],
             $row['role_id'] !== null ? (int) $row['role_id'] : null,
             $row['user_group_id'] !== null ? (int) $row['user_group_id'] : null,
