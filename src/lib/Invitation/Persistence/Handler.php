@@ -8,10 +8,10 @@ declare(strict_types=1);
 
 namespace Ibexa\User\Invitation\Persistence;
 
-use Ibexa\Contracts\User\Invitation\Persistence\InvitationUpdateStruct;
 use Ibexa\Contracts\User\Invitation\Persistence\Gateway;
 use Ibexa\Contracts\User\Invitation\Persistence\Handler as HandlerInterface;
 use Ibexa\Contracts\User\Invitation\Persistence\Invitation;
+use Ibexa\Contracts\User\Invitation\Persistence\InvitationUpdateStruct;
 use Ibexa\Contracts\User\Invitation\Persistence\Mapper;
 use Ibexa\Contracts\User\Invitation\Query\InvitationFilter;
 use Ibexa\Core\Base\Exceptions\NotFoundException;
@@ -84,7 +84,10 @@ class Handler implements HandlerInterface
 
     public function markAsUsed(string $hash): void
     {
-        $this->gateway->markAsUsed($hash);
+        $updateStruct = new InvitationUpdateStruct();
+        $updateStruct->setIsUsed(true);
+
+        $this->gateway->updateInvitation($hash, $updateStruct);
     }
 
     public function findInvitations(?InvitationFilter $invitationsFilter = null): array

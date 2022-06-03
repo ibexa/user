@@ -11,8 +11,8 @@ namespace Ibexa\User\Invitation\Persistence;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\ParameterType;
 use Doctrine\DBAL\Query\QueryBuilder;
-use Ibexa\Contracts\User\Invitation\Persistence\InvitationUpdateStruct;
 use Ibexa\Contracts\User\Invitation\Persistence\Gateway;
+use Ibexa\Contracts\User\Invitation\Persistence\InvitationUpdateStruct;
 use Ibexa\Contracts\User\Invitation\Query\InvitationFilter;
 
 /**
@@ -145,21 +145,6 @@ final class DoctrineGateway implements Gateway
                 't2',
                 't1.id = t2.invitation_id'
             );
-    }
-
-    public function markAsUsed(string $hash): void
-    {
-        $query = $this->connection->createQueryBuilder();
-        $query
-            ->update(self::TABLE_USER_INVITATIONS)
-            ->set('used', 1)
-            ->where(
-                $query->expr()->eq(
-                    'hash',
-                    $query->createPositionalParameter($hash)
-                )
-            );
-        $query->execute();
     }
 
     public function findInvitations(?InvitationFilter $filter = null): array

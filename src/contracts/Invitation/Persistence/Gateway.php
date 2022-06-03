@@ -41,8 +41,6 @@ interface Gateway
 
     public function getInvitationByEmail(string $email);
 
-    public function markAsUsed(string $hash): void;
-
     /**
      * @return array<array{
      *     email: string,
