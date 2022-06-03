@@ -57,4 +57,6 @@ interface Gateway
      * }>
      */
     public function findInvitations(?InvitationFilter $filter = null): array;
+
+    public function updateInvitation(string $hash, InvitationUpdateStruct $updateStruct): void;
 }

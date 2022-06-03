@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\User\Invitation\Persistence;
 
+use Ibexa\Contracts\User\Invitation\Persistence\InvitationUpdateStruct;
 use Ibexa\Contracts\User\Invitation\Persistence\Gateway;
 use Ibexa\Contracts\User\Invitation\Persistence\Handler as HandlerInterface;
 use Ibexa\Contracts\User\Invitation\Persistence\Invitation;
@@ -95,5 +96,13 @@ class Handler implements HandlerInterface
         }
 
         return $invitations;
+    }
+
+    public function refreshInvitation(string $hash): void
+    {
+        $updateStruct = new InvitationUpdateStruct();
+        $updateStruct->setCreatedAt(time());
+
+        $this->gateway->updateInvitation($hash, $updateStruct);
     }
 }

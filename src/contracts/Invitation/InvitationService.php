@@ -38,4 +38,6 @@ interface InvitationService
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
      */
     public function findInvitations(?InvitationFilter $invitationsFilter = null): array;
+
+    public function refreshInvitation(Invitation $invitation): void;
 }
