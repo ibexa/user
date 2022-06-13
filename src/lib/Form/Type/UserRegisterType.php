@@ -50,7 +50,7 @@ class UserRegisterType extends AbstractType
     {
         $allowedFieldsId = $this
             ->configResolver
-            ->getParameter('user_registration.form.allowed_field_definitions_id');
+            ->getParameter('user_registration.form.allowed_field_definitions_identifiers');
 
         $builder
             ->add('register', SubmitType::class, ['label' => /** @Desc("Register") */ 'user.register_button'])

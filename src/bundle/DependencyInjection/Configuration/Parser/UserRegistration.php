@@ -47,7 +47,7 @@ class UserRegistration extends AbstractParser
                     ->arrayNode('form')
                         ->info('User registration form configuration.')
                         ->children()
-                            ->arrayNode('allowed_field_definitions_id')
+                            ->arrayNode('allowed_field_definitions_identifiers')
                             ->requiresAtLeastOneElement()
                             ->defaultValue(['user_account'])
                             ->prototype('scalar')->end()
@@ -97,11 +97,11 @@ class UserRegistration extends AbstractParser
             );
         }
 
-        if (!empty($settings['form']['allowed_field_definitions_id'])) {
+        if (!empty($settings['form']['allowed_field_definitions_identifiers'])) {
             $contextualizer->setContextualParameter(
-                'user_registration.form.allowed_field_definitions_id',
+                'user_registration.form.allowed_field_definitions_identifiers',
                 $currentScope,
-                $settings['form']['allowed_field_definitions_id']
+                $settings['form']['allowed_field_definitions_identifiers']
             );
         }
     }

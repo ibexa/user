@@ -13,6 +13,7 @@ use Ibexa\Contracts\Core\Repository\Exceptions\NotImplementedException;
 use Ibexa\Contracts\Core\Repository\Values\User\Limitation as APILimitationValue;
 use Ibexa\Contracts\Core\Repository\Values\User\Role;
 use Ibexa\Contracts\Core\Repository\Values\User\UserGroup;
+use Ibexa\Contracts\Core\Repository\Values\Content\Content;
 use Ibexa\Contracts\Core\Repository\Values\User\UserReference as APIUserReference;
 use Ibexa\Contracts\Core\Repository\Values\ValueObject;
 use Ibexa\Core\Base\Exceptions\InvalidArgumentException;
@@ -154,7 +155,7 @@ class UserPermissionsLimitationType extends AbstractPersistenceLimitationType im
             throw new InvalidArgumentException('$value', 'Must be of type: APISiteAccessLimitation');
         }
 
-        if (!$object instanceof Role && !$object instanceof UserGroup) {
+        if (!$object instanceof Role && !$object instanceof Content) {
             return self::ACCESS_ABSTAIN;
         }
 
@@ -164,7 +165,7 @@ class UserPermissionsLimitationType extends AbstractPersistenceLimitationType im
             return self::ACCESS_GRANTED;
         }
 
-        if ($object instanceof UserGroup
+        if ($object instanceof Content
             && ($value->limitationValues['user_groups'] === null || in_array($object->id, $value->limitationValues['user_groups']))
         ) {
             return self::ACCESS_GRANTED;
