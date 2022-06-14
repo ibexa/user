@@ -48,17 +48,17 @@ class UserRegisterType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $allowedFieldsId = $this
-            ->configResolver
-            ->getParameter('user_registration.form.allowed_field_definitions_identifiers');
-
         $builder
             ->add('register', SubmitType::class, ['label' => /** @Desc("Register") */ 'user.register_button'])
             ->addEventSubscriber(new UserFieldsSubscriber());
 
         $builder->get('fieldsData')->addEventListener(
             FormEvents::PRE_SET_DATA,
-            static function (FormEvent $event) use ($allowedFieldsId) {
+            function (FormEvent $event): void {
+                $allowedFieldsId = $this
+                    ->configResolver
+                    ->getParameter('user_registration.form.allowed_field_definitions_identifiers');
+
                 $fieldsData = $event->getForm();
                 foreach ($fieldsData as $fieldData) {
                     if (!in_array($fieldData->getName(), $allowedFieldsId, true)) {
