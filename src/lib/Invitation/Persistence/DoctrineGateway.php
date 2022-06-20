@@ -174,33 +174,33 @@ final class DoctrineGateway implements Gateway
 
         $filters = [];
         if ($filter->getRole() !== null) {
-            $filters[] =
-                $query->expr()->eq(
-                    't2.role_id',
-                    $query->createPositionalParameter($filter->getRole()->id)
+            $query
+                ->andWhere(
+                    $query->expr()->eq(
+                        't2.role_id',
+                        $query->createPositionalParameter($filter->getRole()->id)
+                    )
                 );
         }
 
         if ($filter->getUserGroup() !== null) {
-            $filters[] =
-                $query->expr()->eq(
-                    't2.user_group_id',
-                    $query->createPositionalParameter($filter->getUserGroup()->id)
+            $query
+                ->andWhere(
+                    $query->expr()->eq(
+                        't2.user_group_id',
+                        $query->createPositionalParameter($filter->getUserGroup()->id)
+                    )
                 );
         }
 
         if ($filter->getIsUsed() !== null) {
-            $filters[] =
-                $query->expr()->eq(
-                    't1.used',
-                    $query->createPositionalParameter($filter->getIsUsed())
+            $query
+                ->andWhere(
+                    $query->expr()->eq(
+                        't1.used',
+                        $query->createPositionalParameter($filter->getIsUsed())
+                    )
                 );
-        }
-
-        if (!empty($filters)) {
-            $query->where(
-                $expr->and(...$filters)
-            );
         }
 
         $statement = $query->execute();

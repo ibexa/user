@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\Tests\Integration\User\Invitation;
 
+use Ibexa\Contracts\Core\Repository\RoleService;
 use Ibexa\Contracts\Core\Repository\UserService;
 use Ibexa\Contracts\User\Invitation\Exception\InvitationAlreadyExistsException;
 use Ibexa\Contracts\User\Invitation\Exception\UserAlreadyExistsException;
@@ -22,11 +23,14 @@ final class InvitationServiceTest extends IbexaKernelTestCase
 
     private UserService $userService;
 
+    private RoleService $roleService;
+
     protected function setUp(): void
     {
         self::setAdministratorUser();
 
         $this->invitationService = self::getInvitationService();
+        $this->roleService = self::getRoleService();
         $this->userService = self::getUserService();
     }
 
@@ -92,6 +96,30 @@ final class InvitationServiceTest extends IbexaKernelTestCase
 
         $editorInvitations = $this->invitationService->findInvitations(
             new InvitationFilter(null, $editorsGroup)
+        );
+
+        self::assertCount(1, $editorInvitations);
+    }
+
+    public function testFindInvitationsWithUserGroupAndRoleFilter(): void
+    {
+        $editorsGroup = $this->userService->loadUserGroupByRemoteId('3c160cca19fb135f83bd02d911f04db2');
+        $role = $this->roleService->loadRoleByIdentifier('Anonymous');
+
+        $this->invitationService->createInvitation(
+            new InvitationCreateStruct(
+                'anonymous_editor@ibexa.co',
+                'admin',
+                $editorsGroup,
+                $role
+            )
+        );
+
+        $invitations = $this->invitationService->findInvitations();
+        self::assertCount(3, $invitations);
+
+        $editorInvitations = $this->invitationService->findInvitations(
+            new InvitationFilter($role, $editorsGroup)
         );
 
         self::assertCount(1, $editorInvitations);
