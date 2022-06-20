@@ -16,6 +16,8 @@ use Ibexa\Contracts\User\Invitation\InvitationCreateStruct;
 use Ibexa\Contracts\User\Invitation\InvitationService;
 use Ibexa\Contracts\User\Invitation\Query\InvitationFilter;
 use Ibexa\Tests\Integration\User\IbexaKernelTestCase;
+use Ibexa\User\Invitation\Persistence\Handler;
+use Symfony\Bridge\PhpUnit\ClockMock;
 
 final class InvitationServiceTest extends IbexaKernelTestCase
 {
@@ -145,6 +147,11 @@ final class InvitationServiceTest extends IbexaKernelTestCase
 
     public function testRefreshInvitation(): void
     {
+        ClockMock::register(Handler::class);
+        ClockMock::register(__CLASS__);
+
+        ClockMock::withClockMock(true);
+
         $invitation = $this->invitationService->createInvitation(
             new InvitationCreateStruct(
                 'refresh@ibexa.co',
@@ -157,5 +164,6 @@ final class InvitationServiceTest extends IbexaKernelTestCase
         $refreshed = $this->invitationService->getInvitation($invitation->getHash());
 
         self::assertGreaterThan($invitation->createdAt()->getTimestamp(), $refreshed->createdAt()->getTimestamp());
+        ClockMock::withClockMock(false);
     }
 }
