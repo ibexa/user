@@ -12,6 +12,12 @@ use Ibexa\Contracts\User\Invitation\Query\InvitationFilter;
 
 interface InvitationService
 {
+    /**
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\BadStateException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
+     * @throws \Ibexa\Core\Base\Exceptions\UnauthorizedException
+     * @throws \JsonException
+     */
     public function createInvitation(
         InvitationCreateStruct $createStruct
     ): Invitation;
@@ -24,6 +30,12 @@ interface InvitationService
 
     public function markAsUsed(Invitation $invitation): void;
 
-    /** @return \Ibexa\Contracts\User\Invitation\Invitation[] */
+    /**
+     * @return \Ibexa\Contracts\User\Invitation\Invitation[]
+     *
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\BadStateException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
+     * @throws \Ibexa\Core\Base\Exceptions\UnauthorizedException
+     */
     public function findInvitations(?InvitationFilter $invitationsFilter = null): array;
 }
