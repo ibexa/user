@@ -23,6 +23,7 @@ use Ibexa\Contracts\User\Invitation\Exception\UserAlreadyExistsException;
 use Ibexa\Contracts\User\Invitation\Invitation;
 use Ibexa\Contracts\User\Invitation\InvitationCreateStruct;
 use Ibexa\Contracts\User\Invitation\InvitationService as InvitationServiceInterface;
+use Ibexa\Contracts\User\Invitation\Query\InvitationFilter;
 use Ibexa\Core\Base\Exceptions\UnauthorizedException;
 use Ibexa\Core\MVC\Symfony\SiteAccess\SiteAccessServiceInterface;
 use Ibexa\User\Invitation\Persistence\Handler;
@@ -65,6 +66,12 @@ final class InvitationService implements InvitationServiceInterface
         $this->domainMapper = $domainMapper;
     }
 
+    /**
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\BadStateException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
+     * @throws \JsonException
+     */
     public function createInvitation(
         InvitationCreateStruct $createStruct
     ): Invitation {
@@ -163,5 +170,37 @@ final class InvitationService implements InvitationServiceInterface
     public function markAsUsed(Invitation $invitation): void
     {
         $this->handler->markAsUsed($invitation->getHash());
+    }
+
+    /**
+     * @return \Ibexa\Contracts\User\Invitation\Invitation[]
+     *
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\BadStateException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
+     */
+    public function findInvitations(?InvitationFilter $invitationsFilter = null): array
+    {
+        if (!$this->permissionResolver->hasAccess('user', 'invite')) {
+            throw new UnauthorizedException('user', 'invite');
+        }
+
+        $invitations = [];
+
+        foreach ($this->handler->findInvitations($invitationsFilter) as $invitation) {
+            $invitations[] = $this->domainMapper->buildDomainObject($invitation);
+        }
+
+        return array_filter($invitations, function (Invitation $invitation): bool {
+            $access = true;
+            if ($invitation->getUserGroup()) {
+                $access = $this->permissionResolver->canUser('user', 'invite', $invitation->getUserGroup());
+            }
+            if ($invitation->getRole()) {
+                $access = $this->permissionResolver->canUser('user', 'invite', $invitation->getRole());
+            }
+
+            return $access;
+        });
     }
 }

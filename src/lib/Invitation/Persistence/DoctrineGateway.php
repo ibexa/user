@@ -12,6 +12,7 @@ use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\ParameterType;
 use Doctrine\DBAL\Query\QueryBuilder;
 use Ibexa\Contracts\User\Invitation\Persistence\Gateway;
+use Ibexa\Contracts\User\Invitation\Query\InvitationFilter;
 
 /**
  * @internal
@@ -158,5 +159,52 @@ final class DoctrineGateway implements Gateway
                 )
             );
         $query->execute();
+    }
+
+    public function findInvitations(?InvitationFilter $filter = null): array
+    {
+        $query = $this->getSelectQuery();
+        $expr = $query->expr();
+
+        if ($filter === null) {
+            $statement = $query->execute();
+
+            return $statement->fetchAllAssociative();
+        }
+
+        $filters = [];
+        if ($filter->getRole() !== null) {
+            $query
+                ->andWhere(
+                    $query->expr()->eq(
+                        't2.role_id',
+                        $query->createPositionalParameter($filter->getRole()->id)
+                    )
+                );
+        }
+
+        if ($filter->getUserGroup() !== null) {
+            $query
+                ->andWhere(
+                    $query->expr()->eq(
+                        't2.user_group_id',
+                        $query->createPositionalParameter($filter->getUserGroup()->id)
+                    )
+                );
+        }
+
+        if ($filter->getIsUsed() !== null) {
+            $query
+                ->andWhere(
+                    $query->expr()->eq(
+                        't1.used',
+                        $query->createPositionalParameter($filter->getIsUsed())
+                    )
+                );
+        }
+
+        $statement = $query->execute();
+
+        return $statement->fetchAllAssociative();
     }
 }

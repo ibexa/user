@@ -18,7 +18,7 @@ final class Invitation extends ValueObject
 
     private string $siteAccessIdentifier;
 
-    private string $createdAtTimestamp;
+    private int $createdAtTimestamp;
 
     private bool $isUsed;
 
@@ -34,7 +34,7 @@ final class Invitation extends ValueObject
         string $email,
         string $hash,
         string $siteAccessIdentifier,
-        string $createdAtTimestamp,
+        int $createdAtTimestamp,
         bool $isUsed,
         ?int $roleId = null,
         ?int $groupId = null,
@@ -69,7 +69,7 @@ final class Invitation extends ValueObject
         return $this->hash;
     }
 
-    public function getCreatedAtTimestamp(): string
+    public function getCreatedAtTimestamp(): int
     {
         return $this->createdAtTimestamp;
     }

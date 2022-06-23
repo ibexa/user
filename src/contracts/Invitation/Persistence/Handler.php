@@ -8,6 +8,8 @@ declare(strict_types=1);
 
 namespace Ibexa\Contracts\User\Invitation\Persistence;
 
+use Ibexa\Contracts\User\Invitation\Query\InvitationFilter;
+
 interface Handler
 {
     public function createInvitation(
@@ -27,4 +29,7 @@ interface Handler
     public function invitationExistsForEmail(string $email): bool;
 
     public function markAsUsed(string $hash): void;
+
+    /** @return \Ibexa\Contracts\User\Invitation\Persistence\Invitation[] */
+    public function findInvitations(?InvitationFilter $invitationsFilter = null): array;
 }

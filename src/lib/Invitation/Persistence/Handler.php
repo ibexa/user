@@ -12,6 +12,7 @@ use Ibexa\Contracts\User\Invitation\Persistence\Gateway;
 use Ibexa\Contracts\User\Invitation\Persistence\Handler as HandlerInterface;
 use Ibexa\Contracts\User\Invitation\Persistence\Invitation;
 use Ibexa\Contracts\User\Invitation\Persistence\Mapper;
+use Ibexa\Contracts\User\Invitation\Query\InvitationFilter;
 use Ibexa\Core\Base\Exceptions\NotFoundException;
 
 class Handler implements HandlerInterface
@@ -83,5 +84,16 @@ class Handler implements HandlerInterface
     public function markAsUsed(string $hash): void
     {
         $this->gateway->markAsUsed($hash);
+    }
+
+    public function findInvitations(?InvitationFilter $invitationsFilter = null): array
+    {
+        $invitations = [];
+
+        foreach ($this->gateway->findInvitations($invitationsFilter) as $invitation) {
+            $invitations[] = $this->mapper->extractInvitationFromRow($invitation);
+        }
+
+        return $invitations;
     }
 }

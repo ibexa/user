@@ -1,7 +1,7 @@
 <phpunit
         backupGlobals="false"
         backupStaticAttributes="false"
-        bootstrap="bootstrap.php"
+        bootstrap="tests/bootstrap.php"
         convertErrorsToExceptions="true"
         convertNoticesToExceptions="true"
         convertWarningsToExceptions="true"
@@ -13,7 +13,14 @@
         <testsuite name="Ibexa\User">
             <directory>tests/lib/</directory>
         </testsuite>
+        <testsuite name="integration">
+            <directory>tests/integration</directory>
+        </testsuite>
     </testsuites>
+    <php>
+        <env name="KERNEL_CLASS" value="Ibexa\Tests\Integration\User\IbexaTestKernel" />
+        <env name="DATABASE_URL" value="sqlite://i@i/test.db" />
+    </php>
     <filter>
         <whitelist>
             <directory>src</directory>
