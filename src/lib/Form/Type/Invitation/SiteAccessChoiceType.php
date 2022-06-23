@@ -10,7 +10,6 @@ namespace Ibexa\User\Form\Type\Invitation;
 
 use Ibexa\Core\MVC\Symfony\SiteAccess\SiteAccessServiceInterface;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\ChoiceList\ChoiceList;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -27,10 +26,7 @@ final class SiteAccessChoiceType extends AbstractType
     {
         $resolver
             ->setDefaults([
-                'choice_loader' => ChoiceList::lazy(
-                    $this,
-                    fn () => $this->siteAccessService->getAll(),
-                ),
+                'choices' => $this->siteAccessService->getAll(),
                 'choice_label' => 'name',
                 'choice_name' => 'name',
                 'choice_value' => 'name',

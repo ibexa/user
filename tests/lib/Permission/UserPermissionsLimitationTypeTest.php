@@ -298,11 +298,9 @@ class UserPermissionsLimitationTypeTest extends Base
                         'user_groups' => [14, 18],
                     ],
                 ]),
-                'object' => new Content([
-                    'versionInfo' => new VersionInfo([
-                        'contentInfo' => new ContentInfo([
-                            'id' => 14,
-                        ]),
+                'object' => new VersionInfo([
+                    'contentInfo' => new ContentInfo([
+                        'id' => 14,
                     ]),
                 ]),
                 'expected' => null,
