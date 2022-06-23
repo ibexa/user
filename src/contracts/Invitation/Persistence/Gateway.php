@@ -41,8 +41,6 @@ interface Gateway
 
     public function getInvitationByEmail(string $email);
 
-    public function markAsUsed(string $hash): void;
-
     /**
      * @return array<array{
      *     email: string,
@@ -57,4 +55,6 @@ interface Gateway
      * }>
      */
     public function findInvitations(?InvitationFilter $filter = null): array;
+
+    public function updateInvitation(string $hash, InvitationUpdateStruct $updateStruct): void;
 }

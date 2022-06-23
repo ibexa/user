@@ -58,7 +58,8 @@
         "friendsofphp/php-cs-fixer": "^3.0",
         "ibexa/code-style": "^1.0",
         "phpunit/phpunit": "^8.2",
-        "matthiasnoback/symfony-dependency-injection-test": "4.3"
+        "matthiasnoback/symfony-dependency-injection-test": "4.3",
+        "symfony/phpunit-bridge": "^5.3"
     },
     "scripts": {
         "fix-cs": "php-cs-fixer fix --config=.php-cs-fixer.php -v --show-progress=dots",

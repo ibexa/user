@@ -12,6 +12,7 @@ use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\ParameterType;
 use Doctrine\DBAL\Query\QueryBuilder;
 use Ibexa\Contracts\User\Invitation\Persistence\Gateway;
+use Ibexa\Contracts\User\Invitation\Persistence\InvitationUpdateStruct;
 use Ibexa\Contracts\User\Invitation\Query\InvitationFilter;
 
 /**
@@ -146,21 +147,6 @@ final class DoctrineGateway implements Gateway
             );
     }
 
-    public function markAsUsed(string $hash): void
-    {
-        $query = $this->connection->createQueryBuilder();
-        $query
-            ->update(self::TABLE_USER_INVITATIONS)
-            ->set('used', 1)
-            ->where(
-                $query->expr()->eq(
-                    'hash',
-                    $query->createPositionalParameter($hash)
-                )
-            );
-        $query->execute();
-    }
-
     public function findInvitations(?InvitationFilter $filter = null): array
     {
         $query = $this->getSelectQuery();
@@ -206,5 +192,41 @@ final class DoctrineGateway implements Gateway
         $statement = $query->execute();
 
         return $statement->fetchAllAssociative();
+    }
+
+    public function updateInvitation(string $hash, InvitationUpdateStruct $updateStruct): void
+    {
+        $query = $this->connection->createQueryBuilder();
+        $query->update(self::TABLE_USER_INVITATIONS);
+
+        $fieldsForUpdateMap = [
+            'creation_date' => [
+                'value' => $updateStruct->getCreatedAt(),
+                'type' => ParameterType::INTEGER,
+            ],
+            'used' => [
+                'value' => $updateStruct->getIsUsed(),
+                'type' => ParameterType::INTEGER,
+            ],
+        ];
+
+        foreach ($fieldsForUpdateMap as $fieldName => $field) {
+            if (null === $field['value']) {
+                continue;
+            }
+            $query->set(
+                $fieldName,
+                $query->createNamedParameter($field['value'], $field['type'], ":{$fieldName}")
+            );
+        }
+
+        $query->where(
+            $query->expr()->eq(
+                'hash',
+                $query->createNamedParameter($hash, ParameterType::STRING, ':hash')
+            )
+        );
+
+        $query->execute();
     }
 }

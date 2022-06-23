@@ -203,4 +203,27 @@ final class InvitationService implements InvitationServiceInterface
             return $access;
         });
     }
+
+    public function refreshInvitation(Invitation $invitation): void
+    {
+        if (!$this->permissionResolver->hasAccess('user', 'invite')) {
+            throw new UnauthorizedException('user', 'invite');
+        }
+
+        $userGroup = $invitation->getUserGroup();
+        if ($userGroup
+            && !$this->permissionResolver->canUser('user', 'invite', $userGroup)
+        ) {
+            throw new UnauthorizedException('user', 'invite', ['user_group' => $userGroup->getName()]);
+        }
+
+        $role = $invitation->getRole();
+        if ($role
+            && !$this->permissionResolver->canUser('user', 'invite', $role)
+        ) {
+            throw new UnauthorizedException('user', 'invite', ['role' => $role->identifier]);
+        }
+
+        $this->handler->refreshInvitation($invitation->getHash());
+    }
 }

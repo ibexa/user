@@ -16,6 +16,8 @@ use Ibexa\Contracts\User\Invitation\InvitationCreateStruct;
 use Ibexa\Contracts\User\Invitation\InvitationService;
 use Ibexa\Contracts\User\Invitation\Query\InvitationFilter;
 use Ibexa\Tests\Integration\User\IbexaKernelTestCase;
+use Ibexa\User\Invitation\Persistence\Handler;
+use Symfony\Bridge\PhpUnit\ClockMock;
 
 final class InvitationServiceTest extends IbexaKernelTestCase
 {
@@ -123,5 +125,45 @@ final class InvitationServiceTest extends IbexaKernelTestCase
         );
 
         self::assertCount(1, $editorInvitations);
+    }
+
+    public function testMarkInvitationAsUsed(): void
+    {
+        $invitation = $this->invitationService->createInvitation(
+            new InvitationCreateStruct(
+                'used@ibexa.co',
+                'admin',
+            )
+        );
+
+        self::assertFalse($invitation->isUsed());
+
+        $this->invitationService->markAsUsed($invitation);
+
+        self::assertTrue(
+            $this->invitationService->getInvitation($invitation->getHash())->isUsed()
+        );
+    }
+
+    public function testRefreshInvitation(): void
+    {
+        ClockMock::register(Handler::class);
+        ClockMock::register(__CLASS__);
+
+        ClockMock::withClockMock(true);
+
+        $invitation = $this->invitationService->createInvitation(
+            new InvitationCreateStruct(
+                'refresh@ibexa.co',
+                'admin',
+            )
+        );
+        sleep(5);
+
+        $this->invitationService->refreshInvitation($invitation);
+        $refreshed = $this->invitationService->getInvitation($invitation->getHash());
+
+        self::assertGreaterThan($invitation->createdAt()->getTimestamp(), $refreshed->createdAt()->getTimestamp());
+        ClockMock::withClockMock(false);
     }
 }
