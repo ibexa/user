@@ -35,6 +35,7 @@ final class DefaultProfileImageController extends Controller
             /** @deprecated text is deprecated since 4.1, use text_color instead */
             'text' => $colors['text'],
             'text_color' => $colors['text'],
+            'border_color' => $colors['text'],
             'background' => $colors['background'],
         ], $response);
     }
