@@ -37,9 +37,16 @@ tables:
             ibexa_user_invitations_email_uindex:
                 fields:
                     - email
+                options:
+                    lengths:
+                        - 191
             ibexa_user_invitations_hash_uindex:
                 fields:
                     - hash
+                options:
+                    lengths:
+                        - 191
+
     ibexa_user_invitations_assignments:
         id:
             id:
