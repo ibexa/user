@@ -47,7 +47,7 @@ final class DoctrineGateway implements Gateway
                     'email' => $query->createPositionalParameter($email),
                     'site_access_name' => $query->createPositionalParameter($siteAccessName),
                     'hash' => $query->createPositionalParameter($hash),
-                    'creation_date' => time(),
+                    'creation_date' => $query->createPositionalParameter(time(), ParameterType::INTEGER),
                     'used' => $query->createPositionalParameter(false, ParameterType::BOOLEAN),
                 ]
             );
