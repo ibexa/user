@@ -25,7 +25,7 @@ final class IbexaTestKernel extends BaseIbexaTestKernel
         yield from parent::getSchemaFiles();
 
         yield from [
-            $this->locateResource('@IbexaUserBundle/Resources/storage/schema.yaml'),
+            $this->locateResource('@IbexaUserBundle/Resources/config/storage/schema.yaml'),
         ];
     }
 
