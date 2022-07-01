@@ -5,6 +5,7 @@ imports:
     - { resource: services/forms.yaml }
     - { resource: services/profile_image.yaml }
     - { resource: services/invitation.yaml }
+    - { resource: services/installer.yaml }
 
 parameters:
     ibexa.user.content_type_identifier: user
