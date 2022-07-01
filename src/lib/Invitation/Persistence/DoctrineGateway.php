@@ -48,7 +48,7 @@ final class DoctrineGateway implements Gateway
                     'site_access_name' => $query->createPositionalParameter($siteAccessName),
                     'hash' => $query->createPositionalParameter($hash),
                     'creation_date' => time(),
-                    'used' => 0,
+                    'used' => $query->createPositionalParameter(false, ParameterType::BOOLEAN),
                 ]
             );
 
@@ -150,7 +150,6 @@ final class DoctrineGateway implements Gateway
     public function findInvitations(?InvitationFilter $filter = null): array
     {
         $query = $this->getSelectQuery();
-        $expr = $query->expr();
 
         if ($filter === null) {
             $statement = $query->execute();
@@ -158,7 +157,6 @@ final class DoctrineGateway implements Gateway
             return $statement->fetchAllAssociative();
         }
 
-        $filters = [];
         if ($filter->getRole() !== null) {
             $query
                 ->andWhere(
@@ -206,7 +204,7 @@ final class DoctrineGateway implements Gateway
             ],
             'used' => [
                 'value' => $updateStruct->getIsUsed(),
-                'type' => ParameterType::INTEGER,
+                'type' => ParameterType::BOOLEAN,
             ],
         ];
 
