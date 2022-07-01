@@ -23,6 +23,8 @@ final class DoctrineGateway implements Gateway
     private const TABLE_USER_INVITATIONS = 'ibexa_user_invitations';
     private const TABLE_USER_INVITATIONS_ASSIGNMENTS = 'ibexa_user_invitations_assignments';
 
+    private const TABLE_USER_INVITATIONS_SEQ = 'ibexa_user_invitations_id_seq';
+
     private Connection $connection;
 
     public function __construct(Connection $connection)
@@ -53,7 +55,7 @@ final class DoctrineGateway implements Gateway
             );
 
         $query->execute();
-        $invitationId = $this->connection->lastInsertId(self::TABLE_USER_INVITATIONS);
+        $invitationId = $this->connection->lastInsertId(self::TABLE_USER_INVITATIONS_SEQ);
 
         $assigmentQuery = $this->connection->createQueryBuilder();
         $assigmentQuery
