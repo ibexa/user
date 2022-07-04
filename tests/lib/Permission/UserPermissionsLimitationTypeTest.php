@@ -261,16 +261,6 @@ class UserPermissionsLimitationTypeTest extends Base
                 ]),
                 'expected' => true,
             ],
-            'allow_all_roles_limitation' => [
-                'limitation' => new UserPermissionsLimitation([
-                    'limitationValues' => [
-                        'roles' => null,
-                        'user_groups' => [14, 18],
-                    ],
-                ]),
-                'object' => new Role(['id' => 4]),
-                'expected' => true,
-            ],
             'allow_non_role_limitation' => [
                 'limitation' => new UserPermissionsLimitation([
                     'limitationValues' => [

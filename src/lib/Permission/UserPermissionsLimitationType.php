@@ -158,13 +158,13 @@ class UserPermissionsLimitationType extends AbstractPersistenceLimitationType im
             return self::ACCESS_ABSTAIN;
         }
 
-        if ($object instanceof Role
+        if (($object instanceof Role && is_array($value->limitationValues['roles']))
             && (empty($value->limitationValues['roles']) || in_array($object->id, $value->limitationValues['roles']))
         ) {
             return self::ACCESS_GRANTED;
         }
 
-        if ($object instanceof Content
+        if (($object instanceof Content && is_array($value->limitationValues['user_groups']))
             && (empty($value->limitationValues['user_groups']) || in_array($object->id, $value->limitationValues['user_groups']))
         ) {
             return self::ACCESS_GRANTED;
