@@ -23,6 +23,8 @@ final class DoctrineGateway implements Gateway
     private const TABLE_USER_INVITATIONS = 'ibexa_user_invitations';
     private const TABLE_USER_INVITATIONS_ASSIGNMENTS = 'ibexa_user_invitations_assignments';
 
+    private const TABLE_USER_INVITATIONS_SEQ = 'ibexa_user_invitations_id_seq';
+
     private Connection $connection;
 
     public function __construct(Connection $connection)
@@ -47,13 +49,13 @@ final class DoctrineGateway implements Gateway
                     'email' => $query->createPositionalParameter($email),
                     'site_access_name' => $query->createPositionalParameter($siteAccessName),
                     'hash' => $query->createPositionalParameter($hash),
-                    'creation_date' => time(),
-                    'used' => 0,
+                    'creation_date' => $query->createPositionalParameter(time(), ParameterType::INTEGER),
+                    'used' => $query->createPositionalParameter(false, ParameterType::BOOLEAN),
                 ]
             );
 
         $query->execute();
-        $invitationId = $this->connection->lastInsertId(self::TABLE_USER_INVITATIONS);
+        $invitationId = $this->connection->lastInsertId(self::TABLE_USER_INVITATIONS_SEQ);
 
         $assigmentQuery = $this->connection->createQueryBuilder();
         $assigmentQuery
@@ -150,7 +152,6 @@ final class DoctrineGateway implements Gateway
     public function findInvitations(?InvitationFilter $filter = null): array
     {
         $query = $this->getSelectQuery();
-        $expr = $query->expr();
 
         if ($filter === null) {
             $statement = $query->execute();
@@ -158,7 +159,6 @@ final class DoctrineGateway implements Gateway
             return $statement->fetchAllAssociative();
         }
 
-        $filters = [];
         if ($filter->getRole() !== null) {
             $query
                 ->andWhere(
@@ -206,7 +206,7 @@ final class DoctrineGateway implements Gateway
             ],
             'used' => [
                 'value' => $updateStruct->getIsUsed(),
-                'type' => ParameterType::INTEGER,
+                'type' => ParameterType::BOOLEAN,
             ],
         ];
 

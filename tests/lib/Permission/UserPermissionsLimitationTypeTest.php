@@ -261,7 +261,7 @@ class UserPermissionsLimitationTypeTest extends Base
                 ]),
                 'expected' => true,
             ],
-            'allow_all_roles_limitation' => [
+            'allow_non_role_limitation' => [
                 'limitation' => new UserPermissionsLimitation([
                     'limitationValues' => [
                         'roles' => null,
@@ -269,9 +269,9 @@ class UserPermissionsLimitationTypeTest extends Base
                     ],
                 ]),
                 'object' => new Role(['id' => 4]),
-                'expected' => true,
+                'expected' => false,
             ],
-            'allow_non_role_limitation' => [
+            'allow_all_role_limitation' => [
                 'limitation' => new UserPermissionsLimitation([
                     'limitationValues' => [
                         'roles' => [],
@@ -279,7 +279,7 @@ class UserPermissionsLimitationTypeTest extends Base
                     ],
                 ]),
                 'object' => new Role(['id' => 4]),
-                'expected' => false,
+                'expected' => true,
             ],
             'mixed_role_id_with_group' => [
                 'limitation' => new UserPermissionsLimitation([

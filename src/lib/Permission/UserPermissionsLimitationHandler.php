@@ -14,9 +14,6 @@ class UserPermissionsLimitationHandler extends LimitationHandler
     public const USER_GROUP_PREFIX = 'UserGroup_';
     public const ROLE_PREFIX = 'Role_';
 
-    /**
-     * Translate API STATE limitation to Legacy StateGroup_<identifier> limitations.
-     */
     public function toLegacy(Policy $policy): void
     {
         if ($policy->limitations !== '*' && isset($policy->limitations[UserPermissionsLimitation::IDENTIFIER])) {
@@ -31,9 +28,6 @@ class UserPermissionsLimitationHandler extends LimitationHandler
         }
     }
 
-    /**
-     * Translate Legacy StateGroup_<identifier> limitations to API STATE limitation.
-     */
     public function toSPI(Policy $policy): void
     {
         if ($policy->limitations === '*' || empty($policy->limitations)) {
