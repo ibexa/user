@@ -20,6 +20,21 @@
         <target state="new">You are invited to join</target>
         <note>key: ibexa.user.invitation.mail.subject</note>
       </trans-unit>
+      <trans-unit id="c5663e8492fee255f3e2eb99457cf1f6d22d8967" resname="user_invitation.send.invitation_exist">
+        <source>Invitation for '%email%' already exists.</source>
+        <target state="new">Invitation for '%email%' already exists.</target>
+        <note>key: user_invitation.send.invitation_exist</note>
+      </trans-unit>
+      <trans-unit id="eb29ac5a3f9317eda81b2659331df1882a03be8f" resname="user_invitation.send.success">
+        <source>Invitation sent to '%email%' updated.</source>
+        <target state="new">Invitation sent to '%email%' updated.</target>
+        <note>key: user_invitation.send.success</note>
+      </trans-unit>
+      <trans-unit id="7b61e31ce34b47f88e563ed2750171a834a4a589" resname="user_invitation.send.user_exist">
+        <source>User with '%email%' already exists.</source>
+        <target state="new">User with '%email%' already exists.</target>
+        <note>key: user_invitation.send.user_exist</note>
+      </trans-unit>
     </body>
   </file>
 </xliff>
