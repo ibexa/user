@@ -63,21 +63,21 @@ final class UserInvitationController extends Controller
                 $this->mailSender->sendInvitation($invitation);
 
                 $this->actionResultHandler->success(
-                    /** @Desc("Invitation send to '%email%' updated.") */
+                    /** @Desc("Invitation sent to '%email%' updated.") */
                     'user_invitation.send.success',
                     ['%email%' => $data->getEmail()],
                     'user_invitation'
                 );
             } catch (InvitationAlreadyExistsException $e) {
                 $this->actionResultHandler->error(
-                    /** @Desc("Invitation for '%email%' already exist.") */
+                    /** @Desc("Invitation for '%email%' already exists.") */
                     'user_invitation.send.invitation_exist',
                     ['%email%' => $data->getEmail()],
                     'user_invitation'
                 );
             } catch (UserAlreadyExistsException $e) {
                 $this->actionResultHandler->error(
-                    /** @Desc("User with '%email%' already exist.") */
+                    /** @Desc("User with '%email%' already exists.") */
                     'user_invitation.send.user_exist',
                     ['%email%' => $data->getEmail()],
                     'user_invitation'
