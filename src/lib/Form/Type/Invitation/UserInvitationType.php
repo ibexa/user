@@ -54,7 +54,7 @@ final class UserInvitationType extends AbstractType
                 [
                     'required' => false,
                     'multiple' => true,
-                    'label' => /** @Desc("Pick Sections") */ 'ibexa.user.invitation.group',
+                    'label' => /** @Desc("Pick Sections") */ 'ibexa.user.invitation.pick_sections',
                 ]
             )
             ->add(

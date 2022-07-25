@@ -61,6 +61,41 @@
         <target state="new">Update</target>
         <note>key: ezplatform.reset_user_password.update</note>
       </trans-unit>
+      <trans-unit id="ab90b332cf5f8d29b421427cdfc2ec676d5bebdb" resname="ibexa.user.invitation.email">
+        <source>Enter email</source>
+        <target state="new">Enter email</target>
+        <note>key: ibexa.user.invitation.email</note>
+      </trans-unit>
+      <trans-unit id="40edf918af3b2d9085e2ecaa98cfd004f13fc226" resname="ibexa.user.invitation.group">
+        <source>Select Group</source>
+        <target state="new">Select Group</target>
+        <note>key: ibexa.user.invitation.group</note>
+      </trans-unit>
+      <trans-unit id="6b827dc215e0b48c99cd9c687dcf7eb2516ea04c" resname="ibexa.user.invitation.location_id">
+        <source>Type subtree root id</source>
+        <target state="new">Type subtree root id</target>
+        <note>key: ibexa.user.invitation.location_id</note>
+      </trans-unit>
+      <trans-unit id="a58fe68d0cd618abf2315b3fa69de2f2f4d6ed56" resname="ibexa.user.invitation.pick_sections">
+        <source>Pick Sections</source>
+        <target state="new">Pick Sections</target>
+        <note>key: ibexa.user.invitation.pick_sections</note>
+      </trans-unit>
+      <trans-unit id="04b4c40f5a7eabe6c31aa32dacf78b4dfc4f7a62" resname="ibexa.user.invitation.role">
+        <source>Select Role</source>
+        <target state="new">Select Role</target>
+        <note>key: ibexa.user.invitation.role</note>
+      </trans-unit>
+      <trans-unit id="72fa3da181a637ddf261bc9948160611535062ef" resname="ibexa.user.invitation.send_invitation">
+        <source>Send invitation</source>
+        <target state="new">Send invitation</target>
+        <note>key: ibexa.user.invitation.send_invitation</note>
+      </trans-unit>
+      <trans-unit id="ad201158aea7a3eae82b7364341dc0dd218d7436" resname="ibexa.user.invitation.site_access">
+        <source>Select Site</source>
+        <target state="new">Select Site</target>
+        <note>key: ibexa.user.invitation.site_access</note>
+      </trans-unit>
     </body>
   </file>
 </xliff>
