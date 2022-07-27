@@ -21,6 +21,11 @@
         <target state="new">Passwords do not match.</target>
         <note>key: ezplatform.reset_user_password.passwords_must_match</note>
       </trans-unit>
+      <trans-unit id="cfba8aa1f9a4e5948ec73f46c8461f6ce35aa856" resname="ibexa.user.invitation.user_with_email_exists">
+        <source>The email '%email%' is already in your member list.</source>
+        <target state="new">The email '%email%' is already in your member list.</target>
+        <note>key: ibexa.user.invitation.user_with_email_exists</note>
+      </trans-unit>
     </body>
   </file>
 </xliff>
