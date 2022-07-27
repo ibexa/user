@@ -24,7 +24,7 @@ parameters:
     # Invitation
     ibexa.site_access.config.default.user_invitation.templates.form: "@@IbexaUser/invitation/form.html.twig"
     ibexa.site_access.config.default.user_invitation.templates.mail: "@@IbexaUser/invitation/mail/user_invitation.html.twig"
-    ibexa.site_access.config.default.user_invitation.hash_expiration_time: 'P2D'
+    ibexa.site_access.config.default.user_invitation.hash_expiration_time: 'P7D'
 
     # User Settings
     ibexa.site_access.config.default.user_settings_update_view: {}

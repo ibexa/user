@@ -204,7 +204,7 @@ final class InvitationService implements InvitationServiceInterface
         });
     }
 
-    public function refreshInvitation(Invitation $invitation): void
+    public function refreshInvitation(Invitation $invitation): Invitation
     {
         if (!$this->permissionResolver->hasAccess('user', 'invite')) {
             throw new UnauthorizedException('user', 'invite');
@@ -224,6 +224,8 @@ final class InvitationService implements InvitationServiceInterface
             throw new UnauthorizedException('user', 'invite', ['role' => $role->identifier]);
         }
 
-        $this->handler->refreshInvitation($invitation->getHash());
+        return $this->domainMapper->buildDomainObject(
+            $this->handler->refreshInvitation($invitation->getHash(), $this->hashGenerator->generate())
+        );
     }
 }

@@ -33,5 +33,5 @@ interface Handler
     /** @return \Ibexa\Contracts\User\Invitation\Persistence\Invitation[] */
     public function findInvitations(?InvitationFilter $invitationsFilter = null): array;
 
-    public function refreshInvitation(string $hash): void;
+    public function refreshInvitation(string $hash, string $newHash): Invitation;
 }
