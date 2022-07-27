@@ -208,6 +208,10 @@ final class DoctrineGateway implements Gateway
                 'value' => $updateStruct->getIsUsed(),
                 'type' => ParameterType::BOOLEAN,
             ],
+            'hash' => [
+                'value' => $updateStruct->getHash(),
+                'type' => ParameterType::STRING,
+            ],
         ];
 
         foreach ($fieldsForUpdateMap as $fieldName => $field) {
@@ -223,7 +227,7 @@ final class DoctrineGateway implements Gateway
         $query->where(
             $query->expr()->eq(
                 'hash',
-                $query->createNamedParameter($hash, ParameterType::STRING, ':hash')
+                $query->createNamedParameter($hash, ParameterType::STRING, ':current_hash')
             )
         );
 

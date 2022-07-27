@@ -39,5 +39,5 @@ interface InvitationService
      */
     public function findInvitations(?InvitationFilter $invitationsFilter = null): array;
 
-    public function refreshInvitation(Invitation $invitation): void;
+    public function refreshInvitation(Invitation $invitation): Invitation;
 }
