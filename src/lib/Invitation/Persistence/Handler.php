@@ -18,7 +18,7 @@ use Ibexa\Core\Base\Exceptions\NotFoundException;
 
 class Handler implements HandlerInterface
 {
-    private DoctrineGateway $gateway;
+    private Gateway $gateway;
 
     private Mapper $mapper;
 
@@ -101,11 +101,16 @@ class Handler implements HandlerInterface
         return $invitations;
     }
 
-    public function refreshInvitation(string $hash): void
+    public function refreshInvitation(string $hash, string $newHash): Invitation
     {
         $updateStruct = new InvitationUpdateStruct();
         $updateStruct->setCreatedAt(time());
+        $updateStruct->setHash($newHash);
 
         $this->gateway->updateInvitation($hash, $updateStruct);
+
+        return $this->mapper->extractInvitationFromRow(
+            $this->gateway->getInvitation($newHash)
+        );
     }
 }

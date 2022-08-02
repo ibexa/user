@@ -16,3 +16,9 @@ services:
             $userService: '@ibexa.api.service.user'
         tags:
             - { name: validator.constraint_validator }
+
+    Ibexa\User\Validator\Constraints\EmailInvitationValidator:
+        arguments:
+            $userService: '@ibexa.api.service.user'
+        tags:
+            - { name: validator.constraint_validator }

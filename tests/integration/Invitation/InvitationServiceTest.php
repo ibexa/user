@@ -160,10 +160,11 @@ final class InvitationServiceTest extends IbexaKernelTestCase
         );
         sleep(5);
 
-        $this->invitationService->refreshInvitation($invitation);
-        $refreshed = $this->invitationService->getInvitation($invitation->getHash());
+        $refreshed = $this->invitationService->refreshInvitation($invitation);
 
         self::assertGreaterThan($invitation->createdAt()->getTimestamp(), $refreshed->createdAt()->getTimestamp());
+        self::assertNotEquals($invitation->getHash(), $refreshed->getHash());
+
         ClockMock::withClockMock(false);
     }
 }
