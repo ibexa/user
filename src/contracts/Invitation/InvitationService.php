@@ -24,6 +24,8 @@ interface InvitationService
 
     public function isValid(Invitation $invitation): bool;
 
+    public function isExpired(Invitation $invitation): bool;
+
     public function getInvitation(string $hash): Invitation;
 
     public function getInvitationByEmail(string $email): Invitation;
