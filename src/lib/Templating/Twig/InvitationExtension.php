@@ -31,7 +31,7 @@ class InvitationExtension extends AbstractExtension
         return [
             new TwigFunction(
                 'ibexa_is_invitation_expired',
-                fn (Invitation $invitation) => $this->invitationService->isExpired($invitation)
+                fn (Invitation $invitation): bool => $this->invitationService->isExpired($invitation)
             ),
         ];
     }
