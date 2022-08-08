@@ -129,7 +129,7 @@ final class InvitationService implements InvitationServiceInterface
         return $this->domainMapper->buildDomainObject($invitation);
     }
 
-    public function isValid(Invitation $invitation): bool
+    public function isExpired(Invitation $invitation): bool
     {
         $current = new DateTime();
         $expirationTime = $this->configResolver->getParameter(
@@ -138,7 +138,12 @@ final class InvitationService implements InvitationServiceInterface
             $invitation->getSiteAccessIdentifier()
         );
 
-        if ($invitation->createdAt()->add(new DateInterval($expirationTime)) <= $current) {
+        return $current >= $invitation->createdAt()->add(new DateInterval($expirationTime));
+    }
+
+    public function isValid(Invitation $invitation): bool
+    {
+        if ($this->isExpired($invitation)) {
             return false;
         }
 

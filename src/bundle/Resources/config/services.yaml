@@ -63,6 +63,10 @@ services:
         tags:
             - { name: twig.extension }
 
+    Ibexa\User\Templating\Twig\InvitationExtension:
+        tags:
+            - { name: twig.extension }
+
     Ibexa\User\ExceptionHandler\NullActionResultHandler: ~
     Ibexa\User\ExceptionHandler\ActionResultHandler: '@Ibexa\User\ExceptionHandler\NullActionResultHandler'
 
