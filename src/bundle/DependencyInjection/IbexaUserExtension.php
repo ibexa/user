@@ -49,7 +49,7 @@ class IbexaUserExtension extends Extension implements PrependExtensionInterface
     {
         $container->prependExtensionConfig('jms_translation', [
             'configs' => [
-                'ezplatform_user' => [
+                'ibexa_user' => [
                     'dirs' => [
                         __DIR__ . '/../../',
                     ],
