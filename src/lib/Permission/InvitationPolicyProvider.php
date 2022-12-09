@@ -10,8 +10,10 @@ namespace Ibexa\User\Permission;
 
 use Ibexa\Bundle\Core\DependencyInjection\Configuration\ConfigBuilderInterface;
 use Ibexa\Bundle\Core\DependencyInjection\Security\PolicyProvider\PolicyProviderInterface;
+use JMS\TranslationBundle\Model\Message;
+use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 
-final class InvitationPolicyProvider implements PolicyProviderInterface
+final class InvitationPolicyProvider implements PolicyProviderInterface, TranslationContainerInterface
 {
     public function addPolicies(ConfigBuilderInterface $configBuilder)
     {
@@ -20,5 +22,14 @@ final class InvitationPolicyProvider implements PolicyProviderInterface
                 'invite' => ['UserPermissions'],
             ],
         ]);
+    }
+
+    public static function getTranslationMessages()
+    {
+        return [
+            (new Message('role.policy.user', 'forms'))->setDesc('User'),
+            (new Message('role.policy.user.all_functions', 'forms'))->setDesc('User / All functions'),
+            (new Message('role.policy.user.invite', 'forms'))->setDesc('User / Invite'),
+        ];
     }
 }

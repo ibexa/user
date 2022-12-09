@@ -96,6 +96,21 @@
         <target state="new">Select Site</target>
         <note>key: ibexa.user.invitation.site_access</note>
       </trans-unit>
+      <trans-unit id="78b9d0d52e636ef2d0d1f919de16154404c2be0f" resname="role.policy.user">
+        <source>User</source>
+        <target state="new">User</target>
+        <note>key: role.policy.user</note>
+      </trans-unit>
+      <trans-unit id="d44ce8c33cbc780cff9ca6f05ad2f70002550cd0" resname="role.policy.user.all_functions">
+        <source>User / All functions</source>
+        <target state="new">User / All functions</target>
+        <note>key: role.policy.user.all_functions</note>
+      </trans-unit>
+      <trans-unit id="587199065d14880416b8061b73788e731a201c27" resname="role.policy.user.invite">
+        <source>User / Invite</source>
+        <target state="new">User / Invite</target>
+        <note>key: role.policy.user.invite</note>
+      </trans-unit>
     </body>
   </file>
 </xliff>
