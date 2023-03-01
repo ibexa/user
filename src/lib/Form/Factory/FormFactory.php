@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace Ibexa\User\Form\Factory;
 
 use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType;
+use Ibexa\Contracts\Core\Repository\Values\User\User;
 use Ibexa\User\Form\Data\UserPasswordChangeData;
 use Ibexa\User\Form\Data\UserPasswordForgotData;
 use Ibexa\User\Form\Data\UserPasswordForgotWithLoginData;
@@ -45,7 +46,8 @@ class FormFactory
     public function changeUserPassword(
         ContentType $contentType,
         UserPasswordChangeData $data = null,
-        ?string $name = null
+        ?string $name = null,
+        ?User $user = null
     ): FormInterface {
         $name = $name ?: StringUtil::fqcnToBlockPrefix(UserPasswordChangeType::class);
 
@@ -53,7 +55,10 @@ class FormFactory
             $name,
             UserPasswordChangeType::class,
             $data,
-            ['content_type' => $contentType]
+            [
+                'content_type' => $contentType,
+                'user' => $user,
+            ]
         );
     }
 
@@ -102,13 +107,22 @@ class FormFactory
     public function resetUserPassword(
         UserPasswordResetData $data = null,
         ?string $name = null,
-        ContentType $contentType = null
+        ?ContentType $contentType = null,
+        ?User $user = null
     ): FormInterface {
         $name = $name ?: StringUtil::fqcnToBlockPrefix(UserPasswordResetType::class);
 
         $userContentType = $contentType ?? $data->getContentType();
 
-        return $this->formFactory->createNamed($name, UserPasswordResetType::class, $data, ['content_type' => $userContentType]);
+        return $this->formFactory->createNamed(
+            $name,
+            UserPasswordResetType::class,
+            $data,
+            [
+                'content_type' => $userContentType,
+                'user' => $user,
+            ]
+        );
     }
 
     public function updateUserSetting(
