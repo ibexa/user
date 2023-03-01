@@ -61,7 +61,7 @@ class PasswordChangeController extends Controller
     {
         /** @var \Ibexa\Contracts\Core\Repository\Values\User\User $user */
         $user = $this->tokenStorage->getToken()->getUser()->getAPIUser();
-        $form = $this->formFactory->changeUserPassword($user->getContentType());
+        $form = $this->formFactory->changeUserPassword($user->getContentType(), null, null, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
