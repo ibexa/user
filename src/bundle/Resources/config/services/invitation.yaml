@@ -18,7 +18,10 @@ services:
             $mapper: '@Ibexa\User\Invitation\Persistence\Mapper'
             $gateway: '@Ibexa\User\Invitation\Persistence\DoctrineGateway'
 
-    Ibexa\User\Invitation\Persistence\DoctrineGateway: ~
+    Ibexa\User\Invitation\Persistence\DoctrineGateway:
+        arguments:
+            $connection: '@ibexa.persistence.connection'
+
     Ibexa\User\Invitation\MailSender: ~
     Ibexa\User\Invitation\Persistence\Mapper: ~
     Ibexa\User\Invitation\DomainMapper: ~
