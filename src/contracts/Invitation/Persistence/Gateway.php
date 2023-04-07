@@ -13,7 +13,7 @@ use Ibexa\Contracts\User\Invitation\Query\InvitationFilter;
 interface Gateway
 {
     /**
-     * @return array{
+     * @phpstan-return array{
      *     email: string,
      *     hash: string,
      *     site_access_name: string,
@@ -42,7 +42,7 @@ interface Gateway
     public function getInvitationByEmail(string $email);
 
     /**
-     * @return array<array{
+     * @phpstan-return array<array{
      *     email: string,
      *     hash: string,
      *     site_access_name: string,
