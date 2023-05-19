@@ -4,15 +4,21 @@ services:
         autoconfigure: true
         public: false
 
-    EzSystems\EzPlatformUser\Validator\Constraints\:
+    Ibexa\User\Validator\Constraints\:
         resource: "../../../lib/Validator/Constraints"
 
-    EzSystems\EzPlatformUser\Validator\Constraints\UserPasswordValidator:
+    Ibexa\User\Validator\Constraints\UserPasswordValidator:
         tags:
             - { name: validator.constraint_validator }
 
-    EzSystems\EzPlatformUser\Validator\Constraints\PasswordValidator:
+    Ibexa\User\Validator\Constraints\PasswordValidator:
         arguments:
-            $userService: '@ezpublish.api.service.user'
+            $userService: '@ibexa.api.service.user'
+        tags:
+            - { name: validator.constraint_validator }
+
+    Ibexa\User\Validator\Constraints\EmailInvitationValidator:
+        arguments:
+            $userService: '@ibexa.api.service.user'
         tags:
             - { name: validator.constraint_validator }

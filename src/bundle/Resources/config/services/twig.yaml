@@ -1,0 +1,13 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    Ibexa\Bundle\User\Twig\UserExtension:
+        tags:
+            - { name: twig.extension }
+
+    Ibexa\Bundle\User\Twig\UserRuntime:
+        tags:
+            - { name: twig.runtime }

@@ -66,6 +66,46 @@
         <target state="new">Long date and time format</target>
         <note>key: settings.full_datetime_format.value.title</note>
       </trans-unit>
+      <trans-unit id="f69442f4afc8feed51643e408862c6a83f715560" resname="settings.group.browsing.description">
+        <source>settings.group.browsing.description</source>
+        <target state="new"></target>
+        <note>key: settings.group.browsing.description</note>
+      </trans-unit>
+      <trans-unit id="da2c0674f840a052662187106d621f2e3180d631" resname="settings.group.browsing.name">
+        <source>Browsing</source>
+        <target state="new">Browsing</target>
+        <note>key: settings.group.browsing.name</note>
+      </trans-unit>
+      <trans-unit id="c9a8a7a02d6e5a8526e883fc7a6e3e35f40cf809" resname="settings.group.edit_content.description">
+        <source>settings.group.edit_content.description</source>
+        <target state="new"></target>
+        <note>key: settings.group.edit_content.description</note>
+      </trans-unit>
+      <trans-unit id="9fb4add1a9e6148b11b25ddbcaf4e77d97b4ab45" resname="settings.group.edit_content.name">
+        <source>Edit Content</source>
+        <target state="new">Edit Content</target>
+        <note>key: settings.group.edit_content.name</note>
+      </trans-unit>
+      <trans-unit id="377f69d650dee0a54486fea8f8a89b82203b7755" resname="settings.group.generic.description">
+        <source>settings.group.generic.description</source>
+        <target state="new"></target>
+        <note>key: settings.group.generic.description</note>
+      </trans-unit>
+      <trans-unit id="7566f07975d6ac51eb07463ea7719286528aac39" resname="settings.group.generic.name">
+        <source>Custom Group</source>
+        <target state="new">Custom Group</target>
+        <note>key: settings.group.generic.name</note>
+      </trans-unit>
+      <trans-unit id="64ca3f69fd80ec2885e8bdce3393e99d681d8527" resname="settings.group.location.description">
+        <source>settings.group.location.description</source>
+        <target state="new"></target>
+        <note>key: settings.group.location.description</note>
+      </trans-unit>
+      <trans-unit id="bd70b10ce1c6e7fa2b82938496f27116fb10b1d9" resname="settings.group.location.name">
+        <source>Location</source>
+        <target state="new">Location</target>
+        <note>key: settings.group.location.name</note>
+      </trans-unit>
       <trans-unit id="3a4946ea2a7aaa360112cf1e657617e7ce7c7d9b" resname="settings.language.value.description">
         <source>Back Office language</source>
         <target state="new">Back Office language</target>

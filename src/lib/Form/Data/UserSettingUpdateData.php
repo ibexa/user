@@ -1,12 +1,12 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUser\Form\Data;
+namespace Ibexa\User\Form\Data;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -14,55 +14,39 @@ class UserSettingUpdateData
 {
     /**
      * @Assert\NotBlank()
-     *
-     * @var string
      */
-    private $identifier;
+    private string $identifier;
 
     /**
-     * @var string|null
+     * @var array<string, mixed>
      */
-    private $value;
+    private array $values;
 
-    /**
-     * @param string $identifier
-     * @param string $value
-     */
-    public function __construct(?string $identifier = null, ?string $value = null)
+    public function __construct(string $identifier, array $values)
     {
         $this->identifier = $identifier;
-        $this->value = $value;
+        $this->values = $values;
     }
 
-    /**
-     * @return string
-     */
-    public function getIdentifier(): ?string
+    public function getIdentifier(): string
     {
         return $this->identifier;
     }
 
-    /**
-     * @param string $identifier
-     */
     public function setIdentifier(string $identifier): void
     {
         $this->identifier = $identifier;
     }
 
-    /**
-     * @return string
-     */
-    public function getValue(): ?string
+    public function getValues(): array
     {
-        return $this->value;
+        return $this->values;
     }
 
-    /**
-     * @param string $value
-     */
-    public function setValue(?string $value): void
+    public function setValues(array $values): void
     {
-        $this->value = $value;
+        $this->values = $values;
     }
 }
+
+class_alias(UserSettingUpdateData::class, 'EzSystems\EzPlatformUser\Form\Data\UserSettingUpdateData');

@@ -1,48 +1,49 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUserBundle\Controller;
+namespace Ibexa\Bundle\User\Controller;
 
-use eZ\Publish\Core\MVC\Symfony\Security\Authorization\Attribute;
-use EzSystems\EzPlatformUser\Form\DataMapper\UserRegisterMapper;
-use EzSystems\EzPlatformUser\View\Register\ConfirmView;
-use EzSystems\EzPlatformUser\View\Register\FormView;
-use EzSystems\EzPlatformContentForms\Form\ActionDispatcher\ActionDispatcherInterface;
-use EzSystems\EzPlatformUser\Form\Type\UserRegisterType;
+use Ibexa\ContentForms\Form\ActionDispatcher\ActionDispatcherInterface;
+use Ibexa\Contracts\User\Invitation\InvitationService;
+use Ibexa\Core\MVC\Symfony\Security\Authorization\Attribute;
+use Ibexa\User\Form\DataMapper\UserRegisterMapper;
+use Ibexa\User\Form\Type\UserRegisterType;
+use Ibexa\User\View\Register\ConfirmView;
+use Ibexa\User\View\Register\FormView;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
 class UserRegisterController extends Controller
 {
-    /** @var \EzSystems\EzPlatformUser\Form\DataMapper\UserRegisterMapper */
+    /** @var \Ibexa\User\Form\DataMapper\UserRegisterMapper */
     private $userRegisterMapper;
 
-    /** @var \EzSystems\EzPlatformContentForms\Form\ActionDispatcher\ActionDispatcherInterface */
+    /** @var \Ibexa\ContentForms\Form\ActionDispatcher\ActionDispatcherInterface */
     private $userActionDispatcher;
 
-    /**
-     * @param \EzSystems\EzPlatformUser\Form\DataMapper\UserRegisterMapper $userRegisterMapper
-     * @param \EzSystems\EzPlatformContentForms\Form\ActionDispatcher\ActionDispatcherInterface $userActionDispatcher
-     */
+    private InvitationService $invitationService;
+
     public function __construct(
         UserRegisterMapper $userRegisterMapper,
-        ActionDispatcherInterface $userActionDispatcher
+        ActionDispatcherInterface $userActionDispatcher,
+        InvitationService $invitationService
     ) {
         $this->userRegisterMapper = $userRegisterMapper;
         $this->userActionDispatcher = $userActionDispatcher;
+        $this->invitationService = $invitationService;
     }
 
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
      *
-     * @return \EzSystems\EzPlatformUser\View\Register\FormView|\Symfony\Component\HttpFoundation\Response|null
+     * @return \Ibexa\User\View\Register\FormView|\Symfony\Component\HttpFoundation\Response|null
      *
-     * @throws \eZ\Publish\Core\Base\Exceptions\InvalidArgumentType
+     * @throws \Ibexa\Core\Base\Exceptions\InvalidArgumentType
      */
     public function registerAction(Request $request)
     {
@@ -53,7 +54,6 @@ class UserRegisterController extends Controller
         $data = $this->userRegisterMapper->mapToFormData();
         $language = $data->mainLanguageCode;
 
-        /** @var \Symfony\Component\Form\Form $form */
         $form = $this->createForm(
             UserRegisterType::class,
             $data,
@@ -73,12 +73,53 @@ class UserRegisterController extends Controller
     }
 
     /**
-     * @return \EzSystems\EzPlatformUser\View\Register\ConfirmView
+     * @return \Ibexa\User\View\Register\ConfirmView
      *
-     * @throws \eZ\Publish\Core\Base\Exceptions\InvalidArgumentType
+     * @throws \Ibexa\Core\Base\Exceptions\InvalidArgumentType
      */
     public function registerConfirmAction(): ConfirmView
     {
         return new ConfirmView();
     }
+
+    /**
+     * @return \Ibexa\User\View\Register\FormView|\Symfony\Component\HttpFoundation\Response
+     */
+    public function registerFromInvitationAction(Request $request)
+    {
+        $invitation = $this->invitationService->getInvitation($request->get('inviteHash'));
+
+        if (!$this->invitationService->isValid($invitation)) {
+            throw new UnauthorizedHttpException('You are not allowed to register a new account');
+        }
+
+        $this->userRegisterMapper->setParam('invitation', $invitation);
+        $data = $this->userRegisterMapper->mapToFormData();
+        $language = $data->mainLanguageCode;
+
+        $form = $this->createForm(
+            UserRegisterType::class,
+            $data,
+            [
+                'languageCode' => $language,
+                'mainLanguageCode' => $language,
+                'intent' => 'invitation',
+            ]
+        );
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid() && null !== $form->getClickedButton()) {
+            $this->userActionDispatcher->dispatchFormAction($form, $data, $form->getClickedButton()->getName());
+            if ($response = $this->userActionDispatcher->getResponse()) {
+                $this->invitationService->markAsUsed($invitation);
+
+                return $response;
+            }
+        }
+
+        return new FormView(null, ['form' => $form->createView()]);
+    }
 }
+
+class_alias(UserRegisterController::class, 'EzSystems\EzPlatformUserBundle\Controller\UserRegisterController');

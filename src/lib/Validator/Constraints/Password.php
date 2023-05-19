@@ -1,13 +1,15 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUser\Validator\Constraints;
+namespace Ibexa\User\Validator\Constraints;
 
+use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType;
+use Ibexa\Contracts\Core\Repository\Values\User\User;
 use Symfony\Component\Validator\Constraint;
 
 /**
@@ -15,14 +17,11 @@ use Symfony\Component\Validator\Constraint;
  */
 class Password extends Constraint
 {
-    /** @var string */
-    public $message = 'ez.user.password.invalid';
+    public string $message = 'ez.user.password.invalid';
 
-    /** @var \eZ\Publish\API\Repository\Values\ContentType\ContentType|null */
-    public $contentType;
+    public ?ContentType $contentType = null;
 
-    /** @var \eZ\Publish\API\Repository\Values\User\User|null */
-    public $user;
+    public ?User $user = null;
 
     /**
      * {@inheritdoc}
@@ -32,3 +31,5 @@ class Password extends Constraint
         return [self::CLASS_CONSTRAINT, self::PROPERTY_CONSTRAINT];
     }
 }
+
+class_alias(Password::class, 'EzSystems\EzPlatformUser\Validator\Constraints\Password');

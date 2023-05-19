@@ -1,29 +1,29 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUserBundle\DependencyInjection\Compiler\UserSetting;
+namespace Ibexa\Bundle\User\DependencyInjection\Compiler\UserSetting;
 
-use EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException;
-use EzSystems\EzPlatformUser\UserSetting\FormMapperRegistry;
+use Ibexa\Core\Base\Exceptions\InvalidArgumentException;
+use Ibexa\User\UserSetting\FormMapperRegistry;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 
 class FormMapperPass implements CompilerPassInterface
 {
-    public const TAG_NAME = 'ezplatform.admin_ui.user_setting.form_mapper';
+    public const TAG_NAME = 'ibexa.user.setting.mapper.form';
 
     /**
      * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
      *
      * @throws \Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
      * @throws \Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException
-     * @throws \EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException
+     * @throws \Ibexa\Core\Base\Exceptions\InvalidArgumentException;
      */
     public function process(ContainerBuilder $container)
     {
@@ -51,3 +51,5 @@ class FormMapperPass implements CompilerPassInterface
         }
     }
 }
+
+class_alias(FormMapperPass::class, 'EzSystems\EzPlatformUserBundle\DependencyInjection\Compiler\UserSetting\FormMapperPass');

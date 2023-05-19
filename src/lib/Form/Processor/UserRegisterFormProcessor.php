@@ -1,16 +1,17 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformUser\Form\Processor;
+namespace Ibexa\User\Form\Processor;
 
-use eZ\Publish\API\Repository\Repository;
-use eZ\Publish\API\Repository\UserService;
-use EzSystems\EzPlatformUser\Form\Data\UserRegisterData;
-use EzSystems\EzPlatformUser\Form\UserFormEvents;
-use EzSystems\EzPlatformContentForms\Event\FormActionEvent;
+use Ibexa\ContentForms\Event\FormActionEvent;
+use Ibexa\Contracts\Core\Repository\Repository;
+use Ibexa\Contracts\Core\Repository\RoleService;
+use Ibexa\Contracts\Core\Repository\UserService;
+use Ibexa\User\Form\Data\UserRegisterData;
+use Ibexa\User\Form\UserFormEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\RouterInterface;
@@ -20,20 +21,27 @@ use Symfony\Component\Routing\RouterInterface;
  */
 class UserRegisterFormProcessor implements EventSubscriberInterface
 {
-    /** @var \eZ\Publish\API\Repository\UserService */
+    /** @var \Ibexa\Contracts\Core\Repository\UserService */
     private $userService;
 
     /** @var \Symfony\Component\Routing\Generator\UrlGeneratorInterface */
     private $urlGenerator;
 
-    /** @var \eZ\Publish\Core\Repository\Repository */
+    /** @var \Ibexa\Core\Repository\Repository */
     private $repository;
 
-    public function __construct(Repository $repository, UserService $userService, RouterInterface $router)
-    {
+    private RoleService $roleService;
+
+    public function __construct(
+        Repository $repository,
+        UserService $userService,
+        RouterInterface $router,
+        RoleService $roleService
+    ) {
         $this->userService = $userService;
         $this->urlGenerator = $router;
         $this->repository = $repository;
+        $this->roleService = $roleService;
     }
 
     public static function getSubscribedEvents()
@@ -44,13 +52,13 @@ class UserRegisterFormProcessor implements EventSubscriberInterface
     }
 
     /**
-     * @param \EzSystems\EzPlatformContentForms\Event\FormActionEvent $event
+     * @param \Ibexa\ContentForms\Event\FormActionEvent $event
      *
      * @throws \Exception
      */
     public function processRegister(FormActionEvent $event)
     {
-        /** @var UserRegisterData $data */
+        /** @var \Ibexa\User\Form\Data\UserRegisterData $data */
         if (!($data = $event->getData()) instanceof UserRegisterData) {
             return;
         }
@@ -58,16 +66,16 @@ class UserRegisterFormProcessor implements EventSubscriberInterface
 
         $this->createUser($data, $form->getConfig()->getOption('languageCode'));
 
-        $redirectUrl = $this->urlGenerator->generate('ezplatform.user.register_confirmation');
+        $redirectUrl = $this->urlGenerator->generate('ibexa.user.register_confirmation');
         $event->setResponse(new RedirectResponse($redirectUrl));
         $event->stopPropagation();
     }
 
     /**
-     * @param \EzSystems\EzPlatformUser\Form\Data\UserRegisterData $data
+     * @param \Ibexa\User\Form\Data\UserRegisterData $data
      * @param $languageCode
      *
-     * @return \eZ\Publish\API\Repository\Values\User\User
+     * @return \Ibexa\Contracts\Core\Repository\Values\User\User
      *
      * @throws \Exception
      */
@@ -79,8 +87,15 @@ class UserRegisterFormProcessor implements EventSubscriberInterface
 
         return $this->repository->sudo(
             function () use ($data) {
-                return $this->userService->createUser($data, $data->getParentGroups());
+                $user = $this->userService->createUser($data, $data->getParentGroups());
+                if ($data->getRole() !== null) {
+                    $this->roleService->assignRoleToUser($data->getRole(), $user, $data->getRoleLimitation());
+                }
+
+                return $user;
             }
         );
     }
 }
+
+class_alias(UserRegisterFormProcessor::class, 'EzSystems\EzPlatformUser\Form\Processor\UserRegisterFormProcessor');

@@ -1,14 +1,14 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUserBundle\DependencyInjection\Compiler;
+namespace Ibexa\Bundle\User\DependencyInjection\Compiler;
 
-use EzSystems\EzPlatformUserBundle\Security\Authentication\DefaultAuthenticationFailureHandler;
+use Ibexa\Bundle\User\Security\Authentication\DefaultAuthenticationFailureHandler;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
@@ -22,3 +22,5 @@ class SecurityPass implements CompilerPassInterface
         }
     }
 }
+
+class_alias(SecurityPass::class, 'EzSystems\EzPlatformUserBundle\DependencyInjection\Compiler\SecurityPass');

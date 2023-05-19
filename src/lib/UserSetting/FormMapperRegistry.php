@@ -1,25 +1,26 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUser\UserSetting;
+namespace Ibexa\User\UserSetting;
 
-use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
+use Ibexa\Contracts\User\UserSetting\FormMapperInterface;
+use Ibexa\Core\Base\Exceptions\InvalidArgumentException;
 
 /**
  * @internal
  */
 class FormMapperRegistry
 {
-    /** @var \EzSystems\EzPlatformUser\UserSetting\FormMapperInterface[] */
+    /** @var \Ibexa\Contracts\User\UserSetting\FormMapperInterface[] */
     protected $formMappers;
 
     /**
-     * @param \EzSystems\EzPlatformUser\UserSetting\FormMapperInterface[] $formMappers
+     * @param \Ibexa\Contracts\User\UserSetting\FormMapperInterface[] $formMappers
      */
     public function __construct(array $formMappers = [])
     {
@@ -28,7 +29,7 @@ class FormMapperRegistry
 
     /**
      * @param string $identifier
-     * @param \EzSystems\EzPlatformUser\UserSetting\FormMapperInterface $formMapper
+     * @param \Ibexa\Contracts\User\UserSetting\FormMapperInterface $formMapper
      */
     public function addFormMapper(
         string $identifier,
@@ -40,9 +41,9 @@ class FormMapperRegistry
     /**
      * @param string $identifier
      *
-     * @return \EzSystems\EzPlatformUser\UserSetting\FormMapperInterface
+     * @return \Ibexa\Contracts\User\UserSetting\FormMapperInterface
      *
-     * @throws \eZ\Publish\Core\Base\Exceptions\InvalidArgumentException
+     * @throws \Ibexa\Core\Base\Exceptions\InvalidArgumentException
      */
     public function getFormMapper(string $identifier): FormMapperInterface
     {
@@ -57,10 +58,12 @@ class FormMapperRegistry
     }
 
     /**
-     * @return \EzSystems\EzPlatformUser\UserSetting\FormMapperInterface[]
+     * @return \Ibexa\Contracts\User\UserSetting\FormMapperInterface[]
      */
     public function getFormMappers(): array
     {
         return $this->formMappers;
     }
 }
+
+class_alias(FormMapperRegistry::class, 'EzSystems\EzPlatformUser\UserSetting\FormMapperRegistry');

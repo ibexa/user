@@ -1,0 +1,22 @@
+{% trans_default_domain 'user_invitation' %}
+
+{%- block from -%}
+{%- endblock from -%}
+
+{%- block subject -%}
+    {{ 'ibexa.user.invitation.mail.subject'|trans|desc('You are invited to join') }}
+{%- endblock subject -%}
+
+{%- block body -%}
+    <p>
+        {{ 'ibexa.user.invitation.mail.message'|trans({
+            '%invite_link%': url('ibexa.user.from_invite.register', {
+                'inviteHash': invite_hash,
+                'siteaccess': siteaccess
+            })
+        })|raw
+        |desc('Hello,
+            Join us at: %invite_link%
+        ') }}
+    </p>
+{%- endblock body -%}

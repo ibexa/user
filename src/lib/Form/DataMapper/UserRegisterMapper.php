@@ -1,16 +1,17 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformUser\Form\DataMapper;
+namespace Ibexa\User\Form\DataMapper;
 
-use eZ\Publish\API\Repository\Values\Content\Field;
-use EzSystems\EzPlatformUser\ConfigResolver\RegistrationContentTypeLoader;
-use EzSystems\EzPlatformUser\ConfigResolver\RegistrationGroupLoader;
-use EzSystems\EzPlatformContentForms\Data\Content\FieldData;
-use EzSystems\EzPlatformUser\Form\Data\UserRegisterData;
+use Ibexa\Contracts\ContentForms\Data\Content\FieldData;
+use Ibexa\Contracts\Core\Repository\Values\Content\Field;
+use Ibexa\Contracts\User\Invitation\Invitation;
+use Ibexa\User\ConfigResolver\RegistrationContentTypeLoader;
+use Ibexa\User\ConfigResolver\RegistrationGroupLoader;
+use Ibexa\User\Form\Data\UserRegisterData;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -18,18 +19,18 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class UserRegisterMapper
 {
-    /** @var \EzSystems\EzPlatformUser\ConfigResolver\RegistrationContentTypeLoader */
+    /** @var \Ibexa\User\ConfigResolver\RegistrationContentTypeLoader */
     private $contentTypeLoader;
 
-    /** @var \EzSystems\EzPlatformUser\ConfigResolver\RegistrationContentTypeLoader */
+    /** @var \Ibexa\User\ConfigResolver\RegistrationContentTypeLoader */
     private $parentGroupLoader;
 
     /** @var array */
     private $params;
 
     /**
-     * @param \EzSystems\EzPlatformUser\ConfigResolver\RegistrationContentTypeLoader $contentTypeLoader
-     * @param \EzSystems\EzPlatformUser\ConfigResolver\RegistrationGroupLoader $registrationGroupLoader
+     * @param \Ibexa\User\ConfigResolver\RegistrationContentTypeLoader $contentTypeLoader
+     * @param \Ibexa\User\ConfigResolver\RegistrationGroupLoader $registrationGroupLoader
      */
     public function __construct(
         RegistrationContentTypeLoader $contentTypeLoader,
@@ -49,7 +50,7 @@ class UserRegisterMapper
     }
 
     /**
-     * @return UserRegisterData
+     * @return \Ibexa\User\Form\Data\UserRegisterData
      */
     public function mapToFormData()
     {
@@ -57,23 +58,45 @@ class UserRegisterMapper
         $this->configureOptions($resolver);
         $this->params = $resolver->resolve($this->params);
 
-        $contentType = $this->contentTypeLoader->loadContentType();
+        /** @var \Ibexa\Contracts\User\Invitation\Invitation|null $invitation */
+        $invitation = $this->params['invitation'] ?? null;
+        $contentType = $this->contentTypeLoader->loadContentType(
+            $invitation ? $invitation->getSiteAccessIdentifier() : null
+        );
 
         $data = new UserRegisterData([
             'contentType' => $contentType,
             'mainLanguageCode' => $this->params['language'],
             'enabled' => true,
         ]);
-        $data->addParentGroup($this->parentGroupLoader->loadGroup());
 
+        if ($invitation && $invitation->getUserGroup()) {
+            $targetGroup = $invitation->getUserGroup();
+        } else {
+            $targetGroup = $this->parentGroupLoader->loadGroup();
+        }
+
+        $data->addParentGroup($targetGroup);
+
+        if ($invitation) {
+            $data->setRole($invitation->getRole());
+            $data->setRoleLimitation($invitation->getLimitation());
+            $data->email = $invitation->getEmail();
+        }
+
+        /** @var \Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition $fieldDef */
         foreach ($contentType->fieldDefinitions as $fieldDef) {
+            $value = $fieldDef->defaultValue;
+            if ($invitation && $fieldDef->fieldTypeIdentifier === 'ezuser') {
+                $value->email = $invitation->getEmail();
+            }
             $data->addFieldData(new FieldData([
                 'fieldDefinition' => $fieldDef,
                 'field' => new Field([
                     'fieldDefIdentifier' => $fieldDef->identifier,
                     'languageCode' => $this->params['language'],
                 ]),
-                'value' => $fieldDef->defaultValue,
+                'value' => $value,
             ]));
         }
 
@@ -82,6 +105,11 @@ class UserRegisterMapper
 
     private function configureOptions(OptionsResolver $optionsResolver)
     {
-        $optionsResolver->setRequired('language');
+        $optionsResolver
+            ->setRequired('language')
+            ->setDefined(['invitation'])
+            ->setAllowedTypes('invitation', Invitation::class);
     }
 }
+
+class_alias(UserRegisterMapper::class, 'EzSystems\EzPlatformUser\Form\DataMapper\UserRegisterMapper');

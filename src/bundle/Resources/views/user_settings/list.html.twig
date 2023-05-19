@@ -3,35 +3,31 @@
 {% trans_default_domain 'user_settings' %}
 
 {%- block content -%}
-    {% for user_setting in pager %}
-        <h2>{{ user_setting.name }}</h2>
-        {% if user_setting.description is not empty %}
-            <p>{{ user_setting.description }}</p>
+    {% for settings_group in grouped_settings %}
+        <h2>{{ settings_group.name }}</h2>
+        {% if settings_group.description is not empty %}
+            <p>{{ settings_group.description }}</p>
+        {% endif %}
+        {% if settings_group.settings is not empty %}
+            <a
+                title="{{ 'list.action.edit'|trans|desc('Edit') }}"
+                href="{{ path('ibexa.user_settings.update', { 'identifier': settings_group.identifier }) }}"
+            >
+                {{ 'list.action.edit'|trans|desc('Edit') }}
+            </a>
         {% endif %}
         <table>
             <tbody>
-                <tr>
-                    <td>
-                        {{ value_definitions[user_setting.identifier].getDisplayValue(user_setting.value)|raw }}
-                    </td>
-                    <td>
-                        <a title="{{ 'list.action.edit'|trans|desc('Edit') }}"
-                            href="{{ path('ezplatform.user_settings.update', { 'identifier': user_setting.identifier }) }}">
-                            {{ 'list.action.edit'|trans|desc('Edit') }}
-                        </a>
-                    </td>
-                </tr>
+                {% for user_setting in settings_group.settings %}
+                     <tr>
+                        <td>
+                            {{ value_definitions[user_setting.identifier].getDisplayValue(user_setting.value)|raw }}
+                        </td>
+                    </tr>
+                {% endfor %}
             </tbody>
         </table>
     {% endfor %}
-
-    {% if pager.haveToPaginate %}
-        {{ 'pagination.viewing'|trans({
-            '%viewing%': pager.currentPageResults|length,
-            '%total%': pager.nbResults}, 'pagination')|desc('Viewing <strong>%viewing%</strong> out of <strong>%total%</strong> items')|raw }}
-        {{ pagerfanta(pager, 'ez') }}
-    {% endif %}
-
     <h2>{{ 'my_account_settings.password.title'|trans|desc('Password') }}</h2>
     <table class="table table-hover">
         <tbody>
@@ -41,7 +37,7 @@
                 </td>
                 <td>
                     <a title="{{ 'my_account_settings.password.action.edit'|trans|desc('Edit') }}"
-                       href="{{ path('ezplatform.user_profile.change_password') }}">
+                       href="{{ path('ibexa.user_profile.change_password') }}">
                         {{ 'my_account_settings.password.action.edit'|trans|desc('Edit') }}
                     </a>
                 </td>

@@ -1,17 +1,17 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUser\Form\Type;
+namespace Ibexa\User\Form\Type;
 
-use eZ\Publish\API\Repository\Values\ContentType\ContentType;
-use eZ\Publish\API\Repository\Values\User\User;
-use EzSystems\EzPlatformUser\Form\Data\UserPasswordChangeData;
-use EzSystems\EzPlatformUser\Validator\Constraints\Password;
+use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType;
+use Ibexa\Contracts\Core\Repository\Values\User\User;
+use Ibexa\User\Form\Data\UserPasswordChangeData;
+use Ibexa\User\Validator\Constraints\Password;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
@@ -60,3 +60,5 @@ class UserPasswordChangeType extends AbstractType
         ]);
     }
 }
+
+class_alias(UserPasswordChangeType::class, 'EzSystems\EzPlatformUser\Form\Type\UserPasswordChangeType');

@@ -1,28 +1,30 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace Ibexa\User\Behat\Context;
 
 use Behat\Behat\Context\Context;
-use eZ\Publish\API\Repository\PermissionResolver;
-use eZ\Publish\API\Repository\UserService;
-use EzSystems\EzPlatformUser\UserSetting\UserSettingService;
+use Ibexa\Contracts\Core\Repository\PermissionResolver;
+use Ibexa\Contracts\Core\Repository\UserService;
+use Ibexa\User\UserSetting\UserSettingService;
 
 class UserSettingsContext implements Context
 {
     /**
-     * @var UserSettingService
+     * @var \Ibexa\User\UserSetting\UserSettingService
      */
     private $userSettingService;
+
     /**
-     * @var PermissionResolver
+     * @var \Ibexa\Contracts\Core\Repository\PermissionResolver
      */
     private $permissionResolver;
+
     /**
-     * @var UserService
+     * @var \Ibexa\Contracts\Core\Repository\UserService
      */
     private $userService;
 

@@ -1,0 +1,9 @@
+{% extends view_base_layout is defined ? view_base_layout : page_layout %}
+
+{% form_theme form.limitation_type '@ibexadesign/ui/form_fields.html.twig' %}
+
+{% block content %}
+    {{ form_start(form) }}
+    {{ form_row(form) }}
+    {{ form_end(form) }}
+{% endblock %}

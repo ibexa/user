@@ -1,15 +1,15 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUser\Tests\Form\Type\ChoiceList\Loader;
+namespace Ibexa\Tests\User\Form\Type\ChoiceList\Loader;
 
-use eZ\Publish\Core\MVC\ConfigResolverInterface;
-use EzSystems\EzPlatformUser\Form\ChoiceList\Loader\AvailableLocaleChoiceLoader;
+use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
+use Ibexa\User\Form\ChoiceList\Loader\AvailableLocaleChoiceLoader;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Validator\Constraints\Locale;
 use Symfony\Component\Validator\ConstraintViolationInterface;
@@ -27,7 +27,7 @@ class AvailableLocaleChoiceLoaderTest extends TestCase
     /** @var \Symfony\Component\Validator\ConstraintViolationInterface|\PHPUnit\Framework\MockObject\MockObject */
     private $constraintViolation;
 
-    /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface|\PHPUnit\Framework\MockObject\MockObject */
+    /** @var \Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface|\PHPUnit\Framework\MockObject\MockObject */
     private $configResolver;
 
     protected function setUp(): void
@@ -104,3 +104,5 @@ class AvailableLocaleChoiceLoaderTest extends TestCase
         ];
     }
 }
+
+class_alias(AvailableLocaleChoiceLoaderTest::class, 'EzSystems\EzPlatformUser\Tests\Form\Type\ChoiceList\Loader\AvailableLocaleChoiceLoaderTest');

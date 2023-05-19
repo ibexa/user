@@ -1,23 +1,23 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUser\EventListener;
+namespace Ibexa\User\EventListener;
 
-use eZ\Publish\Core\MVC\ConfigResolverInterface;
-use eZ\Publish\Core\MVC\Symfony\Event\PreContentViewEvent;
-use eZ\Publish\Core\MVC\Symfony\MVCEvents;
-use EzSystems\EzPlatformContentForms\User\View\UserUpdateView;
-use EzSystems\EzPlatformUser\View;
+use Ibexa\ContentForms\User\View\UserUpdateView;
+use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
+use Ibexa\Core\MVC\Symfony\Event\PreContentViewEvent;
+use Ibexa\Core\MVC\Symfony\MVCEvents;
+use Ibexa\User\View;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class ViewTemplatesListener implements EventSubscriberInterface
 {
-    /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
+    /** @var \Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface */
     private $configResolver;
 
     public function __construct(ConfigResolverInterface $configResolver)
@@ -84,6 +84,9 @@ class ViewTemplatesListener implements EventSubscriberInterface
             View\UserSettings\ListView::class => $this->configResolver->getParameter('user_settings.templates.list'),
             View\Register\FormView::class => $this->configResolver->getParameter('user_registration.templates.form'),
             View\Register\ConfirmView::class => $this->configResolver->getParameter('user_registration.templates.confirmation'),
+            View\Invitation\FormView::class => $this->configResolver->getParameter('user_invitation.templates.form'),
         ];
     }
 }
+
+class_alias(ViewTemplatesListener::class, 'EzSystems\EzPlatformUser\EventListener\ViewTemplatesListener');

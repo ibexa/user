@@ -6,22 +6,22 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUserBundle\Tests\DependencyInjection\Configuration\Parser;
+namespace Ibexa\Tests\Bundle\User\DependencyInjection\Configuration\Parser;
 
-use eZ\Bundle\EzPublishCoreBundle\DependencyInjection\EzPublishCoreExtension;
-use eZ\Bundle\EzPublishCoreBundle\Tests\DependencyInjection\Configuration\Parser\AbstractParserTestCase;
-use EzSystems\EzPlatformUserBundle\DependencyInjection\Configuration\Parser\ResetPassword;
-use EzSystems\EzPlatformUserBundle\DependencyInjection\EzPlatformUserExtension;
+use Ibexa\Bundle\Core\DependencyInjection\IbexaCoreExtension;
+use Ibexa\Bundle\User\DependencyInjection\Configuration\Parser\ResetPassword;
+use Ibexa\Bundle\User\DependencyInjection\IbexaUserExtension;
+use Ibexa\Tests\Bundle\Core\DependencyInjection\Configuration\Parser\AbstractParserTestCase;
 
 final class ResetPasswordTest extends AbstractParserTestCase
 {
     protected function getContainerExtensions(): array
     {
         return [
-            new EzPublishCoreExtension([
+            new IbexaCoreExtension([
                 new ResetPassword(),
             ]),
-            new EzPlatformUserExtension(),
+            new IbexaUserExtension(),
         ];
     }
 
@@ -33,7 +33,7 @@ final class ResetPasswordTest extends AbstractParserTestCase
                     'user_reset_password' => [
                         'templates' => [
                             'form' => 'default/path/template.html.twig',
-                        ]
+                        ],
                     ],
                 ],
             ],
@@ -47,7 +47,7 @@ final class ResetPasswordTest extends AbstractParserTestCase
         $this->assertConfigResolverParameterValue(
             'user_reset_password.templates.form',
             'default/path/template.html.twig',
-            'ezdemo_site'
+            'ibexa_demo_site'
         );
     }
 
@@ -55,13 +55,13 @@ final class ResetPasswordTest extends AbstractParserTestCase
     {
         $this->load([
             'system' => [
-                'ezdemo_site' => [
+                'ibexa_demo_site' => [
                     'user_reset_password' => [
                         'templates' => [
                             'form' => '@yourOwnBundle/path/to/template.html.twig',
                             'invalid_link' => '@yourOwnBundle/path/to/invalid_link.html.twig',
-                            'success' => '@yourOwnBundle/path/to/success.html.twig'
-                        ]
+                            'success' => '@yourOwnBundle/path/to/success.html.twig',
+                        ],
                     ],
                 ],
             ],
@@ -70,17 +70,19 @@ final class ResetPasswordTest extends AbstractParserTestCase
         $this->assertConfigResolverParameterValue(
             'user_reset_password.templates.form',
             '@yourOwnBundle/path/to/template.html.twig',
-            'ezdemo_site'
+            'ibexa_demo_site'
         );
         $this->assertConfigResolverParameterValue(
             'user_reset_password.templates.invalid_link',
             '@yourOwnBundle/path/to/invalid_link.html.twig',
-            'ezdemo_site'
+            'ibexa_demo_site'
         );
         $this->assertConfigResolverParameterValue(
             'user_reset_password.templates.success',
             '@yourOwnBundle/path/to/success.html.twig',
-            'ezdemo_site'
+            'ibexa_demo_site'
         );
     }
 }
+
+class_alias(ResetPasswordTest::class, 'EzSystems\EzPlatformUserBundle\Tests\DependencyInjection\Configuration\Parser\ResetPasswordTest');

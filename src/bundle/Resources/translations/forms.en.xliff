@@ -27,8 +27,8 @@
         <note>key: ezplatform.change_user_password.old_password</note>
       </trans-unit>
       <trans-unit id="859bfc3d21113eecb4a19d4a9305f2519eb4b331" resname="ezplatform.forgot_user_password.email">
-        <source>Enter your email address:</source>
-        <target state="new">Enter your email address:</target>
+        <source>Enter your email</source>
+        <target state="new">Enter your email</target>
         <note>key: ezplatform.forgot_user_password.email</note>
       </trans-unit>
       <trans-unit id="ffb6990d5e75fe6dc86e94166b77e40a79e4e2a3" resname="ezplatform.forgot_user_password.login">
@@ -40,6 +40,11 @@
         <source>Reset</source>
         <target state="new">Reset</target>
         <note>key: ezplatform.forgot_user_password.reset</note>
+      </trans-unit>
+      <trans-unit id="44c91aa5708f9b819f7f84b00925dc19d6798341" resname="ezplatform.forgot_user_password.send">
+        <source>Send</source>
+        <target state="new">Send</target>
+        <note>key: ezplatform.forgot_user_password.send</note>
       </trans-unit>
       <trans-unit id="877b8a2a4e3b2c7c137b7776a54cd7531421e5d3" resname="ezplatform.reset_user_password.confirm_new_password">
         <source>Confirm password</source>
@@ -55,6 +60,56 @@
         <source>Update</source>
         <target state="new">Update</target>
         <note>key: ezplatform.reset_user_password.update</note>
+      </trans-unit>
+      <trans-unit id="ab90b332cf5f8d29b421427cdfc2ec676d5bebdb" resname="ibexa.user.invitation.email">
+        <source>Enter email</source>
+        <target state="new">Enter email</target>
+        <note>key: ibexa.user.invitation.email</note>
+      </trans-unit>
+      <trans-unit id="40edf918af3b2d9085e2ecaa98cfd004f13fc226" resname="ibexa.user.invitation.group">
+        <source>Select Group</source>
+        <target state="new">Select Group</target>
+        <note>key: ibexa.user.invitation.group</note>
+      </trans-unit>
+      <trans-unit id="6b827dc215e0b48c99cd9c687dcf7eb2516ea04c" resname="ibexa.user.invitation.location_id">
+        <source>Type subtree root id</source>
+        <target state="new">Type subtree root id</target>
+        <note>key: ibexa.user.invitation.location_id</note>
+      </trans-unit>
+      <trans-unit id="a58fe68d0cd618abf2315b3fa69de2f2f4d6ed56" resname="ibexa.user.invitation.pick_sections">
+        <source>Pick Sections</source>
+        <target state="new">Pick Sections</target>
+        <note>key: ibexa.user.invitation.pick_sections</note>
+      </trans-unit>
+      <trans-unit id="04b4c40f5a7eabe6c31aa32dacf78b4dfc4f7a62" resname="ibexa.user.invitation.role">
+        <source>Select Role</source>
+        <target state="new">Select Role</target>
+        <note>key: ibexa.user.invitation.role</note>
+      </trans-unit>
+      <trans-unit id="72fa3da181a637ddf261bc9948160611535062ef" resname="ibexa.user.invitation.send_invitation">
+        <source>Send invitation</source>
+        <target state="new">Send invitation</target>
+        <note>key: ibexa.user.invitation.send_invitation</note>
+      </trans-unit>
+      <trans-unit id="ad201158aea7a3eae82b7364341dc0dd218d7436" resname="ibexa.user.invitation.site_access">
+        <source>Select Site</source>
+        <target state="new">Select Site</target>
+        <note>key: ibexa.user.invitation.site_access</note>
+      </trans-unit>
+      <trans-unit id="78b9d0d52e636ef2d0d1f919de16154404c2be0f" resname="role.policy.user">
+        <source>User</source>
+        <target state="new">User</target>
+        <note>key: role.policy.user</note>
+      </trans-unit>
+      <trans-unit id="d44ce8c33cbc780cff9ca6f05ad2f70002550cd0" resname="role.policy.user.all_functions">
+        <source>User / All functions</source>
+        <target state="new">User / All functions</target>
+        <note>key: role.policy.user.all_functions</note>
+      </trans-unit>
+      <trans-unit id="587199065d14880416b8061b73788e731a201c27" resname="role.policy.user.invite">
+        <source>User / Invite</source>
+        <target state="new">User / Invite</target>
+        <note>key: role.policy.user.invite</note>
       </trans-unit>
     </body>
   </file>

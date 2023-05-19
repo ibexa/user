@@ -6,6 +6,5 @@ services:
 
     Ibexa\User\Behat\Context\UserSetupContext:
         arguments:
-            - '@ezpublish.persistence.connection'
+            - '@ibexa.persistence.connection'
     Ibexa\User\Behat\Context\UserSettingsContext: ~
-

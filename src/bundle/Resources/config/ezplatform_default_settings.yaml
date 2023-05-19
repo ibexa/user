@@ -1,40 +1,50 @@
 parameters:
     # Security
-    ezsettings.default.security.token_interval_spec: PT1H
-    ezsettings.default.user_change_password.templates.form: "@@EzPlatformUser/change_password/index.html.twig"
-    ezsettings.default.user_change_password.templates.success: "@@EzPlatformUser/change_password/success.html.twig"
-    ezsettings.default.user_forgot_password.templates.form: "@@EzPlatformUser/forgot_password/index.html.twig"
-    ezsettings.default.user_forgot_password_success.templates.form: "@@EzPlatformUser/forgot_password/success.html.twig"
-    ezsettings.default.user_forgot_password_login.templates.form: "@@EzPlatformUser/forgot_password/with_login.html.twig"
-    ezsettings.default.user_forgot_password.templates.mail: "@@EzPlatformUser/forgot_password/mail/forgot_user_password.html.twig"
-    ezsettings.default.user_reset_password.templates.form: "@@EzPlatformUser/reset_password/index.html.twig"
-    ezsettings.default.user_reset_password.templates.invalid_link: "@@EzPlatformUser/reset_password/invalid_link.html.twig"
-    ezsettings.default.user_reset_password.templates.success: "@@EzPlatformUser/reset_password/success.html.twig"
+    ibexa.site_access.config.default.security.token_interval_spec: PT1H
+    ibexa.site_access.config.default.user_change_password.templates.form: "@@IbexaUser/change_password/index.html.twig"
+    ibexa.site_access.config.default.user_change_password.templates.success: "@@IbexaUser/change_password/success.html.twig"
+    ibexa.site_access.config.default.user_forgot_password.templates.form: "@@IbexaUser/forgot_password/index.html.twig"
+    ibexa.site_access.config.default.user_forgot_password_success.templates.form: "@@IbexaUser/forgot_password/success.html.twig"
+    ibexa.site_access.config.default.user_forgot_password_login.templates.form: "@@IbexaUser/forgot_password/with_login.html.twig"
+    ibexa.site_access.config.default.user_forgot_password.templates.mail: "@@IbexaUser/forgot_password/mail/forgot_user_password.html.twig"
+    ibexa.site_access.config.default.user_reset_password.templates.form: "@@IbexaUser/reset_password/index.html.twig"
+    ibexa.site_access.config.default.user_reset_password.templates.invalid_link: "@@IbexaUser/reset_password/invalid_link.html.twig"
+    ibexa.site_access.config.default.user_reset_password.templates.success: "@@IbexaUser/reset_password/success.html.twig"
 
     # Registration
-    ezsettings.default.user_registration.group_id: 11
-    ezsettings.default.user_registration.templates.form: "@@EzPlatformContentForms/Content/content_edit.html.twig"
-    ezsettings.default.user_registration.templates.confirmation: "@@EzPlatformUser/register/register_confirmation.html.twig"
+    ibexa.site_access.config.default.user_registration.group_id: 11
+    ibexa.site_access.config.default.user_registration.user_type_identifier: 'user'
+    ibexa.site_access.config.default.user_registration.templates.form: "@@IbexaContentForms/Content/content_edit.html.twig"
+    ibexa.site_access.config.default.user_registration.templates.confirmation: "@@IbexaUser/register/register_confirmation.html.twig"
+    ibexa.site_access.config.default.user_registration.form.allowed_field_definitions_identifiers:
+        - first_name
+        - last_name
+        - user_account
+
+    # Invitation
+    ibexa.site_access.config.default.user_invitation.templates.form: "@@IbexaUser/invitation/form.html.twig"
+    ibexa.site_access.config.default.user_invitation.templates.mail: "@@IbexaUser/invitation/mail/user_invitation.html.twig"
+    ibexa.site_access.config.default.user_invitation.hash_expiration_time: 'P7D'
 
     # User Settings
-    ezsettings.default.user_settings_update_view: {}
-    ezsettings.default.user_settings_update_view_defaults:
+    ibexa.site_access.config.default.user_settings_update_view: {}
+    ibexa.site_access.config.default.user_settings_update_view_defaults:
         full:
             default:
-                template: "%ezsettings.default.user_settings.templates.update%"
+                template: "%ibexa.site_access.config.default.user_settings.templates.update%"
                 match: []
 
-    ezsettings.default.user_settings.templates.list: "@@EzPlatformUser/user_settings/list.html.twig"
-    ezsettings.default.user_settings.templates.update: "@@EzPlatformUser/user_settings/update.html.twig"
+    ibexa.site_access.config.default.user_settings.templates.list: "@@IbexaUser/user_settings/list.html.twig"
+    ibexa.site_access.config.default.user_settings.templates.update: "@@IbexaUser/user_settings/update.html.twig"
 
     # User Preferences
-    ezsettings.default.user_preferences.short_datetime_format:
+    ibexa.site_access.config.default.user_preferences.short_datetime_format:
         date_format: 'dd/MM/yyyy'
         time_format: 'HH:mm'
-    ezsettings.default.user_preferences.full_datetime_format:
+    ibexa.site_access.config.default.user_preferences.full_datetime_format:
         date_format: 'LLLL dd, yyyy'
         time_format: 'HH:mm'
-    ezsettings.default.user_preferences.allowed_short_date_formats:
+    ibexa.site_access.config.default.user_preferences.allowed_short_date_formats:
         'mm/dd/yyyy': 'MM/dd/yyyy'
         'mm/dd/yy': 'MM/dd/yy'
         'dd/mm/yyyy': 'dd/MM/yyyy'
@@ -44,18 +54,28 @@ parameters:
         'mm-dd-yy': 'MM-dd-yy'
         'dd-mm-yyyy': 'dd-MM-yyyy'
         'dd-mm-yy': 'dd-MM-yy'
-    ezsettings.default.user_preferences.allowed_short_time_formats:
+    ibexa.site_access.config.default.user_preferences.allowed_short_time_formats:
         'hh:mm AM/PM': 'hh:mm a'
         'hh:mm': 'HH:mm'
-    ezsettings.default.user_preferences.allowed_full_date_formats:
+    ibexa.site_access.config.default.user_preferences.allowed_full_date_formats:
         'M dd, yyyy': 'LLLL dd, yyyy'
         'dd M yyyy': 'dd LLLL yyyy'
-    ezsettings.default.user_preferences.allowed_full_time_formats:
+    ibexa.site_access.config.default.user_preferences.allowed_full_time_formats:
         'hh:mm AM/PM': 'hh:mm a'
         'hh:mm': 'HH:mm'
 
     # Additional translations e.g. ['en_US', 'nb_NO']
-    ezsettings.default.user_preferences.additional_translations: []
+    ibexa.site_access.config.default.user_preferences.additional_translations: []
 
     # Pagination limits
-    ezsettings.default.pagination_user.user_settings_limit: 10
+    ibexa.site_access.config.default.pagination_user.user_settings_limit: 10
+
+    ibexa.site_access.config.default.user.default_profile_image.colors:
+        - { background: '#FFF7EC', text: '#FCAE42' }
+        - { background: '#FDF3F0', text: '#F18A6B' }
+        - { background: '#FFECE7', text: '#FF4713' }
+        - { background: '#F6E7EF', text: '#AE1164' }
+        - { background: '#E5EDEE', text: '#004D5D' }
+        - { background: '#ECF8FB', text: '#47BEDB' }
+        - { background: '#E5F5E9', text: '#00A42B' }
+        - { background: '#ECF4FF', text: '#4191FF' }

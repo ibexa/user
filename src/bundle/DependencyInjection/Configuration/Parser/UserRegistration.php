@@ -1,15 +1,15 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformUserBundle\DependencyInjection\Configuration\Parser;
+namespace Ibexa\Bundle\User\DependencyInjection\Configuration\Parser;
 
-use eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\AbstractParser;
-use eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\SiteAccessAware\ContextualizerInterface;
+use Ibexa\Bundle\Core\DependencyInjection\Configuration\AbstractParser;
+use Ibexa\Bundle\Core\DependencyInjection\Configuration\SiteAccessAware\ContextualizerInterface;
 use Symfony\Component\Config\Definition\Builder\NodeBuilder;
 
 class UserRegistration extends AbstractParser
@@ -25,6 +25,10 @@ class UserRegistration extends AbstractParser
             ->arrayNode('user_registration')
                 ->info('User registration configuration')
                 ->children()
+                    ->scalarNode('user_type_identifier')
+                        ->info('Content type identifier used for registration.')
+                        ->defaultValue('user')
+                    ->end()
                     ->scalarNode('group_id')
                         ->info('Content id of the user group where users who register are created.')
                         ->defaultValue(11)
@@ -40,6 +44,15 @@ class UserRegistration extends AbstractParser
                             ->end()
                         ->end()
                     ->end()
+                    ->arrayNode('form')
+                        ->info('User registration form configuration.')
+                        ->children()
+                            ->arrayNode('allowed_field_definitions_identifiers')
+                            ->requiresAtLeastOneElement()
+                            ->defaultValue(['user_account'])
+                            ->prototype('scalar')->end()
+                        ->end()
+                    ->end()
                 ->end()
             ->end();
     }
@@ -52,11 +65,20 @@ class UserRegistration extends AbstractParser
 
         $settings = $scopeSettings['user_registration'];
 
+        if (!empty($settings['user_type_identifier'])) {
+            $contextualizer->setContextualParameter(
+                'user_registration.user_type_identifier',
+                $currentScope,
+                $settings['user_type_identifier']
+            );
+        }
+
         if (!empty($settings['group_id'])) {
             $contextualizer->setContextualParameter(
                 'user_registration.group_id',
                 $currentScope,
-                $settings['group_id']);
+                $settings['group_id']
+            );
         }
 
         if (!empty($settings['templates']['form'])) {
@@ -74,5 +96,15 @@ class UserRegistration extends AbstractParser
                 $settings['templates']['confirmation']
             );
         }
+
+        if (!empty($settings['form']['allowed_field_definitions_identifiers'])) {
+            $contextualizer->setContextualParameter(
+                'user_registration.form.allowed_field_definitions_identifiers',
+                $currentScope,
+                $settings['form']['allowed_field_definitions_identifiers']
+            );
+        }
     }
 }
+
+class_alias(UserRegistration::class, 'EzSystems\EzPlatformUserBundle\DependencyInjection\Configuration\Parser\UserRegistration');
