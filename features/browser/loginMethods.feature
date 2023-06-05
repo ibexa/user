@@ -1,4 +1,4 @@
-@IbexaOSS @IbexaContent @IbexaExperience @IbexaCommerce
+@IbexaOSS @IbexaHeadless @IbexaExperience @IbexaCommerce
 Feature: As an user I can log in using email address
 
   @APIUser:admin
