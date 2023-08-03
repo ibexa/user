@@ -17,6 +17,10 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class AvailableLocaleChoiceLoader implements ChoiceLoaderInterface
 {
+    // Acholi dialect is used by In-Context translation
+    // and should not be present on the list of available translations.
+    private const EXCLUDED_TRANSLATIONS = ['ach'];
+
     /** @var \Symfony\Component\Validator\Validator\ValidatorInterface */
     private $validator;
 
@@ -47,8 +51,9 @@ class AvailableLocaleChoiceLoader implements ChoiceLoaderInterface
 
         $additionalTranslations = $this->configResolver->getParameter('user_preferences.additional_translations');
         $availableLocales = array_unique(array_merge($this->availableTranslations, $additionalTranslations));
+        $locales = array_diff($availableLocales, self::EXCLUDED_TRANSLATIONS);
 
-        foreach ($availableLocales as $locale) {
+        foreach ($locales as $locale) {
             if (0 === $this->validator->validate($locale, new Locale())->count()) {
                 $choices[Locales::getName($locale)] = $locale;
             }

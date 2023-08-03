@@ -11,7 +11,6 @@ namespace Ibexa\Tests\User\Form\Type\ChoiceList\Loader;
 use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 use Ibexa\User\Form\ChoiceList\Loader\AvailableLocaleChoiceLoader;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\Validator\Constraints\Locale;
 use Symfony\Component\Validator\ConstraintViolationInterface;
 use Symfony\Component\Validator\ConstraintViolationList;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -20,9 +19,6 @@ class AvailableLocaleChoiceLoaderTest extends TestCase
 {
     /** @var \Symfony\Component\Validator\Validator\ValidatorInterface|\PHPUnit\Framework\MockObject\MockObject */
     private $validator;
-
-    /** @var \Symfony\Component\Validator\Constraints\Locale|\PHPUnit\Framework\MockObject\MockObject */
-    private $localeConstraint;
 
     /** @var \Symfony\Component\Validator\ConstraintViolationInterface|\PHPUnit\Framework\MockObject\MockObject */
     private $constraintViolation;
@@ -34,7 +30,6 @@ class AvailableLocaleChoiceLoaderTest extends TestCase
     {
         parent::setUp();
 
-        $this->localeConstraint = $this->createMock(Locale::class);
         $this->validator = $this->createMock(ValidatorInterface::class);
         $this->constraintViolation = $this->createMock(ConstraintViolationInterface::class);
         $this->configResolver = $this->createMock(ConfigResolverInterface::class);
@@ -99,6 +94,13 @@ class AvailableLocaleChoiceLoaderTest extends TestCase
                     'English' => 'en',
                     'Norwegian Bokmål (Norway)' => 'nb_NO',
                     'German (Germany)' => 'de_DE',
+                ],
+            ],
+            'acholi_exlusion' => [
+                ['en', 'ach'],
+                [],
+                [
+                    'English' => 'en',
                 ],
             ],
         ];
