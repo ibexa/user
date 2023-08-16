@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\User\UserSetting\Group;
 
+use JMS\TranslationBundle\Annotation\Desc;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class CustomGroup extends AbstractGroup
@@ -30,7 +31,7 @@ final class CustomGroup extends AbstractGroup
             /** @Desc("Custom Group") */
             'settings.group.generic.name',
             [],
-            'user_settings'
+            'ibexa_user_settings'
         );
     }
 
@@ -40,7 +41,7 @@ final class CustomGroup extends AbstractGroup
             /** @Desc("") */
             'settings.group.generic.description',
             [],
-            'user_settings'
+            'ibexa_user_settings'
         );
     }
 }

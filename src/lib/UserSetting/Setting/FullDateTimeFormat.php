@@ -14,6 +14,7 @@ use Ibexa\User\Form\DataTransformer\DateTimeFormatTransformer;
 use Ibexa\User\Form\Type\UserSettings\FullDateTimeFormatType;
 use Ibexa\User\UserSetting\DateTimeFormat\FormatterInterface;
 use Ibexa\User\UserSetting\Setting\Value\DateTimeFormat;
+use JMS\TranslationBundle\Annotation\Desc;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -84,7 +85,7 @@ class FullDateTimeFormat extends AbstractDateTimeFormat
             /** @Desc("Long date and time format") */
             'settings.full_datetime_format.value.title',
             [],
-            'user_settings'
+            'ibexa_user_settings'
         );
     }
 
@@ -97,7 +98,7 @@ class FullDateTimeFormat extends AbstractDateTimeFormat
             /** @Desc("Date and time format") */
             'settings.full_datetime_format.value.description',
             [],
-            'user_settings'
+            'ibexa_user_settings'
         );
     }
 

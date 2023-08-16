@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\User\UserSetting\Group;
 
+use JMS\TranslationBundle\Annotation\Desc;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class LocationGroup extends AbstractGroup
@@ -28,7 +29,7 @@ final class LocationGroup extends AbstractGroup
             /** @Desc("Location") */
             'settings.group.location.name',
             [],
-            'user_settings'
+            'ibexa_user_settings'
         );
     }
 
@@ -38,7 +39,7 @@ final class LocationGroup extends AbstractGroup
             /** @Desc("") */
             'settings.group.location.description',
             [],
-            'user_settings'
+            'ibexa_user_settings'
         );
     }
 }

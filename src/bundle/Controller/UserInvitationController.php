@@ -16,6 +16,7 @@ use Ibexa\Contracts\User\Invitation\InvitationService;
 use Ibexa\User\ExceptionHandler\ActionResultHandler;
 use Ibexa\User\Form\Type\Invitation\UserInvitationType;
 use Ibexa\User\View\Invitation\FormView;
+use JMS\TranslationBundle\Annotation\Desc;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -66,21 +67,21 @@ final class UserInvitationController extends Controller
                     /** @Desc("Invitation sent to '%email%' updated.") */
                     'user_invitation.send.success',
                     ['%email%' => $data->getEmail()],
-                    'user_invitation'
+                    'ibexa_user_invitation'
                 );
             } catch (InvitationAlreadyExistsException $e) {
                 $this->actionResultHandler->error(
                     /** @Desc("Invitation for '%email%' already exists.") */
                     'user_invitation.send.invitation_exist',
                     ['%email%' => $data->getEmail()],
-                    'user_invitation'
+                    'ibexa_user_invitation'
                 );
             } catch (UserAlreadyExistsException $e) {
                 $this->actionResultHandler->error(
                     /** @Desc("User with '%email%' already exists.") */
                     'user_invitation.send.user_exist',
                     ['%email%' => $data->getEmail()],
-                    'user_invitation'
+                    'ibexa_user_invitation'
                 );
             }
         }

@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\User\UserSetting\Group;
 
+use JMS\TranslationBundle\Annotation\Desc;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class BrowsingGroup extends AbstractGroup
@@ -28,7 +29,7 @@ final class BrowsingGroup extends AbstractGroup
             /** @Desc("Browsing") */
             'settings.group.browsing.name',
             [],
-            'user_settings'
+            'ibexa_user_settings'
         );
     }
 
@@ -38,7 +39,7 @@ final class BrowsingGroup extends AbstractGroup
             /** @Desc("") */
             'settings.group.browsing.description',
             [],
-            'user_settings'
+            'ibexa_user_settings'
         );
     }
 }

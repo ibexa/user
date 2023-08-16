@@ -12,6 +12,7 @@ use Ibexa\Contracts\User\UserSetting\FormMapperInterface;
 use Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface;
 use Ibexa\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface;
 use Ibexa\User\Form\ChoiceList\Loader\AvailableLocaleChoiceLoader;
+use JMS\TranslationBundle\Annotation\Desc;
 use Symfony\Component\Form\Extension\Core\Type\LocaleType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -101,7 +102,7 @@ class Language implements ValueDefinitionInterface, FormMapperInterface
             /** @Desc("Language") */
             'settings.language.value.title',
             [],
-            'user_settings'
+            'ibexa_user_settings'
         );
     }
 
@@ -114,7 +115,7 @@ class Language implements ValueDefinitionInterface, FormMapperInterface
             /** @Desc("Language") */
             'settings.language.value.description',
             [],
-            'user_settings'
+            'ibexa_user_settings'
         );
     }
 }
