@@ -82,8 +82,8 @@
         <note>key: settings.group.edit_content.description</note>
       </trans-unit>
       <trans-unit id="9fb4add1a9e6148b11b25ddbcaf4e77d97b4ab45" resname="settings.group.edit_content.name">
-        <source>Edit Content</source>
-        <target state="new">Edit Content</target>
+        <source>Edit content</source>
+        <target state="new">Edit content</target>
         <note>key: settings.group.edit_content.name</note>
       </trans-unit>
       <trans-unit id="377f69d650dee0a54486fea8f8a89b82203b7755" resname="settings.group.generic.description">
@@ -107,8 +107,8 @@
         <note>key: settings.group.location.name</note>
       </trans-unit>
       <trans-unit id="3a4946ea2a7aaa360112cf1e657617e7ce7c7d9b" resname="settings.language.value.description">
-        <source>Back Office language</source>
-        <target state="new">Back Office language</target>
+        <source>Language</source>
+        <target state="new">Language</target>
         <note>key: settings.language.value.description</note>
       </trans-unit>
       <trans-unit id="593fb98cf76c44e48e00ce4ee027a6e54b6625fd" resname="settings.language.value.title">
@@ -147,8 +147,8 @@
         <note>key: settings.timezone.value.title</note>
       </trans-unit>
       <trans-unit id="7f90e23e086f56c5f7b4a82c6e4b8f40732e6e6a" resname="user_setting.update.success">
-        <source>User setting '%identifier%' updated.</source>
-        <target state="new">User setting '%identifier%' updated.</target>
+        <source>User settings '%identifier%' updated.</source>
+        <target state="new">User settings '%identifier%' updated.</target>
         <note>key: user_setting.update.success</note>
       </trans-unit>
     </body>
