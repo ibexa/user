@@ -14,15 +14,6 @@ use Symfony\Component\Config\Definition\Builder\NodeBuilder;
 
 /**
  * Configuration parser for system security configuration.
- *
- * Example configuration:
- * ```yaml
- * ezpublish:
- *   system:
- *      default: # configuration per siteaccess or siteaccess group
- *          security:
- *              token_interval_spec: 'PT1H'
- * ```
  */
 class Security extends AbstractParser
 {
