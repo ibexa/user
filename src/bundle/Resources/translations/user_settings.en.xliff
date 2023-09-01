@@ -82,8 +82,8 @@
         <note>key: settings.group.edit_content.description</note>
       </trans-unit>
       <trans-unit id="9fb4add1a9e6148b11b25ddbcaf4e77d97b4ab45" resname="settings.group.edit_content.name">
-        <source>Edit content</source>
-        <target state="new">Edit content</target>
+        <source>Edit</source>
+        <target state="new">Edit</target>
         <note>key: settings.group.edit_content.name</note>
       </trans-unit>
       <trans-unit id="377f69d650dee0a54486fea8f8a89b82203b7755" resname="settings.group.generic.description">
