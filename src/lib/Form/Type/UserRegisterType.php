@@ -10,6 +10,7 @@ use Ibexa\ContentForms\Form\EventSubscriber\UserFieldsSubscriber;
 use Ibexa\ContentForms\Form\Type\Content\BaseContentType;
 use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 use Ibexa\User\Form\Data\UserRegisterData;
+use JMS\TranslationBundle\Annotation\Desc;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -75,7 +76,7 @@ class UserRegisterType extends AbstractType
         $resolver
             ->setDefaults([
                 'data_class' => UserRegisterData::class,
-                'translation_domain' => 'ezplatform_content_forms_user_registration',
+                'translation_domain' => 'ibexa_content_forms_user_registration',
                 'intent' => 'register',
             ])
             ->setRequired(['languageCode']);
