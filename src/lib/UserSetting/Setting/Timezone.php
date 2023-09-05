@@ -10,6 +10,7 @@ namespace Ibexa\User\UserSetting\Setting;
 
 use Ibexa\Contracts\User\UserSetting\FormMapperInterface;
 use Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface;
+use JMS\TranslationBundle\Annotation\Desc;
 use Symfony\Component\Form\Extension\Core\Type\TimezoneType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -84,7 +85,7 @@ class Timezone implements ValueDefinitionInterface, FormMapperInterface
             /** @Desc("Time Zone") */
             'settings.timezone.value.title',
             [],
-            'user_settings'
+            'ibexa_user_settings'
         );
     }
 
@@ -97,7 +98,7 @@ class Timezone implements ValueDefinitionInterface, FormMapperInterface
             /** @Desc("User Time Zone") */
             'settings.timezone.value.description',
             [],
-            'user_settings'
+            'ibexa_user_settings'
         );
     }
 }

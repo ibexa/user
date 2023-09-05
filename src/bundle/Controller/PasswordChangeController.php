@@ -15,6 +15,7 @@ use Ibexa\User\ExceptionHandler\ActionResultHandler;
 use Ibexa\User\Form\Factory\FormFactory;
 use Ibexa\User\View\ChangePassword\FormView;
 use Ibexa\User\View\ChangePassword\SuccessView;
+use JMS\TranslationBundle\Annotation\Desc;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -75,7 +76,7 @@ class PasswordChangeController extends Controller
                         /** @Desc("Your password has been successfully changed.") */
                         'ezplatform.change_password.success',
                         [],
-                        'change_password'
+                        'ibexa_change_password'
                     );
 
                     return new RedirectResponse($this->generateUrl('ibexa.dashboard'));

@@ -14,6 +14,7 @@ use Ibexa\User\Form\DataTransformer\DateTimeFormatTransformer;
 use Ibexa\User\Form\Type\UserSettings\ShortDateTimeFormatType;
 use Ibexa\User\UserSetting\DateTimeFormat\FormatterInterface;
 use Ibexa\User\UserSetting\Setting\Value\DateTimeFormat;
+use JMS\TranslationBundle\Annotation\Desc;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -83,7 +84,7 @@ class ShortDateTimeFormat extends AbstractDateTimeFormat
             /** @Desc("Short date and time format") */
             'settings.short_datetime_format.value.title',
             [],
-            'user_settings'
+            'ibexa_user_settings'
         );
     }
 
@@ -96,7 +97,7 @@ class ShortDateTimeFormat extends AbstractDateTimeFormat
             /** @Desc("Date and time format") */
             'settings.short_datetime_format.value.description',
             [],
-            'user_settings'
+            'ibexa_user_settings'
         );
     }
 

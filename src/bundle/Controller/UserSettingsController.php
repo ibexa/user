@@ -17,6 +17,7 @@ use Ibexa\User\UserSetting\UserSettingService;
 use Ibexa\User\UserSetting\ValueDefinitionRegistry;
 use Ibexa\User\View\UserSettings\ListView;
 use Ibexa\User\View\UserSettings\UpdateView;
+use JMS\TranslationBundle\Annotation\Desc;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -95,7 +96,7 @@ class UserSettingsController extends Controller
                     /** @Desc("User settings '%identifier%' updated.") */
                     'user_setting.update.success',
                     ['%identifier%' => $data->getIdentifier()],
-                    'user_settings'
+                    'ibexa_user_settings'
                 );
 
                 return new RedirectResponse($this->generateUrl('ibexa.user_settings.list'));

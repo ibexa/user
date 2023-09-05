@@ -11,6 +11,7 @@ namespace Ibexa\User\UserSetting\Setting;
 use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 use Ibexa\Contracts\User\UserSetting\FormMapperInterface;
 use Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface;
+use JMS\TranslationBundle\Annotation\Desc;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -86,7 +87,7 @@ class SubitemsLimit implements ValueDefinitionInterface, FormMapperInterface
             /** @Desc("Sub-items") */
             'settings.subitems_limit.value.title',
             [],
-            'user_settings'
+            'ibexa_user_settings'
         );
     }
 
@@ -99,7 +100,7 @@ class SubitemsLimit implements ValueDefinitionInterface, FormMapperInterface
             /** @Desc("Number of items displayed in the table") */
             'settings.subitems_limit.value.description',
             [],
-            'user_settings'
+            'ibexa_user_settings'
         );
     }
 }

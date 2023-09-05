@@ -29,7 +29,7 @@ final class UserPermissionsLimitation extends Limitation implements TranslationC
         return [
             (new Message(
                 'policy.limitation.identifier.userpermissions',
-                'ezplatform_content_forms_policies'
+                'ibexa_content_forms_policies'
             ))->setDesc('Roles and/or User Groups'),
         ];
     }

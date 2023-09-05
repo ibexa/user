@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\User\Form\Type\UserSettings;
 
+use JMS\TranslationBundle\Annotation\Desc;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -43,7 +44,7 @@ class DateTimeFormatType extends AbstractType
         $resolver->setDefaults([
             'date_format_choices' => [],
             'time_format_choices' => [],
-            'translation_domain' => 'user_settings',
+            'translation_domain' => 'ibexa_user_settings',
         ]);
     }
 }

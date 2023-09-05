@@ -11,6 +11,7 @@ namespace Ibexa\User\UserSetting\Setting;
 use Ibexa\Contracts\User\UserSetting\FormMapperInterface;
 use Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface;
 use Ibexa\Core\Base\Exceptions\InvalidArgumentException;
+use JMS\TranslationBundle\Annotation\Desc;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -104,7 +105,7 @@ class CharacterCounter implements ValueDefinitionInterface, FormMapperInterface
             /** @Desc("Character counter") */
             'settings.character_counter.value.title',
             [],
-            'user_settings'
+            'ibexa_user_settings'
         );
     }
 
@@ -117,7 +118,7 @@ class CharacterCounter implements ValueDefinitionInterface, FormMapperInterface
             /** @Desc("Enable character count in Online Editor") */
             'settings.character_counter.value.description',
             [],
-            'user_settings'
+            'ibexa_user_settings'
         );
     }
 
@@ -130,7 +131,7 @@ class CharacterCounter implements ValueDefinitionInterface, FormMapperInterface
             /** @Desc("enabled") */
             'settings.character_counter.value.enabled',
             [],
-            'user_settings'
+            'ibexa_user_settings'
         );
     }
 
@@ -143,7 +144,7 @@ class CharacterCounter implements ValueDefinitionInterface, FormMapperInterface
             /** @Desc("disabled") */
             'settings.character_counter.value.disabled',
             [],
-            'user_settings'
+            'ibexa_user_settings'
         );
     }
 }
