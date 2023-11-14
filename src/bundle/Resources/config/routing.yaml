@@ -75,6 +75,8 @@ ibexa.user_settings.update:
         _controller: 'Ibexa\Bundle\User\Controller\UserSettingsController::updateAction'
     requirements:
         identifier: .+
+    options:
+        expose: true
 
 ibexa.user.default_profile_image.initials:
     path: /user/default_profile_image/initials.svg
