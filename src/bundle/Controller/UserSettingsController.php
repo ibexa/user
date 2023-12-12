@@ -67,8 +67,7 @@ class UserSettingsController extends Controller
     public function listAction(int $page = 1): ListView
     {
         $user = $this->getUser()->getAPIUser();
-        $canChangePassword = $this->permissionResolver->canUser('content', 'edit', $user)
-            && $this->permissionResolver->canUser('user', 'password', $user);
+        $canChangePassword = $this->permissionResolver->canUser('user', 'password', $user);
 
         return new ListView(null, [
             'grouped_settings' => $this->userSettingService->loadGroupedUserSettings(),
