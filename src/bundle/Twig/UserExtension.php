@@ -18,7 +18,11 @@ final class UserExtension extends AbstractExtension
         return [
             new TwigFunction(
                 'ibexa_user_get_current',
-                [UserRuntime::class, 'getCurrentUser']
+                [UserRuntime::class, 'getCurrentUser'],
+                [
+                    'deprecated' => '4.6',
+                    'alternative' => 'ibexa_current_user',
+                ]
             ),
         ];
     }
