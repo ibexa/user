@@ -16,7 +16,6 @@ use Ibexa\User\Form\Factory\FormFactory;
 use Ibexa\User\View\ChangePassword\FormView;
 use Ibexa\User\View\ChangePassword\SuccessView;
 use JMS\TranslationBundle\Annotation\Desc;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
@@ -79,7 +78,9 @@ class PasswordChangeController extends Controller
                         'ibexa_change_password'
                     );
 
-                    return new RedirectResponse($this->generateUrl('ibexa.dashboard'));
+                    return $this->redirectToRoute('ibexa.user_settings.list', [
+                        '_fragment' => 'ibexa-tab-my-account-settings',
+                    ]);
                 }
 
                 return new SuccessView(null);
