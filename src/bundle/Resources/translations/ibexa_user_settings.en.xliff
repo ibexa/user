@@ -81,10 +81,10 @@
         <target state="new"></target>
         <note>key: settings.group.edit_content.description</note>
       </trans-unit>
-      <trans-unit id="9fb4add1a9e6148b11b25ddbcaf4e77d97b4ab45" resname="settings.group.edit_content.name">
-        <source>Edit</source>
-        <target state="new">Edit</target>
-        <note>key: settings.group.edit_content.name</note>
+      <trans-unit id="962f753514ae358c3a7c093f354f213ec553e9b3" resname="settings.group.content_authoring.name">
+        <source>Content authoring</source>
+        <target state="new">Content authoring</target>
+        <note>key: settings.group.content_authoring.name</note>
       </trans-unit>
       <trans-unit id="377f69d650dee0a54486fea8f8a89b82203b7755" resname="settings.group.generic.description">
         <source>settings.group.generic.description</source>

@@ -26,8 +26,8 @@ final class EditContentGroup extends AbstractGroup
     public function getName(): string
     {
         return $this->translator->trans(
-            /** @Desc("Edit") */
-            'settings.group.edit_content.name',
+            /** @Desc("Content authoring") */
+            'settings.group.content_authoring.name',
             [],
             'ibexa_user_settings'
         );
