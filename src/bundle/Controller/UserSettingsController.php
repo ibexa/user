@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\Bundle\User\Controller;
 
-use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
+use Ibexa\Contracts\Core\Repository\PermissionResolver;
 use Ibexa\User\ExceptionHandler\ActionResultHandler;
 use Ibexa\User\Form\Data\UserSettingUpdateData;
 use Ibexa\User\Form\Factory\FormFactory;
@@ -39,8 +39,7 @@ class UserSettingsController extends Controller
     /** @var \Ibexa\User\ExceptionHandler\ActionResultHandler */
     private $actionResultHandler;
 
-    /** @var \Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface */
-    private $configResolver;
+    private PermissionResolver $permissionResolver;
 
     public function __construct(
         FormFactory $formFactory,
@@ -48,14 +47,14 @@ class UserSettingsController extends Controller
         UserSettingService $userSettingService,
         ValueDefinitionRegistry $valueDefinitionRegistry,
         ActionResultHandler $actionResultHandler,
-        ConfigResolverInterface $configResolver
+        PermissionResolver $permissionResolver
     ) {
         $this->formFactory = $formFactory;
         $this->submitHandler = $submitHandler;
         $this->userSettingService = $userSettingService;
         $this->valueDefinitionRegistry = $valueDefinitionRegistry;
         $this->actionResultHandler = $actionResultHandler;
-        $this->configResolver = $configResolver;
+        $this->permissionResolver = $permissionResolver;
     }
 
     /**
@@ -67,9 +66,13 @@ class UserSettingsController extends Controller
      */
     public function listAction(int $page = 1): ListView
     {
+        $user = $this->getUser()->getAPIUser();
+        $canChangePassword = $this->permissionResolver->canUser('user', 'password', $user);
+
         return new ListView(null, [
             'grouped_settings' => $this->userSettingService->loadGroupedUserSettings(),
             'value_definitions' => $this->valueDefinitionRegistry->getValueDefinitions(),
+            'can_change_password' => $canChangePassword,
         ]);
     }
 
