@@ -14,7 +14,7 @@ namespace Ibexa\User\ConfigResolver;
 interface RegistrationContentTypeLoader
 {
     /**
-     * Gets the Content Type used by user registration.
+     * Gets the content type used by user registration.
      *
      * @return \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType
      */
