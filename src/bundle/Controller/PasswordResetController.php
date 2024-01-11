@@ -17,6 +17,11 @@ use Ibexa\Contracts\Core\Repository\UserService;
 use Ibexa\Contracts\Core\Repository\Values\User\User;
 use Ibexa\Contracts\Core\Repository\Values\User\UserTokenUpdateStruct;
 use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
+use Ibexa\Contracts\Notifications\Service\NotificationServiceInterface;
+use Ibexa\Contracts\Notifications\Value\Notification\SymfonyNotificationAdapter;
+use Ibexa\Contracts\Notifications\Value\Recipent\SymfonyRecipientAdapter;
+use Ibexa\Contracts\Notifications\Value\Recipent\UserRecipient;
+use Ibexa\Contracts\User\Notification\UserPasswordReset;
 use Ibexa\User\ExceptionHandler\ActionResultHandler;
 use Ibexa\User\Form\Data\UserPasswordResetData;
 use Ibexa\User\Form\Factory\FormFactory;
@@ -34,26 +39,21 @@ use Twig\Environment;
 
 class PasswordResetController extends Controller
 {
-    /** @var \Ibexa\User\Form\Factory\FormFactory */
-    private $formFactory;
+    private FormFactory $formFactory;
 
-    /** @var \Ibexa\Contracts\Core\Repository\UserService */
-    private $userService;
+    private UserService $userService;
 
-    /** @var \Swift_Mailer */
-    private $mailer;
+    private Swift_Mailer $mailer;
 
-    /** @var \Twig\Environment */
-    private $twig;
+    private Environment $twig;
 
-    /** @var \Ibexa\User\ExceptionHandler\ActionResultHandler */
-    private $actionResultHandler;
+    private ActionResultHandler $actionResultHandler;
 
-    /** @var \Ibexa\Contracts\Core\Repository\PermissionResolver */
-    private $permissionResolver;
+    private PermissionResolver $permissionResolver;
 
-    /** @var \Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface */
-    private $configResolver;
+    private ConfigResolverInterface $configResolver;
+
+    private NotificationServiceInterface $notificationService;
 
     public function __construct(
         FormFactory $formFactory,
@@ -62,7 +62,8 @@ class PasswordResetController extends Controller
         Environment $twig,
         ActionResultHandler $actionResultHandler,
         PermissionResolver $permissionResolver,
-        ConfigResolverInterface $configResolver
+        ConfigResolverInterface $configResolver,
+        NotificationServiceInterface $notificationService
     ) {
         $this->formFactory = $formFactory;
         $this->userService = $userService;
@@ -71,6 +72,7 @@ class PasswordResetController extends Controller
         $this->actionResultHandler = $actionResultHandler;
         $this->permissionResolver = $permissionResolver;
         $this->configResolver = $configResolver;
+        $this->notificationService = $notificationService;
     }
 
     /**
@@ -96,7 +98,7 @@ class PasswordResetController extends Controller
                 $user = reset($users);
                 $token = $this->updateUserToken($user);
 
-                $this->sendResetPasswordMessage($user->email, $token);
+                $this->sendResetPasswordMessage($user, $token);
             }
 
             return new SuccessView(null);
@@ -136,7 +138,7 @@ class PasswordResetController extends Controller
             }
 
             $token = $this->updateUserToken($user);
-            $this->sendResetPasswordMessage($user->email, $token);
+            $this->sendResetPasswordMessage($user, $token);
 
             return new SuccessView(null);
         }
@@ -230,8 +232,15 @@ class PasswordResetController extends Controller
         return $struct->hashKey;
     }
 
-    private function sendResetPasswordMessage(string $to, string $hashKey): void
+    private function sendResetPasswordMessage(User $user, string $hashKey): void
     {
+        if ($this->isNotifierConfigured()) {
+            $this->sendNotification($user, $hashKey);
+
+            return;
+        }
+
+        // Swiftmailer delivery has to be kept to maintain backwards compatibility
         $template = $this->twig->load($this->configResolver->getParameter('user_forgot_password.templates.mail'));
 
         $senderAddress = $this->configResolver->hasParameter('sender_address', 'swiftmailer.mailer')
@@ -244,7 +253,7 @@ class PasswordResetController extends Controller
 
         $message = (new Swift_Message())
             ->setSubject($subject)
-            ->setTo($to)
+            ->setTo($user->email)
             ->setBody($body, 'text/html');
 
         if (empty($from) === false) {
@@ -252,6 +261,24 @@ class PasswordResetController extends Controller
         }
 
         $this->mailer->send($message);
+    }
+
+    private function sendNotification($user, string $token): void
+    {
+        $this->notificationService->send(
+            new SymfonyNotificationAdapter(
+                new UserPasswordReset($user, $token),
+            ),
+            [new SymfonyRecipientAdapter(new UserRecipient($user))],
+        );
+    }
+
+    private function isNotifierConfigured(): bool
+    {
+        $subscriptions = $this->configResolver->getParameter('notifications.subscriptions');
+
+        return array_key_exists(UserPasswordReset::class, $subscriptions)
+            && !empty($subscriptions[UserPasswordReset::class]['channels']);
     }
 }
 
