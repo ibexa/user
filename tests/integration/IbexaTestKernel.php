@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\Tests\Integration\User;
 
+use Ibexa\Bundle\Notifications\IbexaNotificationsBundle;
 use Ibexa\Bundle\User\IbexaUserBundle;
 use Ibexa\ContentForms\Form\ActionDispatcher\UserDispatcher;
 use Ibexa\Contracts\Core\Test\IbexaTestKernel as BaseIbexaTestKernel;
@@ -35,6 +36,7 @@ final class IbexaTestKernel extends BaseIbexaTestKernel
 
         yield from [
             new IbexaUserBundle(),
+            new IbexaNotificationsBundle(),
         ];
     }
 
