@@ -10,10 +10,17 @@ use Ibexa\ContentForms\Event\FormActionEvent;
 use Ibexa\Contracts\Core\Repository\Repository;
 use Ibexa\Contracts\Core\Repository\RoleService;
 use Ibexa\Contracts\Core\Repository\UserService;
+use Ibexa\Contracts\Core\Repository\Values\User\User;
+use Ibexa\Contracts\Notifications\Service\NotificationServiceInterface;
+use Ibexa\Contracts\Notifications\Value\Notification\SymfonyNotificationAdapter;
+use Ibexa\Contracts\Notifications\Value\Recipent\SymfonyRecipientAdapter;
+use Ibexa\Contracts\Notifications\Value\Recipent\UserRecipient;
+use Ibexa\Contracts\User\Notification\UserRegister;
 use Ibexa\User\Form\Data\UserRegisterData;
 use Ibexa\User\Form\UserFormEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 /**
@@ -21,27 +28,28 @@ use Symfony\Component\Routing\RouterInterface;
  */
 class UserRegisterFormProcessor implements EventSubscriberInterface
 {
-    /** @var \Ibexa\Contracts\Core\Repository\UserService */
-    private $userService;
+    private UserService $userService;
 
-    /** @var \Symfony\Component\Routing\Generator\UrlGeneratorInterface */
-    private $urlGenerator;
+    private UrlGeneratorInterface $urlGenerator;
 
-    /** @var \Ibexa\Core\Repository\Repository */
-    private $repository;
+    private Repository $repository;
 
     private RoleService $roleService;
+
+    private NotificationServiceInterface $notificationService;
 
     public function __construct(
         Repository $repository,
         UserService $userService,
         RouterInterface $router,
-        RoleService $roleService
+        RoleService $roleService,
+        NotificationServiceInterface $notificationService
     ) {
         $this->userService = $userService;
         $this->urlGenerator = $router;
         $this->repository = $repository;
         $this->roleService = $roleService;
+        $this->notificationService = $notificationService;
     }
 
     public static function getSubscribedEvents()
@@ -64,22 +72,15 @@ class UserRegisterFormProcessor implements EventSubscriberInterface
         }
         $form = $event->getForm();
 
-        $this->createUser($data, $form->getConfig()->getOption('languageCode'));
+        $user = $this->createUser($data, $form->getConfig()->getOption('languageCode'));
+        $this->sendNotification($user);
 
         $redirectUrl = $this->urlGenerator->generate('ibexa.user.register_confirmation');
         $event->setResponse(new RedirectResponse($redirectUrl));
         $event->stopPropagation();
     }
 
-    /**
-     * @param \Ibexa\User\Form\Data\UserRegisterData $data
-     * @param $languageCode
-     *
-     * @return \Ibexa\Contracts\Core\Repository\Values\User\User
-     *
-     * @throws \Exception
-     */
-    private function createUser(UserRegisterData $data, $languageCode)
+    private function createUser(UserRegisterData $data, string $languageCode): User
     {
         foreach ($data->fieldsData as $fieldDefIdentifier => $fieldData) {
             $data->setField($fieldDefIdentifier, $fieldData->value, $languageCode);
@@ -94,6 +95,16 @@ class UserRegisterFormProcessor implements EventSubscriberInterface
 
                 return $user;
             }
+        );
+    }
+
+    private function sendNotification(User $user): void
+    {
+        $this->notificationService->send(
+            new SymfonyNotificationAdapter(
+                new UserRegister($user),
+            ),
+            [new SymfonyRecipientAdapter(new UserRecipient($user))],
         );
     }
 }

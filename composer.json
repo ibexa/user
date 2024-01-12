@@ -28,6 +28,7 @@
         "php": "^7.4 || ^8.0",
         "ibexa/core": "~4.6.0@dev",
         "ibexa/content-forms": "~4.6.0@dev",
+        "ibexa/notifications": "~4.6.0@dev",
         "jms/translation-bundle": "^1.5",
         "symfony/dependency-injection": "^5.0",
         "symfony/http-kernel": "^5.0",
@@ -69,5 +70,8 @@
         "branch-alias": {
             "dev-main": "4.6.x-dev"
         }
+    },
+    "config": {
+        "allow-plugins": false
     }
 }
