@@ -20,6 +20,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class UserSettingUpdateType extends AbstractType
 {
+    public const BTN_UPDATE_AND_EDIT = 'update_and_edit';
+
     /** @var \Ibexa\User\UserSetting\FormMapperRegistry */
     protected $formMapperRegistry;
 
@@ -68,6 +70,7 @@ class UserSettingUpdateType extends AbstractType
             $builder->add($sub);
         }
         $builder->add('update', SubmitType::class, []);
+        $builder->add(self::BTN_UPDATE_AND_EDIT, SubmitType::class);
     }
 
     /**
