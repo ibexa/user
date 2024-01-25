@@ -122,6 +122,7 @@ class UserSettingsController extends Controller
 
         $view->addParameters([
             'form' => $form->createView(),
+            'title' => $userSettingGroup->getName(),
         ]);
 
         return $view;
