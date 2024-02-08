@@ -94,7 +94,7 @@ class ShortDateTimeFormat extends AbstractDateTimeFormat
     protected function getTranslatedDescription(): string
     {
         return $this->translator->trans(
-            /** @Desc("Date and time format") */
+            /** @Desc("Short date and time format") */
             'settings.short_datetime_format.value.description',
             [],
             'ibexa_user_settings'

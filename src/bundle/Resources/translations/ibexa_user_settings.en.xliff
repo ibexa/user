@@ -57,13 +57,13 @@
         <note>key: settings.character_counter.value.title</note>
       </trans-unit>
       <trans-unit id="bb01c22de6038102d6fa6646f4ecebaf0c54e720" resname="settings.full_datetime_format.value.description">
-        <source>Date and time format</source>
-        <target state="new">Date and time format</target>
+        <source>Full date and time format</source>
+        <target state="new">Full date and time format</target>
         <note>key: settings.full_datetime_format.value.description</note>
       </trans-unit>
       <trans-unit id="9b6504d133b0a02fd337aa91d724723c927e4e96" resname="settings.full_datetime_format.value.title">
-        <source>Long date and time format</source>
-        <target state="new">Long date and time format</target>
+        <source>Full date and time format</source>
+        <target state="new">Full date and time format</target>
         <note>key: settings.full_datetime_format.value.title</note>
       </trans-unit>
       <trans-unit id="f69442f4afc8feed51643e408862c6a83f715560" resname="settings.group.browsing.description">
@@ -117,8 +117,8 @@
         <note>key: settings.language.value.title</note>
       </trans-unit>
       <trans-unit id="f99a9bb9741db45f57f2436c535d89609ebc6b0d" resname="settings.short_datetime_format.value.description">
-        <source>Date and time format</source>
-        <target state="new">Date and time format</target>
+        <source>Short date and time format</source>
+        <target state="new">Short date and time format</target>
         <note>key: settings.short_datetime_format.value.description</note>
       </trans-unit>
       <trans-unit id="f87e581648ae7baaa1e96941f1c8b45c11f73553" resname="settings.short_datetime_format.value.title">

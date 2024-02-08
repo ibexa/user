@@ -82,7 +82,7 @@ class FullDateTimeFormat extends AbstractDateTimeFormat
     protected function getTranslatedName(): string
     {
         return $this->translator->trans(
-            /** @Desc("Long date and time format") */
+            /** @Desc("Full date and time format") */
             'settings.full_datetime_format.value.title',
             [],
             'ibexa_user_settings'
@@ -95,7 +95,7 @@ class FullDateTimeFormat extends AbstractDateTimeFormat
     protected function getTranslatedDescription(): string
     {
         return $this->translator->trans(
-            /** @Desc("Date and time format") */
+            /** @Desc("Full date and time format") */
             'settings.full_datetime_format.value.description',
             [],
             'ibexa_user_settings'
