@@ -90,7 +90,7 @@ class UserSettingsController extends Controller
         $data = new UserSettingUpdateData($userSettingGroup->getIdentifier(), $values);
         $form = $this->formFactory->updateUserSetting($userSettingGroup->getIdentifier(), $data);
         $form->handleRequest($request);
-        
+
         if ($form->isSubmitted()) {
             $result = $this->submitHandler->handle($form, function (UserSettingUpdateData $data) use ($form, $request) {
                 foreach ($data->getValues() as $identifier => $value) {
@@ -106,7 +106,7 @@ class UserSettingsController extends Controller
 
                 if ($form->getClickedButton() instanceof Button
                     && $form->getClickedButton()->getName() === UserSettingUpdateType::BTN_UPDATE_AND_EDIT
-                ) {  
+                ) {
                     return $this->redirectToRoute('ibexa.user_settings.update', [
                         'identifier' => $data->getIdentifier(),
                     ]);
