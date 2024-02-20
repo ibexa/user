@@ -114,8 +114,8 @@ class UserSettingsController extends Controller
 
                 if ($request->query->has('route')) {
                     $route = $request->query->get('route');
-                    $contentId = $request->query->get('content_id');
-                    $versionNo = $request->query->get('version');
+                    $contentId = $request->query->get('contentId');
+                    $versionNo = $request->query->get('versionNo');
                     $language = $request->query->get('language');
 
                     return $this->redirectToRoute($route, [
