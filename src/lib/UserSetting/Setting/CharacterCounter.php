@@ -128,7 +128,7 @@ class CharacterCounter implements ValueDefinitionInterface, FormMapperInterface
     private function getTranslatedOptionEnabled(): string
     {
         return $this->translator->trans(
-            /** @Desc("enabled") */
+            /** @Desc("Enabled") */
             'settings.character_counter.value.enabled',
             [],
             'ibexa_user_settings'
@@ -141,7 +141,7 @@ class CharacterCounter implements ValueDefinitionInterface, FormMapperInterface
     private function getTranslatedOptionDisabled(): string
     {
         return $this->translator->trans(
-            /** @Desc("disabled") */
+            /** @Desc("Disabled") */
             'settings.character_counter.value.disabled',
             [],
             'ibexa_user_settings'

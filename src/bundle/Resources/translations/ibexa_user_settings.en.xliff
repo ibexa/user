@@ -42,13 +42,13 @@
         <note>key: settings.character_counter.value.description</note>
       </trans-unit>
       <trans-unit id="3d03b64f879f2c57cb9395f31c7691ecb7cc2807" resname="settings.character_counter.value.disabled">
-        <source>disabled</source>
-        <target state="new">disabled</target>
+        <source>Disabled</source>
+        <target state="new">Disabled</target>
         <note>key: settings.character_counter.value.disabled</note>
       </trans-unit>
       <trans-unit id="fd6ba122727aeacdb3e8c1c02d3e9ae023ca2174" resname="settings.character_counter.value.enabled">
-        <source>enabled</source>
-        <target state="new">enabled</target>
+        <source>Enabled</source>
+        <target state="new">Enabled</target>
         <note>key: settings.character_counter.value.enabled</note>
       </trans-unit>
       <trans-unit id="ca8c3eac8ffed6fed1ee9e028be185741f33bfec" resname="settings.character_counter.value.title">
