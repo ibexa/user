@@ -76,15 +76,15 @@
         <target state="new">Browsing</target>
         <note>key: settings.group.browsing.name</note>
       </trans-unit>
-      <trans-unit id="c9a8a7a02d6e5a8526e883fc7a6e3e35f40cf809" resname="settings.group.edit_content.description">
-        <source>settings.group.edit_content.description</source>
-        <target state="new"></target>
-        <note>key: settings.group.edit_content.description</note>
-      </trans-unit>
       <trans-unit id="962f753514ae358c3a7c093f354f213ec553e9b3" resname="settings.group.content_authoring.name">
         <source>Content authoring</source>
         <target state="new">Content authoring</target>
         <note>key: settings.group.content_authoring.name</note>
+      </trans-unit>
+      <trans-unit id="c9a8a7a02d6e5a8526e883fc7a6e3e35f40cf809" resname="settings.group.edit_content.description">
+        <source>settings.group.edit_content.description</source>
+        <target state="new"></target>
+        <note>key: settings.group.edit_content.description</note>
       </trans-unit>
       <trans-unit id="377f69d650dee0a54486fea8f8a89b82203b7755" resname="settings.group.generic.description">
         <source>settings.group.generic.description</source>
@@ -127,8 +127,8 @@
         <note>key: settings.short_datetime_format.value.title</note>
       </trans-unit>
       <trans-unit id="18f788ade37f54e5d52f0e3ddacb39a5558190b5" resname="settings.subitems_limit.value.description">
-        <source>Number of items displayed in the table</source>
-        <target state="new">Number of items displayed in the table</target>
+        <source>Number of items displayed in the sub-items</source>
+        <target state="new">Number of items displayed in the sub-items</target>
         <note>key: settings.subitems_limit.value.description</note>
       </trans-unit>
       <trans-unit id="67329191003095f24d2ca7d2182ecb00d5a85e36" resname="settings.subitems_limit.value.title">
