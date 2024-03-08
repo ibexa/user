@@ -57,8 +57,8 @@ final class DefaultThumbnailStrategy implements ThumbnailStrategy
         foreach ($this->initialsFieldDefIdentifiers as $identifier) {
             /** @var \Ibexa\Contracts\Core\Repository\Values\Content\Field $field */
             foreach ($fields as $field) {
-                if ($field->fieldDefIdentifier === $identifier) {
-                    $initials .= substr((string)$field->value, 0, 1);
+                if ($field->getFieldDefinitionIdentifier() === $identifier) {
+                    $initials .= substr((string)$field->getValue(), 0, 1);
                 }
             }
         }
