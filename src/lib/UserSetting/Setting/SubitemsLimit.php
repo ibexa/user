@@ -97,7 +97,7 @@ class SubitemsLimit implements ValueDefinitionInterface, FormMapperInterface
     private function getTranslatedDescription(): string
     {
         return $this->translator->trans(
-            /** @Desc("Number of items displayed in the table") */
+            /** @Desc("Number of items displayed in the sub-items") */
             'settings.subitems_limit.value.description',
             [],
             'ibexa_user_settings'
