@@ -92,7 +92,7 @@ class UserSettingsController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
-            $result = $this->submitHandler->handle($form, function (UserSettingUpdateData $data) use ($form) {
+            $result = $this->submitHandler->handle($form, function (UserSettingUpdateData $data) use ($form, $request) {
                 foreach ($data->getValues() as $identifier => $value) {
                     $this->userSettingService->setUserSetting($identifier, (string)$value['value']);
                 }
@@ -104,11 +104,28 @@ class UserSettingsController extends Controller
                     'ibexa_user_settings'
                 );
 
+                $route = $request->query->get('route') ?? null;
+                $contentId = $request->query->get('contentId') ?? null;
+                $versionNo = $request->query->get('versionNo') ?? null;
+                $language = $request->query->get('language') ?? null;
+
                 if ($form->getClickedButton() instanceof Button
                     && $form->getClickedButton()->getName() === UserSettingUpdateType::BTN_UPDATE_AND_EDIT
                 ) {
                     return $this->redirectToRoute('ibexa.user_settings.update', [
                         'identifier' => $data->getIdentifier(),
+                        'route' => $route,
+                        'contentId' => $contentId,
+                        'versionNo' => $versionNo,
+                        'language' => $language,
+                    ]);
+                }
+
+                if ($route !== null) {
+                    return $this->redirectToRoute($route, [
+                        'contentId' => $contentId,
+                        'versionNo' => $versionNo,
+                        'language' => $language,
                     ]);
                 }
 
