@@ -104,20 +104,24 @@ class UserSettingsController extends Controller
                     'ibexa_user_settings'
                 );
 
+                $route = $request->query->get('route') ?? null;
+                $contentId = $request->query->get('contentId') ?? null;
+                $versionNo = $request->query->get('versionNo') ?? null;
+                $language = $request->query->get('language') ?? null;
+
                 if ($form->getClickedButton() instanceof Button
                     && $form->getClickedButton()->getName() === UserSettingUpdateType::BTN_UPDATE_AND_EDIT
                 ) {
                     return $this->redirectToRoute('ibexa.user_settings.update', [
                         'identifier' => $data->getIdentifier(),
+                        'route' => $route,
+                        'contentId' => $contentId,
+                        'versionNo' => $versionNo,
+                        'language' => $language,
                     ]);
                 }
 
-                if ($request->query->has('route')) {
-                    $route = $request->query->get('route');
-                    $contentId = $request->query->get('contentId');
-                    $versionNo = $request->query->get('versionNo');
-                    $language = $request->query->get('language');
-
+                if ($route !== null) {
                     return $this->redirectToRoute($route, [
                         'contentId' => $contentId,
                         'versionNo' => $versionNo,
