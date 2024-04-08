@@ -74,7 +74,11 @@ class Language implements ValueDefinitionInterface, FormMapperInterface
     {
         $preferredLocales = $this->userLanguagePreferenceProvider->getPreferredLocales();
 
-        return reset($preferredLocales);
+        $list = $this->availableLocaleChoiceLoader->getChoiceList();
+        $commonLocales = array_intersect($list, $preferredLocales);
+        $locales = empty($commonLocales) ? $preferredLocales : $commonLocales;
+
+        return reset($locales);
     }
 
     /**
