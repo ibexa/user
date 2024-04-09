@@ -51,11 +51,6 @@ parameters:
 			path: src/bundle/Controller/PasswordResetController.php
 
 		-
-			message: "#^Parameter \\#1 \\$value of function count expects array\\|Countable, iterable\\<Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\User\\\\User\\> given\\.$#"
-			count: 2
-			path: src/bundle/Controller/PasswordResetController.php
-
-		-
 			message: "#^Call to an undefined method Symfony\\\\Component\\\\Form\\\\FormInterface\\:\\:getClickedButton\\(\\)\\.$#"
 			count: 4
 			path: src/bundle/Controller/UserRegisterController.php
@@ -224,11 +219,6 @@ parameters:
 			message: "#^Method Ibexa\\\\Contracts\\\\User\\\\Invitation\\\\Persistence\\\\Mapper\\:\\:extractInvitationFromRow\\(\\) has parameter \\$row with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/contracts/Invitation/Persistence/Mapper.php
-
-		-
-			message: "#^Parameter \\#2 \\$value of method Doctrine\\\\DBAL\\\\Query\\\\QueryBuilder\\:\\:set\\(\\) expects string, int given\\.$#"
-			count: 1
-			path: src/lib/Behat/Context/UserSetupContext.php
 
 		-
 			message: "#^Method Ibexa\\\\User\\\\ConfigResolver\\\\ConfigurableSudoRepositoryLoader\\:\\:__construct\\(\\) has parameter \\$params with no value type specified in iterable type array\\.$#"
@@ -502,11 +492,6 @@ parameters:
 
 		-
 			message: "#^Method Ibexa\\\\User\\\\Form\\\\Type\\\\Invitation\\\\RoleChoiceType\\:\\:loadFilteredRoles\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/lib/Form/Type/Invitation/RoleChoiceType.php
-
-		-
-			message: "#^Parameter \\#1 \\$array of function array_filter expects array, iterable\\<Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\User\\\\Role\\> given\\.$#"
 			count: 1
 			path: src/lib/Form/Type/Invitation/RoleChoiceType.php
 
