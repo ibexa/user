@@ -27,7 +27,7 @@ use Symfony\Component\Form\Button;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Exception\ExceptionInterface as RouteExceptionInterface;
-use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class UserSettingsController extends Controller implements LoggerAwareInterface
 {
@@ -50,7 +50,7 @@ class UserSettingsController extends Controller implements LoggerAwareInterface
 
     private PermissionResolver $permissionResolver;
 
-    private RouterInterface $router;
+    private UrlGeneratorInterface $urlGenerator;
 
     public function __construct(
         FormFactory $formFactory,
@@ -59,7 +59,7 @@ class UserSettingsController extends Controller implements LoggerAwareInterface
         ValueDefinitionRegistry $valueDefinitionRegistry,
         ActionResultHandler $actionResultHandler,
         PermissionResolver $permissionResolver,
-        RouterInterface $router,
+        UrlGeneratorInterface $urlGenerator,
         LoggerInterface $logger = null
     ) {
         $this->formFactory = $formFactory;
@@ -68,7 +68,7 @@ class UserSettingsController extends Controller implements LoggerAwareInterface
         $this->valueDefinitionRegistry = $valueDefinitionRegistry;
         $this->actionResultHandler = $actionResultHandler;
         $this->permissionResolver = $permissionResolver;
-        $this->router = $router;
+        $this->urlGenerator = $urlGenerator;
         $this->logger = $logger ?? new NullLogger();
     }
 
@@ -154,10 +154,13 @@ class UserSettingsController extends Controller implements LoggerAwareInterface
         return $view;
     }
 
-    private function routeExists($route, array $routeParameters): bool
+    /**
+     * @param array<mixed> $routeParameters
+     */
+    private function routeExists(string $route, array $routeParameters): bool
     {
         try {
-            $this->router->generate($route, $routeParameters);
+            $this->urlGenerator->generate($route, $routeParameters);
 
             return true;
         } catch (RouteExceptionInterface $e) {
