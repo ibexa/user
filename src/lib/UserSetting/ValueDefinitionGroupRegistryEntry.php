@@ -41,7 +41,7 @@ final class ValueDefinitionGroupRegistryEntry implements \IteratorAggregate
         return $this->definition;
     }
 
-    public function getIterator()
+    public function getIterator(): \Traversable
     {
         return new \ArrayIterator($this->valueDefinitions);
     }
