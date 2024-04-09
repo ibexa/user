@@ -116,7 +116,7 @@ class UserSettingsController extends Controller
                         'routeParameters' => $routeParameters,
                     ]);
                 }
-                
+
                 if ($route !== null) {
                     return $this->redirectToRoute($route, $routeParameters);
                 }
