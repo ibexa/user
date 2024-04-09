@@ -8,8 +8,10 @@ declare(strict_types=1);
 
 namespace Ibexa\User\UserSetting;
 
+use ArrayIterator;
 use Ibexa\Contracts\User\UserSetting\ValueDefinitionGroupInterface;
 use Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface;
+use Traversable;
 
 /**
  * @internal
@@ -41,8 +43,8 @@ final class ValueDefinitionGroupRegistryEntry implements \IteratorAggregate
         return $this->definition;
     }
 
-    public function getIterator(): \Traversable
+    public function getIterator(): Traversable
     {
-        return new \ArrayIterator($this->valueDefinitions);
+        return new ArrayIterator($this->valueDefinitions);
     }
 }
