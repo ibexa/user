@@ -761,11 +761,6 @@ parameters:
 			path: src/lib/UserSetting/Setting/FullDateTimeFormat.php
 
 		-
-			message: "#^Method Ibexa\\\\User\\\\UserSetting\\\\Setting\\\\Language\\:\\:getDefaultValue\\(\\) should return string but returns string\\|false\\.$#"
-			count: 1
-			path: src/lib/UserSetting/Setting/Language.php
-
-		-
 			message: "#^Method Ibexa\\\\User\\\\UserSetting\\\\Setting\\\\ShortDateTimeFormat\\:\\:getDefaultValue\\(\\) should return string but returns string\\|null\\.$#"
 			count: 1
 			path: src/lib/UserSetting/Setting/ShortDateTimeFormat.php
