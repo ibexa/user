@@ -25,7 +25,7 @@ class UserSettingServiceTest extends TestCase
         $valueRegistry->method('countValueDefinitions')->willReturn(2);
         $userSettingService = new UserSettingService($userPreferenceService, $valueRegistry);
 
-        $this->assertEquals(2, $userSettingService->countUserSettings());
+        self::assertEquals(2, $userSettingService->countUserSettings());
     }
 
     public function testLoadUserSettings(): void
@@ -65,7 +65,7 @@ class UserSettingServiceTest extends TestCase
                 'value' => '3',
             ]),
         ];
-        $this->assertEquals($expected, $settings);
+        self::assertEquals($expected, $settings);
     }
 
     /**

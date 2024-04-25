@@ -18,6 +18,7 @@ final class UserInvitationData
 {
     /**
      * @Assert\NotBlank()
+     *
      * @Assert\Email()
      */
     private string $email;
