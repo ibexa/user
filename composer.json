@@ -25,44 +25,44 @@
         }
     },
     "require": {
-        "php": "^7.4 || ^8.0",
-        "ibexa/core": "~5.0.0@dev",
-        "ibexa/content-forms": "~5.0.0@dev",
-        "ibexa/notifications": "~5.0.0@dev",
+        "php": " >=8.3",
+        "ibexa/content-forms": "~5.0.x-dev",
+        "ibexa/core": "~5.0.x-dev",
+        "ibexa/notifications": "~5.0.x-dev",
         "jms/translation-bundle": "^1.5",
-        "symfony/dependency-injection": "^5.0",
-        "symfony/http-kernel": "^5.0",
-        "symfony/translation": "^5.0",
-        "symfony/security-core": "^5.0",
-        "symfony/http-foundation": "^5.0",
         "symfony/config": "^5.0",
-        "symfony/options-resolver": "^5.0",
+        "symfony/dependency-injection": "^5.0",
         "symfony/event-dispatcher": "^5.0",
-        "symfony/intl": "^5.0",
-        "symfony/validator": "^5.0",
         "symfony/form": "^5.0",
+        "symfony/http-foundation": "^5.0",
+        "symfony/http-kernel": "^5.0",
+        "symfony/intl": "^5.0",
+        "symfony/options-resolver": "^5.0",
         "symfony/routing": "^5.0",
+        "symfony/security-core": "^5.0",
+        "symfony/security-http": "^5.0",
         "symfony/swiftmailer-bundle": "^3.4",
-        "twig/twig": "^3.0",
-        "symfony/security-http": "^5.0"
+        "symfony/translation": "^5.0",
+        "symfony/validator": "^5.0",
+        "twig/twig": "^3.0"
     },
     "require-dev": {
-        "ibexa/ci-scripts": "^0.2@dev",
-        "ibexa/doctrine-schema": "~5.0.0@dev",
-        "ibexa/search": "~5.0.0@dev",
-        "ibexa/design-engine": "~5.0.0@dev",
-        "ibexa/http-cache": "~5.0.0@dev",
-        "ibexa/fieldtype-richtext": "~5.0.0@dev",
-        "ibexa/rest": "~5.0.0@dev",
-        "symfony/proxy-manager-bridge": "^5.0",
         "friendsofphp/php-cs-fixer": "^3.0",
+        "ibexa/ci-scripts": "^0.2@dev",
         "ibexa/code-style": "^1.0",
-        "phpunit/phpunit": "^8.2",
+        "ibexa/design-engine": "~5.0.x-dev",
+        "ibexa/doctrine-schema": "~5.0.x-dev",
+        "ibexa/fieldtype-richtext": "~5.0.x-dev",
+        "ibexa/http-cache": "~5.0.x-dev",
+        "ibexa/rest": "~5.0.x-dev",
+        "ibexa/search": "~5.0.x-dev",
         "matthiasnoback/symfony-dependency-injection-test": "4.3",
-        "symfony/phpunit-bridge": "^5.3",
         "phpstan/phpstan": "^1.10",
         "phpstan/phpstan-phpunit": "^1.3",
-        "phpstan/phpstan-symfony": "^1.3"
+        "phpstan/phpstan-symfony": "^1.3",
+        "phpunit/phpunit": "^8.2",
+        "symfony/phpunit-bridge": "^5.3",
+        "symfony/proxy-manager-bridge": "^5.0"
     },
     "scripts": {
         "fix-cs": "php-cs-fixer fix --config=.php-cs-fixer.php -v --show-progress=dots",
@@ -76,6 +76,7 @@
         }
     },
     "config": {
-        "allow-plugins": false
+        "allow-plugins": false,
+        "sort-packages": true
     }
 }
