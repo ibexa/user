@@ -16,10 +16,10 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class LanguageTest extends TestCase
 {
-    /** @var \Ibexa\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface|\PHPUnit\Framework\MockObject\MockObject */
+    /** @var \Ibexa\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface&\PHPUnit\Framework\MockObject\MockObject */
     private UserLanguagePreferenceProviderInterface $userLanguagePreferenceProvider;
 
-    /** @var \Ibexa\User\Form\ChoiceList\Loader\AvailableLocaleChoiceLoader|\PHPUnit\Framework\MockObject\MockObject */
+    /** @var \Ibexa\User\Form\ChoiceList\Loader\AvailableLocaleChoiceLoader&\PHPUnit\Framework\MockObject\MockObject */
     private AvailableLocaleChoiceLoader $availableLocaleChoiceLoader;
 
     protected function setUp(): void
@@ -61,6 +61,7 @@ final class LanguageTest extends TestCase
     public function providerForDefaultValue(): iterable
     {
         yield 'intersection' => [['en_GB', 'en'], ['en', 'de', 'el', 'en_US'], 'en'];
-        yield 'preferred_locales' => [['en_GB', 'en'], ['de', 'el', 'en_US'], 'en_GB'];
+        yield 'no available locale' => [['en_GB', 'en'], ['de', 'el', 'en_US'], ''];
+        yield 'user preferred language priority' => [['en_GB', 'en', 'de'], ['de', 'en', 'el'], 'en'];
     }
 }
