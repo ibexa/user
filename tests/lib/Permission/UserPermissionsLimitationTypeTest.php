@@ -151,7 +151,7 @@ class UserPermissionsLimitationTypeTest extends Base
                 ->method('loadRole')
                 ->withConsecutive([4, Role::STATUS_DEFINED], [8, Role::STATUS_DEFINED])
                 ->willReturnOnConsecutiveCalls(
-                    $this->throwException(new NotFoundException('Role', 4)),
+                    self::throwException(new NotFoundException('Role', 4)),
                     new Role()
                 );
 
@@ -165,7 +165,7 @@ class UserPermissionsLimitationTypeTest extends Base
                 ->method('loadContentInfo')
                 ->withConsecutive([14], [18])
                 ->willReturnOnConsecutiveCalls(
-                    $this->throwException(new NotFoundException('Role', 4)),
+                    self::throwException(new NotFoundException('Role', 4)),
                     new ContentInfo()
                 );
 

@@ -17,9 +17,7 @@ use Symfony\Component\Notifier\Notification\SmsNotificationInterface;
 use Symfony\Component\Notifier\Recipient\EmailRecipientInterface;
 use Symfony\Component\Notifier\Recipient\SmsRecipientInterface;
 
-final class UserPasswordReset
-extends Notification
-implements EmailNotificationInterface, SmsNotificationInterface, UserAwareNotificationInterface
+final class UserPasswordReset extends Notification implements EmailNotificationInterface, SmsNotificationInterface, UserAwareNotificationInterface
 {
     private User $user;
 

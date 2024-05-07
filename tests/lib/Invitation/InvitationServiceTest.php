@@ -63,7 +63,7 @@ class InvitationServiceTest extends TestCase
                 $invitation->getSiteAccessIdentifier()
             )->willReturn('P2D');
 
-        $this->assertSame(
+        self::assertSame(
             $isValid,
             $this->invitationService->isValid($invitation)
         );

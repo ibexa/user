@@ -24,7 +24,7 @@ class ValueDefinitionRegistryTest extends TestCase
 
         $registry = new ValueDefinitionRegistry($definitions);
 
-        $this->assertEquals($definitions, $registry->getValueDefinitions());
+        self::assertEquals($definitions, $registry->getValueDefinitions());
     }
 
     public function testAddValueDefinition()
@@ -34,7 +34,7 @@ class ValueDefinitionRegistryTest extends TestCase
         $registry = new ValueDefinitionRegistry([]);
         $registry->addValueDefinition('foo', $foo);
 
-        $this->assertEquals(['foo' => $foo], $registry->getValueDefinitions());
+        self::assertEquals(['foo' => $foo], $registry->getValueDefinitions());
     }
 
     public function testHasValueDefinition()
@@ -43,8 +43,8 @@ class ValueDefinitionRegistryTest extends TestCase
             'foo' => $this->createMock(ValueDefinitionInterface::class),
         ]);
 
-        $this->assertTrue($registry->hasValueDefinition('foo'));
-        $this->assertFalse($registry->hasValueDefinition('bar'));
+        self::assertTrue($registry->hasValueDefinition('foo'));
+        self::assertFalse($registry->hasValueDefinition('bar'));
     }
 
     public function testGetValueDefinition()
@@ -55,7 +55,7 @@ class ValueDefinitionRegistryTest extends TestCase
             'foo' => $foo,
         ]);
 
-        $this->assertEquals($foo, $registry->getValueDefinition('foo'));
+        self::assertEquals($foo, $registry->getValueDefinition('foo'));
     }
 
     public function testCountValueDefinitions()
@@ -67,14 +67,14 @@ class ValueDefinitionRegistryTest extends TestCase
 
         $registry = new ValueDefinitionRegistry($definitions);
 
-        $this->assertEquals(2, $registry->countValueDefinitions());
+        self::assertEquals(2, $registry->countValueDefinitions());
     }
 
     public function testCountValueDefinitionsWithEmptyRegistry()
     {
         $registry = new ValueDefinitionRegistry([]);
 
-        $this->assertEquals(0, $registry->countValueDefinitions());
+        self::assertEquals(0, $registry->countValueDefinitions());
     }
 }
 
