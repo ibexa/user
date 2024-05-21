@@ -10,18 +10,14 @@
         "psr-4": {
             "Ibexa\\User\\": "src/lib/",
             "Ibexa\\Bundle\\User\\": "src/bundle/",
-            "Ibexa\\Contracts\\User\\": "src/contracts/",
-            "EzSystems\\EzPlatformUserBundle\\": "src/bundle/",
-            "EzSystems\\EzPlatformUser\\": "src/lib/"
+            "Ibexa\\Contracts\\User\\": "src/contracts/"
         }
     },
     "autoload-dev": {
         "psr-4": {
             "Ibexa\\Tests\\Bundle\\User\\": "tests/bundle/",
             "Ibexa\\Tests\\User\\": "tests/lib/",
-            "Ibexa\\Tests\\Integration\\User\\": "tests/integration/",
-            "EzSystems\\EzPlatformUserBundle\\Tests\\": "tests/bundle/",
-            "EzSystems\\EzPlatformUser\\Tests\\": "tests/lib/"
+            "Ibexa\\Tests\\Integration\\User\\": "tests/integration/"
         }
     },
     "require": {
