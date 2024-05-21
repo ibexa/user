@@ -98,5 +98,3 @@ final class ForgotPasswordTest extends AbstractParserTestCase
         );
     }
 }
-
-class_alias(ForgotPasswordTest::class, 'EzSystems\EzPlatformUserBundle\Tests\DependencyInjection\Configuration\Parser\ForgotPasswordTest');

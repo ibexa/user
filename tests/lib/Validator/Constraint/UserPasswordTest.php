@@ -19,5 +19,3 @@ class UserPasswordTest extends TestCase
         self::assertSame('ezplatform.change_user_password.not_match', $constraint->message);
     }
 }
-
-class_alias(UserPasswordTest::class, 'EzSystems\EzPlatformUser\Tests\Validator\Constraint\UserPasswordTest');

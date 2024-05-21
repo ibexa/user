@@ -77,5 +77,3 @@ class ValueDefinitionRegistryTest extends TestCase
         self::assertEquals(0, $registry->countValueDefinitions());
     }
 }
-
-class_alias(ValueDefinitionRegistryTest::class, 'EzSystems\EzPlatformUser\Tests\UserSetting\ValueDefinitionRegistryTest');

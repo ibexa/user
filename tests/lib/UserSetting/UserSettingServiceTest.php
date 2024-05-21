@@ -83,5 +83,3 @@ class UserSettingServiceTest extends TestCase
         return $valueDefinition;
     }
 }
-
-class_alias(UserSettingServiceTest::class, 'EzSystems\EzPlatformUser\Tests\UserSetting\UserSettingServiceTest');

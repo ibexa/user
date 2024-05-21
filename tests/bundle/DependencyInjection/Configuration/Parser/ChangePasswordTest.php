@@ -78,5 +78,3 @@ final class ChangePasswordTest extends AbstractParserTestCase
         );
     }
 }
-
-class_alias(ChangePasswordTest::class, 'EzSystems\EzPlatformUserBundle\Tests\DependencyInjection\Configuration\Parser\ChangePasswordTest');

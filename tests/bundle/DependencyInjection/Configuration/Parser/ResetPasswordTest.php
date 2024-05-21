@@ -84,5 +84,3 @@ final class ResetPasswordTest extends AbstractParserTestCase
         );
     }
 }
-
-class_alias(ResetPasswordTest::class, 'EzSystems\EzPlatformUserBundle\Tests\DependencyInjection\Configuration\Parser\ResetPasswordTest');

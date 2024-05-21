@@ -106,5 +106,3 @@ class AvailableLocaleChoiceLoaderTest extends TestCase
         ];
     }
 }
-
-class_alias(AvailableLocaleChoiceLoaderTest::class, 'EzSystems\EzPlatformUser\Tests\Form\Type\ChoiceList\Loader\AvailableLocaleChoiceLoaderTest');
