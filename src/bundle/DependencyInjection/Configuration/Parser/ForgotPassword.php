@@ -99,5 +99,3 @@ final class ForgotPassword extends AbstractParser
         }
     }
 }
-
-class_alias(ForgotPassword::class, 'EzSystems\EzPlatformUserBundle\DependencyInjection\Configuration\Parser\ForgotPassword');

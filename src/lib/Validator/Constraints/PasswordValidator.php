@@ -50,5 +50,3 @@ class PasswordValidator extends ConstraintValidator
         return new ValidationErrorsProcessor($this->context);
     }
 }
-
-class_alias(PasswordValidator::class, 'EzSystems\EzPlatformUser\Validator\Constraints\PasswordValidator');

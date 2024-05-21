@@ -12,5 +12,3 @@ use Ibexa\Core\MVC\Symfony\View\BaseView;
 class FormView extends BaseView
 {
 }
-
-class_alias(FormView::class, 'EzSystems\EzPlatformUser\View\Register\FormView');

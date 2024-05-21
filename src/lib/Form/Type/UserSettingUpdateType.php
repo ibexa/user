@@ -92,5 +92,3 @@ class UserSettingUpdateType extends AbstractType
         ;
     }
 }
-
-class_alias(UserSettingUpdateType::class, 'EzSystems\EzPlatformUser\Form\Type\UserSettingUpdateType');

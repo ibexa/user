@@ -64,5 +64,3 @@ class Pagination extends AbstractParser
         }
     }
 }
-
-class_alias(Pagination::class, 'EzSystems\EzPlatformUserBundle\DependencyInjection\Configuration\Parser\Pagination');

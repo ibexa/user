@@ -38,5 +38,3 @@ class ShortDateFormatterFactory extends AbstractDateTimeFormatterFactory impleme
         )->getDateFormat();
     }
 }
-
-class_alias(ShortDateFormatterFactory::class, 'EzSystems\EzPlatformUser\UserSetting\DateTimeFormat\ShortDateFormatterFactory');

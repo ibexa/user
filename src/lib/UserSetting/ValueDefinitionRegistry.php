@@ -127,5 +127,3 @@ class ValueDefinitionRegistry
         return \count($this->groupedDefinitions);
     }
 }
-
-class_alias(ValueDefinitionRegistry::class, 'EzSystems\EzPlatformUser\UserSetting\ValueDefinitionRegistry');

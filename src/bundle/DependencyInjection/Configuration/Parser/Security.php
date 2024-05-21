@@ -61,5 +61,3 @@ class Security extends AbstractParser
         }
     }
 }
-
-class_alias(Security::class, 'EzSystems\EzPlatformUserBundle\DependencyInjection\Configuration\Parser\Security');

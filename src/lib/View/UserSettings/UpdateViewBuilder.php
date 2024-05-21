@@ -61,5 +61,3 @@ class UpdateViewBuilder implements ViewBuilder
         return $view;
     }
 }
-
-class_alias(UpdateViewBuilder::class, 'EzSystems\EzPlatformUser\View\UserSettings\UpdateViewBuilder');

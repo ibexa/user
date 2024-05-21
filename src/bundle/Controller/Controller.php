@@ -17,5 +17,3 @@ abstract class Controller extends AbstractController
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
     }
 }
-
-class_alias(Controller::class, 'EzSystems\EzPlatformUserBundle\Controller\Controller');

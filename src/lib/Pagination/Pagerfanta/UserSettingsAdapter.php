@@ -44,5 +44,3 @@ class UserSettingsAdapter implements AdapterInterface
         return $this->userSettingService->loadUserSettings($offset, $length);
     }
 }
-
-class_alias(UserSettingsAdapter::class, 'EzSystems\EzPlatformUser\Pagination\Pagerfanta\UserSettingsAdapter');

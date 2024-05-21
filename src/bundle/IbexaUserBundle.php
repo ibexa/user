@@ -50,5 +50,3 @@ class IbexaUserBundle extends Bundle
         $core->addDefaultSettings(__DIR__ . '/Resources/config', ['ezplatform_default_settings.yaml']);
     }
 }
-
-class_alias(IbexaUserBundle::class, 'EzSystems\EzPlatformUserBundle\EzPlatformUserBundle');

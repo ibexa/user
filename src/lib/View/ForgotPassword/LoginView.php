@@ -13,5 +13,3 @@ use Ibexa\Core\MVC\Symfony\View\BaseView;
 class LoginView extends BaseView
 {
 }
-
-class_alias(LoginView::class, 'EzSystems\EzPlatformUser\View\ForgotPassword\LoginView');

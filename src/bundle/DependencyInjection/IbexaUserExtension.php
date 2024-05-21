@@ -68,5 +68,3 @@ class IbexaUserExtension extends Extension implements PrependExtensionInterface
             && true === $container->getParameter('ibexa.behat.browser.enabled');
     }
 }
-
-class_alias(IbexaUserExtension::class, 'EzSystems\EzPlatformUserBundle\DependencyInjection\EzPlatformUserExtension');

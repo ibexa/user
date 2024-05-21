@@ -15,5 +15,3 @@ final class UserFormEvents
      */
     public const USER_REGISTER = 'user.edit.register';
 }
-
-class_alias(UserFormEvents::class, 'EzSystems\EzPlatformUser\Form\UserFormEvents');

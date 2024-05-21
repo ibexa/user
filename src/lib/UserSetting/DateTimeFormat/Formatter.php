@@ -52,5 +52,3 @@ class Formatter implements FormatterInterface
         return $result;
     }
 }
-
-class_alias(Formatter::class, 'EzSystems\EzPlatformUser\UserSetting\DateTimeFormat\Formatter');

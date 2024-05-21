@@ -38,5 +38,3 @@ class FullTimeFormatterFactory extends AbstractDateTimeFormatterFactory implemen
         )->getTimeFormat();
     }
 }
-
-class_alias(FullTimeFormatterFactory::class, 'EzSystems\EzPlatformUser\UserSetting\DateTimeFormat\FullTimeFormatterFactory');

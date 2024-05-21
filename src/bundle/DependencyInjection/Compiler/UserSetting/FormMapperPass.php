@@ -51,5 +51,3 @@ class FormMapperPass implements CompilerPassInterface
         }
     }
 }
-
-class_alias(FormMapperPass::class, 'EzSystems\EzPlatformUserBundle\DependencyInjection\Compiler\UserSetting\FormMapperPass');

@@ -65,5 +65,3 @@ class ChangePassword extends AbstractParser
         }
     }
 }
-
-class_alias(ChangePassword::class, 'EzSystems\EzPlatformUserBundle\DependencyInjection\Configuration\Parser\ChangePassword');

@@ -47,5 +47,3 @@ final class ValueDefinitionRegistryEntry
         return $this->priority;
     }
 }
-
-class_alias(ValueDefinitionRegistryEntry::class, 'EzSystems\EzPlatformUser\UserSetting\ValueDefinitionRegistryEntry');

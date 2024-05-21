@@ -22,5 +22,3 @@ class SecurityPass implements CompilerPassInterface
         }
     }
 }
-
-class_alias(SecurityPass::class, 'EzSystems\EzPlatformUserBundle\DependencyInjection\Compiler\SecurityPass');

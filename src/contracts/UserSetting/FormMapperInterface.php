@@ -20,5 +20,3 @@ interface FormMapperInterface
         ValueDefinitionInterface $value
     ): FormBuilderInterface;
 }
-
-class_alias(FormMapperInterface::class, 'EzSystems\EzPlatformUser\UserSetting\FormMapperInterface');

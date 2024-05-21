@@ -117,5 +117,3 @@ class ShortDateTimeFormat extends AbstractDateTimeFormat
         return $this->configResolver->getParameter('user_preferences.allowed_short_date_formats');
     }
 }
-
-class_alias(ShortDateTimeFormat::class, 'EzSystems\EzPlatformUser\UserSetting\Setting\ShortDateTimeFormat');

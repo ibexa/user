@@ -42,5 +42,3 @@ class Identifier implements ViewMatcherInterface
         return !empty(array_intersect($identifiersInGroup, $this->identifiers));
     }
 }
-
-class_alias(Identifier::class, 'EzSystems\EzPlatformUser\View\UserSettings\Matcher\Identifier');

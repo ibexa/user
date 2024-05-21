@@ -30,5 +30,3 @@ class UserPassword extends Constraint implements TranslationContainerInterface
         ];
     }
 }
-
-class_alias(UserPassword::class, 'EzSystems\EzPlatformUser\Validator\Constraints\UserPassword');

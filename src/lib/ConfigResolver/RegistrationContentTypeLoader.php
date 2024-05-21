@@ -20,5 +20,3 @@ interface RegistrationContentTypeLoader
      */
     public function loadContentType();
 }
-
-class_alias(RegistrationContentTypeLoader::class, 'EzSystems\EzPlatformUser\ConfigResolver\RegistrationContentTypeLoader');

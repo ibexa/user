@@ -61,5 +61,3 @@ class UserPasswordValidator extends ConstraintValidator
         }
     }
 }
-
-class_alias(UserPasswordValidator::class, 'EzSystems\EzPlatformUser\Validator\Constraints\UserPasswordValidator');

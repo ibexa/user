@@ -20,5 +20,3 @@ interface RegistrationGroupLoader
      */
     public function loadGroup();
 }
-
-class_alias(RegistrationGroupLoader::class, 'EzSystems\EzPlatformUser\ConfigResolver\RegistrationGroupLoader');

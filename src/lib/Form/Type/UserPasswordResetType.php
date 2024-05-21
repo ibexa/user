@@ -58,5 +58,3 @@ class UserPasswordResetType extends AbstractType
         ]);
     }
 }
-
-class_alias(UserPasswordResetType::class, 'EzSystems\EzPlatformUser\Form\Type\UserPasswordResetType');

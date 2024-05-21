@@ -46,5 +46,3 @@ class ConfigurableRegistrationContentTypeLoader implements RegistrationContentTy
         );
     }
 }
-
-class_alias(ConfigurableRegistrationContentTypeLoader::class, 'EzSystems\EzPlatformUser\ConfigResolver\ConfigurableRegistrationContentTypeLoader');

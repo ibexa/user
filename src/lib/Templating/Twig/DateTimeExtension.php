@@ -195,5 +195,3 @@ class DateTimeExtension extends AbstractExtension
         return $formatter->format($date, $timezone);
     }
 }
-
-class_alias(DateTimeExtension::class, 'EzSystems\EzPlatformUser\Templating\Twig\DateTimeExtension');

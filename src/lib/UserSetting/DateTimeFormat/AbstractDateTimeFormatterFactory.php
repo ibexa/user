@@ -44,5 +44,3 @@ abstract class AbstractDateTimeFormatterFactory implements DateTimeFormatterFact
         );
     }
 }
-
-class_alias(AbstractDateTimeFormatterFactory::class, 'EzSystems\EzPlatformUser\UserSetting\DateTimeFormat\AbstractDateTimeFormatterFactory');

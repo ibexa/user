@@ -69,5 +69,3 @@ final class ResetPassword extends AbstractParser
         }
     }
 }
-
-class_alias(ResetPassword::class, 'EzSystems\EzPlatformUserBundle\DependencyInjection\Configuration\Parser\ResetPassword');

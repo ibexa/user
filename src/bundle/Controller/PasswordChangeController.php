@@ -99,5 +99,3 @@ class PasswordChangeController extends Controller
         return in_array($siteAccess->name, $this->siteAccessGroups['admin_group'], true);
     }
 }
-
-class_alias(PasswordChangeController::class, 'EzSystems\EzPlatformUserBundle\Controller\PasswordChangeController');

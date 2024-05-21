@@ -77,5 +77,3 @@ class ValueDefinitionPass implements CompilerPassInterface
         }
     }
 }
-
-class_alias(ValueDefinitionPass::class, 'EzSystems\EzPlatformUserBundle\DependencyInjection\Compiler\UserSetting\ValueDefinitionPass');

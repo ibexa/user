@@ -39,5 +39,3 @@ class UserPasswordForgotWithLoginType extends AbstractType
         ]);
     }
 }
-
-class_alias(UserPasswordForgotWithLoginType::class, 'EzSystems\EzPlatformUser\Form\Type\UserPasswordForgotWithLoginType');

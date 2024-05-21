@@ -71,5 +71,3 @@ class UserPasswordChangeData
         return $this->newPassword;
     }
 }
-
-class_alias(UserPasswordChangeData::class, 'EzSystems\EzPlatformUser\Form\Data\UserPasswordChangeData');

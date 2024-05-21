@@ -65,5 +65,3 @@ class UpdateView extends BaseView
         ];
     }
 }
-
-class_alias(UpdateView::class, 'EzSystems\EzPlatformUser\View\UserSettings\UpdateView');

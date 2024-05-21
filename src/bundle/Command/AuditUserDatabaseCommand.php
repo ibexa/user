@@ -159,5 +159,3 @@ final class AuditUserDatabaseCommand extends Command implements BackwardCompatib
         return ['ezplatform:user:audit_database'];
     }
 }
-
-class_alias(AuditUserDatabaseCommand::class, 'EzSystems\EzPlatformUserBundle\Command\AuditUserDatabaseCommand');

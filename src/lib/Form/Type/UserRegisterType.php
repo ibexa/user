@@ -83,5 +83,3 @@ class UserRegisterType extends AbstractType
             ->setRequired(['languageCode']);
     }
 }
-
-class_alias(UserRegisterType::class, 'EzSystems\EzPlatformUser\Form\Type\UserRegisterType');
