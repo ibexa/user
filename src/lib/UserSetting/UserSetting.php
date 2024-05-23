@@ -20,6 +20,7 @@ class UserSetting extends ValueObject
 {
     /** @var string */
     protected $identifier;
+
     /** @var string */
     protected $name;
 
