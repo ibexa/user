@@ -11,10 +11,10 @@ namespace Ibexa\User\UserSetting;
 use Ibexa\Contracts\Core\Repository\Values\ValueObject;
 
 /**
- * @property string $identifier @deprecated use {@see UserSetting::getIdentifier()} instead.
- * @property string $name @deprecated use {@see UserSetting::getName()} instead.
- * @property string $description @deprecated use {@see UserSetting::getDescription()} instead.
- * @property string $value @deprecated use {@see UserSetting::getValue()} instead.
+ * @property string $identifier @deprecated 4.6.7 accessing magic getter is deprecated and will be removed in 5.0.0. Use {@see UserSetting::getIdentifier()} instead.
+ * @property string $name @deprecated 4.6.7 accessing magic getter is deprecated and will be removed in 5.0.0. Use {@see UserSetting::getName()} instead.
+ * @property string $description @deprecated 4.6.7 accessing magic getter is deprecated and will be removed in 5.0.0. Use {@see UserSetting::getDescription()} instead.
+ * @property string $value @deprecated 4.6.7 accessing magic getter is deprecated and will be removed in 5.0.0. Use {@see UserSetting::getValue()} instead.
  */
 class UserSetting extends ValueObject
 {
