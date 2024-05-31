@@ -4,7 +4,7 @@ Repository dedicated to [Ibexa DXP](https://www.ibexa.co/products) and Ibexa Ope
 management.
 
 ## COPYRIGHT
-Copyright (C) 1999-2021 Ibexa AS (formerly eZ Systems AS). All rights reserved.
+Copyright (C) 1999-2024 Ibexa AS (formerly eZ Systems AS). All rights reserved.
 
 ## LICENSE
 This source code is available separately under the following licenses:
