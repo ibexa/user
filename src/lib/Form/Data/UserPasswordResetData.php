@@ -68,5 +68,3 @@ class UserPasswordResetData
         $this->contentType = $contentType;
     }
 }
-
-class_alias(UserPasswordResetData::class, 'EzSystems\EzPlatformUser\Form\Data\UserPasswordResetData');

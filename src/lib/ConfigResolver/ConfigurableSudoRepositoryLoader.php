@@ -98,5 +98,3 @@ abstract class ConfigurableSudoRepositoryLoader
      */
     abstract protected function configureOptions(OptionsResolver $optionsResolver);
 }
-
-class_alias(ConfigurableSudoRepositoryLoader::class, 'EzSystems\EzPlatformUser\ConfigResolver\ConfigurableSudoRepositoryLoader');

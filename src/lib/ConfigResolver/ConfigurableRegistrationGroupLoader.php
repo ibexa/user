@@ -39,5 +39,3 @@ class ConfigurableRegistrationGroupLoader implements RegistrationGroupLoader
         });
     }
 }
-
-class_alias(ConfigurableRegistrationGroupLoader::class, 'EzSystems\EzPlatformUser\ConfigResolver\ConfigurableRegistrationGroupLoader');

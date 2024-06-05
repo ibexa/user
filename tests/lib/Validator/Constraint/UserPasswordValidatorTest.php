@@ -122,5 +122,3 @@ class UserPasswordValidatorTest extends TestCase
         $this->validator->validate('password', new UserPassword());
     }
 }
-
-class_alias(UserPasswordValidatorTest::class, 'EzSystems\EzPlatformUser\Tests\Validator\Constraint\UserPasswordValidatorTest');

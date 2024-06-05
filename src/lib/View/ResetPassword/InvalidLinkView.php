@@ -13,5 +13,3 @@ use Ibexa\Core\MVC\Symfony\View\BaseView;
 class InvalidLinkView extends BaseView
 {
 }
-
-class_alias(InvalidLinkView::class, 'EzSystems\EzPlatformUser\View\ResetPassword\InvalidLinkView');

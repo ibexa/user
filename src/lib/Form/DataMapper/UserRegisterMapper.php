@@ -112,5 +112,3 @@ class UserRegisterMapper
             ->setAllowedTypes('invitation', Invitation::class);
     }
 }
-
-class_alias(UserRegisterMapper::class, 'EzSystems\EzPlatformUser\Form\DataMapper\UserRegisterMapper');

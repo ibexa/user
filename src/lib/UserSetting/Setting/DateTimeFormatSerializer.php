@@ -38,5 +38,3 @@ final class DateTimeFormatSerializer
         return $value;
     }
 }
-
-class_alias(DateTimeFormatSerializer::class, 'EzSystems\EzPlatformUser\UserSetting\Setting\DateTimeFormatSerializer');

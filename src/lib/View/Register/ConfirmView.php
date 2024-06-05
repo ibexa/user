@@ -12,5 +12,3 @@ use Ibexa\Core\MVC\Symfony\View\BaseView;
 class ConfirmView extends BaseView
 {
 }
-
-class_alias(ConfirmView::class, 'EzSystems\EzPlatformUser\View\Register\ConfirmView');

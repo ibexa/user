@@ -15,5 +15,3 @@ interface DateTimeFormatterFactoryInterface
      */
     public function getFormatter(): FormatterInterface;
 }
-
-class_alias(DateTimeFormatterFactoryInterface::class, 'EzSystems\EzPlatformUser\UserSetting\DateTimeFormat\DateTimeFormatterFactoryInterface');

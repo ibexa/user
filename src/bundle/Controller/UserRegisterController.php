@@ -121,5 +121,3 @@ class UserRegisterController extends Controller
         return new FormView(null, ['form' => $form->createView()]);
     }
 }
-
-class_alias(UserRegisterController::class, 'EzSystems\EzPlatformUserBundle\Controller\UserRegisterController');

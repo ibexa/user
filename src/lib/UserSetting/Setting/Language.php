@@ -119,5 +119,3 @@ class Language implements ValueDefinitionInterface, FormMapperInterface
         );
     }
 }
-
-class_alias(Language::class, 'EzSystems\EzPlatformUser\UserSetting\Setting\Language');

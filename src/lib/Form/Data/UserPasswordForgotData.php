@@ -43,5 +43,3 @@ class UserPasswordForgotData
         return $this->email;
     }
 }
-
-class_alias(UserPasswordForgotData::class, 'EzSystems\EzPlatformUser\Form\Data\UserPasswordForgotData');

@@ -128,5 +128,3 @@ class UserSettingsController extends Controller
         return $view;
     }
 }
-
-class_alias(UserSettingsController::class, 'EzSystems\EzPlatformUserBundle\Controller\UserSettingsController');

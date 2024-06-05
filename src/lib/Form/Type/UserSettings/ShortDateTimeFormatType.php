@@ -41,5 +41,3 @@ class ShortDateTimeFormatType extends AbstractType
         return DateTimeFormatType::class;
     }
 }
-
-class_alias(ShortDateTimeFormatType::class, 'EzSystems\EzPlatformUser\Form\Type\UserSettings\ShortDateTimeFormatType');

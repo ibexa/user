@@ -125,5 +125,3 @@ class UserPreferences extends AbstractParser
         }
     }
 }
-
-class_alias(UserPreferences::class, 'EzSystems\EzPlatformUserBundle\DependencyInjection\Configuration\Parser\UserPreferences');

@@ -24,5 +24,3 @@ class BaseSubmitHandler implements SubmitHandler
         return null;
     }
 }
-
-class_alias(BaseSubmitHandler::class, 'EzSystems\EzPlatformUser\Form\BaseSubmitHandler');

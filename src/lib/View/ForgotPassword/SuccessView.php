@@ -13,5 +13,3 @@ use Ibexa\Core\MVC\Symfony\View\BaseView;
 class SuccessView extends BaseView
 {
 }
-
-class_alias(SuccessView::class, 'EzSystems\EzPlatformUser\View\ForgotPassword\SuccessView');

@@ -60,5 +60,3 @@ class UserPasswordChangeType extends AbstractType
         ]);
     }
 }
-
-class_alias(UserPasswordChangeType::class, 'EzSystems\EzPlatformUser\Form\Type\UserPasswordChangeType');

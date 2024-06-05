@@ -106,5 +106,3 @@ class UserRegistration extends AbstractParser
         }
     }
 }
-
-class_alias(UserRegistration::class, 'EzSystems\EzPlatformUserBundle\DependencyInjection\Configuration\Parser\UserRegistration');

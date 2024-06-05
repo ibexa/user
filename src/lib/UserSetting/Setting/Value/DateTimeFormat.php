@@ -70,5 +70,3 @@ final class DateTimeFormat
         return implode(' ', $parts);
     }
 }
-
-class_alias(DateTimeFormat::class, 'EzSystems\EzPlatformUser\UserSetting\Setting\Value\DateTimeFormat');

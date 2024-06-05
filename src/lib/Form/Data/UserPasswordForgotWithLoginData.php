@@ -43,5 +43,3 @@ class UserPasswordForgotWithLoginData
         return $this->login;
     }
 }
-
-class_alias(UserPasswordForgotWithLoginData::class, 'EzSystems\EzPlatformUser\Form\Data\UserPasswordForgotWithLoginData');

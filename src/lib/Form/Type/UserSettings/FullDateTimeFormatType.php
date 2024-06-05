@@ -41,5 +41,3 @@ class FullDateTimeFormatType extends AbstractType
         return DateTimeFormatType::class;
     }
 }
-
-class_alias(FullDateTimeFormatType::class, 'EzSystems\EzPlatformUser\Form\Type\UserSettings\FullDateTimeFormatType');

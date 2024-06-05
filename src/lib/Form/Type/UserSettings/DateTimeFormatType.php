@@ -48,5 +48,3 @@ class DateTimeFormatType extends AbstractType
         ]);
     }
 }
-
-class_alias(DateTimeFormatType::class, 'EzSystems\EzPlatformUser\Form\Type\UserSettings\DateTimeFormatType');

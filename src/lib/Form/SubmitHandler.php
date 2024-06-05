@@ -15,5 +15,3 @@ interface SubmitHandler
 {
     public function handle(FormInterface $form, callable $handler): ?Response;
 }
-
-class_alias(SubmitHandler::class, 'EzSystems\EzPlatformUser\Form\SubmitHandler');

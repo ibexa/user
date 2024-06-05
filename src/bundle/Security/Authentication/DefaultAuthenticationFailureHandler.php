@@ -27,5 +27,3 @@ final class DefaultAuthenticationFailureHandler extends HttpDefaultAuthenticatio
         return parent::onAuthenticationFailure($request, $exception);
     }
 }
-
-class_alias(DefaultAuthenticationFailureHandler::class, 'EzSystems\EzPlatformUserBundle\Security\Authentication\DefaultAuthenticationFailureHandler');

@@ -109,5 +109,3 @@ class UserRegisterFormProcessor implements EventSubscriberInterface
         );
     }
 }
-
-class_alias(UserRegisterFormProcessor::class, 'EzSystems\EzPlatformUser\Form\Processor\UserRegisterFormProcessor');

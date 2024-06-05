@@ -102,5 +102,3 @@ class Timezone implements ValueDefinitionInterface, FormMapperInterface
         );
     }
 }
-
-class_alias(Timezone::class, 'EzSystems\EzPlatformUser\UserSetting\Setting\Timezone');

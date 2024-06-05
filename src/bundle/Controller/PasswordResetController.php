@@ -281,5 +281,3 @@ class PasswordResetController extends Controller
             && !empty($subscriptions[UserPasswordReset::class]['channels']);
     }
 }
-
-class_alias(PasswordResetController::class, 'EzSystems\EzPlatformUserBundle\Controller\PasswordResetController');

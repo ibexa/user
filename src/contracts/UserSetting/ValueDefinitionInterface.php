@@ -36,5 +36,3 @@ interface ValueDefinitionInterface
      */
     public function getDefaultValue(): string;
 }
-
-class_alias(ValueDefinitionInterface::class, 'EzSystems\EzPlatformUser\UserSetting\ValueDefinitionInterface');

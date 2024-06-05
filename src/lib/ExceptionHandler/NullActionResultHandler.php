@@ -26,5 +26,3 @@ class NullActionResultHandler implements ActionResultHandler
     ): void {
     }
 }
-
-class_alias(NullActionResultHandler::class, 'EzSystems\EzPlatformUser\ExceptionHandler\NullActionResultHandler');

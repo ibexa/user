@@ -140,5 +140,3 @@ class FormFactory
         );
     }
 }
-
-class_alias(FormFactory::class, 'EzSystems\EzPlatformUser\Form\Factory\FormFactory');

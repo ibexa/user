@@ -15,5 +15,3 @@ class UserSettingsUpdateView extends View
     public const NODE_KEY = 'user_settings_update_view';
     public const INFO = 'Template selection settings when displaying a user setting update form';
 }
-
-class_alias(UserSettingsUpdateView::class, 'EzSystems\EzPlatformUserBundle\DependencyInjection\Configuration\Parser\UserSettingsUpdateView');

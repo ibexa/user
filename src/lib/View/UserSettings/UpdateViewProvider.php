@@ -64,5 +64,3 @@ class UpdateViewProvider implements ViewProvider
         return $view;
     }
 }
-
-class_alias(UpdateViewProvider::class, 'EzSystems\EzPlatformUser\View\UserSettings\UpdateViewProvider');

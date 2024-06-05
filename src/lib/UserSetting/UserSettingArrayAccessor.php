@@ -63,5 +63,3 @@ class UserSettingArrayAccessor implements ArrayAccess
         throw new NotImplementedException('offsetUnset');
     }
 }
-
-class_alias(UserSettingArrayAccessor::class, 'EzSystems\EzPlatformUser\UserSetting\UserSettingArrayAccessor');

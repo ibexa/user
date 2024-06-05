@@ -104,5 +104,3 @@ class SubitemsLimit implements ValueDefinitionInterface, FormMapperInterface
         );
     }
 }
-
-class_alias(SubitemsLimit::class, 'EzSystems\EzPlatformUser\UserSetting\Setting\SubitemsLimit');

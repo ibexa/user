@@ -94,5 +94,3 @@ class AvailableLocaleChoiceLoader implements ChoiceLoaderInterface
         return $this->loadChoiceList($value)->getValuesForChoices($choices);
     }
 }
-
-class_alias(AvailableLocaleChoiceLoader::class, 'EzSystems\EzPlatformUser\Form\ChoiceList\Loader\AvailableLocaleChoiceLoader');

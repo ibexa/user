@@ -148,5 +148,3 @@ class CharacterCounter implements ValueDefinitionInterface, FormMapperInterface
         );
     }
 }
-
-class_alias(CharacterCounter::class, 'EzSystems\EzPlatformUser\UserSetting\Setting\CharacterCounter');

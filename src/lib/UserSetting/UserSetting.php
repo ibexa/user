@@ -30,5 +30,3 @@ class UserSetting extends ValueObject
     /** @var string */
     protected $value;
 }
-
-class_alias(UserSetting::class, 'EzSystems\EzPlatformUser\UserSetting\UserSetting');

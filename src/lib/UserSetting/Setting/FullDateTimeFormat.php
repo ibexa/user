@@ -118,5 +118,3 @@ class FullDateTimeFormat extends AbstractDateTimeFormat
         return $this->configResolver->getParameter('user_preferences.allowed_full_date_formats');
     }
 }
-
-class_alias(FullDateTimeFormat::class, 'EzSystems\EzPlatformUser\UserSetting\Setting\FullDateTimeFormat');

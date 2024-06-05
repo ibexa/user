@@ -92,5 +92,3 @@ abstract class AbstractDateTimeFormat implements ValueDefinitionInterface, FormM
      */
     abstract protected function getTranslatedDescription(): string;
 }
-
-class_alias(AbstractDateTimeFormat::class, 'EzSystems\EzPlatformUser\UserSetting\Setting\AbstractDateTimeFormat');

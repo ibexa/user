@@ -70,5 +70,3 @@ class DateTimeFormatTransformer implements DataTransformerInterface
         ));
     }
 }
-
-class_alias(DateTimeFormatTransformer::class, 'EzSystems\EzPlatformUser\Form\DataTransformer\DateTimeFormatTransformer');

@@ -65,5 +65,3 @@ class FormMapperRegistry
         return $this->formMappers;
     }
 }
-
-class_alias(FormMapperRegistry::class, 'EzSystems\EzPlatformUser\UserSetting\FormMapperRegistry');
