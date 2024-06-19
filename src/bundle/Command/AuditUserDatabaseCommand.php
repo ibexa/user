@@ -10,7 +10,6 @@ namespace Ibexa\Bundle\User\Command;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\FetchMode;
-use Ibexa\Bundle\Core\Command\BackwardCompatibleCommand;
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
 use Ibexa\Contracts\Core\Repository\UserService;
 use Ibexa\Core\FieldType\User\Type;
@@ -19,7 +18,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-final class AuditUserDatabaseCommand extends Command implements BackwardCompatibleCommand
+final class AuditUserDatabaseCommand extends Command
 {
     /** @var \Ibexa\Contracts\Core\Repository\ContentTypeService */
     private $contentTypeService;
@@ -40,11 +39,6 @@ final class AuditUserDatabaseCommand extends Command implements BackwardCompatib
         $this->contentTypeService = $contentTypeService;
         $this->userService = $userService;
         $this->connection = $connection;
-    }
-
-    protected function configure(): void
-    {
-        $this->setAliases($this->getDeprecatedAliases());
     }
 
     /**
@@ -149,13 +143,5 @@ final class AuditUserDatabaseCommand extends Command implements BackwardCompatib
         }
 
         return false;
-    }
-
-    /**
-     * @return string[]
-     */
-    public function getDeprecatedAliases(): array
-    {
-        return ['ezplatform:user:audit_database'];
     }
 }
