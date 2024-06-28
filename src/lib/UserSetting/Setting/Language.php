@@ -72,9 +72,16 @@ class Language implements ValueDefinitionInterface, FormMapperInterface
      */
     public function getDefaultValue(): string
     {
+        $defaultLocale = '';
         $preferredLocales = $this->userLanguagePreferenceProvider->getPreferredLocales();
 
-        return reset($preferredLocales);
+        $list = $this->availableLocaleChoiceLoader->getChoiceList();
+        $commonLocales = array_intersect($preferredLocales, $list);
+        if (!empty($commonLocales)) {
+            $defaultLocale = reset($commonLocales);
+        }
+
+        return $defaultLocale;
     }
 
     /**
