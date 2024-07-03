@@ -26,6 +26,12 @@ class InvitationServiceTest extends TestCase
 {
     private InvitationService $invitationService;
 
+    /** @var \Ibexa\Core\MVC\Symfony\SiteAccess\SiteAccessServiceInterface&\PHPUnit\Framework\MockObject\MockObject */
+    private SiteAccessServiceInterface $siteAccessService;
+
+    /** @var \Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface&\PHPUnit\Framework\MockObject\MockObject */
+    private ConfigResolverInterface $configResolver;
+
     protected function setUp(): void
     {
         $this->siteAccessService = $this->createMock(SiteAccessServiceInterface::class);
