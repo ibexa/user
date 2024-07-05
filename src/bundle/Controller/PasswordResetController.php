@@ -228,23 +228,11 @@ class PasswordResetController extends Controller
 
     private function sendResetPasswordMessage(User $user, string $hashKey): void
     {
-        if (!$this->isNotifierConfigured()) {
-            return;
-        }
-
         $this->notificationService->send(
             new SymfonyNotificationAdapter(
                 new UserPasswordReset($user, $hashKey, $this->configResolver, $this->twig),
             ),
             [new SymfonyRecipientAdapter(new UserRecipient($user))],
         );
-    }
-
-    private function isNotifierConfigured(): bool
-    {
-        $subscriptions = $this->configResolver->getParameter('notifications.subscriptions');
-
-        return array_key_exists(UserPasswordReset::class, $subscriptions)
-            && !empty($subscriptions[UserPasswordReset::class]['channels']);
     }
 }

@@ -38,23 +38,11 @@ final class MailSender implements InvitationSender
 
     public function sendInvitation(Invitation $invitation): void
     {
-        if (!$this->isNotifierConfigured()) {
-            return;
-        }
-
         $this->notificationService->send(
             new SymfonyNotificationAdapter(
                 new UserInvitation($invitation, $this->configResolver, $this->twig),
             ),
             [new SymfonyRecipientAdapter(new Recipient($invitation->getEmail()))],
         );
-    }
-
-    private function isNotifierConfigured(): bool
-    {
-        $subscriptions = $this->configResolver->getParameter('notifications.subscriptions');
-
-        return array_key_exists(UserInvitation::class, $subscriptions)
-            && !empty($subscriptions[UserInvitation::class]['channels']);
     }
 }
