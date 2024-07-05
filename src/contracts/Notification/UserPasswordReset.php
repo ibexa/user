@@ -12,15 +12,12 @@ use Ibexa\Contracts\Core\Repository\Values\User\User;
 use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 use Symfony\Bridge\Twig\Mime\NotificationEmail;
 use Symfony\Component\Notifier\Message\EmailMessage;
-use Symfony\Component\Notifier\Message\SmsMessage;
 use Symfony\Component\Notifier\Notification\EmailNotificationInterface;
 use Symfony\Component\Notifier\Notification\Notification;
-use Symfony\Component\Notifier\Notification\SmsNotificationInterface;
 use Symfony\Component\Notifier\Recipient\EmailRecipientInterface;
-use Symfony\Component\Notifier\Recipient\SmsRecipientInterface;
 use Twig\Environment;
 
-final class UserPasswordReset extends Notification implements EmailNotificationInterface, SmsNotificationInterface, UserAwareNotificationInterface
+final class UserPasswordReset extends Notification implements EmailNotificationInterface, UserAwareNotificationInterface
 {
     private User $user;
 
@@ -64,11 +61,6 @@ final class UserPasswordReset extends Notification implements EmailNotificationI
         }
 
         return new EmailMessage($email);
-    }
-
-    public function asSmsMessage(SmsRecipientInterface $recipient, string $transport = null): ?SmsMessage
-    {
-        return null;
     }
 
     public function getUser(): User

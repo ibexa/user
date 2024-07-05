@@ -12,15 +12,12 @@ use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 use Ibexa\Contracts\User\Invitation\Invitation;
 use Symfony\Bridge\Twig\Mime\NotificationEmail;
 use Symfony\Component\Notifier\Message\EmailMessage;
-use Symfony\Component\Notifier\Message\SmsMessage;
 use Symfony\Component\Notifier\Notification\EmailNotificationInterface;
 use Symfony\Component\Notifier\Notification\Notification;
-use Symfony\Component\Notifier\Notification\SmsNotificationInterface;
 use Symfony\Component\Notifier\Recipient\EmailRecipientInterface;
-use Symfony\Component\Notifier\Recipient\SmsRecipientInterface;
 use Twig\Environment;
 
-final class UserInvitation extends Notification implements EmailNotificationInterface, SmsNotificationInterface
+final class UserInvitation extends Notification implements EmailNotificationInterface
 {
     private Invitation $invitation;
 
@@ -71,10 +68,5 @@ final class UserInvitation extends Notification implements EmailNotificationInte
         }
 
         return new EmailMessage($email);
-    }
-
-    public function asSmsMessage(SmsRecipientInterface $recipient, string $transport = null): ?SmsMessage
-    {
-        return null;
     }
 }
