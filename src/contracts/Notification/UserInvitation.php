@@ -20,9 +20,9 @@ use Twig\Environment;
 final class UserInvitation extends Notification implements EmailNotificationInterface
 {
     public function __construct(
-        private Invitation $invitation,
-        private ConfigResolverInterface $configResolver,
-        private Environment $twig
+        private readonly Invitation $invitation,
+        private readonly ConfigResolverInterface $configResolver,
+        private readonly Environment $twig
     ) {
         parent::__construct();
     }
