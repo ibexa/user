@@ -19,22 +19,12 @@ use Twig\Environment;
 
 final class UserInvitation extends Notification implements EmailNotificationInterface
 {
-    private Invitation $invitation;
-
-    private ConfigResolverInterface $configResolver;
-
-    private Environment $twig;
-
     public function __construct(
-        Invitation $invitation,
-        ConfigResolverInterface $configResolver,
-        Environment $twig
+        private Invitation $invitation,
+        private ConfigResolverInterface $configResolver,
+        private Environment $twig
     ) {
         parent::__construct();
-
-        $this->configResolver = $configResolver;
-        $this->twig = $twig;
-        $this->invitation = $invitation;
     }
 
     public function asEmailMessage(EmailRecipientInterface $recipient, string $transport = null): ?EmailMessage
