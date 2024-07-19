@@ -53,7 +53,7 @@ class UserRegisterFormProcessor implements EventSubscriberInterface
         $this->notificationService = $notificationService;
     }
 
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             UserFormEvents::USER_REGISTER => ['processRegister', 20],

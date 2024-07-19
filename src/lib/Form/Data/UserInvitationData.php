@@ -16,18 +16,13 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 final class UserInvitationData
 {
-    /**
-     * @Assert\NotBlank()
-     *
-     * @Assert\Email()
-     */
+    #[Assert\NotBlank]
+    #[Assert\Email]
     private string $email;
 
     private ?Role $role;
 
-    /**
-     * @Assert\NotBlank()
-     */
+    #[Assert\NotBlank]
     private ?SiteAccess $siteaccess;
 
     private ?UserGroup $userGroup;

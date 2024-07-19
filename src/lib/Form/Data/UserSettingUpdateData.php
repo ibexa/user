@@ -12,9 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class UserSettingUpdateData
 {
-    /**
-     * @Assert\NotBlank()
-     */
+    #[Assert\NotBlank]
     private string $identifier;
 
     /**
