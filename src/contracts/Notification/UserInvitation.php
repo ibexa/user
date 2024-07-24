@@ -8,8 +8,8 @@ declare(strict_types=1);
 
 namespace Ibexa\Contracts\User\Notification;
 
-use Ibexa\Contracts\Core\Repository\Values\User\User;
 use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
+use Ibexa\Contracts\User\Invitation\Invitation;
 use Symfony\Bridge\Twig\Mime\NotificationEmail;
 use Symfony\Component\Notifier\Message\EmailMessage;
 use Symfony\Component\Notifier\Notification\EmailNotificationInterface;
@@ -17,38 +17,35 @@ use Symfony\Component\Notifier\Notification\Notification;
 use Symfony\Component\Notifier\Recipient\EmailRecipientInterface;
 use Twig\Environment;
 
-final class UserPasswordReset extends Notification implements EmailNotificationInterface, UserAwareNotificationInterface
+final class UserInvitation extends Notification implements EmailNotificationInterface
 {
-    private User $user;
-
-    private string $token;
-
-    private ConfigResolverInterface $configResolver;
-
-    private Environment $twig;
-
     public function __construct(
-        User $user,
-        string $token,
-        ConfigResolverInterface $configResolver,
-        Environment $twig
+        private readonly Invitation $invitation,
+        private readonly ConfigResolverInterface $configResolver,
+        private readonly Environment $twig
     ) {
         parent::__construct();
-
-        $this->user = $user;
-        $this->token = $token;
-        $this->configResolver = $configResolver;
-        $this->twig = $twig;
     }
 
     public function asEmailMessage(EmailRecipientInterface $recipient, string $transport = null): ?EmailMessage
     {
-        $templatePath = $this->configResolver->getParameter('user_forgot_password.templates.mail');
+        $templatePath = $this->twig->load(
+            $this->configResolver->getParameter(
+                'user_invitation.templates.mail',
+                null,
+                $this->invitation->getSiteAccessIdentifier()
+            )
+        );
+
         $template = $this->twig->load($templatePath);
 
         $subject = $template->renderBlock('subject');
         $from = $template->renderBlock('from') ?: null;
-        $body = $template->renderBlock('body', ['hash_key' => $this->token]);
+        $body = $template->renderBlock('body', [
+            'invite_hash' => $this->invitation->getHash(),
+            'siteaccess' => $this->invitation->getSiteAccessIdentifier(),
+            'invitation' => $this->invitation,
+        ]);
 
         $email = NotificationEmail::asPublicEmail()
             ->html($body)
@@ -61,15 +58,5 @@ final class UserPasswordReset extends Notification implements EmailNotificationI
         }
 
         return new EmailMessage($email);
-    }
-
-    public function getUser(): User
-    {
-        return $this->user;
-    }
-
-    public function getToken(): string
-    {
-        return $this->token;
     }
 }

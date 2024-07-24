@@ -41,11 +41,6 @@ parameters:
 			path: src/bundle/Controller/PasswordChangeController.php
 
 		-
-			message: "#^Method Ibexa\\\\Bundle\\\\User\\\\Controller\\\\PasswordResetController\\:\\:sendNotification\\(\\) has parameter \\$user with no type specified\\.$#"
-			count: 1
-			path: src/bundle/Controller/PasswordResetController.php
-
-		-
 			message: "#^Parameter \\#1 \\$user of method Ibexa\\\\Bundle\\\\User\\\\Controller\\\\PasswordResetController\\:\\:sendResetPasswordMessage\\(\\) expects Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\User\\\\User, Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\User\\\\User\\|false given\\.$#"
 			count: 1
 			path: src/bundle/Controller/PasswordResetController.php
@@ -979,16 +974,6 @@ parameters:
 			message: "#^Method Ibexa\\\\Tests\\\\User\\\\Form\\\\Type\\\\ChoiceList\\\\Loader\\\\AvailableLocaleChoiceLoaderTest\\:\\:testGetChoiceList\\(\\) has parameter \\$expectedLocales with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: tests/lib/Form/Type/ChoiceList/Loader/AvailableLocaleChoiceLoaderTest.php
-
-		-
-			message: "#^Access to an undefined property Ibexa\\\\Tests\\\\User\\\\Invitation\\\\InvitationServiceTest\\:\\:\\$configResolver\\.$#"
-			count: 2
-			path: tests/lib/Invitation/InvitationServiceTest.php
-
-		-
-			message: "#^Access to an undefined property Ibexa\\\\Tests\\\\User\\\\Invitation\\\\InvitationServiceTest\\:\\:\\$siteAccessService\\.$#"
-			count: 2
-			path: tests/lib/Invitation/InvitationServiceTest.php
 
 		-
 			message: "#^Method Ibexa\\\\Tests\\\\User\\\\Invitation\\\\InvitationServiceTest\\:\\:invitationProvider\\(\\) return type has no value type specified in iterable type array\\.$#"

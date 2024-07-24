@@ -20,11 +20,16 @@ use Ibexa\Core\MVC\Symfony\SiteAccess;
 use Ibexa\Core\MVC\Symfony\SiteAccess\SiteAccessServiceInterface;
 use Ibexa\User\Invitation\InvitationService;
 use Ibexa\User\Invitation\Persistence\Handler;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 class InvitationServiceTest extends TestCase
 {
     private InvitationService $invitationService;
+
+    private SiteAccessServiceInterface&MockObject $siteAccessService;
+
+    private ConfigResolverInterface&MockObject $configResolver;
 
     protected function setUp(): void
     {

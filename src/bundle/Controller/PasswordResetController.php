@@ -31,8 +31,6 @@ use Ibexa\User\View\ForgotPassword\SuccessView;
 use Ibexa\User\View\ResetPassword\FormView as UserResetPasswordFormView;
 use Ibexa\User\View\ResetPassword\InvalidLinkView;
 use Ibexa\User\View\ResetPassword\SuccessView as UserResetPasswordSuccessView;
-use Swift_Mailer;
-use Swift_Message;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
@@ -42,8 +40,6 @@ class PasswordResetController extends Controller
     private FormFactory $formFactory;
 
     private UserService $userService;
-
-    private Swift_Mailer $mailer;
 
     private Environment $twig;
 
@@ -58,7 +54,6 @@ class PasswordResetController extends Controller
     public function __construct(
         FormFactory $formFactory,
         UserService $userService,
-        Swift_Mailer $mailer,
         Environment $twig,
         ActionResultHandler $actionResultHandler,
         PermissionResolver $permissionResolver,
@@ -67,7 +62,6 @@ class PasswordResetController extends Controller
     ) {
         $this->formFactory = $formFactory;
         $this->userService = $userService;
-        $this->mailer = $mailer;
         $this->twig = $twig;
         $this->actionResultHandler = $actionResultHandler;
         $this->permissionResolver = $permissionResolver;
@@ -89,7 +83,7 @@ class PasswordResetController extends Controller
             $data = $form->getData();
             $users = $this->userService->loadUsersByEmail($data->getEmail());
 
-            /** Because is is possible to have multiple user accounts with same email address we must gain a user login. */
+            /** Because it is possible to have multiple user accounts with same email address we must gain a user login. */
             if (\count($users) > 1) {
                 return $this->redirectToRoute('ibexa.user.forgot_password.login');
             }
@@ -234,50 +228,11 @@ class PasswordResetController extends Controller
 
     private function sendResetPasswordMessage(User $user, string $hashKey): void
     {
-        if ($this->isNotifierConfigured()) {
-            $this->sendNotification($user, $hashKey);
-
-            return;
-        }
-
-        // Swiftmailer delivery has to be kept to maintain backwards compatibility
-        $template = $this->twig->load($this->configResolver->getParameter('user_forgot_password.templates.mail'));
-
-        $senderAddress = $this->configResolver->hasParameter('sender_address', 'swiftmailer.mailer')
-            ? $this->configResolver->getParameter('sender_address', 'swiftmailer.mailer')
-            : '';
-
-        $subject = $template->renderBlock('subject', []);
-        $from = $template->renderBlock('from', []) ?: $senderAddress;
-        $body = $template->renderBlock('body', ['hash_key' => $hashKey]);
-
-        $message = (new Swift_Message())
-            ->setSubject($subject)
-            ->setTo($user->email)
-            ->setBody($body, 'text/html');
-
-        if (empty($from) === false) {
-            $message->setFrom($from);
-        }
-
-        $this->mailer->send($message);
-    }
-
-    private function sendNotification($user, string $token): void
-    {
         $this->notificationService->send(
             new SymfonyNotificationAdapter(
-                new UserPasswordReset($user, $token),
+                new UserPasswordReset($user, $hashKey, $this->configResolver, $this->twig),
             ),
             [new SymfonyRecipientAdapter(new UserRecipient($user))],
         );
-    }
-
-    private function isNotifierConfigured(): bool
-    {
-        $subscriptions = $this->configResolver->getParameter('notifications.subscriptions');
-
-        return array_key_exists(UserPasswordReset::class, $subscriptions)
-            && !empty($subscriptions[UserPasswordReset::class]['channels']);
     }
 }

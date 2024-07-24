@@ -10,14 +10,11 @@ namespace Ibexa\Contracts\User\Notification;
 
 use Ibexa\Contracts\Core\Repository\Values\User\User;
 use Symfony\Component\Notifier\Message\EmailMessage;
-use Symfony\Component\Notifier\Message\SmsMessage;
 use Symfony\Component\Notifier\Notification\EmailNotificationInterface;
 use Symfony\Component\Notifier\Notification\Notification;
-use Symfony\Component\Notifier\Notification\SmsNotificationInterface;
 use Symfony\Component\Notifier\Recipient\EmailRecipientInterface;
-use Symfony\Component\Notifier\Recipient\SmsRecipientInterface;
 
-final class UserRegister extends Notification implements EmailNotificationInterface, SmsNotificationInterface, UserAwareNotificationInterface
+final class UserRegister extends Notification implements EmailNotificationInterface, UserAwareNotificationInterface
 {
     private User $user;
 
@@ -29,11 +26,6 @@ final class UserRegister extends Notification implements EmailNotificationInterf
     }
 
     public function asEmailMessage(EmailRecipientInterface $recipient, string $transport = null): ?EmailMessage
-    {
-        return null;
-    }
-
-    public function asSmsMessage(SmsRecipientInterface $recipient, string $transport = null): ?SmsMessage
     {
         return null;
     }

@@ -14,7 +14,6 @@ use Ibexa\ContentForms\Form\ActionDispatcher\UserDispatcher;
 use Ibexa\Contracts\Core\Test\IbexaTestKernel as BaseIbexaTestKernel;
 use Ibexa\Contracts\User\Invitation\InvitationService;
 use LogicException;
-use Swift_Mailer;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
@@ -55,7 +54,6 @@ final class IbexaTestKernel extends BaseIbexaTestKernel
             $container->setParameter('locale_fallback', 'en');
 
             self::createSyntheticService($container, UserDispatcher::class);
-            self::createSyntheticService($container, Swift_Mailer::class);
 
             $container->loadFromExtension('framework', [
                 'router' => [
