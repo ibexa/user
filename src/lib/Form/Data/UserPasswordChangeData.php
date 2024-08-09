@@ -16,17 +16,15 @@ class UserPasswordChangeData
     /**
      * @UserAssert\UserPassword()
      *
-     * @Assert\NotBlank()
-     *
      * @var string
      */
+    #[Assert\NotBlank]
     private $oldPassword;
 
     /**
-     * @Assert\NotBlank()
-     *
      * @var string
      */
+    #[Assert\NotBlank]
     private $newPassword;
 
     /**

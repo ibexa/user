@@ -109,7 +109,7 @@ final class AuditUserDatabaseCommand extends Command
         $output->writeln('');
         $output->writeln('Done.');
 
-        return 0;
+        return Command::SUCCESS;
     }
 
     /**

@@ -14,10 +14,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 class UserPasswordResetData
 {
     /**
-     * @Assert\NotBlank()
-     *
      * @var string
      */
+    #[Assert\NotBlank]
     private $newPassword;
 
     /**
