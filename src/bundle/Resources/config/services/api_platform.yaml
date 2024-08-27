@@ -1,0 +1,15 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    ibexa.api_platform.schemas_provider.user:
+        class: Ibexa\Rest\ApiPlatform\SchemasProvider
+        arguments:
+            $files:
+                - '@@IbexaUserBundle/Resources/api_platform/roles_schemas.yml'
+                - '@@IbexaUserBundle/Resources/api_platform/sessions_schemas.yml'
+                - '@@IbexaUserBundle/Resources/api_platform/token_schemas.yml'
+                - '@@IbexaUserBundle/Resources/api_platform/user_groups_schemas.yml'
+                - '@@IbexaUserBundle/Resources/api_platform/users_schemas.yml'
