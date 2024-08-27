@@ -36,13 +36,13 @@ final class UpdateUserCommand extends Command
         $this->addArgument(
             'user',
             InputArgument::REQUIRED,
-            'User reference (id or login)',
+            'User login',
         );
         $this->addOption(
             'password',
             null,
             InputOption::VALUE_NONE,
-            'New plaintext password (type will be in a "hidden" mode)',
+            'New plaintext password (input will be in a "hidden" mode)',
         );
         $this->addOption(
             'email',
@@ -84,11 +84,7 @@ final class UpdateUserCommand extends Command
             return Command::SUCCESS;
         }
 
-        if (is_numeric($userReference)) {
-            $user = $this->userService->loadUser((int)$userReference);
-        } else {
-            $user = $this->userService->loadUserByLogin($userReference);
-        }
+        $user = $this->userService->loadUserByLogin($userReference);
 
         if ($enable && $disable) {
             $io->error('--enable and --disable options cannot be used simultaneously.');
@@ -97,7 +93,7 @@ final class UpdateUserCommand extends Command
         }
 
         if ($password) {
-            $password = $io->askHidden('Password (your type will be hidden)');
+            $password = $io->askHidden('Password (your input will be hidden)');
             $input->setOption('password', $password);
         }
 
