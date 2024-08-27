@@ -26,9 +26,8 @@ final class UpdateUserCommand extends Command
     public function __construct(
         private readonly UserService $userService,
         private readonly Repository $repository,
-        ?string $name = null
     ) {
-        parent::__construct($name);
+        parent::__construct();
     }
 
     protected function configure(): void
@@ -41,8 +40,9 @@ final class UpdateUserCommand extends Command
         $this->addOption(
             'password',
             null,
-            InputOption::VALUE_NONE,
+            InputOption::VALUE_OPTIONAL,
             'New plaintext password (input will be in a "hidden" mode)',
+            false
         );
         $this->addOption(
             'email',
@@ -64,6 +64,19 @@ final class UpdateUserCommand extends Command
         );
     }
 
+    protected function interact(InputInterface $input, OutputInterface $output): void
+    {
+        $io = new SymfonyStyle($input, $output);
+        $password = $input->getOption('password');
+
+        if ($password !== null) {
+            return;
+        }
+
+        $password = $io->askHidden('Password (your input will be hidden)');
+        $input->setOption('password', $password);
+    }
+
     /**
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
@@ -79,9 +92,9 @@ final class UpdateUserCommand extends Command
         $email = $input->getOption('email');
 
         if (!$password && !$enable && !$disable && $email === null) {
-            $io->success('No new user data specified, exiting.');
+            $io->error('No new user data specified, exiting.');
 
-            return Command::SUCCESS;
+            return Command::FAILURE;
         }
 
         $user = $this->userService->loadUserByLogin($userReference);
@@ -92,15 +105,10 @@ final class UpdateUserCommand extends Command
             return Command::FAILURE;
         }
 
-        if ($password) {
-            $password = $io->askHidden('Password (your input will be hidden)');
-            $input->setOption('password', $password);
-        }
-
         $userUpdateStruct = new UserUpdateStruct();
-        $userUpdateStruct->password = $input->getOption('password');
+        $userUpdateStruct->password = $password;
         $userUpdateStruct->email = $email;
-        $userUpdateStruct->enabled = $enable === true || !$disable;
+        $userUpdateStruct->enabled = $this->resolveEnabledFlag($enable, $disable);
 
         $this->repository->sudo(
             function () use ($user, $userUpdateStruct): User {
@@ -111,5 +119,14 @@ final class UpdateUserCommand extends Command
         $io->success('User was successfully updated.');
 
         return Command::SUCCESS;
+    }
+
+    private function resolveEnabledFlag(bool $enable, bool $disable): ?bool
+    {
+        if (!$enable && !$disable) {
+            return null;
+        }
+
+        return $enable === true || !$disable;
     }
 }
