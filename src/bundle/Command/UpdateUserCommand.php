@@ -1,0 +1,119 @@
+<?php
+
+/**
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ */
+declare(strict_types=1);
+
+namespace Ibexa\Bundle\User\Command;
+
+use Ibexa\Contracts\Core\Repository\Repository;
+use Ibexa\Contracts\Core\Repository\UserService;
+use Ibexa\Contracts\Core\Repository\Values\User\User;
+use Ibexa\Contracts\Core\Repository\Values\User\UserUpdateStruct;
+use Symfony\Component\Console\Attribute\AsCommand;
+use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Style\SymfonyStyle;
+
+#[AsCommand(name: 'ibexa:user:update-user', description: 'Updates basic user data.')]
+final class UpdateUserCommand extends Command
+{
+    public function __construct(
+        private readonly UserService $userService,
+        private readonly Repository $repository,
+        ?string $name = null
+    ) {
+        parent::__construct($name);
+    }
+
+    protected function configure(): void
+    {
+        $this->addArgument(
+            'user',
+            InputArgument::REQUIRED,
+            'User reference (id or login)',
+        );
+        $this->addOption(
+            'password',
+            null,
+            InputOption::VALUE_NONE,
+            'New plaintext password (type will be in a "hidden" mode)',
+        );
+        $this->addOption(
+            'email',
+            null,
+            InputOption::VALUE_REQUIRED,
+            'New e-mail address',
+        );
+        $this->addOption(
+            'enable',
+            null,
+            InputOption::VALUE_NONE,
+            'Flag enabling the user being updated',
+        );
+        $this->addOption(
+            'disable',
+            null,
+            InputOption::VALUE_NONE,
+            'Flag disabling the user being updated',
+        );
+    }
+
+    /**
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+     */
+    protected function execute(InputInterface $input, OutputInterface $output): int
+    {
+        $io = new SymfonyStyle($input, $output);
+
+        $userReference = $input->getArgument('user');
+        $password = $input->getOption('password');
+        $enable = $input->getOption('enable');
+        $disable = $input->getOption('disable');
+        $email = $input->getOption('email');
+
+        if (!$password && !$enable && !$disable && $email === null) {
+            $io->success('No new user data specified, exiting.');
+
+            return Command::SUCCESS;
+        }
+
+        if (is_numeric($userReference)) {
+            $user = $this->userService->loadUser((int)$userReference);
+        } else {
+            $user = $this->userService->loadUserByLogin($userReference);
+        }
+
+        if ($enable && $disable) {
+            $io->error('--enable and --disable options cannot be used simultaneously.');
+
+            return Command::FAILURE;
+        }
+
+        if ($password) {
+            $password = $io->askHidden('Password (your type will be hidden)');
+            $input->setOption('password', $password);
+        }
+
+        $userUpdateStruct = new UserUpdateStruct();
+        $userUpdateStruct->password = $input->getOption('password');
+        $userUpdateStruct->email = $email;
+        $userUpdateStruct->enabled = $enable === true || !$disable;
+
+        $this->repository->sudo(
+            function () use ($user, $userUpdateStruct): User {
+                return $this->userService->updateUser($user, $userUpdateStruct);
+            }
+        );
+
+        $io->success('User was successfully updated.');
+
+        return Command::SUCCESS;
+    }
+}

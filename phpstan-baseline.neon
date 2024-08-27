@@ -51,7 +51,7 @@ parameters:
 			path: src/bundle/Controller/PasswordResetController.php
 
 		-
-			message: "#^Call to an undefined method Symfony\\\\Component\\\\Form\\\\FormInterface\\:\\:getClickedButton\\(\\)\\.$#"
+			message: "#^Call to an undefined method Symfony\\\\Component\\\\Form\\\\FormInterface\\<mixed\\>\\:\\:getClickedButton\\(\\)\\.$#"
 			count: 4
 			path: src/bundle/Controller/UserRegisterController.php
 
