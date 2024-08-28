@@ -127,6 +127,6 @@ final class UpdateUserCommand extends Command
             return null;
         }
 
-        return $enable === true || !$disable;
+        return $enable === true;
     }
 }

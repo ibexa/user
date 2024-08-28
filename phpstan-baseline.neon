@@ -11,11 +11,6 @@ parameters:
 			path: src/bundle/Command/AuditUserDatabaseCommand.php
 
 		-
-			message: "#^Negated boolean expression is always false\\.$#"
-			count: 1
-			path: src/bundle/Command/UpdateUserCommand.php
-
-		-
 			message: "#^Method Ibexa\\\\Bundle\\\\User\\\\Controller\\\\Controller\\:\\:performAccessCheck\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/bundle/Controller/Controller.php
