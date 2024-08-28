@@ -116,7 +116,10 @@ final class UpdateUserCommand extends Command
             }
         );
 
-        $io->success('User was successfully updated.');
+        $io->success(sprintf(
+            'User "%s" was successfully updated.',
+            $user->getLogin(),
+        ));
 
         return Command::SUCCESS;
     }

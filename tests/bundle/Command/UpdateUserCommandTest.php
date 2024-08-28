@@ -78,7 +78,7 @@ final class UpdateUserCommandTest extends KernelTestCase
         );
 
         self::assertStringContainsString(
-            'User was successfully updated.',
+            'User "anonymous" was successfully updated.',
             $this->commandTester->getDisplay()
         );
 
