@@ -106,66 +106,6 @@ class DateTimeExtension extends AbstractExtension
                     return $this->format($this->fullTimeFormatter, $date, $timezone);
                 }
             ),
-            new TwigFilter(
-                'ez_short_datetime',
-                function ($date, $timezone = null) {
-                    return $this->format($this->shortDateTimeFormatter, $date, $timezone);
-                },
-                [
-                    'deprecated' => '4.0',
-                    'alternative' => 'ibexa_short_datetime',
-                ]
-            ),
-            new TwigFilter(
-                'ez_short_date',
-                function ($date, $timezone = null) {
-                    return $this->format($this->shortDateFormatter, $date, $timezone);
-                },
-                [
-                    'deprecated' => '4.0',
-                    'alternative' => 'ibexa_short_date',
-                ]
-            ),
-            new TwigFilter(
-                'ez_short_time',
-                function ($date, $timezone = null) {
-                    return $this->format($this->shortTimeFormatter, $date, $timezone);
-                },
-                [
-                    'deprecated' => '4.0',
-                    'alternative' => 'ibexa_short_time',
-                ]
-            ),
-            new TwigFilter(
-                'ez_full_datetime',
-                function ($date, $timezone = null) {
-                    return $this->format($this->fullDateTimeFormatter, $date, $timezone);
-                },
-                [
-                    'deprecated' => '4.0',
-                    'alternative' => 'ibexa_full_datetime',
-                ]
-            ),
-            new TwigFilter(
-                'ez_full_date',
-                function ($date, $timezone = null) {
-                    return $this->format($this->fullDateFormatter, $date, $timezone);
-                },
-                [
-                    'deprecated' => '4.0',
-                    'alternative' => 'ibexa_full_date',
-                ]
-            ),
-            new TwigFilter(
-                'ez_full_time',
-                function ($date, $timezone = null) {
-                    return $this->format($this->fullTimeFormatter, $date, $timezone);
-                },
-                [
-                    'deprecated' => '4.0',
-                    'alternative' => 'ibexa_full_time',
-                ]
-            ),
         ];
     }
 
