@@ -44,6 +44,6 @@ class IbexaUserBundle extends Bundle
         $container->addCompilerPass(new UserSetting\FormMapperPass());
         $container->addCompilerPass(new SecurityPass());
 
-        $core->addDefaultSettings(__DIR__ . '/Resources/config', ['ezplatform_default_settings.yaml']);
+        $core->addDefaultSettings(__DIR__ . '/Resources/config', ['ibexa_core_default_settings.yaml']);
     }
 }
