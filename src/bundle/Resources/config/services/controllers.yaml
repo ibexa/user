@@ -28,6 +28,7 @@ services:
 
     Ibexa\Bundle\User\Controller\UserRegisterController:
         autowire: true
+        autoconfigure: true
         arguments:
             $userActionDispatcher: '@Ibexa\ContentForms\Form\ActionDispatcher\UserDispatcher'
         tags: [controller.service_arguments]
@@ -47,4 +48,5 @@ services:
 
     Ibexa\Bundle\User\Controller\UserInvitationController:
         autowire: true
+        autoconfigure: true
         tags: [ controller.service_arguments ]
