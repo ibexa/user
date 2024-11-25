@@ -10,12 +10,13 @@ namespace Ibexa\Bundle\User\Security\Authentication;
 
 use Ibexa\Contracts\Core\Repository\Exceptions\PasswordInUnsupportedFormatException;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Http\Authentication\DefaultAuthenticationFailureHandler as HttpDefaultAuthenticationFailureHandler;
 
 final class DefaultAuthenticationFailureHandler extends HttpDefaultAuthenticationFailureHandler
 {
-    public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
+    public function onAuthenticationFailure(Request $request, AuthenticationException $exception): Response
     {
         if ($exception instanceof PasswordInUnsupportedFormatException) {
             $resetPasswordUrl = $this->httpUtils->generateUri($request, 'ibexa.user.forgot_password.migration');
