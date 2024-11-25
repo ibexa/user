@@ -25,7 +25,7 @@
         "ibexa/content-forms": "~5.0.x-dev",
         "ibexa/core": "~5.0.x-dev",
         "ibexa/notifications": "~5.0.x-dev",
-        "jms/translation-bundle": "^1.5",
+        "jms/translation-bundle": "^2.4",
         "symfony/config": "^6.4",
         "symfony/dependency-injection": "^6.4",
         "symfony/event-dispatcher": "^6.4",
