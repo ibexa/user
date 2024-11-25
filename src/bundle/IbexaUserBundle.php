@@ -24,10 +24,7 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class IbexaUserBundle extends Bundle
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function build(ContainerBuilder $container)
+    public function build(ContainerBuilder $container): void
     {
         /** @var \Ibexa\Bundle\Core\DependencyInjection\IbexaCoreExtension $core */
         $core = $container->getExtension('ibexa');
