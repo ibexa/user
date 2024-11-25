@@ -10,6 +10,7 @@ namespace Ibexa\User\Form\ChoiceList\Loader;
 
 use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 use Symfony\Component\Form\ChoiceList\ArrayChoiceList;
+use Symfony\Component\Form\ChoiceList\ChoiceListInterface;
 use Symfony\Component\Form\ChoiceList\Loader\ChoiceLoaderInterface;
 use Symfony\Component\Intl\Locales;
 use Symfony\Component\Validator\Constraints\Locale;
@@ -17,22 +18,21 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class AvailableLocaleChoiceLoader implements ChoiceLoaderInterface
 {
-    // Acholi dialect is used by In-Context translation
-    // and should not be present on the list of available translations.
-    private const EXCLUDED_TRANSLATIONS = ['ach'];
+    /**
+     * @var string[]
+     *
+     * Acholi dialect is used by In-Context translation and should not be present on the list of available translations.
+     */
+    private const array EXCLUDED_TRANSLATIONS = ['ach'];
 
-    /** @var \Symfony\Component\Validator\Validator\ValidatorInterface */
-    private $validator;
+    private ValidatorInterface $validator;
 
-    /** @var \Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface */
-    private $configResolver;
+    private ConfigResolverInterface $configResolver;
 
     /** @var string[] */
-    private $availableTranslations;
+    private array $availableTranslations;
 
     /**
-     * @param \Symfony\Component\Validator\Validator\ValidatorInterface $validator
-     * @param \Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface $configResolver
      * @param string[] $availableTranslations
      */
     public function __construct(
@@ -45,6 +45,9 @@ class AvailableLocaleChoiceLoader implements ChoiceLoaderInterface
         $this->configResolver = $configResolver;
     }
 
+    /**
+     * @return array<string, string>
+     */
     public function getChoiceList(): array
     {
         $choices = [];
@@ -62,12 +65,12 @@ class AvailableLocaleChoiceLoader implements ChoiceLoaderInterface
         return $choices;
     }
 
-    public function loadChoiceList($value = null)
+    public function loadChoiceList(?callable $value = null): ChoiceListInterface
     {
         return new ArrayChoiceList($this->getChoiceList(), $value);
     }
 
-    public function loadChoicesForValues(array $values, $value = null)
+    public function loadChoicesForValues(array $values, ?callable $value = null): array
     {
         // Optimize
         $values = array_filter($values);
@@ -78,7 +81,7 @@ class AvailableLocaleChoiceLoader implements ChoiceLoaderInterface
         return $this->loadChoiceList($value)->getChoicesForValues($values);
     }
 
-    public function loadValuesForChoices(array $choices, $value = null)
+    public function loadValuesForChoices(array $choices, ?callable $value = null): array
     {
         // Optimize
         $choices = array_filter($choices);

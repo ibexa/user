@@ -29,7 +29,7 @@ class ValueDefinitionPass implements CompilerPassInterface
      * @throws \Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException
      * @throws \Ibexa\Core\Base\Exceptions\InvalidArgumentException
      */
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         if (!$container->hasDefinition(ValueDefinitionRegistry::class)) {
             return;
