@@ -16,15 +16,19 @@ use Symfony\Component\Validator\ConstraintValidator;
 
 class PasswordValidator extends ConstraintValidator
 {
-    /** @var \Ibexa\Contracts\Core\Repository\UserService */
-    private $userService;
+    private UserService $userService;
 
     public function __construct(UserService $userService)
     {
         $this->userService = $userService;
     }
 
-    public function validate($value, Constraint $constraint): void
+    /**
+     * @param \Ibexa\User\Validator\Constraints\Password $constraint
+     *
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ContentValidationException
+     */
+    public function validate(mixed $value, Constraint $constraint): void
     {
         if (!\is_string($value) || empty($value)) {
             return;
