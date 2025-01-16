@@ -1,52 +1,40 @@
 services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        tags:
+            - controller.service_arguments
+            - container.service_subscriber
 
     Ibexa\Bundle\User\Controller\:
         resource: "../../Controller/*"
         exclude: "../../Controller/{Controller}"
         parent: Ibexa\Bundle\User\Controller\Controller
+        tags:
+            - controller.service_arguments
+            - container.service_subscriber
 
     Ibexa\Bundle\User\Controller\Controller:
         calls:
-            - [setContainer, ["@service_container"]]
+            - [setContainer , ['@Psr\Container\ContainerInterface']]
             - [performAccessCheck, []]
-        tags: [controller.service_arguments]
 
     Ibexa\Bundle\User\Controller\PasswordResetController:
-        autowire: true
         calls:
-            - [setContainer, ['@service_container']]
-        tags: [controller.service_arguments]
+            - [setContainer , ['@Psr\Container\ContainerInterface']]
 
     Ibexa\Bundle\User\Controller\PasswordChangeController:
-        autowire: true
         arguments:
             $siteAccessGroups: '%ibexa.site_access.groups%'
-        calls:
-            - [setContainer, ['@service_container']]
-            - [performAccessCheck, []]
-        tags: [controller.service_arguments]
 
     Ibexa\Bundle\User\Controller\UserRegisterController:
-        autowire: true
-        autoconfigure: true
         arguments:
             $userActionDispatcher: '@Ibexa\ContentForms\Form\ActionDispatcher\UserDispatcher'
-        tags: [controller.service_arguments]
 
-    Ibexa\Bundle\User\Controller\UserSettingsController:
-        autowire: true
-        calls:
-            - [ setContainer, [ '@service_container' ] ]
-            - [performAccessCheck, []]
-        tags: [controller.service_arguments]
+    Ibexa\Bundle\User\Controller\UserSettingsController: ~
 
     Ibexa\Bundle\User\Controller\DefaultProfileImageController:
-        autowire: true
         calls:
-            - [ setContainer, [ '@service_container' ] ]
-        tags: [controller.service_arguments]
+            - [setContainer , ['@Psr\Container\ContainerInterface']]
 
-    Ibexa\Bundle\User\Controller\UserInvitationController:
-        autowire: true
-        autoconfigure: true
-        tags: [ controller.service_arguments ]
+    Ibexa\Bundle\User\Controller\UserInvitationController: ~
