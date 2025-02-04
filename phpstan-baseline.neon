@@ -86,16 +86,6 @@ parameters:
 			path: src/bundle/Controller/UserSettingsController.php
 
 		-
-			message: "#^Method Ibexa\\\\Bundle\\\\User\\\\DependencyInjection\\\\Compiler\\\\UserSetting\\\\FormMapperPass\\:\\:process\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/bundle/DependencyInjection/Compiler/UserSetting/FormMapperPass.php
-
-		-
-			message: "#^Method Ibexa\\\\Bundle\\\\User\\\\DependencyInjection\\\\Compiler\\\\UserSetting\\\\ValueDefinitionPass\\:\\:process\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/bundle/DependencyInjection/Compiler/UserSetting/ValueDefinitionPass.php
-
-		-
 			message: "#^Method Ibexa\\\\Bundle\\\\User\\\\DependencyInjection\\\\Configuration\\\\Parser\\\\ChangePassword\\:\\:addSemanticConfig\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/bundle/DependencyInjection/Configuration/Parser/ChangePassword.php
@@ -196,11 +186,6 @@ parameters:
 			path: src/bundle/DependencyInjection/Configuration/Parser/UserRegistration.php
 
 		-
-			message: "#^Method Ibexa\\\\Bundle\\\\User\\\\IbexaUserBundle\\:\\:build\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/bundle/IbexaUserBundle.php
-
-		-
 			message: "#^Method Ibexa\\\\Contracts\\\\User\\\\Invitation\\\\Persistence\\\\Gateway\\:\\:getInvitation\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/contracts/Invitation/Persistence/Gateway.php
@@ -279,11 +264,6 @@ parameters:
 			message: "#^Method Ibexa\\\\User\\\\ExceptionHandler\\\\NullActionResultHandler\\:\\:success\\(\\) has parameter \\$parameters with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/lib/ExceptionHandler/NullActionResultHandler.php
-
-		-
-			message: "#^Method Ibexa\\\\User\\\\Form\\\\ChoiceList\\\\Loader\\\\AvailableLocaleChoiceLoader\\:\\:getChoiceList\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/lib/Form/ChoiceList/Loader/AvailableLocaleChoiceLoader.php
 
 		-
 			message: "#^Method Ibexa\\\\User\\\\Form\\\\ChoiceList\\\\Loader\\\\UserGroupsChoiceLoader\\:\\:loadChoices\\(\\) return type has no value type specified in iterable type array\\.$#"
@@ -506,11 +486,6 @@ parameters:
 			path: src/lib/Form/Type/Invitation/UserInvitationType.php
 
 		-
-			message: "#^Method Ibexa\\\\User\\\\Form\\\\Type\\\\Invitation\\\\UserInvitationType\\:\\:configureOptions\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/Form/Type/Invitation/UserInvitationType.php
-
-		-
 			message: "#^Method Ibexa\\\\User\\\\Form\\\\Type\\\\UserPasswordChangeType\\:\\:buildForm\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/lib/Form/Type/UserPasswordChangeType.php
@@ -521,17 +496,7 @@ parameters:
 			path: src/lib/Form/Type/UserPasswordForgotType.php
 
 		-
-			message: "#^Method Ibexa\\\\User\\\\Form\\\\Type\\\\UserPasswordForgotType\\:\\:configureOptions\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/Form/Type/UserPasswordForgotType.php
-
-		-
 			message: "#^Method Ibexa\\\\User\\\\Form\\\\Type\\\\UserPasswordForgotWithLoginType\\:\\:buildForm\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/Form/Type/UserPasswordForgotWithLoginType.php
-
-		-
-			message: "#^Method Ibexa\\\\User\\\\Form\\\\Type\\\\UserPasswordForgotWithLoginType\\:\\:configureOptions\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/lib/Form/Type/UserPasswordForgotWithLoginType.php
 
@@ -546,22 +511,12 @@ parameters:
 			path: src/lib/Form/Type/UserRegisterType.php
 
 		-
-			message: "#^Method Ibexa\\\\User\\\\Form\\\\Type\\\\UserRegisterType\\:\\:configureOptions\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/Form/Type/UserRegisterType.php
-
-		-
 			message: "#^Method Ibexa\\\\User\\\\Form\\\\Type\\\\UserRegisterType\\:\\:getName\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/lib/Form/Type/UserRegisterType.php
 
 		-
 			message: "#^Method Ibexa\\\\User\\\\Form\\\\Type\\\\UserSettingUpdateType\\:\\:buildForm\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/Form/Type/UserSettingUpdateType.php
-
-		-
-			message: "#^Method Ibexa\\\\User\\\\Form\\\\Type\\\\UserSettingUpdateType\\:\\:configureOptions\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/lib/Form/Type/UserSettingUpdateType.php
 
@@ -636,6 +591,11 @@ parameters:
 			path: src/lib/Invitation/Persistence/Mapper.php
 
 		-
+			message: "#^Method Ibexa\\\\User\\\\Pagination\\\\Pagerfanta\\\\UserSettingsAdapter\\:\\:getNbResults\\(\\) should return int\\<0, max\\> but returns int\\.$#"
+			count: 1
+			path: src/lib/Pagination/Pagerfanta/UserSettingsAdapter.php
+
+		-
 			message: "#^Method Ibexa\\\\User\\\\Pagination\\\\Pagerfanta\\\\UserSettingsAdapter\\:\\:getSlice\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/lib/Pagination/Pagerfanta/UserSettingsAdapter.php
@@ -674,11 +634,6 @@ parameters:
 			message: "#^Property Ibexa\\\\User\\\\Templating\\\\Twig\\\\DateTimeExtension\\:\\:\\$dateTimeFormatSerializer is never read, only written\\.$#"
 			count: 1
 			path: src/lib/Templating/Twig/DateTimeExtension.php
-
-		-
-			message: "#^Method Ibexa\\\\User\\\\UserSetting\\\\DateTimeFormat\\\\Formatter\\:\\:format\\(\\) should return string but returns bool\\|string\\.$#"
-			count: 1
-			path: src/lib/UserSetting/DateTimeFormat/Formatter.php
 
 		-
 			message: "#^Cannot call method getDateFormat\\(\\) on Ibexa\\\\User\\\\UserSetting\\\\Setting\\\\Value\\\\DateTimeFormat\\|null\\.$#"
@@ -851,24 +806,9 @@ parameters:
 			path: src/lib/Validator/Constraints/EmailInvitationValidator.php
 
 		-
-			message: "#^Method Ibexa\\\\User\\\\Validator\\\\Constraints\\\\EmailInvitationValidator\\:\\:validate\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/Validator/Constraints/EmailInvitationValidator.php
-
-		-
 			message: "#^Method Ibexa\\\\User\\\\Validator\\\\Constraints\\\\Password\\:\\:getTargets\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/lib/Validator/Constraints/Password.php
-
-		-
-			message: "#^Access to an undefined property Symfony\\\\Component\\\\Validator\\\\Constraint\\:\\:\\$contentType\\.$#"
-			count: 1
-			path: src/lib/Validator/Constraints/PasswordValidator.php
-
-		-
-			message: "#^Access to an undefined property Symfony\\\\Component\\\\Validator\\\\Constraint\\:\\:\\$user\\.$#"
-			count: 1
-			path: src/lib/Validator/Constraints/PasswordValidator.php
 
 		-
 			message: "#^Property Ibexa\\\\User\\\\Validator\\\\Constraints\\\\UserPassword\\:\\:\\$message has no type specified\\.$#"
@@ -887,11 +827,6 @@ parameters:
 
 		-
 			message: "#^Cannot call method getUser\\(\\) on Symfony\\\\Component\\\\Security\\\\Core\\\\Authentication\\\\Token\\\\TokenInterface\\|null\\.$#"
-			count: 1
-			path: src/lib/Validator/Constraints/UserPasswordValidator.php
-
-		-
-			message: "#^Method Ibexa\\\\User\\\\Validator\\\\Constraints\\\\UserPasswordValidator\\:\\:validate\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/lib/Validator/Constraints/UserPasswordValidator.php
 

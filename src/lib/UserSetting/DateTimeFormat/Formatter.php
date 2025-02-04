@@ -13,14 +13,8 @@ use IntlDateFormatter;
 
 class Formatter implements FormatterInterface
 {
-    /** @var \IntlDateFormatter */
-    private $formatter;
+    private IntlDateFormatter $formatter;
 
-    /**
-     * @param string $locale
-     * @param string $timezone
-     * @param string $format
-     */
     public function __construct(string $locale, string $timezone, string $format)
     {
         $this->formatter = new IntlDateFormatter(
@@ -33,9 +27,6 @@ class Formatter implements FormatterInterface
         );
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function format(DateTimeInterface $datetime, string $timezone = null): string
     {
         if ($timezone) {
@@ -44,6 +35,9 @@ class Formatter implements FormatterInterface
         }
 
         $result = $this->formatter->format($datetime);
+        if (false === $result) {
+            throw new \LogicException('Failed to format date time');
+        }
 
         if ($timezone) {
             $this->formatter->setTimeZone($currentTimezone);

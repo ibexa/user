@@ -24,10 +24,7 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class IbexaUserBundle extends Bundle
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function build(ContainerBuilder $container)
+    public function build(ContainerBuilder $container): void
     {
         /** @var \Ibexa\Bundle\Core\DependencyInjection\IbexaCoreExtension $core */
         $core = $container->getExtension('ibexa');
@@ -47,6 +44,6 @@ class IbexaUserBundle extends Bundle
         $container->addCompilerPass(new UserSetting\FormMapperPass());
         $container->addCompilerPass(new SecurityPass());
 
-        $core->addDefaultSettings(__DIR__ . '/Resources/config', ['ezplatform_default_settings.yaml']);
+        $core->addDefaultSettings(__DIR__ . '/Resources/config', ['ibexa_core_default_settings.yaml']);
     }
 }
