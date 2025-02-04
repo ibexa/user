@@ -11,6 +11,9 @@ namespace Ibexa\User\Pagination\Pagerfanta;
 use Ibexa\User\UserSetting\UserSettingService;
 use Pagerfanta\Adapter\AdapterInterface;
 
+/**
+ * @phpstan-implements \Pagerfanta\Adapter\AdapterInterface<\Ibexa\User\UserSetting\UserSetting>
+ */
 class UserSettingsAdapter implements AdapterInterface
 {
     /** @var \Ibexa\User\UserSetting\UserSettingService */

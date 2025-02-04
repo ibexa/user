@@ -591,6 +591,11 @@ parameters:
 			path: src/lib/Invitation/Persistence/Mapper.php
 
 		-
+			message: "#^Method Ibexa\\\\User\\\\Pagination\\\\Pagerfanta\\\\UserSettingsAdapter\\:\\:getNbResults\\(\\) should return int\\<0, max\\> but returns int\\.$#"
+			count: 1
+			path: src/lib/Pagination/Pagerfanta/UserSettingsAdapter.php
+
+		-
 			message: "#^Method Ibexa\\\\User\\\\Pagination\\\\Pagerfanta\\\\UserSettingsAdapter\\:\\:getSlice\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/lib/Pagination/Pagerfanta/UserSettingsAdapter.php
