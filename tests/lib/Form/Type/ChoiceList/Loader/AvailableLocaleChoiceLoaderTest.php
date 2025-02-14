@@ -97,7 +97,7 @@ class AvailableLocaleChoiceLoaderTest extends TestCase
                 ],
             ],
             'acholi_exlusion' => [
-                ['en', 'ach'],
+                ['en', 'ach-UG'],
                 [],
                 [
                     'English' => 'en',

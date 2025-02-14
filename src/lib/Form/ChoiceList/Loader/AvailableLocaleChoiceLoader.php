@@ -23,7 +23,7 @@ class AvailableLocaleChoiceLoader implements ChoiceLoaderInterface
      *
      * Acholi dialect is used by In-Context translation and should not be present on the list of available translations.
      */
-    private const array EXCLUDED_TRANSLATIONS = ['ach'];
+    private const array EXCLUDED_TRANSLATIONS = ['ach-UG'];
 
     private ValidatorInterface $validator;
 
