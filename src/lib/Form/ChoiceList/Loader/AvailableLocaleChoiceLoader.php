@@ -19,7 +19,7 @@ class AvailableLocaleChoiceLoader implements ChoiceLoaderInterface
 {
     // Acholi dialect is used by In-Context translation
     // and should not be present on the list of available translations.
-    private const EXCLUDED_TRANSLATIONS = ['ach'];
+    private const EXCLUDED_TRANSLATIONS = ['ach-UG'];
 
     /** @var \Symfony\Component\Validator\Validator\ValidatorInterface */
     private $validator;
