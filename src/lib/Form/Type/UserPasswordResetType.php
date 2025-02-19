@@ -21,7 +21,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class UserPasswordResetType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('new_password', RepeatedType::class, [
