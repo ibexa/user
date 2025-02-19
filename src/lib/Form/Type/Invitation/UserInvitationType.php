@@ -23,7 +23,7 @@ final class UserInvitationType extends AbstractType
     public const LIMITATION_TYPE_SECTION = 'section';
     public const LIMITATION_TYPE_LOCATION = 'location';
 
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('email', EmailType::class, [
@@ -73,7 +73,7 @@ final class UserInvitationType extends AbstractType
         $builder->addModelTransformer(new LimitationValueTransformer());
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => UserInvitationData::class,

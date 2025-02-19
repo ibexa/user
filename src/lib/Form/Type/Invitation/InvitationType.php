@@ -22,7 +22,7 @@ final class InvitationType extends AbstractType
         $this->invitationService = $invitationService;
     }
 
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->addViewTransformer(new InvitationTransformer($this->invitationService));
     }

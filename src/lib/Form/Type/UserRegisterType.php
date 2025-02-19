@@ -48,7 +48,7 @@ class UserRegisterType extends AbstractType
         return BaseContentType::class;
     }
 
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('register', SubmitType::class, ['label' => /** @Desc("Register") */ 'user.register_button'])
@@ -72,7 +72,7 @@ class UserRegisterType extends AbstractType
         );
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
             ->setDefaults([

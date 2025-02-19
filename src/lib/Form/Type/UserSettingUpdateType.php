@@ -45,7 +45,7 @@ class UserSettingUpdateType extends AbstractType
      *
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $groupDefinition = $this->valueDefinitionRegistry->getValueDefinitionGroup(
             $options['user_setting_group_identifier']
@@ -76,7 +76,7 @@ class UserSettingUpdateType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
             ->setRequired('user_setting_group_identifier')
