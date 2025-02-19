@@ -466,11 +466,6 @@ parameters:
 			path: src/lib/Form/Processor/UserRegisterFormProcessor.php
 
 		-
-			message: "#^Method Ibexa\\\\User\\\\Form\\\\Type\\\\Invitation\\\\InvitationType\\:\\:buildForm\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/Form/Type/Invitation/InvitationType.php
-
-		-
 			message: "#^Method Ibexa\\\\User\\\\Form\\\\Type\\\\Invitation\\\\RoleChoiceType\\:\\:loadFilteredRoles\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/lib/Form/Type/Invitation/RoleChoiceType.php
@@ -481,44 +476,9 @@ parameters:
 			path: src/lib/Form/Type/Invitation/UserGroupChoiceType.php
 
 		-
-			message: "#^Method Ibexa\\\\User\\\\Form\\\\Type\\\\Invitation\\\\UserInvitationType\\:\\:buildForm\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/Form/Type/Invitation/UserInvitationType.php
-
-		-
-			message: "#^Method Ibexa\\\\User\\\\Form\\\\Type\\\\UserPasswordChangeType\\:\\:buildForm\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/Form/Type/UserPasswordChangeType.php
-
-		-
-			message: "#^Method Ibexa\\\\User\\\\Form\\\\Type\\\\UserPasswordForgotType\\:\\:buildForm\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/Form/Type/UserPasswordForgotType.php
-
-		-
-			message: "#^Method Ibexa\\\\User\\\\Form\\\\Type\\\\UserPasswordForgotWithLoginType\\:\\:buildForm\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/Form/Type/UserPasswordForgotWithLoginType.php
-
-		-
-			message: "#^Method Ibexa\\\\User\\\\Form\\\\Type\\\\UserPasswordResetType\\:\\:buildForm\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/Form/Type/UserPasswordResetType.php
-
-		-
-			message: "#^Method Ibexa\\\\User\\\\Form\\\\Type\\\\UserRegisterType\\:\\:buildForm\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/Form/Type/UserRegisterType.php
-
-		-
 			message: "#^Method Ibexa\\\\User\\\\Form\\\\Type\\\\UserRegisterType\\:\\:getName\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/lib/Form/Type/UserRegisterType.php
-
-		-
-			message: "#^Method Ibexa\\\\User\\\\Form\\\\Type\\\\UserSettingUpdateType\\:\\:buildForm\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/Form/Type/UserSettingUpdateType.php
 
 		-
 			message: "#^Method Ibexa\\\\User\\\\Invitation\\\\DomainMapper\\:\\:mapRoleLimitation\\(\\) has parameter \\$values with no value type specified in iterable type array\\.$#"
