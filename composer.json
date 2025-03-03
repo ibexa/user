@@ -55,8 +55,7 @@
         "phpstan/phpstan-phpunit": "^2.0",
         "phpstan/phpstan-symfony": "^2.0",
         "phpunit/phpunit": "^9.6",
-        "symfony/phpunit-bridge": "^6.4",
-        "symfony/proxy-manager-bridge": "^6.4"
+        "symfony/phpunit-bridge": "^6.4"
     },
     "scripts": {
         "fix-cs": "php-cs-fixer fix --config=.php-cs-fixer.php -v --show-progress=dots",
