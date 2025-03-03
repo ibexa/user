@@ -50,7 +50,7 @@
         "ibexa/rector": "~5.0.x-dev",
         "ibexa/rest": "~5.0.x-dev",
         "ibexa/search": "~5.0.x-dev",
-        "matthiasnoback/symfony-dependency-injection-test": "4.3",
+        "matthiasnoback/symfony-dependency-injection-test": "^5.0",
         "phpstan/phpstan": "^2.0",
         "phpstan/phpstan-phpunit": "^2.0",
         "phpstan/phpstan-symfony": "^2.0",
