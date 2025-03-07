@@ -13,7 +13,6 @@ use Ibexa\Contracts\User\Invitation\Invitation;
 use Ibexa\Contracts\User\Invitation\InvitationSender;
 use Swift_Mailer;
 use Swift_Message;
-use Swift_Image;
 use Twig\Environment;
 
 final class MailSender implements InvitationSender
@@ -50,19 +49,15 @@ final class MailSender implements InvitationSender
 
         $subject = $template->renderBlock('subject', []);
         $from = $template->renderBlock('from', []) ?: $senderAddress;
-        
+
         $message = (new Swift_Message())
             ->setSubject($subject)
             ->setTo($invitation->getEmail());
-
-        $mailImagesDir = dirname(__DIR__, 6) . '/public/bundles/ibexaadminui/img/mail/';
-        $embeddedHeader = $message->embed(Swift_Image::fromPath($mailImagesDir . 'header.jpg'));
 
         $body = $template->renderBlock('body', [
             'invite_hash' => $invitation->getHash(),
             'siteaccess' => $invitation->getSiteAccessIdentifier(),
             'invitation' => $invitation,
-            'header_img_path' => $embeddedHeader,
         ]);
 
         $message->setBody($body, 'text/html');
