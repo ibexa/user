@@ -1,22 +1,23 @@
-{% trans_default_domain 'ibexa_user_invitation' %}
+{% extends '@ibexadesign/ui/mail/base_mail_template.html.twig' %}
 
-{%- block from -%}
-{%- endblock from -%}
+{% trans_default_domain 'ibexa_user_invitation' %}
 
 {%- block subject -%}
     {{ 'ibexa.user.invitation.mail.subject'|trans|desc('You are invited to join') }}
 {%- endblock subject -%}
 
-{%- block body -%}
-    <p>
-        {{ 'ibexa.user.invitation.mail.message'|trans({
-            '%invite_link%': url('ibexa.user.from_invite.register', {
-                'inviteHash': invite_hash,
-                'siteaccess': siteaccess
-            })
-        })|raw
-        |desc('Hello,
-            Join us at: %invite_link%
-        ') }}
-    </p>
-{%- endblock body -%}
+{% block message_title %}
+    {{ 'ibexa.user.invitation.mail.message_title'|trans()|desc('Hello,') }}
+{% endblock %}
+
+{% block message %}
+    {{ 'ibexa.user.invitation.mail.message'|trans({
+        '%invite_link%': url('ibexa.user.from_invite.register', {
+            'inviteHash': invite_hash,
+            'siteaccess': siteaccess
+        })
+    })|raw
+    |desc('Join us at: %invite_link%') }}
+{% endblock %}
+
+{%- block footer -%}{%- endblock footer -%}
