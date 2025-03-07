@@ -83,6 +83,7 @@ class PasswordResetController extends Controller
      */
     public function userForgotPasswordAction(Request $request, ?string $reason = null)
     {
+
         $form = $this->formFactory->forgotUserPassword();
         $form->handleRequest($request);
 
