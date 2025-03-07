@@ -31,6 +31,7 @@ use Ibexa\User\View\ForgotPassword\SuccessView;
 use Ibexa\User\View\ResetPassword\FormView as UserResetPasswordFormView;
 use Ibexa\User\View\ResetPassword\InvalidLinkView;
 use Ibexa\User\View\ResetPassword\SuccessView as UserResetPasswordSuccessView;
+use Swift_Image;
 use Swift_Mailer;
 use Swift_Message;
 use Symfony\Component\HttpFoundation\Request;
@@ -249,12 +250,19 @@ class PasswordResetController extends Controller
 
         $subject = $template->renderBlock('subject', []);
         $from = $template->renderBlock('from', []) ?: $senderAddress;
-        $body = $template->renderBlock('body', ['hash_key' => $hashKey]);
 
         $message = (new Swift_Message())
             ->setSubject($subject)
-            ->setTo($user->email)
-            ->setBody($body, 'text/html');
+            ->setTo($user->email);
+
+        $mailImagesDir = dirname(__DIR__, 6) . '/public/bundles/ibexaadminui/img/mail/';
+        $embeddedHeader = $message->embed(Swift_Image::fromPath($mailImagesDir . 'header.png'));
+
+        $body = $template->renderBlock('body', [
+            'hash_key' => $hashKey,
+            'header_img_path' => $embeddedHeader,
+        ]);
+        $message->setBody($body, 'text/html');
 
         if (empty($from) === false) {
             $message->setFrom($from);
