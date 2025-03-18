@@ -15,8 +15,7 @@ use Symfony\Component\HttpKernel\Controller\ControllerReference;
 
 class UpdateViewProvider implements ViewProvider
 {
-    /** @var \Ibexa\Core\MVC\Symfony\Matcher\MatcherFactoryInterface */
-    protected $matcherFactory;
+    protected MatcherFactoryInterface $matcherFactory;
 
     /**
      * @param \Ibexa\Core\MVC\Symfony\Matcher\MatcherFactoryInterface $matcherFactory

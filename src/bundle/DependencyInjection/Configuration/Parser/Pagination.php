@@ -26,7 +26,7 @@ use Symfony\Component\Config\Definition\Builder\NodeBuilder;
  */
 class Pagination extends AbstractParser
 {
-    public function addSemanticConfig(NodeBuilder $nodeBuilder)
+    public function addSemanticConfig(NodeBuilder $nodeBuilder): void
     {
         $nodeBuilder
             ->arrayNode('pagination_user')

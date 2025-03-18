@@ -26,8 +26,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 abstract class ConfigurableSudoRepositoryLoader
 {
-    /** @var \Ibexa\Contracts\Core\Repository\Repository */
-    private $repository;
+    private Repository $repository;
 
     /** @var array */
     private $params;

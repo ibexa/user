@@ -15,11 +15,10 @@ use Ibexa\User\UserSetting\DateTimeFormat\FormatterInterface;
 
 abstract class AbstractDateTimeFormat implements ValueDefinitionInterface, FormMapperInterface
 {
-    /** @var \Ibexa\User\UserSetting\Setting\DateTimeFormatSerializer */
-    protected $serializer;
+    protected DateTimeFormatSerializer $serializer;
 
     /** @var \Ibexa\User\UserSetting\DateTimeFormat\Formatter|null */
-    protected $formatter;
+    protected FormatterInterface $formatter;
 
     /**
      * @param \Ibexa\User\UserSetting\Setting\DateTimeFormatSerializer $serializer

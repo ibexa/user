@@ -12,7 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 abstract class Controller extends AbstractController
 {
-    public function performAccessCheck()
+    public function performAccessCheck(): void
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
     }

@@ -18,7 +18,7 @@ use Ibexa\User\View\UserSettings\UpdateView;
 class Identifier implements ViewMatcherInterface
 {
     /** @var string[] */
-    private $identifiers = [];
+    private array $identifiers = [];
 
     /**
      * {@inheritdoc}

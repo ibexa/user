@@ -14,7 +14,7 @@ use Symfony\Component\Config\Definition\Builder\NodeBuilder;
 
 final class ResetPassword extends AbstractParser
 {
-    public function addSemanticConfig(NodeBuilder $nodeBuilder)
+    public function addSemanticConfig(NodeBuilder $nodeBuilder): void
     {
         $nodeBuilder
             ->arrayNode('user_reset_password')
@@ -39,7 +39,7 @@ final class ResetPassword extends AbstractParser
         ;
     }
 
-    public function mapConfig(array &$scopeSettings, $currentScope, ContextualizerInterface $contextualizer)
+    public function mapConfig(array &$scopeSettings, $currentScope, ContextualizerInterface $contextualizer): void
     {
         if (empty($scopeSettings['user_reset_password'])) {
             return;

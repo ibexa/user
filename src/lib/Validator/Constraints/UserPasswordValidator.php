@@ -20,11 +20,9 @@ use Symfony\Component\Validator\Exception\ConstraintDefinitionException;
  */
 class UserPasswordValidator extends ConstraintValidator
 {
-    /** @var \Ibexa\Contracts\Core\Repository\UserService */
-    private $userService;
+    private UserService $userService;
 
-    /** @var \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface */
-    private $tokenStorage;
+    private TokenStorageInterface $tokenStorage;
 
     /**
      * @param \Ibexa\Contracts\Core\Repository\UserService $userService
@@ -42,7 +40,7 @@ class UserPasswordValidator extends ConstraintValidator
      * @param string $password The password that should be validated
      * @param \Symfony\Component\Validator\Constraint|\Ibexa\User\Validator\Constraints\UserPassword $constraint The constraint for the validation
      */
-    public function validate($password, Constraint $constraint)
+    public function validate($password, Constraint $constraint): void
     {
         if (null === $password || '' === $password) {
             $this->context->addViolation($constraint->message);
