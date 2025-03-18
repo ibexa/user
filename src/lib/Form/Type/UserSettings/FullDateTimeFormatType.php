@@ -14,8 +14,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class FullDateTimeFormatType extends AbstractType
 {
-    /** @var \Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface */
-    private $configResolver;
+    private ConfigResolverInterface $configResolver;
 
     public function __construct(ConfigResolverInterface $configResolver)
     {

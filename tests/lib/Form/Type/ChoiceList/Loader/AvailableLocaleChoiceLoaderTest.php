@@ -10,6 +10,7 @@ namespace Ibexa\Tests\User\Form\Type\ChoiceList\Loader;
 
 use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 use Ibexa\User\Form\ChoiceList\Loader\AvailableLocaleChoiceLoader;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Validator\ConstraintViolationInterface;
 use Symfony\Component\Validator\ConstraintViolationList;
@@ -18,13 +19,13 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 class AvailableLocaleChoiceLoaderTest extends TestCase
 {
     /** @var \Symfony\Component\Validator\Validator\ValidatorInterface|\PHPUnit\Framework\MockObject\MockObject */
-    private $validator;
+    private MockObject $validator;
 
     /** @var \Symfony\Component\Validator\ConstraintViolationInterface|\PHPUnit\Framework\MockObject\MockObject */
-    private $constraintViolation;
+    private MockObject $constraintViolation;
 
     /** @var \Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface|\PHPUnit\Framework\MockObject\MockObject */
-    private $configResolver;
+    private MockObject $configResolver;
 
     protected function setUp(): void
     {
@@ -49,7 +50,7 @@ class AvailableLocaleChoiceLoaderTest extends TestCase
     ): void {
         $this->validator
             ->method('validate')
-            ->willReturnCallback(function ($locale) {
+            ->willReturnCallback(function ($locale): ConstraintViolationList {
                 return $locale === 'foo_BAR' ? new ConstraintViolationList([$this->constraintViolation]) : new ConstraintViolationList();
             });
 

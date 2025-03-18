@@ -21,8 +21,7 @@ class CharacterCounter implements ValueDefinitionInterface, FormMapperInterface
     public const ENABLED_OPTION = 'enabled';
     public const DISABLED_OPTION = 'disabled';
 
-    /** @var \Symfony\Contracts\Translation\TranslatorInterface */
-    private $translator;
+    private TranslatorInterface $translator;
 
     /**
      * @param \Symfony\Contracts\Translation\TranslatorInterface $translator

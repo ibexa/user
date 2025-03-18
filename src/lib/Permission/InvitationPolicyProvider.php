@@ -15,7 +15,7 @@ use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 
 final class InvitationPolicyProvider implements PolicyProviderInterface, TranslationContainerInterface
 {
-    public function addPolicies(ConfigBuilderInterface $configBuilder)
+    public function addPolicies(ConfigBuilderInterface $configBuilder): void
     {
         $configBuilder->addConfig([
             'user' => [

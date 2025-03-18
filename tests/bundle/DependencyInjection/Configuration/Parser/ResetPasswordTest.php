@@ -51,7 +51,7 @@ final class ResetPasswordTest extends AbstractParserTestCase
         );
     }
 
-    public function testOverwrittenConfig()
+    public function testOverwrittenConfig(): void
     {
         $this->load([
             'system' => [

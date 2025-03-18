@@ -19,7 +19,7 @@ use Ibexa\User\UserSetting\Group\CustomGroup;
 class ValueDefinitionRegistry
 {
     /** @var \Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface[] */
-    protected $valueDefinitions;
+    protected array $valueDefinitions;
 
     /** @var \Ibexa\Contracts\User\UserSetting\ValueDefinitionGroupInterface[] */
     protected $groupedDefinitions;

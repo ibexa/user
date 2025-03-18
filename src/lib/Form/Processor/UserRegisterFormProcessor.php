@@ -65,7 +65,7 @@ class UserRegisterFormProcessor implements EventSubscriberInterface
      *
      * @throws \Exception
      */
-    public function processRegister(FormActionEvent $event)
+    public function processRegister(FormActionEvent $event): void
     {
         /** @var \Ibexa\User\Form\Data\UserRegisterData $data */
         if (!($data = $event->getData()) instanceof UserRegisterData) {
@@ -88,7 +88,7 @@ class UserRegisterFormProcessor implements EventSubscriberInterface
         }
 
         return $this->repository->sudo(
-            function () use ($data) {
+            function () use ($data): \Ibexa\Contracts\Core\Repository\Values\User\User {
                 $user = $this->userService->createUser($data, $data->getParentGroups());
                 if ($data->getRole() !== null) {
                     $this->roleService->assignRoleToUser($data->getRole(), $user, $data->getRoleLimitation());

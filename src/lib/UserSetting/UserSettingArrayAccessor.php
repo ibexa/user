@@ -16,8 +16,7 @@ use Ibexa\Contracts\Core\Repository\Exceptions\NotImplementedException;
  */
 class UserSettingArrayAccessor implements ArrayAccess
 {
-    /** @var \Ibexa\User\UserSetting\UserSettingService */
-    protected $userSettingService;
+    protected UserSettingService $userSettingService;
 
     /**
      * @param \Ibexa\User\UserSetting\UserSettingService $userSettingService

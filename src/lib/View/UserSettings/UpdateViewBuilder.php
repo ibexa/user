@@ -15,14 +15,11 @@ use Ibexa\User\UserSetting\UserSettingService;
 
 class UpdateViewBuilder implements ViewBuilder
 {
-    /** @var \Ibexa\User\UserSetting\UserSettingService */
-    private $userSettingService;
+    private UserSettingService $userSettingService;
 
-    /** @var \Ibexa\Core\MVC\Symfony\View\Configurator */
-    private $viewConfigurator;
+    private Configurator $viewConfigurator;
 
-    /** @var \Ibexa\Core\MVC\Symfony\View\ParametersInjector */
-    private $viewParametersInjector;
+    private ParametersInjector $viewParametersInjector;
 
     /**
      * @param \Ibexa\User\UserSetting\UserSettingService $userSettingService

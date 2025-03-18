@@ -19,11 +19,9 @@ use Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface;
  */
 class UserSettingService
 {
-    /** @var \Ibexa\Contracts\Core\Repository\UserPreferenceService */
-    protected $userPreferenceService;
+    protected UserPreferenceService $userPreferenceService;
 
-    /** @var \Ibexa\User\UserSetting\ValueDefinitionRegistry */
-    protected $valueRegistry;
+    protected ValueDefinitionRegistry $valueRegistry;
 
     /**
      * @param \Ibexa\Contracts\Core\Repository\UserPreferenceService $userPreferenceService
@@ -191,7 +189,7 @@ class UserSettingService
         return $userPreferenceValue;
     }
 
-    public function countGroupedUserSettings()
+    public function countGroupedUserSettings(): int
     {
         return $this->valueRegistry->countValueDefinitionGroups();
     }

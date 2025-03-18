@@ -70,12 +70,12 @@ final class DomainMapper implements DomainMapperInterface
 
     private function loadUserGroup(int $userGroupId): UserGroup
     {
-        return $this->repository->sudo(fn () => $this->userService->loadUserGroup($userGroupId));
+        return $this->repository->sudo(fn (): \Ibexa\Contracts\Core\Repository\Values\User\UserGroup => $this->userService->loadUserGroup($userGroupId));
     }
 
     private function loadRole(int $roleId): Role
     {
-        return $this->repository->sudo(fn () => $this->roleService->loadRole($roleId));
+        return $this->repository->sudo(fn (): \Ibexa\Contracts\Core\Repository\Values\User\Role => $this->roleService->loadRole($roleId));
     }
 
     private function mapRoleLimitation(string $type, array $values): RoleLimitation

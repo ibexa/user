@@ -28,7 +28,7 @@ class EmailInvitationValidator extends ConstraintValidator
      * @param string $email The value that should be validated
      * @param \Symfony\Component\Validator\Constraint $constraint The constraint for the validation
      */
-    public function validate($email, Constraint $constraint)
+    public function validate($email, Constraint $constraint): void
     {
         try {
             $this->userService->loadUserByEmail($email);

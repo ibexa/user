@@ -20,11 +20,9 @@ use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
 class UserRegisterController extends Controller
 {
-    /** @var \Ibexa\User\Form\DataMapper\UserRegisterMapper */
-    private $userRegisterMapper;
+    private UserRegisterMapper $userRegisterMapper;
 
-    /** @var \Ibexa\ContentForms\Form\ActionDispatcher\ActionDispatcherInterface */
-    private $userActionDispatcher;
+    private ActionDispatcherInterface $userActionDispatcher;
 
     private InvitationService $invitationService;
 

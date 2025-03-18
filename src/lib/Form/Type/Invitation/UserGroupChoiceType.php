@@ -67,7 +67,7 @@ final class UserGroupChoiceType extends AbstractType
                 $this->searchService,
                 $this->userService
             ))->loadChoiceList()->getChoices(),
-            fn ($group) => $this->permissionResolver->canUser('user', 'invite', $group)
+            fn ($group): bool => $this->permissionResolver->canUser('user', 'invite', $group)
         );
     }
 }

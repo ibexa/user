@@ -16,8 +16,7 @@ use Pagerfanta\Adapter\AdapterInterface;
  */
 class UserSettingsAdapter implements AdapterInterface
 {
-    /** @var \Ibexa\User\UserSetting\UserSettingService */
-    private $userSettingService;
+    private UserSettingService $userSettingService;
 
     /**
      * @param \Ibexa\User\UserSetting\UserSettingService $userSettingService

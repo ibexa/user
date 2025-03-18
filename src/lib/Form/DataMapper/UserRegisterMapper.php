@@ -20,11 +20,10 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class UserRegisterMapper
 {
-    /** @var \Ibexa\User\ConfigResolver\RegistrationContentTypeLoader */
-    private $contentTypeLoader;
+    private RegistrationContentTypeLoader $contentTypeLoader;
 
     /** @var \Ibexa\User\ConfigResolver\RegistrationContentTypeLoader */
-    private $parentGroupLoader;
+    private RegistrationGroupLoader $parentGroupLoader;
 
     /** @var array */
     private $params;
@@ -45,7 +44,7 @@ class UserRegisterMapper
      * @param $name
      * @param $value
      */
-    public function setParam($name, $value)
+    public function setParam($name, $value): void
     {
         $this->params[$name] = $value;
     }
@@ -53,7 +52,7 @@ class UserRegisterMapper
     /**
      * @return \Ibexa\User\Form\Data\UserRegisterData
      */
-    public function mapToFormData()
+    public function mapToFormData(): UserRegisterData
     {
         $resolver = new OptionsResolver();
         $this->configureOptions($resolver);
@@ -104,7 +103,7 @@ class UserRegisterMapper
         return $data;
     }
 
-    private function configureOptions(OptionsResolver $optionsResolver)
+    private function configureOptions(OptionsResolver $optionsResolver): void
     {
         $optionsResolver
             ->setRequired('language')

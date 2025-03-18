@@ -27,11 +27,9 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class FormFactory
 {
-    /** @var \Symfony\Component\Form\FormFactoryInterface */
-    protected $formFactory;
+    protected FormFactoryInterface $formFactory;
 
-    /** @var \Symfony\Component\Routing\Generator\UrlGeneratorInterface */
-    protected $urlGenerator;
+    protected UrlGeneratorInterface $urlGenerator;
 
     /**
      * @param \Symfony\Component\Form\FormFactoryInterface $formFactory

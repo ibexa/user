@@ -18,11 +18,9 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class SubitemsLimit implements ValueDefinitionInterface, FormMapperInterface
 {
-    /** @var \Symfony\Contracts\Translation\TranslatorInterface */
-    private $translator;
+    private TranslatorInterface $translator;
 
-    /** @var \Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface */
-    private $configResolver;
+    private ConfigResolverInterface $configResolver;
 
     public function __construct(TranslatorInterface $translator, ConfigResolverInterface $configResolver)
     {
