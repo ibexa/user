@@ -33,6 +33,10 @@ class UserRegistration extends AbstractParser
                         ->info('Content id of the user group where users who register are created.')
                         ->defaultValue(11)
                     ->end()
+                    ->scalarNode('group_remote_id')
+                        ->info('Content Remote id of the user group where users who register are created - takes precedence over group_id if set.')
+                        ->defaultNull()
+                    ->end()
                     ->arrayNode('templates')
                         ->info('User registration templates.')
                         ->children()
@@ -78,6 +82,14 @@ class UserRegistration extends AbstractParser
                 'user_registration.group_id',
                 $currentScope,
                 $settings['group_id']
+            );
+        }
+
+        if (!empty($settings['group_remote_id'])) {
+            $contextualizer->setContextualParameter(
+                'user_registration.group_remote_id',
+                $currentScope,
+                $settings['group_remote_id']
             );
         }
 
