@@ -58,13 +58,13 @@ class UserPasswordValidatorTest extends TestCase
     public function testEmptyValueType($value)
     {
         $this->userService
-            ->expects($this->never())
+            ->expects(self::never())
             ->method('checkUserCredentials');
         $this->tokenStorage
-            ->expects($this->never())
+            ->expects(self::never())
             ->method('getToken');
         $this->executionContext
-            ->expects($this->never())
+            ->expects(self::never())
             ->method('buildViolation');
 
         $this->validator->validate($value, new UserPassword());
@@ -81,7 +81,7 @@ class UserPasswordValidatorTest extends TestCase
     public function testValid()
     {
         $apiUser = $this->getMockForAbstractClass(APIUser::class, [], '', true, true, true, ['__get']);
-        $apiUser->method('__get')->with($this->equalTo('login'))->willReturn('login');
+        $apiUser->method('__get')->with(self::equalTo('login'))->willReturn('login');
         $user = $this->createMock(ReferenceUserInterface::class);
         $user->method('getAPIUser')->willReturn($apiUser);
         $token = $this->createMock(TokenInterface::class);
@@ -92,7 +92,7 @@ class UserPasswordValidatorTest extends TestCase
             ->with($apiUser, 'password')
             ->willReturn(true);
         $this->executionContext
-            ->expects($this->never())
+            ->expects(self::never())
             ->method('buildViolation');
 
         $this->validator->validate('password', new UserPassword());
@@ -101,7 +101,7 @@ class UserPasswordValidatorTest extends TestCase
     public function testInvalid()
     {
         $apiUser = $this->getMockForAbstractClass(APIUser::class, [], '', true, true, true, ['__get']);
-        $apiUser->method('__get')->with($this->equalTo('login'))->willReturn('login');
+        $apiUser->method('__get')->with(self::equalTo('login'))->willReturn('login');
         $user = $this->createMock(ReferenceUserInterface::class);
         $user->method('getAPIUser')->willReturn($apiUser);
         $token = $this->createMock(TokenInterface::class);
@@ -114,7 +114,7 @@ class UserPasswordValidatorTest extends TestCase
         $constraint = new UserPassword();
         $constraintViolationBuilder = $this->createMock(ConstraintViolationBuilderInterface::class);
         $this->executionContext
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('buildViolation')
             ->with($constraint->message)
             ->willReturn($constraintViolationBuilder);

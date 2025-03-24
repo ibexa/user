@@ -10,6 +10,7 @@ namespace Ibexa\Tests\Integration\User;
 
 /**
  * @group integration
+ *
  * @coversNothing
  */
 final class SampleTest extends IbexaKernelTestCase

@@ -24,17 +24,17 @@ class PasswordTest extends TestCase
 
     public function testConstruct(): void
     {
-        $this->assertSame('ez.user.password.invalid', $this->constraint->message);
+        self::assertSame('ez.user.password.invalid', $this->constraint->message);
     }
 
     public function testValidatedBy(): void
     {
-        $this->assertSame(PasswordValidator::class, $this->constraint->validatedBy());
+        self::assertSame(PasswordValidator::class, $this->constraint->validatedBy());
     }
 
     public function testGetTargets(): void
     {
-        $this->assertSame([Password::CLASS_CONSTRAINT, Password::PROPERTY_CONSTRAINT], $this->constraint->getTargets());
+        self::assertSame([Password::CLASS_CONSTRAINT, Password::PROPERTY_CONSTRAINT], $this->constraint->getTargets());
     }
 }
 
