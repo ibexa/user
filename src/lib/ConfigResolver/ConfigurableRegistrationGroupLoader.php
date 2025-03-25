@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace Ibexa\User\ConfigResolver;
 
 use Ibexa\Contracts\Core\Repository\Repository;
+use Ibexa\Contracts\Core\Repository\Values\User\UserGroup;
 use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 
 /**
@@ -31,7 +32,7 @@ class ConfigurableRegistrationGroupLoader implements RegistrationGroupLoader
     public function loadGroup()
     {
         if ($this->configResolver->hasParameter('user_registration.group_remote_id')) {
-            return $this->repository->sudo(function (Repository $repository) {
+            return $this->repository->sudo(function (Repository $repository): UserGroup {
                 return $repository
                     ->getUserService()
                     ->loadUserGroupByRemoteId(
@@ -40,7 +41,7 @@ class ConfigurableRegistrationGroupLoader implements RegistrationGroupLoader
             });
         }
 
-        return $this->repository->sudo(function (Repository $repository) {
+        return $this->repository->sudo(function (Repository $repository): UserGroup {
             return $repository
                  ->getUserService()
                  ->loadUserGroup(
