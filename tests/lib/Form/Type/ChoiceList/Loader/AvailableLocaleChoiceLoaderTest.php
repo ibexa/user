@@ -18,14 +18,11 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class AvailableLocaleChoiceLoaderTest extends TestCase
 {
-    /** @var \Symfony\Component\Validator\Validator\ValidatorInterface|\PHPUnit\Framework\MockObject\MockObject */
-    private MockObject $validator;
+    private ValidatorInterface&MockObject $validator;
 
-    /** @var \Symfony\Component\Validator\ConstraintViolationInterface|\PHPUnit\Framework\MockObject\MockObject */
-    private MockObject $constraintViolation;
+    private ConstraintViolationInterface&MockObject $constraintViolation;
 
-    /** @var \Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface|\PHPUnit\Framework\MockObject\MockObject */
-    private MockObject $configResolver;
+    private ConfigResolverInterface&MockObject $configResolver;
 
     protected function setUp(): void
     {

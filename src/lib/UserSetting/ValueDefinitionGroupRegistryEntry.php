@@ -11,12 +11,13 @@ namespace Ibexa\User\UserSetting;
 use ArrayIterator;
 use Ibexa\Contracts\User\UserSetting\ValueDefinitionGroupInterface;
 use Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface;
+use IteratorAggregate;
 use Traversable;
 
 /**
  * @internal
  */
-final class ValueDefinitionGroupRegistryEntry implements \IteratorAggregate
+final class ValueDefinitionGroupRegistryEntry implements IteratorAggregate
 {
     private ValueDefinitionGroupInterface $definition;
 

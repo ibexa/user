@@ -88,7 +88,7 @@ class UserRegisterFormProcessor implements EventSubscriberInterface
         }
 
         return $this->repository->sudo(
-            function () use ($data): \Ibexa\Contracts\Core\Repository\Values\User\User {
+            function () use ($data): User {
                 $user = $this->userService->createUser($data, $data->getParentGroups());
                 if ($data->getRole() !== null) {
                     $this->roleService->assignRoleToUser($data->getRole(), $user, $data->getRoleLimitation());

@@ -22,24 +22,12 @@ use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 
 class UserPasswordValidatorTest extends TestCase
 {
-    /**
-     * @var \Ibexa\Contracts\Core\Repository\UserService|\PHPUnit\Framework\MockObject\MockObject
-     */
-    private MockObject $userService;
+    private UserService&MockObject $userService;
 
-    /**
-     * @var \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
-    private MockObject $tokenStorage;
+    private TokenStorageInterface&MockObject $tokenStorage;
 
-    /**
-     * @var \Symfony\Component\Validator\Context\ExecutionContextInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
-    private MockObject $executionContext;
+    private ExecutionContextInterface&MockObject $executionContext;
 
-    /**
-     * @var \Ibexa\User\Validator\Constraints\UserPasswordValidator
-     */
     private UserPasswordValidator $validator;
 
     protected function setUp(): void
