@@ -14,20 +14,11 @@ use Ibexa\User\UserSetting\UserSettingService;
 
 class UserSettingsContext implements Context
 {
-    /**
-     * @var \Ibexa\User\UserSetting\UserSettingService
-     */
-    private $userSettingService;
+    private UserSettingService $userSettingService;
 
-    /**
-     * @var \Ibexa\Contracts\Core\Repository\PermissionResolver
-     */
-    private $permissionResolver;
+    private PermissionResolver $permissionResolver;
 
-    /**
-     * @var \Ibexa\Contracts\Core\Repository\UserService
-     */
-    private $userService;
+    private UserService $userService;
 
     public function __construct(UserSettingService $userSettingService, PermissionResolver $permissionResolver, UserService $userService)
     {

@@ -8,6 +8,8 @@ declare(strict_types=1);
 
 namespace Ibexa\Tests\User\Invitation;
 
+use DateInterval;
+use DateTime;
 use Ibexa\Contracts\Core\HashGenerator;
 use Ibexa\Contracts\Core\Persistence\TransactionHandler;
 use Ibexa\Contracts\Core\Repository\PermissionResolver;
@@ -81,7 +83,7 @@ class InvitationServiceTest extends TestCase
                 new Invitation(
                     'test@ibexa.co',
                     'random_hash',
-                    (new \DateTime())->sub(new \DateInterval('PT2H')),
+                    (new DateTime())->sub(new DateInterval('PT2H')),
                     'admin',
                     false,
                 ),
@@ -92,7 +94,7 @@ class InvitationServiceTest extends TestCase
                 new Invitation(
                     'test@ibexa.co',
                     'random_hash',
-                    (new \DateTime())->sub(new \DateInterval('P3D')),
+                    (new DateTime())->sub(new DateInterval('P3D')),
                     'admin',
                     false,
                 ),
@@ -103,7 +105,7 @@ class InvitationServiceTest extends TestCase
                 new Invitation(
                     'test@ibexa.co',
                     'random_hash',
-                    (new \DateTime())->sub(new \DateInterval('PT2H')),
+                    (new DateTime())->sub(new DateInterval('PT2H')),
                     'admin',
                     false,
                 ),
@@ -114,7 +116,7 @@ class InvitationServiceTest extends TestCase
                 new Invitation(
                     'test@ibexa.co',
                     'random_hash',
-                    (new \DateTime())->sub(new \DateInterval('PT2H')),
+                    (new DateTime())->sub(new DateInterval('PT2H')),
                     'admin',
                     true,
                 ),

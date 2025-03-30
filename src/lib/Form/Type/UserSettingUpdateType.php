@@ -22,11 +22,9 @@ class UserSettingUpdateType extends AbstractType
 {
     public const BTN_UPDATE_AND_EDIT = 'update_and_edit';
 
-    /** @var \Ibexa\User\UserSetting\FormMapperRegistry */
-    protected $formMapperRegistry;
+    protected FormMapperRegistry $formMapperRegistry;
 
-    /** @var \Ibexa\User\UserSetting\ValueDefinitionRegistry */
-    protected $valueDefinitionRegistry;
+    protected ValueDefinitionRegistry $valueDefinitionRegistry;
 
     /**
      * @param \Ibexa\User\UserSetting\FormMapperRegistry $formMapperRegistry

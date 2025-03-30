@@ -30,7 +30,7 @@ class PasswordValidator extends ConstraintValidator
      */
     public function validate(mixed $value, Constraint $constraint): void
     {
-        if (!\is_string($value) || empty($value)) {
+        if (!is_string($value) || empty($value)) {
             return;
         }
 

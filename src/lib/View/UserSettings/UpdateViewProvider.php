@@ -15,8 +15,7 @@ use Symfony\Component\HttpKernel\Controller\ControllerReference;
 
 class UpdateViewProvider implements ViewProvider
 {
-    /** @var \Ibexa\Core\MVC\Symfony\Matcher\MatcherFactoryInterface */
-    protected $matcherFactory;
+    protected MatcherFactoryInterface $matcherFactory;
 
     /**
      * @param \Ibexa\Core\MVC\Symfony\Matcher\MatcherFactoryInterface $matcherFactory
@@ -57,7 +56,7 @@ class UpdateViewProvider implements ViewProvider
             $view->setControllerReference(new ControllerReference($viewConfig['controller']));
         }
 
-        if (isset($viewConfig['params']) && \is_array($viewConfig['params'])) {
+        if (isset($viewConfig['params']) && is_array($viewConfig['params'])) {
             $view->addParameters($viewConfig['params']);
         }
 

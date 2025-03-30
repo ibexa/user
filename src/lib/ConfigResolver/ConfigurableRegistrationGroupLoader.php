@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace Ibexa\User\ConfigResolver;
 
 use Ibexa\Contracts\Core\Repository\Repository;
+use Ibexa\Contracts\Core\Repository\Values\User\UserGroup;
 use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 
 /**
@@ -16,11 +17,9 @@ use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
  */
 class ConfigurableRegistrationGroupLoader implements RegistrationGroupLoader
 {
-    /** @var \Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface */
-    private $configResolver;
+    private ConfigResolverInterface $configResolver;
 
-    /** @var \Ibexa\Contracts\Core\Repository\Repository */
-    private $repository;
+    private Repository $repository;
 
     public function __construct(ConfigResolverInterface $configResolver, Repository $repository)
     {
@@ -30,7 +29,7 @@ class ConfigurableRegistrationGroupLoader implements RegistrationGroupLoader
 
     public function loadGroup()
     {
-        return $this->repository->sudo(function (Repository $repository) {
+        return $this->repository->sudo(function (Repository $repository): UserGroup {
             return $repository
                  ->getUserService()
                  ->loadUserGroup(

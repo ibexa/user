@@ -20,11 +20,9 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class FullDateTimeFormat extends AbstractDateTimeFormat
 {
-    /** @var \Symfony\Contracts\Translation\TranslatorInterface */
-    private $translator;
+    private TranslatorInterface $translator;
 
-    /** @var \Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface */
-    private $configResolver;
+    private ConfigResolverInterface $configResolver;
 
     /**
      * @param \Ibexa\User\UserSetting\Setting\DateTimeFormatSerializer $serializer

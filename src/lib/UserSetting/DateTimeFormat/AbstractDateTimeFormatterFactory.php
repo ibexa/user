@@ -12,8 +12,7 @@ use Ibexa\User\UserSetting\UserSettingService;
 
 abstract class AbstractDateTimeFormatterFactory implements DateTimeFormatterFactoryInterface
 {
-    /** @var \Ibexa\User\UserSetting\UserSettingService */
-    protected $userSettingService;
+    protected UserSettingService $userSettingService;
 
     /**
      * @param \Ibexa\User\UserSetting\UserSettingService $userSettingService

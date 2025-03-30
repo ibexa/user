@@ -33,7 +33,7 @@ class UserRegisterType extends AbstractType
         $this->configResolver = $configResolver;
     }
 
-    public function getName()
+    public function getName(): string
     {
         return $this->getBlockPrefix();
     }

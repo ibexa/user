@@ -31,7 +31,7 @@ class UserPermissionsLimitationType extends AbstractPersistenceLimitationType im
      *
      * @param \Ibexa\Contracts\Core\Repository\Values\User\Limitation $limitationValue
      */
-    public function acceptValue(APILimitationValue $limitationValue)
+    public function acceptValue(APILimitationValue $limitationValue): void
     {
         if (!$limitationValue instanceof UserPermissionsLimitation) {
             throw new InvalidArgumentType(

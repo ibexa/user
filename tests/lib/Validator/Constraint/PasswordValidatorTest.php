@@ -15,20 +15,19 @@ use Ibexa\Contracts\Core\Repository\Values\User\User;
 use Ibexa\Core\FieldType\ValidationError;
 use Ibexa\User\Validator\Constraints\Password;
 use Ibexa\User\Validator\Constraints\PasswordValidator;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use stdClass;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 
 class PasswordValidatorTest extends TestCase
 {
-    /** @var \Ibexa\Contracts\Core\Repository\UserService|\PHPUnit\Framework\MockObject\MockObject */
-    private $userService;
+    private UserService&MockObject $userService;
 
-    /** @var \PHPUnit\Framework\MockObject\MockObject|\Symfony\Component\Validator\Context\ExecutionContextInterface */
-    private $executionContext;
+    private ExecutionContextInterface&MockObject $executionContext;
 
-    /** @var \Ibexa\User\Validator\Constraints\PasswordValidator */
-    private $validator;
+    private PasswordValidator $validator;
 
     protected function setUp(): void
     {
@@ -41,7 +40,7 @@ class PasswordValidatorTest extends TestCase
     /**
      * @dataProvider dataProviderForValidateNotSupportedValueType
      */
-    public function testValidateShouldBeSkipped($value): void
+    public function testValidateShouldBeSkipped(mixed $value): void
     {
         $this->userService
             ->expects(self::never())
@@ -144,7 +143,7 @@ class PasswordValidatorTest extends TestCase
     public function dataProviderForValidateNotSupportedValueType(): array
     {
         return [
-            [new \stdClass()],
+            [new stdClass()],
             [null],
             [''],
         ];

@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\Tests\Integration\User\Invitation;
 
+use DateTime;
 use Ibexa\Contracts\Core\Repository\RoleService;
 use Ibexa\Contracts\Core\Repository\UserService;
 use Ibexa\Contracts\User\Invitation\Exception\InvitationAlreadyExistsException;
@@ -38,7 +39,7 @@ final class InvitationServiceTest extends IbexaKernelTestCase
 
     public function testCreateInvitation(): void
     {
-        $now = (new \DateTime())->getTimestamp();
+        $now = (new DateTime())->getTimestamp();
         $invitation = $this->invitationService->createInvitation(
             new InvitationCreateStruct(
                 'thisisjustatest@ibexa.co',

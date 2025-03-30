@@ -13,6 +13,7 @@ use Ibexa\Contracts\Core\Repository\Values\User\User as APIUser;
 use Ibexa\Core\MVC\Symfony\Security\ReferenceUserInterface;
 use Ibexa\User\Validator\Constraints\UserPassword;
 use Ibexa\User\Validator\Constraints\UserPasswordValidator;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
@@ -21,25 +22,13 @@ use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 
 class UserPasswordValidatorTest extends TestCase
 {
-    /**
-     * @var \Ibexa\Contracts\Core\Repository\UserService|\PHPUnit\Framework\MockObject\MockObject
-     */
-    private $userService;
+    private UserService&MockObject $userService;
 
-    /**
-     * @var \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
-    private $tokenStorage;
+    private TokenStorageInterface&MockObject $tokenStorage;
 
-    /**
-     * @var \Symfony\Component\Validator\Context\ExecutionContextInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
-    private $executionContext;
+    private ExecutionContextInterface&MockObject $executionContext;
 
-    /**
-     * @var \Ibexa\User\Validator\Constraints\UserPasswordValidator
-     */
-    private $validator;
+    private UserPasswordValidator $validator;
 
     protected function setUp(): void
     {
@@ -55,7 +44,7 @@ class UserPasswordValidatorTest extends TestCase
      *
      * @param string|null $value
      */
-    public function testEmptyValueType($value)
+    public function testEmptyValueType(?string $value): void
     {
         $this->userService
             ->expects(self::never())
@@ -78,7 +67,7 @@ class UserPasswordValidatorTest extends TestCase
         ];
     }
 
-    public function testValid()
+    public function testValid(): void
     {
         $apiUser = $this->getMockForAbstractClass(APIUser::class, [], '', true, true, true, ['__get']);
         $apiUser->method('__get')->with(self::equalTo('login'))->willReturn('login');
@@ -98,7 +87,7 @@ class UserPasswordValidatorTest extends TestCase
         $this->validator->validate('password', new UserPassword());
     }
 
-    public function testInvalid()
+    public function testInvalid(): void
     {
         $apiUser = $this->getMockForAbstractClass(APIUser::class, [], '', true, true, true, ['__get']);
         $apiUser->method('__get')->with(self::equalTo('login'))->willReturn('login');
