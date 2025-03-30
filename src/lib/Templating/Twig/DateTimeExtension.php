@@ -9,8 +9,10 @@ declare(strict_types=1);
 namespace Ibexa\User\Templating\Twig;
 
 use DateTimeImmutable;
+use DateTimeInterface;
 use Ibexa\User\UserSetting\DateTimeFormat\FormatterInterface;
 use Ibexa\User\UserSetting\Setting\DateTimeFormatSerializer;
+use RuntimeException;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 
@@ -117,12 +119,12 @@ class DateTimeExtension extends AbstractExtension
             $date = new DateTimeImmutable();
         }
 
-        if (\is_int($date)) {
+        if (is_int($date)) {
             $date = new DateTimeImmutable('@' . $date);
         }
 
-        if (!$date instanceof \DateTimeInterface) {
-            throw new \RuntimeException('The date argument passed to the format function must be an int or a DateTimeInterface');
+        if (!$date instanceof DateTimeInterface) {
+            throw new RuntimeException('The date argument passed to the format function must be an int or a DateTimeInterface');
         }
 
         return $formatter->format($date, $timezone);

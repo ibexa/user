@@ -92,7 +92,7 @@ class UserSettingService
     {
         $values = $this->valueRegistry->getValueDefinitions();
         /** @var \Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface[] $slice */
-        $slice = \array_slice($values, $offset, $limit, true);
+        $slice = array_slice($values, $offset, $limit, true);
 
         $userPreferences = [];
         foreach ($slice as $identifier => $userSettingDefinition) {

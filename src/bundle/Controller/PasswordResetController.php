@@ -10,6 +10,7 @@ namespace Ibexa\Bundle\User\Controller;
 
 use DateInterval;
 use DateTime;
+use Exception;
 use Ibexa\Bundle\User\Type\UserForgotPasswordReason;
 use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
 use Ibexa\Contracts\Core\Repository\PermissionResolver;
@@ -85,7 +86,7 @@ class PasswordResetController extends Controller
             $users = $this->userService->loadUsersByEmail($data->getEmail());
 
             /** Because it is possible to have multiple user accounts with same email address we must gain a user login. */
-            if (\count($users) > 1) {
+            if (count($users) > 1) {
                 return $this->redirectToRoute('ibexa.user.forgot_password.login');
             }
 
@@ -128,7 +129,7 @@ class PasswordResetController extends Controller
                 $user = null;
             }
 
-            if (!$user || \count($this->userService->loadUsersByEmail($user->email)) < 2) {
+            if (!$user || count($this->userService->loadUsersByEmail($user->email)) < 2) {
                 return new SuccessView(null);
             }
 
@@ -195,7 +196,7 @@ class PasswordResetController extends Controller
                 $view->setResponse($response);
 
                 return $view;
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 $this->actionResultHandler->error($e->getMessage());
             }
         }

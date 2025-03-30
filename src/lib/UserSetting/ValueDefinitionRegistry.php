@@ -119,11 +119,11 @@ class ValueDefinitionRegistry
      */
     public function countValueDefinitions(): int
     {
-        return \count($this->valueDefinitions);
+        return count($this->valueDefinitions);
     }
 
     public function countValueDefinitionGroups(): int
     {
-        return \count($this->groupedDefinitions);
+        return count($this->groupedDefinitions);
     }
 }
