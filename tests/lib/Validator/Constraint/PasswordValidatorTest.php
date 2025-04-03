@@ -44,11 +44,11 @@ class PasswordValidatorTest extends TestCase
     public function testValidateShouldBeSkipped($value): void
     {
         $this->userService
-            ->expects($this->never())
+            ->expects(self::never())
             ->method('validatePassword');
 
         $this->executionContext
-            ->expects($this->never())
+            ->expects(self::never())
             ->method('buildViolation');
 
         $this->validator->validate($value, new Password());
@@ -79,7 +79,7 @@ class PasswordValidatorTest extends TestCase
             );
 
         $this->executionContext
-            ->expects($this->never())
+            ->expects(self::never())
             ->method('buildViolation');
 
         $this->validator->validate(
@@ -99,7 +99,7 @@ class PasswordValidatorTest extends TestCase
         $errorMessage = 'error';
 
         $this->userService
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('validatePassword')
             ->willReturnCallback(function (string $actualPassword, PasswordValidationContext $actualContext) use (
                 $password,
@@ -119,21 +119,21 @@ class PasswordValidatorTest extends TestCase
         $constraintViolationBuilder = $this->createMock(ConstraintViolationBuilderInterface::class);
 
         $this->executionContext
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('buildViolation')
             ->willReturn($constraintViolationBuilder);
         $this->executionContext
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('buildViolation')
             ->with($errorMessage)
             ->willReturn($constraintViolationBuilder);
         $constraintViolationBuilder
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('setParameters')
             ->with(['%foo%' => $errorParameter])
             ->willReturn($constraintViolationBuilder);
         $constraintViolationBuilder
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('addViolation');
 
         $this->validator->validate('pass', new Password([

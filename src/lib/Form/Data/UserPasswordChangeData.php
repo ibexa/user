@@ -15,6 +15,7 @@ class UserPasswordChangeData
 {
     /**
      * @UserAssert\UserPassword()
+     *
      * @Assert\NotBlank()
      *
      * @var string

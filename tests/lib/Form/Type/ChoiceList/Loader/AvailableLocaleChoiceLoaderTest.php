@@ -64,7 +64,7 @@ class AvailableLocaleChoiceLoaderTest extends TestCase
             $availableTranslations
         );
 
-        $this->assertSame($expectedLocales, $availableLocaleChoiceLoader->getChoiceList());
+        self::assertSame($expectedLocales, $availableLocaleChoiceLoader->getChoiceList());
     }
 
     public function providerForGetChoiceList(): array
