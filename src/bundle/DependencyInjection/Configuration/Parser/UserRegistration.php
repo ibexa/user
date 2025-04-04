@@ -29,14 +29,9 @@ class UserRegistration extends AbstractParser
                         ->info('Content type identifier used for registration.')
                         ->defaultValue('user')
                     ->end()
-                    ->scalarNode('group_id')
-                        ->info('Content id of the user group where users who register are created.')
-                        ->defaultValue(11)
-                        ->setDeprecated('ibexa/user', '4.6', 'The child node "%node%" at path "%path%" is deprecated, use group_remote_id instead.')
-                    ->end()
                     ->scalarNode('group_remote_id')
-                        ->info('Content remote id of the user group where users who register are created - takes precedence over group_id if set.')
-                        ->defaultNull()
+                        ->info('Content remote id of the user group where users who register are created.')
+                        ->defaultValue('5f7f0bdb3381d6a461d8c29ff53d908f')
                     ->end()
                     ->arrayNode('templates')
                         ->info('User registration templates.')
@@ -75,14 +70,6 @@ class UserRegistration extends AbstractParser
                 'user_registration.user_type_identifier',
                 $currentScope,
                 $settings['user_type_identifier']
-            );
-        }
-
-        if (!empty($settings['group_id'])) {
-            $contextualizer->setContextualParameter(
-                'user_registration.group_id',
-                $currentScope,
-                $settings['group_id']
             );
         }
 

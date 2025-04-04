@@ -31,22 +31,12 @@ class ConfigurableRegistrationGroupLoader implements RegistrationGroupLoader
 
     public function loadGroup()
     {
-        if ($this->configResolver->hasParameter('user_registration.group_remote_id')) {
-            return $this->repository->sudo(function (Repository $repository): UserGroup {
-                return $repository
-                    ->getUserService()
-                    ->loadUserGroupByRemoteId(
-                        $this->configResolver->getParameter('user_registration.group_remote_id')
-                    );
-            });
-        }
-
         return $this->repository->sudo(function (Repository $repository): UserGroup {
             return $repository
-                 ->getUserService()
-                 ->loadUserGroup(
-                     $this->configResolver->getParameter('user_registration.group_id')
-                 );
+                ->getUserService()
+                ->loadUserGroupByRemoteId(
+                    $this->configResolver->getParameter('user_registration.group_remote_id')
+                );
         });
     }
 }
