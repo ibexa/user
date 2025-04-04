@@ -12,7 +12,7 @@ parameters:
     ibexa.site_access.config.default.user_reset_password.templates.success: "@@IbexaUser/reset_password/success.html.twig"
 
     # Registration
-    ibexa.site_access.config.default.user_registration.group_id: 11
+    ibexa.site_access.config.default.user_registration.group_remote_id: '5f7f0bdb3381d6a461d8c29ff53d908f'
     ibexa.site_access.config.default.user_registration.user_type_identifier: 'user'
     ibexa.site_access.config.default.user_registration.templates.form: "@@IbexaContentForms/Content/content_edit.html.twig"
     ibexa.site_access.config.default.user_registration.templates.confirmation: "@@IbexaUser/register/register_confirmation.html.twig"
