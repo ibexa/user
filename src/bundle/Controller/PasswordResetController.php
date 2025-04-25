@@ -10,6 +10,7 @@ namespace Ibexa\Bundle\User\Controller;
 
 use DateInterval;
 use DateTime;
+use Exception;
 use Ibexa\Bundle\User\Type\UserForgotPasswordReason;
 use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
 use Ibexa\Contracts\Core\Repository\PermissionResolver;
@@ -31,6 +32,7 @@ use Ibexa\User\View\ForgotPassword\SuccessView;
 use Ibexa\User\View\ResetPassword\FormView as UserResetPasswordFormView;
 use Ibexa\User\View\ResetPassword\InvalidLinkView;
 use Ibexa\User\View\ResetPassword\SuccessView as UserResetPasswordSuccessView;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
@@ -74,7 +76,7 @@ class PasswordResetController extends Controller
      *
      * @throws \Ibexa\Core\Base\Exceptions\InvalidArgumentType
      */
-    public function userForgotPasswordAction(Request $request, ?string $reason = null)
+    public function userForgotPasswordAction(Request $request, ?string $reason = null): RedirectResponse|SuccessView|FormView
     {
         $form = $this->formFactory->forgotUserPassword();
         $form->handleRequest($request);
@@ -84,7 +86,7 @@ class PasswordResetController extends Controller
             $users = $this->userService->loadUsersByEmail($data->getEmail());
 
             /** Because it is possible to have multiple user accounts with same email address we must gain a user login. */
-            if (\count($users) > 1) {
+            if (count($users) > 1) {
                 return $this->redirectToRoute('ibexa.user.forgot_password.login');
             }
 
@@ -112,7 +114,7 @@ class PasswordResetController extends Controller
      *
      * @throws \Ibexa\Core\Base\Exceptions\InvalidArgumentType
      */
-    public function userForgotPasswordLoginAction(Request $request)
+    public function userForgotPasswordLoginAction(Request $request): SuccessView|LoginView
     {
         $form = $this->formFactory->forgotUserPasswordWithLogin();
 
@@ -127,7 +129,7 @@ class PasswordResetController extends Controller
                 $user = null;
             }
 
-            if (!$user || \count($this->userService->loadUsersByEmail($user->email)) < 2) {
+            if (!$user || count($this->userService->loadUsersByEmail($user->email)) < 2) {
                 return new SuccessView(null);
             }
 
@@ -150,7 +152,7 @@ class PasswordResetController extends Controller
      *
      * @throws \Ibexa\Core\Base\Exceptions\InvalidArgumentType
      */
-    public function userResetPasswordAction(Request $request, string $hashKey)
+    public function userResetPasswordAction(Request $request, string $hashKey): InvalidLinkView|UserResetPasswordSuccessView|UserResetPasswordFormView
     {
         $response = new Response();
         $response->headers->set('X-Robots-Tag', 'noindex');
@@ -194,7 +196,7 @@ class PasswordResetController extends Controller
                 $view->setResponse($response);
 
                 return $view;
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 $this->actionResultHandler->error($e->getMessage());
             }
         }

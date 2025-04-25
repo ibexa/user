@@ -19,14 +19,11 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class Language implements ValueDefinitionInterface, FormMapperInterface
 {
-    /** @var \Symfony\Contracts\Translation\TranslatorInterface */
-    private $translator;
+    private TranslatorInterface $translator;
 
-    /** @var \Ibexa\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface */
-    private $userLanguagePreferenceProvider;
+    private UserLanguagePreferenceProviderInterface $userLanguagePreferenceProvider;
 
-    /** @var \Ibexa\User\Form\ChoiceList\Loader\AvailableLocaleChoiceLoader */
-    private $availableLocaleChoiceLoader;
+    private AvailableLocaleChoiceLoader $availableLocaleChoiceLoader;
 
     /**
      * @param \Symfony\Contracts\Translation\TranslatorInterface $translator

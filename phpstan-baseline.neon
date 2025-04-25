@@ -13,12 +13,6 @@ parameters:
 			path: src/bundle/Command/AuditUserDatabaseCommand.php
 
 		-
-			message: '#^Method Ibexa\\Bundle\\User\\Controller\\Controller\:\:performAccessCheck\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: src/bundle/Controller/Controller.php
-
-		-
 			message: '#^Method Ibexa\\Bundle\\User\\Controller\\DefaultProfileImageController\:\:getInitialsColors\(\) return type has no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
@@ -97,28 +91,10 @@ parameters:
 			path: src/bundle/Controller/UserSettingsController.php
 
 		-
-			message: '#^Method Ibexa\\Bundle\\User\\Controller\\UserSettingsController\:\:updateAction\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: src/bundle/Controller/UserSettingsController.php
-
-		-
 			message: '#^PHPDoc tag @throws has invalid value \(\\Ibexa\\Core\\Base\\Exceptions\\InvalidArgumentException;\)\: Unexpected token ";", expected TOKEN_HORIZONTAL_WS at offset 337 on line 6$#'
 			identifier: phpDoc.parseError
 			count: 1
 			path: src/bundle/DependencyInjection/Compiler/UserSetting/FormMapperPass.php
-
-		-
-			message: '#^Method Ibexa\\Bundle\\User\\DependencyInjection\\Configuration\\Parser\\ChangePassword\:\:addSemanticConfig\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: src/bundle/DependencyInjection/Configuration/Parser/ChangePassword.php
-
-		-
-			message: '#^Method Ibexa\\Bundle\\User\\DependencyInjection\\Configuration\\Parser\\ChangePassword\:\:mapConfig\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: src/bundle/DependencyInjection/Configuration/Parser/ChangePassword.php
 
 		-
 			message: '#^Method Ibexa\\Bundle\\User\\DependencyInjection\\Configuration\\Parser\\ChangePassword\:\:mapConfig\(\) has parameter \$scopeSettings with no value type specified in iterable type array\.$#'
@@ -127,28 +103,10 @@ parameters:
 			path: src/bundle/DependencyInjection/Configuration/Parser/ChangePassword.php
 
 		-
-			message: '#^Method Ibexa\\Bundle\\User\\DependencyInjection\\Configuration\\Parser\\ForgotPassword\:\:addSemanticConfig\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: src/bundle/DependencyInjection/Configuration/Parser/ForgotPassword.php
-
-		-
-			message: '#^Method Ibexa\\Bundle\\User\\DependencyInjection\\Configuration\\Parser\\ForgotPassword\:\:mapConfig\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: src/bundle/DependencyInjection/Configuration/Parser/ForgotPassword.php
-
-		-
 			message: '#^Method Ibexa\\Bundle\\User\\DependencyInjection\\Configuration\\Parser\\ForgotPassword\:\:mapConfig\(\) has parameter \$scopeSettings with no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
 			path: src/bundle/DependencyInjection/Configuration/Parser/ForgotPassword.php
-
-		-
-			message: '#^Method Ibexa\\Bundle\\User\\DependencyInjection\\Configuration\\Parser\\Pagination\:\:addSemanticConfig\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: src/bundle/DependencyInjection/Configuration/Parser/Pagination.php
 
 		-
 			message: '#^Method Ibexa\\Bundle\\User\\DependencyInjection\\Configuration\\Parser\\Pagination\:\:mapConfig\(\) has parameter \$scopeSettings with no value type specified in iterable type array\.$#'
@@ -157,46 +115,16 @@ parameters:
 			path: src/bundle/DependencyInjection/Configuration/Parser/Pagination.php
 
 		-
-			message: '#^Method Ibexa\\Bundle\\User\\DependencyInjection\\Configuration\\Parser\\ResetPassword\:\:addSemanticConfig\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: src/bundle/DependencyInjection/Configuration/Parser/ResetPassword.php
-
-		-
-			message: '#^Method Ibexa\\Bundle\\User\\DependencyInjection\\Configuration\\Parser\\ResetPassword\:\:mapConfig\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: src/bundle/DependencyInjection/Configuration/Parser/ResetPassword.php
-
-		-
 			message: '#^Method Ibexa\\Bundle\\User\\DependencyInjection\\Configuration\\Parser\\ResetPassword\:\:mapConfig\(\) has parameter \$scopeSettings with no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
 			path: src/bundle/DependencyInjection/Configuration/Parser/ResetPassword.php
 
 		-
-			message: '#^Method Ibexa\\Bundle\\User\\DependencyInjection\\Configuration\\Parser\\Security\:\:addSemanticConfig\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: src/bundle/DependencyInjection/Configuration/Parser/Security.php
-
-		-
 			message: '#^Method Ibexa\\Bundle\\User\\DependencyInjection\\Configuration\\Parser\\Security\:\:mapConfig\(\) has parameter \$scopeSettings with no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
 			path: src/bundle/DependencyInjection/Configuration/Parser/Security.php
-
-		-
-			message: '#^Method Ibexa\\Bundle\\User\\DependencyInjection\\Configuration\\Parser\\UserInvitation\:\:addSemanticConfig\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: src/bundle/DependencyInjection/Configuration/Parser/UserInvitation.php
-
-		-
-			message: '#^Method Ibexa\\Bundle\\User\\DependencyInjection\\Configuration\\Parser\\UserInvitation\:\:mapConfig\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: src/bundle/DependencyInjection/Configuration/Parser/UserInvitation.php
 
 		-
 			message: '#^Method Ibexa\\Bundle\\User\\DependencyInjection\\Configuration\\Parser\\UserInvitation\:\:mapConfig\(\) has parameter \$scopeSettings with no value type specified in iterable type array\.$#'
@@ -209,18 +137,6 @@ parameters:
 			identifier: missingType.iterableValue
 			count: 1
 			path: src/bundle/DependencyInjection/Configuration/Parser/UserPreferences.php
-
-		-
-			message: '#^Method Ibexa\\Bundle\\User\\DependencyInjection\\Configuration\\Parser\\UserRegistration\:\:addSemanticConfig\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: src/bundle/DependencyInjection/Configuration/Parser/UserRegistration.php
-
-		-
-			message: '#^Method Ibexa\\Bundle\\User\\DependencyInjection\\Configuration\\Parser\\UserRegistration\:\:mapConfig\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: src/bundle/DependencyInjection/Configuration/Parser/UserRegistration.php
 
 		-
 			message: '#^Method Ibexa\\Bundle\\User\\DependencyInjection\\Configuration\\Parser\\UserRegistration\:\:mapConfig\(\) has parameter \$scopeSettings with no value type specified in iterable type array\.$#'
@@ -415,42 +331,6 @@ parameters:
 			path: src/lib/Form/Data/UserInvitationData.php
 
 		-
-			message: '#^Property Ibexa\\User\\Form\\Data\\UserPasswordChangeData\:\:\$newPassword \(string\) does not accept string\|null\.$#'
-			identifier: assign.propertyType
-			count: 2
-			path: src/lib/Form/Data/UserPasswordChangeData.php
-
-		-
-			message: '#^Property Ibexa\\User\\Form\\Data\\UserPasswordChangeData\:\:\$oldPassword \(string\) does not accept string\|null\.$#'
-			identifier: assign.propertyType
-			count: 2
-			path: src/lib/Form/Data/UserPasswordChangeData.php
-
-		-
-			message: '#^Property Ibexa\\User\\Form\\Data\\UserPasswordForgotData\:\:\$email \(string\) does not accept string\|null\.$#'
-			identifier: assign.propertyType
-			count: 2
-			path: src/lib/Form/Data/UserPasswordForgotData.php
-
-		-
-			message: '#^Property Ibexa\\User\\Form\\Data\\UserPasswordForgotWithLoginData\:\:\$login \(string\) does not accept string\|null\.$#'
-			identifier: assign.propertyType
-			count: 2
-			path: src/lib/Form/Data/UserPasswordForgotWithLoginData.php
-
-		-
-			message: '#^Property Ibexa\\User\\Form\\Data\\UserPasswordResetData\:\:\$contentType \(Ibexa\\Contracts\\Core\\Repository\\Values\\ContentType\\ContentType\) does not accept Ibexa\\Contracts\\Core\\Repository\\Values\\ContentType\\ContentType\|null\.$#'
-			identifier: assign.propertyType
-			count: 1
-			path: src/lib/Form/Data/UserPasswordResetData.php
-
-		-
-			message: '#^Property Ibexa\\User\\Form\\Data\\UserPasswordResetData\:\:\$newPassword \(string\) does not accept string\|null\.$#'
-			identifier: assign.propertyType
-			count: 2
-			path: src/lib/Form/Data/UserPasswordResetData.php
-
-		-
 			message: '#^Method Ibexa\\User\\Form\\Data\\UserSettingUpdateData\:\:__construct\(\) has parameter \$values with no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
@@ -469,26 +349,8 @@ parameters:
 			path: src/lib/Form/Data/UserSettingUpdateData.php
 
 		-
-			message: '#^Call to an undefined method Ibexa\\User\\ConfigResolver\\RegistrationContentTypeLoader\:\:loadGroup\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: src/lib/Form/DataMapper/UserRegisterMapper.php
-
-		-
 			message: '#^Method Ibexa\\User\\ConfigResolver\\RegistrationContentTypeLoader\:\:loadContentType\(\) invoked with 1 parameter, 0 required\.$#'
 			identifier: arguments.count
-			count: 1
-			path: src/lib/Form/DataMapper/UserRegisterMapper.php
-
-		-
-			message: '#^Method Ibexa\\User\\Form\\DataMapper\\UserRegisterMapper\:\:configureOptions\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: src/lib/Form/DataMapper/UserRegisterMapper.php
-
-		-
-			message: '#^Method Ibexa\\User\\Form\\DataMapper\\UserRegisterMapper\:\:setParam\(\) has no return type specified\.$#'
-			identifier: missingType.return
 			count: 1
 			path: src/lib/Form/DataMapper/UserRegisterMapper.php
 
@@ -505,14 +367,14 @@ parameters:
 			path: src/lib/Form/DataMapper/UserRegisterMapper.php
 
 		-
-			message: '#^Property Ibexa\\User\\Form\\DataMapper\\UserRegisterMapper\:\:\$params type has no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
+			message: '#^PHPDoc tag @var for property Ibexa\\User\\Form\\DataMapper\\UserRegisterMapper\:\:\$parentGroupLoader with type Ibexa\\User\\ConfigResolver\\RegistrationContentTypeLoader is not subtype of native type Ibexa\\User\\ConfigResolver\\RegistrationGroupLoader\.$#'
+			identifier: property.phpDocType
 			count: 1
 			path: src/lib/Form/DataMapper/UserRegisterMapper.php
 
 		-
-			message: '#^Property Ibexa\\User\\Form\\DataMapper\\UserRegisterMapper\:\:\$parentGroupLoader \(Ibexa\\User\\ConfigResolver\\RegistrationContentTypeLoader\) does not accept Ibexa\\User\\ConfigResolver\\RegistrationGroupLoader\.$#'
-			identifier: assign.propertyType
+			message: '#^Property Ibexa\\User\\Form\\DataMapper\\UserRegisterMapper\:\:\$params type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/lib/Form/DataMapper/UserRegisterMapper.php
 
@@ -611,12 +473,6 @@ parameters:
 			identifier: argument.type
 			count: 5
 			path: src/lib/Form/Factory/FormFactory.php
-
-		-
-			message: '#^Method Ibexa\\User\\Form\\Processor\\UserRegisterFormProcessor\:\:processRegister\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: src/lib/Form/Processor/UserRegisterFormProcessor.php
 
 		-
 			message: '#^Variable \$data in PHPDoc tag @var does not exist\.$#'
@@ -735,12 +591,6 @@ parameters:
 		-
 			message: '#^Class Ibexa\\User\\Form\\Type\\UserRegisterType extends generic class Symfony\\Component\\Form\\AbstractType but does not specify its types\: TData$#'
 			identifier: missingType.generics
-			count: 1
-			path: src/lib/Form/Type/UserRegisterType.php
-
-		-
-			message: '#^Method Ibexa\\User\\Form\\Type\\UserRegisterType\:\:getName\(\) has no return type specified\.$#'
-			identifier: missingType.return
 			count: 1
 			path: src/lib/Form/Type/UserRegisterType.php
 
@@ -865,18 +715,6 @@ parameters:
 			path: src/lib/Pagination/Pagerfanta/UserSettingsAdapter.php
 
 		-
-			message: '#^Method Ibexa\\User\\Permission\\InvitationPolicyProvider\:\:addPolicies\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: src/lib/Permission/InvitationPolicyProvider.php
-
-		-
-			message: '#^Method Ibexa\\User\\Permission\\UserPermissionsLimitationType\:\:acceptValue\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: src/lib/Permission/UserPermissionsLimitationType.php
-
-		-
 			message: '#^Method Ibexa\\User\\Permission\\UserPermissionsLimitationType\:\:evaluate\(\) should return bool but returns null\.$#'
 			identifier: return.type
 			count: 1
@@ -961,12 +799,6 @@ parameters:
 			path: src/lib/UserSetting/Group/LocationGroup.php
 
 		-
-			message: '#^Cannot call method format\(\) on Ibexa\\User\\UserSetting\\DateTimeFormat\\Formatter\|null\.$#'
-			identifier: method.nonObject
-			count: 1
-			path: src/lib/UserSetting/Setting/AbstractDateTimeFormat.php
-
-		-
 			message: '#^Cannot call method getDateFormat\(\) on Ibexa\\User\\UserSetting\\Setting\\Value\\DateTimeFormat\|null\.$#'
 			identifier: method.nonObject
 			count: 1
@@ -979,7 +811,13 @@ parameters:
 			path: src/lib/UserSetting/Setting/AbstractDateTimeFormat.php
 
 		-
-			message: '#^Property Ibexa\\User\\UserSetting\\Setting\\AbstractDateTimeFormat\:\:\$formatter \(Ibexa\\User\\UserSetting\\DateTimeFormat\\Formatter\|null\) does not accept Ibexa\\User\\UserSetting\\DateTimeFormat\\FormatterInterface\.$#'
+			message: '#^PHPDoc tag @var for property Ibexa\\User\\UserSetting\\Setting\\AbstractDateTimeFormat\:\:\$formatter with type Ibexa\\User\\UserSetting\\DateTimeFormat\\Formatter\|null is not subtype of native type Ibexa\\User\\UserSetting\\DateTimeFormat\\FormatterInterface\.$#'
+			identifier: property.phpDocType
+			count: 1
+			path: src/lib/UserSetting/Setting/AbstractDateTimeFormat.php
+
+		-
+			message: '#^Property Ibexa\\User\\UserSetting\\Setting\\AbstractDateTimeFormat\:\:\$formatter \(Ibexa\\User\\UserSetting\\DateTimeFormat\\Formatter\) does not accept Ibexa\\User\\UserSetting\\DateTimeFormat\\FormatterInterface\.$#'
 			identifier: assign.propertyType
 			count: 1
 			path: src/lib/UserSetting/Setting/AbstractDateTimeFormat.php
@@ -1075,18 +913,6 @@ parameters:
 			path: src/lib/UserSetting/Setting/Timezone.php
 
 		-
-			message: '#^Method Ibexa\\User\\UserSetting\\Setting\\Value\\DateTimeFormat\:\:setDateFormat\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: src/lib/UserSetting/Setting/Value/DateTimeFormat.php
-
-		-
-			message: '#^Method Ibexa\\User\\UserSetting\\Setting\\Value\\DateTimeFormat\:\:setTimeFormat\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: src/lib/UserSetting/Setting/Value/DateTimeFormat.php
-
-		-
 			message: '#^Class Ibexa\\User\\UserSetting\\UserSettingArrayAccessor implements generic interface ArrayAccess but does not specify its types\: TKey, TValue$#'
 			identifier: missingType.generics
 			count: 1
@@ -1109,12 +935,6 @@ parameters:
 			identifier: missingType.iterableValue
 			count: 1
 			path: src/lib/UserSetting/UserSettingGroup.php
-
-		-
-			message: '#^Method Ibexa\\User\\UserSetting\\UserSettingService\:\:countGroupedUserSettings\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: src/lib/UserSetting/UserSettingService.php
 
 		-
 			message: '#^Method Ibexa\\User\\UserSetting\\UserSettingService\:\:createUserSettingsGroup\(\) has parameter \$userPreferences with no value type specified in iterable type array\.$#'
@@ -1261,32 +1081,14 @@ parameters:
 			path: tests/bundle/DependencyInjection/Configuration/Parser/ChangePasswordTest.php
 
 		-
-			message: '#^Method Ibexa\\Tests\\Bundle\\User\\DependencyInjection\\Configuration\\Parser\\ChangePasswordTest\:\:testOverwrittenConfig\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/bundle/DependencyInjection/Configuration/Parser/ChangePasswordTest.php
-
-		-
 			message: '#^Method Ibexa\\Tests\\Bundle\\User\\DependencyInjection\\Configuration\\Parser\\ForgotPasswordTest\:\:getMinimalConfiguration\(\) return type has no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
 			path: tests/bundle/DependencyInjection/Configuration/Parser/ForgotPasswordTest.php
 
 		-
-			message: '#^Method Ibexa\\Tests\\Bundle\\User\\DependencyInjection\\Configuration\\Parser\\ForgotPasswordTest\:\:testOverwrittenConfig\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/bundle/DependencyInjection/Configuration/Parser/ForgotPasswordTest.php
-
-		-
 			message: '#^Method Ibexa\\Tests\\Bundle\\User\\DependencyInjection\\Configuration\\Parser\\ResetPasswordTest\:\:getMinimalConfiguration\(\) return type has no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
-			count: 1
-			path: tests/bundle/DependencyInjection/Configuration/Parser/ResetPasswordTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\Bundle\\User\\DependencyInjection\\Configuration\\Parser\\ResetPasswordTest\:\:testOverwrittenConfig\(\) has no return type specified\.$#'
-			identifier: missingType.return
 			count: 1
 			path: tests/bundle/DependencyInjection/Configuration/Parser/ResetPasswordTest.php
 
@@ -1339,52 +1141,16 @@ parameters:
 			path: tests/lib/Permission/UserPermissionsLimitationTypeTest.php
 
 		-
-			message: '#^Method Ibexa\\Tests\\User\\Permission\\UserPermissionsLimitationTypeTest\:\:providerForTestEvaluate\(\) has no return type specified\.$#'
-			identifier: missingType.return
+			message: '#^Method Ibexa\\Tests\\User\\Permission\\UserPermissionsLimitationTypeTest\:\:providerForTestEvaluate\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: tests/lib/Permission/UserPermissionsLimitationTypeTest.php
 
 		-
-			message: '#^Method Ibexa\\Tests\\User\\Permission\\UserPermissionsLimitationTypeTest\:\:providerForTestValidateError\(\) has no return type specified\.$#'
-			identifier: missingType.return
+			message: '#^Method Ibexa\\Tests\\User\\Permission\\UserPermissionsLimitationTypeTest\:\:providerForTestValidateError\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: tests/lib/Permission/UserPermissionsLimitationTypeTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\User\\UserSetting\\ValueDefinitionRegistryTest\:\:testAddValueDefinition\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/UserSetting/ValueDefinitionRegistryTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\User\\UserSetting\\ValueDefinitionRegistryTest\:\:testCountValueDefinitions\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/UserSetting/ValueDefinitionRegistryTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\User\\UserSetting\\ValueDefinitionRegistryTest\:\:testCountValueDefinitionsWithEmptyRegistry\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/UserSetting/ValueDefinitionRegistryTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\User\\UserSetting\\ValueDefinitionRegistryTest\:\:testGetValueDefinition\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/UserSetting/ValueDefinitionRegistryTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\User\\UserSetting\\ValueDefinitionRegistryTest\:\:testGetValueDefinitions\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/UserSetting/ValueDefinitionRegistryTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\User\\UserSetting\\ValueDefinitionRegistryTest\:\:testHasValueDefinition\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/UserSetting/ValueDefinitionRegistryTest.php
 
 		-
 			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\User\\\\PasswordValidationContext'' and Ibexa\\Contracts\\Core\\Repository\\Values\\User\\PasswordValidationContext will always evaluate to true\.$#'
@@ -1405,38 +1171,8 @@ parameters:
 			path: tests/lib/Validator/Constraint/PasswordValidatorTest.php
 
 		-
-			message: '#^Method Ibexa\\Tests\\User\\Validator\\Constraint\\PasswordValidatorTest\:\:testValidateShouldBeSkipped\(\) has parameter \$value with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/Validator/Constraint/PasswordValidatorTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\User\\Validator\\Constraint\\UserPasswordTest\:\:testConstruct\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/Validator/Constraint/UserPasswordTest.php
-
-		-
 			message: '#^Method Ibexa\\Tests\\User\\Validator\\Constraint\\UserPasswordValidatorTest\:\:emptyDataProvider\(\) return type has no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
-			count: 1
-			path: tests/lib/Validator/Constraint/UserPasswordValidatorTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\User\\Validator\\Constraint\\UserPasswordValidatorTest\:\:testEmptyValueType\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/Validator/Constraint/UserPasswordValidatorTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\User\\Validator\\Constraint\\UserPasswordValidatorTest\:\:testInvalid\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/Validator/Constraint/UserPasswordValidatorTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\User\\Validator\\Constraint\\UserPasswordValidatorTest\:\:testValid\(\) has no return type specified\.$#'
-			identifier: missingType.return
 			count: 1
 			path: tests/lib/Validator/Constraint/UserPasswordValidatorTest.php
 

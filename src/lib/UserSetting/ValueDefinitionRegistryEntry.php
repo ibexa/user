@@ -15,11 +15,9 @@ use Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface;
  */
 final class ValueDefinitionRegistryEntry
 {
-    /** @var \Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface */
-    private $definition;
+    private ValueDefinitionInterface $definition;
 
-    /** @var int */
-    private $priority;
+    private int $priority;
 
     /**
      * @param \Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface $definition

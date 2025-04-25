@@ -26,20 +26,15 @@ use Symfony\Component\HttpFoundation\Response;
 
 class UserSettingsController extends Controller
 {
-    /** @var \Ibexa\User\Form\Factory\FormFactory */
-    private $formFactory;
+    private FormFactory $formFactory;
 
-    /** @var \Ibexa\User\Form\SubmitHandler */
-    private $submitHandler;
+    private SubmitHandler $submitHandler;
 
-    /** @var \Ibexa\User\UserSetting\UserSettingService */
-    private $userSettingService;
+    private UserSettingService $userSettingService;
 
-    /** @var \Ibexa\User\UserSetting\ValueDefinitionRegistry */
-    private $valueDefinitionRegistry;
+    private ValueDefinitionRegistry $valueDefinitionRegistry;
 
-    /** @var \Ibexa\User\ExceptionHandler\ActionResultHandler */
-    private $actionResultHandler;
+    private ActionResultHandler $actionResultHandler;
 
     private PermissionResolver $permissionResolver;
 
@@ -78,7 +73,7 @@ class UserSettingsController extends Controller
         ]);
     }
 
-    public function updateAction(Request $request, UpdateView $view)
+    public function updateAction(Request $request, UpdateView $view): Response|UpdateView
     {
         $userSettingGroup = $view->getUserSettingGroup();
 
@@ -92,7 +87,7 @@ class UserSettingsController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
-            $result = $this->submitHandler->handle($form, function (UserSettingUpdateData $data) use ($form) {
+            $result = $this->submitHandler->handle($form, function (UserSettingUpdateData $data) use ($form): RedirectResponse {
                 foreach ($data->getValues() as $identifier => $value) {
                     $this->userSettingService->setUserSetting($identifier, (string)$value['value']);
                 }

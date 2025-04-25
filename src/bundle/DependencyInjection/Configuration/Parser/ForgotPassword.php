@@ -14,7 +14,7 @@ use Symfony\Component\Config\Definition\Builder\NodeBuilder;
 
 final class ForgotPassword extends AbstractParser
 {
-    public function addSemanticConfig(NodeBuilder $nodeBuilder)
+    public function addSemanticConfig(NodeBuilder $nodeBuilder): void
     {
         $nodeBuilder
             ->arrayNode('user_forgot_password')
@@ -60,7 +60,7 @@ final class ForgotPassword extends AbstractParser
         ;
     }
 
-    public function mapConfig(array &$scopeSettings, $currentScope, ContextualizerInterface $contextualizer)
+    public function mapConfig(array &$scopeSettings, $currentScope, ContextualizerInterface $contextualizer): void
     {
         if (!empty($scopeSettings['user_forgot_password'])) {
             $settings = $scopeSettings['user_forgot_password']['templates'];

@@ -14,7 +14,7 @@ use PHPUnit\Framework\TestCase;
 
 class ValueDefinitionRegistryTest extends TestCase
 {
-    public function testGetValueDefinitions()
+    public function testGetValueDefinitions(): void
     {
         $definitions = [
             'foo' => $this->createMock(ValueDefinitionInterface::class),
@@ -27,7 +27,7 @@ class ValueDefinitionRegistryTest extends TestCase
         self::assertEquals($definitions, $registry->getValueDefinitions());
     }
 
-    public function testAddValueDefinition()
+    public function testAddValueDefinition(): void
     {
         $foo = $this->createMock(ValueDefinitionInterface::class);
 
@@ -37,7 +37,7 @@ class ValueDefinitionRegistryTest extends TestCase
         self::assertEquals(['foo' => $foo], $registry->getValueDefinitions());
     }
 
-    public function testHasValueDefinition()
+    public function testHasValueDefinition(): void
     {
         $registry = new ValueDefinitionRegistry([
             'foo' => $this->createMock(ValueDefinitionInterface::class),
@@ -47,7 +47,7 @@ class ValueDefinitionRegistryTest extends TestCase
         self::assertFalse($registry->hasValueDefinition('bar'));
     }
 
-    public function testGetValueDefinition()
+    public function testGetValueDefinition(): void
     {
         $foo = $this->createMock(ValueDefinitionInterface::class);
 
@@ -58,7 +58,7 @@ class ValueDefinitionRegistryTest extends TestCase
         self::assertEquals($foo, $registry->getValueDefinition('foo'));
     }
 
-    public function testCountValueDefinitions()
+    public function testCountValueDefinitions(): void
     {
         $definitions = [
             'foo' => $this->createMock(ValueDefinitionInterface::class),
@@ -70,7 +70,7 @@ class ValueDefinitionRegistryTest extends TestCase
         self::assertEquals(2, $registry->countValueDefinitions());
     }
 
-    public function testCountValueDefinitionsWithEmptyRegistry()
+    public function testCountValueDefinitionsWithEmptyRegistry(): void
     {
         $registry = new ValueDefinitionRegistry([]);
 

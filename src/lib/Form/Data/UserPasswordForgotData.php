@@ -12,11 +12,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class UserPasswordForgotData
 {
-    /**
-     * @var string
-     */
     #[Assert\NotBlank]
-    private $email;
+    private ?string $email;
 
     /**
      * @param string|null $email

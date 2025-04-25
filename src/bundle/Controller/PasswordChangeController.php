@@ -16,25 +16,21 @@ use Ibexa\User\Form\Factory\FormFactory;
 use Ibexa\User\View\ChangePassword\FormView;
 use Ibexa\User\View\ChangePassword\SuccessView;
 use JMS\TranslationBundle\Annotation\Desc;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class PasswordChangeController extends Controller
 {
-    /** @var \Ibexa\User\ExceptionHandler\ActionResultHandler */
-    private $actionResultHandler;
+    private ActionResultHandler $actionResultHandler;
 
-    /** @var \Ibexa\Contracts\Core\Repository\UserService */
-    private $userService;
+    private UserService $userService;
 
-    /** @var \Ibexa\User\Form\Factory\FormFactory */
-    private $formFactory;
+    private FormFactory $formFactory;
 
-    /** @var \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface */
-    private $tokenStorage;
+    private TokenStorageInterface $tokenStorage;
 
-    /** @var array */
-    private $siteAccessGroups;
+    private array $siteAccessGroups;
 
     public function __construct(
         ActionResultHandler $actionResultHandler,
@@ -57,7 +53,7 @@ class PasswordChangeController extends Controller
      *
      * @throws \Ibexa\Core\Base\Exceptions\InvalidArgumentType
      */
-    public function userPasswordChangeAction(Request $request)
+    public function userPasswordChangeAction(Request $request): RedirectResponse|SuccessView|FormView
     {
         /** @var \Ibexa\Contracts\Core\Repository\Values\User\User $user */
         $user = $this->tokenStorage->getToken()->getUser()->getAPIUser();

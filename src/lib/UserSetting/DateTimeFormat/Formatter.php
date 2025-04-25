@@ -10,6 +10,7 @@ namespace Ibexa\User\UserSetting\DateTimeFormat;
 
 use DateTimeInterface;
 use IntlDateFormatter;
+use LogicException;
 
 class Formatter implements FormatterInterface
 {
@@ -36,7 +37,7 @@ class Formatter implements FormatterInterface
 
         $result = $this->formatter->format($datetime);
         if (false === $result) {
-            throw new \LogicException('Failed to format date time');
+            throw new LogicException('Failed to format date time');
         }
 
         if ($timezone) {

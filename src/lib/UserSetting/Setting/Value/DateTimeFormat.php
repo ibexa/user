@@ -10,11 +10,9 @@ namespace Ibexa\User\UserSetting\Setting\Value;
 
 final class DateTimeFormat
 {
-    /** @var string|null */
-    private $dateFormat;
+    private ?string $dateFormat;
 
-    /** @var string|null */
-    private $timeFormat;
+    private ?string $timeFormat;
 
     /**
      * @param string|null $dateFormat
@@ -34,7 +32,7 @@ final class DateTimeFormat
         return $this->dateFormat;
     }
 
-    public function setDateFormat(?string $dateFormat)
+    public function setDateFormat(?string $dateFormat): void
     {
         $this->dateFormat = $dateFormat;
     }
@@ -47,7 +45,7 @@ final class DateTimeFormat
         return $this->timeFormat;
     }
 
-    public function setTimeFormat(?string $timeFormat)
+    public function setTimeFormat(?string $timeFormat): void
     {
         $this->timeFormat = $timeFormat;
     }

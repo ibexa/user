@@ -13,7 +13,7 @@ use PHPUnit\Framework\TestCase;
 
 class UserPasswordTest extends TestCase
 {
-    public function testConstruct()
+    public function testConstruct(): void
     {
         $constraint = new UserPassword();
         self::assertSame('ezplatform.change_user_password.not_match', $constraint->message);

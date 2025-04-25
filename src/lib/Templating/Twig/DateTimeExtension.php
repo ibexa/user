@@ -9,33 +9,28 @@ declare(strict_types=1);
 namespace Ibexa\User\Templating\Twig;
 
 use DateTimeImmutable;
+use DateTimeInterface;
 use Ibexa\User\UserSetting\DateTimeFormat\FormatterInterface;
 use Ibexa\User\UserSetting\Setting\DateTimeFormatSerializer;
+use RuntimeException;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 
 class DateTimeExtension extends AbstractExtension
 {
-    /** @var \Ibexa\User\UserSetting\Setting\DateTimeFormatSerializer */
-    private $dateTimeFormatSerializer;
+    private DateTimeFormatSerializer $dateTimeFormatSerializer;
 
-    /** @var \Ibexa\User\UserSetting\DateTimeFormat\FormatterInterface */
-    private $shortDateTimeFormatter;
+    private FormatterInterface $shortDateTimeFormatter;
 
-    /** @var \Ibexa\User\UserSetting\DateTimeFormat\FormatterInterface */
-    private $shortDateFormatter;
+    private FormatterInterface $shortDateFormatter;
 
-    /** @var \Ibexa\User\UserSetting\DateTimeFormat\FormatterInterface */
-    private $shortTimeFormatter;
+    private FormatterInterface $shortTimeFormatter;
 
-    /** @var \Ibexa\User\UserSetting\DateTimeFormat\FormatterInterface */
-    private $fullDateTimeFormatter;
+    private FormatterInterface $fullDateTimeFormatter;
 
-    /** @var \Ibexa\User\UserSetting\DateTimeFormat\FormatterInterface */
-    private $fullDateFormatter;
+    private FormatterInterface $fullDateFormatter;
 
-    /** @var \Ibexa\User\UserSetting\DateTimeFormat\FormatterInterface */
-    private $fullTimeFormatter;
+    private FormatterInterface $fullTimeFormatter;
 
     /**
      * @param \Ibexa\User\UserSetting\Setting\DateTimeFormatSerializer $dateTimeFormatSerializer
@@ -72,37 +67,37 @@ class DateTimeExtension extends AbstractExtension
         return [
             new TwigFilter(
                 'ibexa_short_datetime',
-                function ($date, $timezone = null) {
+                function ($date, $timezone = null): string {
                     return $this->format($this->shortDateTimeFormatter, $date, $timezone);
                 }
             ),
             new TwigFilter(
                 'ibexa_short_date',
-                function ($date, $timezone = null) {
+                function ($date, $timezone = null): string {
                     return $this->format($this->shortDateFormatter, $date, $timezone);
                 }
             ),
             new TwigFilter(
                 'ibexa_short_time',
-                function ($date, $timezone = null) {
+                function ($date, $timezone = null): string {
                     return $this->format($this->shortTimeFormatter, $date, $timezone);
                 }
             ),
             new TwigFilter(
                 'ibexa_full_datetime',
-                function ($date, $timezone = null) {
+                function ($date, $timezone = null): string {
                     return $this->format($this->fullDateTimeFormatter, $date, $timezone);
                 }
             ),
             new TwigFilter(
                 'ibexa_full_date',
-                function ($date, $timezone = null) {
+                function ($date, $timezone = null): string {
                     return $this->format($this->fullDateFormatter, $date, $timezone);
                 }
             ),
             new TwigFilter(
                 'ibexa_full_time',
-                function ($date, $timezone = null) {
+                function ($date, $timezone = null): string {
                     return $this->format($this->fullTimeFormatter, $date, $timezone);
                 }
             ),
@@ -124,12 +119,12 @@ class DateTimeExtension extends AbstractExtension
             $date = new DateTimeImmutable();
         }
 
-        if (\is_int($date)) {
+        if (is_int($date)) {
             $date = new DateTimeImmutable('@' . $date);
         }
 
-        if (!$date instanceof \DateTimeInterface) {
-            throw new \RuntimeException('The date argument passed to the format function must be an int or a DateTimeInterface');
+        if (!$date instanceof DateTimeInterface) {
+            throw new RuntimeException('The date argument passed to the format function must be an int or a DateTimeInterface');
         }
 
         return $formatter->format($date, $timezone);

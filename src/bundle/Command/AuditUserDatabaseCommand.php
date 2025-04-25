@@ -20,14 +20,11 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 final class AuditUserDatabaseCommand extends Command
 {
-    /** @var \Ibexa\Contracts\Core\Repository\ContentTypeService */
-    private $contentTypeService;
+    private ContentTypeService $contentTypeService;
 
-    /** @var \Ibexa\Contracts\Core\Repository\UserService */
-    private $userService;
+    private UserService $userService;
 
-    /** @var \Doctrine\DBAL\Connection */
-    private $connection;
+    private Connection $connection;
 
     public function __construct(
         ContentTypeService $contentTypeService,
