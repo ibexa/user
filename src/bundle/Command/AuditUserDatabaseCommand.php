@@ -9,7 +9,6 @@ declare(strict_types=1);
 namespace Ibexa\Bundle\User\Command;
 
 use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\FetchMode;
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
 use Ibexa\Contracts\Core\Repository\UserService;
 use Ibexa\Core\FieldType\User\Type;
