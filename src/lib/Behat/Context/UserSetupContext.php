@@ -35,7 +35,7 @@ class UserSetupContext implements Context
             ->andWhere(
                 $queryBuilder->expr()->eq('u.login', ':login')
             )
-            ->setParameter(':login', $login, ParameterType::STRING);
+            ->setParameter('login', $login, ParameterType::STRING);
 
         $update->execute();
     }
