@@ -54,7 +54,7 @@ final class DoctrineGateway implements Gateway
                 ]
             );
 
-        $query->execute();
+        $query->executeStatement();
         $invitationId = $this->connection->lastInsertId(self::TABLE_USER_INVITATIONS_SEQ);
 
         $assigmentQuery = $this->connection->createQueryBuilder();
@@ -69,7 +69,7 @@ final class DoctrineGateway implements Gateway
                     'limitation_value' => $assigmentQuery->createPositionalParameter($limitationValue),
                 ]
             );
-        $assigmentQuery->execute();
+        $assigmentQuery->executeStatement();
 
         return $this->getInvitationByEmail($email);
     }
@@ -85,7 +85,7 @@ final class DoctrineGateway implements Gateway
             )
         );
 
-        $statement = $query->execute();
+        $statement = $query->executeQuery();
 
         return $statement->fetchAssociative();
     }
@@ -104,7 +104,7 @@ final class DoctrineGateway implements Gateway
                 )
             );
 
-        $statement = $query->execute();
+        $statement = $query->executeQuery();
 
         return (bool) $statement->fetchOne();
     }
@@ -119,7 +119,7 @@ final class DoctrineGateway implements Gateway
             )
         );
 
-        $statement = $query->execute();
+        $statement = $query->executeQuery();
 
         return $statement->fetchAssociative();
     }
@@ -154,7 +154,7 @@ final class DoctrineGateway implements Gateway
         $query = $this->getSelectQuery();
 
         if ($filter === null) {
-            $statement = $query->execute();
+            $statement = $query->executeQuery();
 
             return $statement->fetchAllAssociative();
         }
@@ -189,7 +189,7 @@ final class DoctrineGateway implements Gateway
                 );
         }
 
-        $statement = $query->execute();
+        $statement = $query->executeQuery();
 
         return $statement->fetchAllAssociative();
     }
@@ -231,6 +231,6 @@ final class DoctrineGateway implements Gateway
             )
         );
 
-        $query->execute();
+        $query->executeStatement();
     }
 }

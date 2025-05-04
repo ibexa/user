@@ -57,8 +57,8 @@ final class AuditUserDatabaseCommand extends Command
                 ->groupBy('email')
                 ->having('COUNT(email) > 1');
 
-            $statement = $query->execute();
-            $nonUniqueEmails = $statement->fetchAll(FetchMode::ASSOCIATIVE);
+            $statement = $query->executeQuery();
+            $nonUniqueEmails = $statement->fetchAllAssociative();
 
             if (!empty($nonUniqueEmails)) {
                 $output->writeln('');
@@ -83,8 +83,8 @@ final class AuditUserDatabaseCommand extends Command
             ->select('login')
             ->from(DoctrineStorage::USER_TABLE);
 
-        $statement = $query->execute();
-        $logins = $statement->fetchAll(FetchMode::ASSOCIATIVE);
+        $statement = $query->executeQuery();
+        $logins = $statement->fetchAllAssociative();
 
         $output->writeln('<question>Checking login format...</question>');
 
