@@ -10,20 +10,23 @@ namespace Ibexa\Contracts\User\Invitation\Persistence;
 
 use Ibexa\Contracts\User\Invitation\Query\InvitationFilter;
 
+/**
+ * @phpstan-type TInvitationData array{
+ *     email: string,
+ *     hash: string,
+ *     site_access_name: string,
+ *     creation_date: int,
+ *     used: bool,
+ *     role_id: ?int,
+ *     user_group_id: ?int,
+ *     limitation_type: ?string,
+ *     limitation_value: ?string
+ * }
+ */
 interface Gateway
 {
     /**
-     * @phpstan-return array{
-     *     email: string,
-     *     hash: string,
-     *     site_access_name: string,
-     *     creation_date: int,
-     *     used: bool,
-     *     role_id: ?int,
-     *     user_group_id: ?int,
-     *     limitation_type: ?string,
-     *     limitation_value: ?string
-     *  }
+     * @phpstan-return TInvitationData
      */
     public function addInvitation(
         string $email,
@@ -42,17 +45,7 @@ interface Gateway
     public function getInvitationByEmail(string $email);
 
     /**
-     * @phpstan-return array<array{
-     *     email: string,
-     *     hash: string,
-     *     site_access_name: string,
-     *     creation_date: int,
-     *     used: bool,
-     *     role_id: ?int,
-     *     user_group_id: ?int,
-     *     limitation_type: ?string,
-     *     limitation_value: ?string,
-     * }>
+     * @phpstan-return TInvitationData[]
      */
     public function findInvitations(?InvitationFilter $filter = null): array;
 

@@ -17,6 +17,8 @@ use Ibexa\Contracts\User\Invitation\Query\InvitationFilter;
 
 /**
  * @internal
+ *
+ * @phpstan-import-type TInvitationData from \Ibexa\Contracts\User\Invitation\Persistence\Gateway
  */
 final class DoctrineGateway implements Gateway
 {
@@ -109,6 +111,9 @@ final class DoctrineGateway implements Gateway
         return (bool) $statement->fetchOne();
     }
 
+    /**
+     * @phpstan-return TInvitationData
+     */
     public function getInvitationByEmail(string $email)
     {
         $query = $this->getSelectQuery();
@@ -121,6 +126,7 @@ final class DoctrineGateway implements Gateway
 
         $statement = $query->executeQuery();
 
+        /** @phpstan-var TInvitationData */
         return $statement->fetchAssociative();
     }
 
@@ -156,6 +162,7 @@ final class DoctrineGateway implements Gateway
         if ($filter === null) {
             $statement = $query->executeQuery();
 
+            /** @phpstan-var TInvitationData[] */
             return $statement->fetchAllAssociative();
         }
 
@@ -191,6 +198,7 @@ final class DoctrineGateway implements Gateway
 
         $statement = $query->executeQuery();
 
+        /** @phpstan-var TInvitationData[] */
         return $statement->fetchAllAssociative();
     }
 
