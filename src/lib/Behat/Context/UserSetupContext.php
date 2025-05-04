@@ -37,6 +37,6 @@ class UserSetupContext implements Context
             )
             ->setParameter('login', $login, ParameterType::STRING);
 
-        $update->execute();
+        $update->executeStatement();
     }
 }
