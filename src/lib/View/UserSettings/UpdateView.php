@@ -18,10 +18,13 @@ class UpdateView extends BaseView
 
     private ?UserSettingGroup $userSettingGroup;
 
+    /**
+     * @param array<string, mixed> $parameters
+     */
     public function __construct(
         $templateIdentifier = null,
         array $parameters = [],
-        $viewType = 'full'
+        string $viewType = 'full'
     ) {
         $this->userSetting = null;
         $this->userSettingGroup = null;
