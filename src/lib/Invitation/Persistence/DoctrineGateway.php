@@ -17,6 +17,8 @@ use Ibexa\Contracts\User\Invitation\Query\InvitationFilter;
 
 /**
  * @internal
+ *
+ * @phpstan-import-type TInvitationData from \Ibexa\Contracts\User\Invitation\Persistence\Gateway
  */
 final class DoctrineGateway implements Gateway
 {
@@ -54,7 +56,7 @@ final class DoctrineGateway implements Gateway
                 ]
             );
 
-        $query->execute();
+        $query->executeStatement();
         $invitationId = $this->connection->lastInsertId(self::TABLE_USER_INVITATIONS_SEQ);
 
         $assigmentQuery = $this->connection->createQueryBuilder();
@@ -69,7 +71,7 @@ final class DoctrineGateway implements Gateway
                     'limitation_value' => $assigmentQuery->createPositionalParameter($limitationValue),
                 ]
             );
-        $assigmentQuery->execute();
+        $assigmentQuery->executeStatement();
 
         return $this->getInvitationByEmail($email);
     }
@@ -85,7 +87,7 @@ final class DoctrineGateway implements Gateway
             )
         );
 
-        $statement = $query->execute();
+        $statement = $query->executeQuery();
 
         return $statement->fetchAssociative();
     }
@@ -104,11 +106,14 @@ final class DoctrineGateway implements Gateway
                 )
             );
 
-        $statement = $query->execute();
+        $statement = $query->executeQuery();
 
         return (bool) $statement->fetchOne();
     }
 
+    /**
+     * @phpstan-return TInvitationData
+     */
     public function getInvitationByEmail(string $email)
     {
         $query = $this->getSelectQuery();
@@ -119,8 +124,9 @@ final class DoctrineGateway implements Gateway
             )
         );
 
-        $statement = $query->execute();
+        $statement = $query->executeQuery();
 
+        /** @phpstan-var TInvitationData */
         return $statement->fetchAssociative();
     }
 
@@ -154,8 +160,9 @@ final class DoctrineGateway implements Gateway
         $query = $this->getSelectQuery();
 
         if ($filter === null) {
-            $statement = $query->execute();
+            $statement = $query->executeQuery();
 
+            /** @phpstan-var TInvitationData[] */
             return $statement->fetchAllAssociative();
         }
 
@@ -189,8 +196,9 @@ final class DoctrineGateway implements Gateway
                 );
         }
 
-        $statement = $query->execute();
+        $statement = $query->executeQuery();
 
+        /** @phpstan-var TInvitationData[] */
         return $statement->fetchAllAssociative();
     }
 
@@ -231,6 +239,6 @@ final class DoctrineGateway implements Gateway
             )
         );
 
-        $query->execute();
+        $query->executeStatement();
     }
 }
