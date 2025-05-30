@@ -11,6 +11,7 @@ namespace Ibexa\User\Behat\Context;
 use Behat\Behat\Context\Context;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\ParameterType;
+use Ibexa\Core\Persistence\Legacy\User\Gateway;
 
 class UserSetupContext implements Context
 {
@@ -30,7 +31,7 @@ class UserSetupContext implements Context
     {
         $queryBuilder = $this->connection->createQueryBuilder();
         $update = $queryBuilder
-            ->update('ibexa_user', 'u')
+            ->update(Gateway::USER_TABLE, 'u')
             ->set('password_hash_type', self::UNSUPPORTED_USER_HASH)
             ->andWhere(
                 $queryBuilder->expr()->eq('u.login', ':login')
