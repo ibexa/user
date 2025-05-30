@@ -19,7 +19,7 @@ class EmailInvitation extends Constraint implements TranslationContainerInterfac
 {
     public string $message = 'ibexa.user.invitation.user_with_email_exists';
 
-    public static function getTranslationMessages()
+    public static function getTranslationMessages(): array
     {
         return [
             Message::create('ibexa.user.invitation.user_with_email_exists', 'validators')
