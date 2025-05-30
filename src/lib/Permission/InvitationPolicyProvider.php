@@ -24,7 +24,7 @@ final class InvitationPolicyProvider implements PolicyProviderInterface, Transla
         ]);
     }
 
-    public static function getTranslationMessages()
+    public static function getTranslationMessages(): array
     {
         return [
             (new Message('role.policy.user', 'forms'))->setDesc('User'),
