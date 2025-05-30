@@ -120,7 +120,7 @@ final class AuditUserDatabaseCommand extends Command
             $contentTypes = $this->contentTypeService->loadContentTypes($contentTypeGroup);
 
             foreach ($contentTypes as $contentType) {
-                $fieldDefinitions = $contentType->getFieldDefinitionsOfType('ezuser');
+                $fieldDefinitions = $contentType->getFieldDefinitionsOfType('ibexa_user');
                 if (!$fieldDefinitions->isEmpty()) {
                     $userFieldDefinitions[] = $fieldDefinitions->first();
                 }
