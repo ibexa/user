@@ -87,7 +87,7 @@ class UserRegisterMapper
         /** @var \Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition $fieldDef */
         foreach ($contentType->fieldDefinitions as $fieldDef) {
             $value = $fieldDef->defaultValue;
-            if ($invitation && $fieldDef->fieldTypeIdentifier === 'ezuser') {
+            if ($invitation && $fieldDef->fieldTypeIdentifier === 'ibexa_user') {
                 $value->email = $invitation->getEmail();
             }
             $data->addFieldData(new FieldData([

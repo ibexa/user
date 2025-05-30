@@ -17,7 +17,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 final class DefaultThumbnailStrategy implements ThumbnailStrategy
 {
     private const THUMBNAIL_MIME_TYPE = 'image/svg+xml';
-    private const USER_TYPE_IDENTIFIER = 'ezuser';
+    private const USER_TYPE_IDENTIFIER = 'ibexa_user';
 
     private UrlGeneratorInterface $urlGenerator;
 
