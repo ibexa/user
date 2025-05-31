@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\Bundle\User\Twig;
 
+use Twig\DeprecatedCallableInfo;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
@@ -20,8 +21,7 @@ final class UserExtension extends AbstractExtension
                 'ibexa_user_get_current',
                 [UserRuntime::class, 'getCurrentUser'],
                 [
-                    'deprecated' => '4.6',
-                    'alternative' => 'ibexa_current_user',
+                    'deprecation_info' => new DeprecatedCallableInfo('ibexa/user', '4.6', 'ibexa_current_user'),
                 ]
             ),
         ];
