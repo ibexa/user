@@ -661,12 +661,6 @@ parameters:
 			path: src/lib/Pagination/Pagerfanta/UserSettingsAdapter.php
 
 		-
-			message: '#^Method Ibexa\\User\\Permission\\UserPermissionsLimitationType\:\:evaluate\(\) should return bool but returns null\.$#'
-			identifier: return.type
-			count: 1
-			path: src/lib/Permission/UserPermissionsLimitationType.php
-
-		-
 			message: '#^Method Ibexa\\User\\Strategy\\DefaultThumbnailStrategy\:\:__construct\(\) has parameter \$initialsFieldDefIdentifiers with no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
