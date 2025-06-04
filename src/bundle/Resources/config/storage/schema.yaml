@@ -1,10 +1,10 @@
 tables:
-    ibexa_user_invitations:
+    ibexa_user_invitation:
         indexes:
-            ibexa_user_invitations_email_idx:
+            ibexa_user_invitation_email_idx:
                 fields:
                     - email
-            ibexa_user_invitations_hash_idx:
+            ibexa_user_invitation_hash_idx:
                 fields:
                     - hash
         id:
@@ -34,20 +34,20 @@ tables:
                 options:
                     default: false
         uniqueConstraints:
-            ibexa_user_invitations_email_uindex:
+            ibexa_user_invitation_email_uindex:
                 fields:
                     - email
                 options:
                     lengths:
                         - 191
-            ibexa_user_invitations_hash_uindex:
+            ibexa_user_invitation_hash_uindex:
                 fields:
                     - hash
                 options:
                     lengths:
                         - 191
 
-    ibexa_user_invitations_assignments:
+    ibexa_user_invitation_assignment:
         id:
             id:
                 type: integer
@@ -73,8 +73,8 @@ tables:
                 nullable: true
                 length: 255
         foreignKeys:
-            ibexa_user_invitations_assignments_ibexa_user_invitations_id_fk:
-                foreignTable: ibexa_user_invitations
+            ibexa_user_invitation_assignment_ibexa_user_invitation_id_fk:
+                foreignTable: ibexa_user_invitation
                 fields:
                     - invitation_id
                 foreignFields:
