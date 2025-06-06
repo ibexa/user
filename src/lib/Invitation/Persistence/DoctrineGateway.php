@@ -22,10 +22,10 @@ use Ibexa\Contracts\User\Invitation\Query\InvitationFilter;
  */
 final class DoctrineGateway implements Gateway
 {
-    private const TABLE_USER_INVITATIONS = 'ibexa_user_invitations';
-    private const TABLE_USER_INVITATIONS_ASSIGNMENTS = 'ibexa_user_invitations_assignments';
+    private const string TABLE_USER_INVITATIONS = 'ibexa_user_invitation';
+    private const string TABLE_USER_INVITATIONS_ASSIGNMENTS = 'ibexa_user_invitation_assignment';
 
-    private const TABLE_USER_INVITATIONS_SEQ = 'ibexa_user_invitations_id_seq';
+    private const string TABLE_USER_INVITATIONS_SEQ = 'ibexa_user_invitation_id_seq';
 
     private Connection $connection;
 
