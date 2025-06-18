@@ -8,6 +8,8 @@ declare(strict_types=1);
 
 namespace Ibexa\Bundle\User\Controller;
 
+use Ibexa\Contracts\User\Controller\AccessCheckController;
+use Ibexa\Contracts\User\Controller\AuthenticatedRememberedCheckTrait;
 use Ibexa\Contracts\User\Invitation\Exception\InvitationAlreadyExistsException;
 use Ibexa\Contracts\User\Invitation\Exception\UserAlreadyExistsException;
 use Ibexa\Contracts\User\Invitation\InvitationCreateStruct;
@@ -20,8 +22,10 @@ use JMS\TranslationBundle\Annotation\Desc;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-final class UserInvitationController extends Controller
+final class UserInvitationController extends Controller implements AccessCheckController
 {
+    use AuthenticatedRememberedCheckTrait;
+
     private InvitationService $invitationService;
 
     private InvitationSender $mailSender;

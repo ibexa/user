@@ -17,7 +17,6 @@ services:
     Ibexa\Bundle\User\Controller\Controller:
         calls:
             - [setContainer , ['@Psr\Container\ContainerInterface']]
-            - [performAccessCheck, []]
 
     Ibexa\Bundle\User\Controller\PasswordResetController:
         calls:
