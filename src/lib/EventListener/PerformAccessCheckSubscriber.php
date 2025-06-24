@@ -15,6 +15,9 @@ use Symfony\Component\HttpKernel\Event\ControllerArgumentsEvent;
 
 final class PerformAccessCheckSubscriber implements EventSubscriberInterface
 {
+    /**
+     * @param iterable<object> $controllers
+     */
     public function __construct(
         #[AutowireIterator('controller.service_arguments')]
         private readonly iterable $controllers
