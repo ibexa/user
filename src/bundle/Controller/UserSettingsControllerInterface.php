@@ -9,7 +9,7 @@ declare(strict_types=1);
 namespace Ibexa\Bundle\User\Controller;
 
 use Ibexa\Contracts\Core\Repository\PermissionResolver;
-use Ibexa\Contracts\User\Controller\AccessCheckController;
+use Ibexa\Contracts\User\Controller\RestrictedControllerInterface;
 use Ibexa\Contracts\User\Controller\AuthenticatedRememberedCheckTrait;
 use Ibexa\User\ExceptionHandler\ActionResultHandler;
 use Ibexa\User\Form\Data\UserSettingUpdateData;
@@ -26,7 +26,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class UserSettingsController extends Controller implements AccessCheckController
+class UserSettingsControllerInterface extends Controller implements RestrictedControllerInterface
 {
     use AuthenticatedRememberedCheckTrait;
 

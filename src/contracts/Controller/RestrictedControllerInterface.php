@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\Contracts\User\Controller;
 
-interface AccessCheckController
+interface RestrictedControllerInterface
 {
     public function performAccessCheck(): void;
 }

@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\Bundle\User\Controller;
 
-use Ibexa\Contracts\User\Controller\AccessCheckController;
+use Ibexa\Contracts\User\Controller\RestrictedControllerInterface;
 use Ibexa\Contracts\User\Controller\AuthenticatedRememberedCheckTrait;
 use Ibexa\Contracts\User\Invitation\Exception\InvitationAlreadyExistsException;
 use Ibexa\Contracts\User\Invitation\Exception\UserAlreadyExistsException;
@@ -22,7 +22,7 @@ use JMS\TranslationBundle\Annotation\Desc;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-final class UserInvitationController extends Controller implements AccessCheckController
+final class UserInvitationControllerInterface extends Controller implements RestrictedControllerInterface
 {
     use AuthenticatedRememberedCheckTrait;
 
