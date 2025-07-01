@@ -11,7 +11,7 @@ namespace Ibexa\User\EventListener;
 use Ibexa\Contracts\User\Controller\RestrictedControllerInterface;
 use Symfony\Component\DependencyInjection\Attribute\AutowireIterator;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpKernel\Event\ControllerArgumentsEvent;
+use Symfony\Component\HttpKernel\Event\ControllerEvent;
 
 final class PerformAccessCheckSubscriber implements EventSubscriberInterface
 {
@@ -24,7 +24,7 @@ final class PerformAccessCheckSubscriber implements EventSubscriberInterface
     ) {
     }
 
-    public function onControllerArgumentsEvent(ControllerArgumentsEvent $event): void
+    public function onControllerEvent(ControllerEvent $event): void
     {
         $controller = $event->getController();
         if (is_array($controller) && $controller[0] instanceof RestrictedControllerInterface) {
@@ -54,7 +54,7 @@ final class PerformAccessCheckSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents(): array
     {
         return [
-            ControllerArgumentsEvent::class => 'onControllerArgumentsEvent',
+            ControllerEvent::class => 'onControllerEvent',
         ];
     }
 }

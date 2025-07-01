@@ -12,7 +12,7 @@ use Ibexa\Contracts\User\Controller\RestrictedControllerInterface;
 use Ibexa\User\EventListener\PerformAccessCheckSubscriber;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Event\ControllerArgumentsEvent;
+use Symfony\Component\HttpKernel\Event\ControllerEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 final class PerformAccessCheckSubscriberTest extends TestCase
@@ -33,15 +33,14 @@ final class PerformAccessCheckSubscriberTest extends TestCase
     public function testArrayController(): void
     {
         $controller = new MockControllerInterface();
-        $event = new ControllerArgumentsEvent(
+        $event = new ControllerEvent(
             $this->kernel,
             [$controller, 'action'],
-            [],
             $this->request,
             HttpKernelInterface::MAIN_REQUEST
         );
 
-        $this->subscriber->onControllerArgumentsEvent($event);
+        $this->subscriber->onControllerEvent($event);
 
         self::assertTrue($controller->wasCheckPerformed());
     }
@@ -49,15 +48,14 @@ final class PerformAccessCheckSubscriberTest extends TestCase
     public function testInvokableController(): void
     {
         $controller = new MockControllerInterface();
-        $event = new ControllerArgumentsEvent(
+        $event = new ControllerEvent(
             $this->kernel,
             $controller,
-            [],
             $this->request,
             HttpKernelInterface::MAIN_REQUEST
         );
 
-        $this->subscriber->onControllerArgumentsEvent($event);
+        $this->subscriber->onControllerEvent($event);
 
         self::assertTrue($controller->wasCheckPerformed());
     }
@@ -67,15 +65,14 @@ final class PerformAccessCheckSubscriberTest extends TestCase
         $controller = new MockControllerInterface();
         $this->subscriber = new PerformAccessCheckSubscriber([$controller]);
 
-        $event = new ControllerArgumentsEvent(
+        $event = new ControllerEvent(
             $this->kernel,
             MockControllerInterface::class . '::staticAction',
-            [],
             $this->request,
             HttpKernelInterface::MAIN_REQUEST
         );
 
-        $this->subscriber->onControllerArgumentsEvent($event);
+        $this->subscriber->onControllerEvent($event);
 
         self::assertTrue($controller->wasCheckPerformed());
     }
