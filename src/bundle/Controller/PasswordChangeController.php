@@ -22,7 +22,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
-class PasswordChangeController extends Controller implements RestrictedControllerInterface
+final class PasswordChangeController extends Controller implements RestrictedControllerInterface
 {
     use AuthenticatedRememberedCheckTrait;
 

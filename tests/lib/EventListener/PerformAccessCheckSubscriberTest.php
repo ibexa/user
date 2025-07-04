@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\Tests\User\EventListener;
 
-use Ibexa\Contracts\User\Controller\RestrictedControllerInterface;
+use Ibexa\Tests\User\Stub\RestrictedControllerStub;
 use Ibexa\User\EventListener\PerformAccessCheckSubscriber;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
@@ -32,7 +32,7 @@ final class PerformAccessCheckSubscriberTest extends TestCase
 
     public function testArrayController(): void
     {
-        $controller = new MockControllerInterface();
+        $controller = new RestrictedControllerStub();
         $event = new ControllerEvent(
             $this->kernel,
             [$controller, 'action'],
@@ -47,7 +47,7 @@ final class PerformAccessCheckSubscriberTest extends TestCase
 
     public function testInvokableController(): void
     {
-        $controller = new MockControllerInterface();
+        $controller = new RestrictedControllerStub();
         $event = new ControllerEvent(
             $this->kernel,
             $controller,
@@ -62,12 +62,12 @@ final class PerformAccessCheckSubscriberTest extends TestCase
 
     public function testStringControllerWithServiceLookup(): void
     {
-        $controller = new MockControllerInterface();
+        $controller = new RestrictedControllerStub();
         $this->subscriber = new PerformAccessCheckSubscriber([$controller]);
 
         $event = new ControllerEvent(
             $this->kernel,
-            MockControllerInterface::class . '::staticAction',
+            RestrictedControllerStub::class . '::staticAction',
             $this->request,
             HttpKernelInterface::MAIN_REQUEST
         );
@@ -75,32 +75,5 @@ final class PerformAccessCheckSubscriberTest extends TestCase
         $this->subscriber->onControllerEvent($event);
 
         self::assertTrue($controller->wasCheckPerformed());
-    }
-}
-
-final class MockControllerInterface implements RestrictedControllerInterface
-{
-    private bool $checkPerformed = false;
-
-    public function performAccessCheck(): void
-    {
-        $this->checkPerformed = true;
-    }
-
-    public function wasCheckPerformed(): bool
-    {
-        return $this->checkPerformed;
-    }
-
-    public function __invoke(): void
-    {
-    }
-
-    public function action(): void
-    {
-    }
-
-    public static function staticAction(): void
-    {
     }
 }
