@@ -10,6 +10,8 @@ namespace Ibexa\Bundle\User\Controller;
 
 use Exception;
 use Ibexa\Contracts\Core\Repository\UserService;
+use Ibexa\Contracts\User\Controller\AuthenticatedRememberedCheckTrait;
+use Ibexa\Contracts\User\Controller\RestrictedControllerInterface;
 use Ibexa\Core\MVC\Symfony\SiteAccess;
 use Ibexa\User\ExceptionHandler\ActionResultHandler;
 use Ibexa\User\Form\Factory\FormFactory;
@@ -20,8 +22,10 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
-class PasswordChangeController extends Controller
+final class PasswordChangeController extends Controller implements RestrictedControllerInterface
 {
+    use AuthenticatedRememberedCheckTrait;
+
     private ActionResultHandler $actionResultHandler;
 
     private UserService $userService;
