@@ -36,7 +36,7 @@ final class PerformAccessCheckSubscriberTest extends TestCase
         $controller = new RestrictedControllerStub();
         $event = new ControllerEvent(
             $this->kernel,
-            $controller->action(...),
+            [$controller, 'action'],
             $this->request,
             HttpKernelInterface::MAIN_REQUEST
         );
