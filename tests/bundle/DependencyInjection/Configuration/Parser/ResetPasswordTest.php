@@ -25,6 +25,7 @@ final class ResetPasswordTest extends AbstractParserTestCase
         ];
     }
 
+    #[\Override]
     protected function getMinimalConfiguration(): array
     {
         return [

@@ -14,34 +14,22 @@ use Pagerfanta\Adapter\AdapterInterface;
 /**
  * @phpstan-implements \Pagerfanta\Adapter\AdapterInterface<\Ibexa\User\UserSetting\UserSetting>
  */
-class UserSettingsAdapter implements AdapterInterface
+readonly class UserSettingsAdapter implements AdapterInterface
 {
-    private UserSettingService $userSettingService;
-
-    /**
-     * @param \Ibexa\User\UserSetting\UserSettingService $userSettingService
-     */
-    public function __construct(UserSettingService $userSettingService)
-    {
-        $this->userSettingService = $userSettingService;
+    public function __construct(
+        private UserSettingService $userSettingService
+    ) {
     }
 
-    /**
-     * {@inheritdoc}
-     *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
-     */
     public function getNbResults(): int
     {
         return $this->userSettingService->countUserSettings();
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
      */
-    public function getSlice($offset, $length): array
+    public function getSlice(int $offset, int $length): array
     {
         return $this->userSettingService->loadUserSettings($offset, $length);
     }

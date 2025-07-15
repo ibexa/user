@@ -26,11 +26,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class UserRegisterType extends AbstractType
 {
-    private ConfigResolverInterface $configResolver;
-
-    public function __construct(ConfigResolverInterface $configResolver)
-    {
-        $this->configResolver = $configResolver;
+    public function __construct(
+        private readonly ConfigResolverInterface $configResolver
+    ) {
     }
 
     public function getName(): string
@@ -38,12 +36,14 @@ class UserRegisterType extends AbstractType
         return $this->getBlockPrefix();
     }
 
+    #[\Override]
     public function getBlockPrefix(): string
     {
         return 'ezplatform_content_forms_user_register';
     }
 
-    public function getParent(): ?string
+    #[\Override]
+    public function getParent(): string
     {
         return BaseContentType::class;
     }

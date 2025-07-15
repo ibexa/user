@@ -21,26 +21,14 @@ use Ibexa\Contracts\User\Invitation\Invitation;
 use Ibexa\Contracts\User\Invitation\Persistence\Invitation as PersistenceInvitation;
 use Ibexa\Core\Repository\Permission\LimitationService;
 
-final class DomainMapper implements DomainMapperInterface
+final readonly class DomainMapper implements DomainMapperInterface
 {
-    private UserService $userService;
-
-    private RoleService $roleService;
-
-    private Repository $repository;
-
-    private LimitationService $limitationService;
-
     public function __construct(
-        Repository $repository,
-        UserService $userService,
-        RoleService $roleService,
-        LimitationService $limitationService
+        private Repository $repository,
+        private UserService $userService,
+        private RoleService $roleService,
+        private LimitationService $limitationService
     ) {
-        $this->userService = $userService;
-        $this->roleService = $roleService;
-        $this->repository = $repository;
-        $this->limitationService = $limitationService;
     }
 
     public function buildDomainObject(PersistenceInvitation $invitation): Invitation
@@ -49,7 +37,7 @@ final class DomainMapper implements DomainMapperInterface
         $role = $invitation->getRoleId() !== null ? $this->loadRole($invitation->getRoleId()) : null;
 
         $roleLimitation = null;
-        if ($invitation->getLimitation()) {
+        if ($invitation->getLimitation() !== null && is_array($invitation->getLimitationValue())) {
             $roleLimitation = $this->mapRoleLimitation(
                 $invitation->getLimitation(),
                 $invitation->getLimitationValue()
@@ -88,7 +76,7 @@ final class DomainMapper implements DomainMapperInterface
                 sprintf(
                     'Given limitation must be of: %s class, %s given',
                     RoleLimitation::class,
-                    get_class($limitation)
+                    $limitation::class
                 )
             );
         }

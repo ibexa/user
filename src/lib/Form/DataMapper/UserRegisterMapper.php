@@ -20,38 +20,20 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class UserRegisterMapper
 {
-    private RegistrationContentTypeLoader $contentTypeLoader;
+    /** @var array<string, mixed> */
+    private array $params;
 
-    /** @var \Ibexa\User\ConfigResolver\RegistrationContentTypeLoader */
-    private RegistrationGroupLoader $parentGroupLoader;
-
-    /** @var array */
-    private $params;
-
-    /**
-     * @param \Ibexa\User\ConfigResolver\RegistrationContentTypeLoader $contentTypeLoader
-     * @param \Ibexa\User\ConfigResolver\RegistrationGroupLoader $registrationGroupLoader
-     */
     public function __construct(
-        RegistrationContentTypeLoader $contentTypeLoader,
-        RegistrationGroupLoader $registrationGroupLoader
+        private readonly RegistrationContentTypeLoader $contentTypeLoader,
+        private readonly RegistrationGroupLoader $parentGroupLoader
     ) {
-        $this->contentTypeLoader = $contentTypeLoader;
-        $this->parentGroupLoader = $registrationGroupLoader;
     }
 
-    /**
-     * @param $name
-     * @param $value
-     */
-    public function setParam($name, $value): void
+    public function setParam(string $name, mixed $value): void
     {
         $this->params[$name] = $value;
     }
 
-    /**
-     * @return \Ibexa\User\Form\Data\UserRegisterData
-     */
     public function mapToFormData(): UserRegisterData
     {
         $resolver = new OptionsResolver();

@@ -20,23 +20,17 @@ use Symfony\Component\Form\ChoiceList\Loader\AbstractChoiceLoader;
 
 final class UserGroupsChoiceLoader extends AbstractChoiceLoader
 {
-    private Repository $repository;
-
-    private SearchService $searchService;
-
-    private UserService $userService;
-
     public function __construct(
-        Repository $repository,
-        SearchService $searchService,
-        UserService $userService
+        private readonly Repository $repository,
+        private readonly SearchService $searchService,
+        private readonly UserService $userService
     ) {
-        $this->repository = $repository;
-        $this->searchService = $searchService;
-        $this->userService = $userService;
     }
 
-    protected function loadChoices(): array
+    /**
+     * @return iterable<\Ibexa\Contracts\Core\Repository\Values\User\UserGroup>
+     */
+    protected function loadChoices(): iterable
     {
         return $this->repository->sudo(function () {
             $query = new Query();

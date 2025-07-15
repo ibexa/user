@@ -55,6 +55,10 @@ class UserInvitation extends AbstractParser
             ->end();
     }
 
+    /**
+     * @param array<string, mixed> $scopeSettings
+     * @param string $currentScope
+     */
     public function mapConfig(array &$scopeSettings, $currentScope, ContextualizerInterface $contextualizer): void
     {
         if (empty($scopeSettings['user_invitation'])) {

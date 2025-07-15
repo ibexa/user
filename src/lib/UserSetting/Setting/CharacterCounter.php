@@ -18,64 +18,41 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class CharacterCounter implements ValueDefinitionInterface, FormMapperInterface
 {
-    public const ENABLED_OPTION = 'enabled';
-    public const DISABLED_OPTION = 'disabled';
+    public const string ENABLED_OPTION = 'enabled';
+    public const string DISABLED_OPTION = 'disabled';
 
-    private TranslatorInterface $translator;
-
-    /**
-     * @param \Symfony\Contracts\Translation\TranslatorInterface $translator
-     */
-    public function __construct(TranslatorInterface $translator)
-    {
-        $this->translator = $translator;
+    public function __construct(
+        private readonly TranslatorInterface $translator
+    ) {
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName(): string
     {
         return $this->getTranslatedName();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getDescription(): string
     {
         return $this->getTranslatedDescription();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getDisplayValue(string $storageValue): string
     {
-        switch ($storageValue) {
-            case self::ENABLED_OPTION:
-                return $this->getTranslatedOptionEnabled();
-            case self::DISABLED_OPTION:
-                return $this->getTranslatedOptionDisabled();
-            default:
-                throw new InvalidArgumentException(
-                    '$storageValue',
-                    sprintf('There is no \'%s\' option', $storageValue)
-                );
-        }
+        return match ($storageValue) {
+            self::ENABLED_OPTION => $this->getTranslatedOptionEnabled(),
+            self::DISABLED_OPTION => $this->getTranslatedOptionDisabled(),
+            default => throw new InvalidArgumentException(
+                '$storageValue',
+                sprintf('There is no \'%s\' option', $storageValue)
+            ),
+        };
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getDefaultValue(): string
     {
         return 'enabled';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function mapFieldForm(FormBuilderInterface $formBuilder, ValueDefinitionInterface $value): FormBuilderInterface
     {
         $choices = [
@@ -95,9 +72,6 @@ class CharacterCounter implements ValueDefinitionInterface, FormMapperInterface
         );
     }
 
-    /**
-     * @return string
-     */
     private function getTranslatedName(): string
     {
         return $this->translator->trans(
@@ -108,9 +82,6 @@ class CharacterCounter implements ValueDefinitionInterface, FormMapperInterface
         );
     }
 
-    /**
-     * @return string
-     */
     private function getTranslatedDescription(): string
     {
         return $this->translator->trans(
@@ -121,9 +92,6 @@ class CharacterCounter implements ValueDefinitionInterface, FormMapperInterface
         );
     }
 
-    /**
-     * @return string
-     */
     private function getTranslatedOptionEnabled(): string
     {
         return $this->translator->trans(
@@ -134,9 +102,6 @@ class CharacterCounter implements ValueDefinitionInterface, FormMapperInterface
         );
     }
 
-    /**
-     * @return string
-     */
     private function getTranslatedOptionDisabled(): string
     {
         return $this->translator->trans(

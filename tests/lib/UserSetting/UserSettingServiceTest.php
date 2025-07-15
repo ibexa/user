@@ -68,12 +68,6 @@ class UserSettingServiceTest extends TestCase
         self::assertEquals($expected, $settings);
     }
 
-    /**
-     * @param string $name
-     * @param string $description
-     *
-     * @return \Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface
-     */
     private function getValueDefinition(string $name = 'name', string $description = 'description'): ValueDefinitionInterface
     {
         $valueDefinition = $this->createMock(ValueDefinitionInterface::class);

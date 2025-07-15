@@ -15,25 +15,25 @@ use Symfony\Component\Validator\ConstraintValidator;
 
 class EmailInvitationValidator extends ConstraintValidator
 {
-    private UserService $userService;
-
-    public function __construct(UserService $userService)
-    {
-        $this->userService = $userService;
+    public function __construct(
+        private readonly UserService $userService
+    ) {
     }
 
     /**
      * Checks if the passed value is valid.
      *
-     * @param string $email The value that should be validated
+     * @param mixed $email The value that should be validated
      * @param \Symfony\Component\Validator\Constraint $constraint The constraint for the validation
      */
-    public function validate($email, Constraint $constraint): void
+    public function validate(mixed $email, Constraint $constraint): void
     {
+        assert(is_string($email));
+
         try {
             $this->userService->loadUserByEmail($email);
             $this->context->addViolation($constraint->message, ['%email%' => $email]);
-        } catch (NotFoundException $exception) {
+        } catch (NotFoundException) {
             // Do nothing
         }
     }

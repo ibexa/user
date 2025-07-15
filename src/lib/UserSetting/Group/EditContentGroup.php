@@ -13,13 +13,13 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class EditContentGroup extends AbstractGroup
 {
-    private TranslatorInterface $translator;
-
+    /**
+     * @param array<string, \Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface> $values
+     */
     public function __construct(
-        TranslatorInterface $translator,
+        private readonly TranslatorInterface $translator,
         array $values = []
     ) {
-        $this->translator = $translator;
         parent::__construct($values);
     }
 

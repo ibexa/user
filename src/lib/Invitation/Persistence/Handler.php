@@ -18,16 +18,10 @@ use Ibexa\Core\Base\Exceptions\NotFoundException;
 
 class Handler implements HandlerInterface
 {
-    private Gateway $gateway;
-
-    private Mapper $mapper;
-
     public function __construct(
-        Gateway $gateway,
-        Mapper $mapper
+        private readonly Gateway $gateway,
+        private readonly Mapper $mapper
     ) {
-        $this->gateway = $gateway;
-        $this->mapper = $mapper;
     }
 
     public function createInvitation(

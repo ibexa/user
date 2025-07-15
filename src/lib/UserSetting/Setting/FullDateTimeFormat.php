@@ -20,31 +20,15 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class FullDateTimeFormat extends AbstractDateTimeFormat
 {
-    private TranslatorInterface $translator;
-
-    private ConfigResolverInterface $configResolver;
-
-    /**
-     * @param \Ibexa\User\UserSetting\Setting\DateTimeFormatSerializer $serializer
-     * @param \Symfony\Contracts\Translation\TranslatorInterface $translator
-     * @param \Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface $configResolver
-     * @param \Ibexa\User\UserSetting\DateTimeFormat\FormatterInterface $formatter
-     */
     public function __construct(
         DateTimeFormatSerializer $serializer,
-        TranslatorInterface $translator,
-        ConfigResolverInterface $configResolver,
+        private readonly TranslatorInterface $translator,
+        private readonly ConfigResolverInterface $configResolver,
         FormatterInterface $formatter
     ) {
         parent::__construct($serializer, $formatter);
-
-        $this->translator = $translator;
-        $this->configResolver = $configResolver;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getDefaultValue(): string
     {
         $format = $this->configResolver->getParameter('user_preferences.full_datetime_format');
@@ -54,9 +38,6 @@ class FullDateTimeFormat extends AbstractDateTimeFormat
         );
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function mapFieldForm(
         FormBuilderInterface $formBuilder,
         ValueDefinitionInterface $value
@@ -74,9 +55,6 @@ class FullDateTimeFormat extends AbstractDateTimeFormat
         return $form;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getTranslatedName(): string
     {
         return $this->translator->trans(
@@ -87,9 +65,6 @@ class FullDateTimeFormat extends AbstractDateTimeFormat
         );
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getTranslatedDescription(): string
     {
         return $this->translator->trans(

@@ -11,33 +11,30 @@ namespace Ibexa\User\UserSetting;
 use Ibexa\Contracts\User\UserSetting\ValueDefinitionGroupInterface;
 use Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface;
 use Ibexa\Core\Base\Exceptions\InvalidArgumentException;
-use Ibexa\User\UserSetting\Group\CustomGroup;
 
 /**
  * @internal
  */
 class ValueDefinitionRegistry
 {
-    /** @var \Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface[] */
+    /** @var array<string, \Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface> */
     protected array $valueDefinitions;
 
-    /** @var \Ibexa\Contracts\User\UserSetting\ValueDefinitionGroupInterface[] */
-    protected $groupedDefinitions;
+    /** @var array<string, \Ibexa\Contracts\User\UserSetting\ValueDefinitionGroupInterface> */
+    protected array $groupedDefinitions;
 
-    public function __construct(array $valueDefinitions = [])
-    {
+    /**
+     * @param array<string, \Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface> $valueDefinitions
+     */
+    public function __construct(
+        array $valueDefinitions = []
+    ) {
         $this->valueDefinitions = [];
         foreach ($valueDefinitions as $identifier => $valueDefinition) {
             $this->valueDefinitions[$identifier] = $valueDefinition;
         }
-        $this->groupedDefinitions[CustomGroup::CUSTOM_GROUP_IDENTIFIER] = $valueDefinitions;
     }
 
-    /**
-     * @param string $identifier
-     * @param \Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface $valueDefinition
-     * @param int $priority
-     */
     public function addValueDefinition(
         string $identifier,
         ValueDefinitionInterface $valueDefinition,
@@ -60,16 +57,15 @@ class ValueDefinitionRegistry
         $this->groupedDefinitions[$groupIdentifier] = $valueDefinition;
     }
 
+    /**
+     * @return array<string, \Ibexa\Contracts\User\UserSetting\ValueDefinitionGroupInterface>
+     */
     public function getValueDefinitionGroups(): array
     {
         return $this->groupedDefinitions;
     }
 
     /**
-     * @param string $identifier
-     *
-     * @return \Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface
-     *
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
      */
     public function getValueDefinition(string $identifier): ValueDefinitionInterface
@@ -84,6 +80,9 @@ class ValueDefinitionRegistry
         return $this->valueDefinitions[$identifier];
     }
 
+    /**
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
+     */
     public function getValueDefinitionGroup(string $identifier): ValueDefinitionGroupInterface
     {
         if (!isset($this->groupedDefinitions[$identifier])) {
@@ -96,11 +95,6 @@ class ValueDefinitionRegistry
         return $this->groupedDefinitions[$identifier];
     }
 
-    /**
-     * @param string $identifier
-     *
-     * @return bool
-     */
     public function hasValueDefinition(string $identifier): bool
     {
         return isset($this->valueDefinitions[$identifier]);
@@ -114,9 +108,6 @@ class ValueDefinitionRegistry
         return $this->valueDefinitions;
     }
 
-    /**
-     * @return int
-     */
     public function countValueDefinitions(): int
     {
         return count($this->valueDefinitions);

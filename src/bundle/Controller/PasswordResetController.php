@@ -39,42 +39,20 @@ use Twig\Environment;
 
 class PasswordResetController extends Controller
 {
-    private FormFactory $formFactory;
-
-    private UserService $userService;
-
-    private Environment $twig;
-
-    private ActionResultHandler $actionResultHandler;
-
-    private PermissionResolver $permissionResolver;
-
-    private ConfigResolverInterface $configResolver;
-
-    private NotificationServiceInterface $notificationService;
-
     public function __construct(
-        FormFactory $formFactory,
-        UserService $userService,
-        Environment $twig,
-        ActionResultHandler $actionResultHandler,
-        PermissionResolver $permissionResolver,
-        ConfigResolverInterface $configResolver,
-        NotificationServiceInterface $notificationService
+        private readonly FormFactory $formFactory,
+        private readonly UserService $userService,
+        private readonly Environment $twig,
+        private readonly ActionResultHandler $actionResultHandler,
+        private readonly PermissionResolver $permissionResolver,
+        private readonly ConfigResolverInterface $configResolver,
+        private readonly NotificationServiceInterface $notificationService
     ) {
-        $this->formFactory = $formFactory;
-        $this->userService = $userService;
-        $this->twig = $twig;
-        $this->actionResultHandler = $actionResultHandler;
-        $this->permissionResolver = $permissionResolver;
-        $this->configResolver = $configResolver;
-        $this->notificationService = $notificationService;
     }
 
     /**
-     * @return \Ibexa\User\View\ForgotPassword\FormView|\Ibexa\User\View\ForgotPassword\SuccessView|\Symfony\Component\HttpFoundation\RedirectResponse
-     *
      * @throws \Ibexa\Core\Base\Exceptions\InvalidArgumentType
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
      */
     public function userForgotPasswordAction(Request $request, ?string $reason = null): RedirectResponse|SuccessView|FormView
     {
@@ -108,11 +86,8 @@ class PasswordResetController extends Controller
     }
 
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
-     * @return \Ibexa\User\View\ForgotPassword\LoginView|\Ibexa\User\View\ForgotPassword\SuccessView
-     *
      * @throws \Ibexa\Core\Base\Exceptions\InvalidArgumentType
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
      */
     public function userForgotPasswordLoginAction(Request $request): SuccessView|LoginView
     {
@@ -125,7 +100,7 @@ class PasswordResetController extends Controller
 
             try {
                 $user = $this->userService->loadUserByLogin($data->getLogin());
-            } catch (NotFoundException $e) {
+            } catch (NotFoundException) {
                 $user = null;
             }
 
@@ -145,11 +120,6 @@ class PasswordResetController extends Controller
     }
 
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param string $hashKey
-     *
-     * @return \Ibexa\User\View\ResetPassword\FormView|\Ibexa\User\View\ResetPassword\InvalidLinkView|\Ibexa\User\View\ResetPassword\SuccessView
-     *
      * @throws \Ibexa\Core\Base\Exceptions\InvalidArgumentType
      */
     public function userResetPasswordAction(Request $request, string $hashKey): InvalidLinkView|UserResetPasswordSuccessView|UserResetPasswordFormView
@@ -210,10 +180,6 @@ class PasswordResetController extends Controller
     }
 
     /**
-     * @param \Ibexa\Contracts\Core\Repository\Values\User\User $user
-     *
-     * @return string
-     *
      * @throws \Exception
      */
     private function updateUserToken(User $user): string

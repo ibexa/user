@@ -27,18 +27,10 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class FormFactory
 {
-    protected FormFactoryInterface $formFactory;
-
-    protected UrlGeneratorInterface $urlGenerator;
-
-    /**
-     * @param \Symfony\Component\Form\FormFactoryInterface $formFactory
-     * @param \Symfony\Component\Routing\Generator\UrlGeneratorInterface $urlGenerator
-     */
-    public function __construct(FormFactoryInterface $formFactory, UrlGeneratorInterface $urlGenerator)
-    {
-        $this->formFactory = $formFactory;
-        $this->urlGenerator = $urlGenerator;
+    public function __construct(
+        protected FormFactoryInterface $formFactory,
+        protected UrlGeneratorInterface $urlGenerator
+    ) {
     }
 
     public function changeUserPassword(
@@ -61,11 +53,6 @@ class FormFactory
     }
 
     /**
-     * @param \Ibexa\User\Form\Data\UserPasswordForgotData $data
-     * @param string|null $name
-     *
-     * @return \Symfony\Component\Form\FormInterface
-     *
      * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
      */
     public function forgotUserPassword(
@@ -78,11 +65,6 @@ class FormFactory
     }
 
     /**
-     * @param \Ibexa\User\Form\Data\UserPasswordForgotWithLoginData $data
-     * @param string|null $name
-     *
-     * @return \Symfony\Component\Form\FormInterface
-     *
      * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
      */
     public function forgotUserPasswordWithLogin(
@@ -95,11 +77,6 @@ class FormFactory
     }
 
     /**
-     * @param \Ibexa\User\Form\Data\UserPasswordResetData $data
-     * @param string|null $name
-     *
-     * @return \Symfony\Component\Form\FormInterface
-     *
      * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
      */
     public function resetUserPassword(

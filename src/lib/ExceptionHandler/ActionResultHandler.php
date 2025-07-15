@@ -13,7 +13,13 @@ namespace Ibexa\User\ExceptionHandler;
  */
 interface ActionResultHandler
 {
+    /**
+     * @param array<string, mixed> $parameters
+     */
     public function error(string $message, array $parameters = [], ?string $domain = null, ?string $locale = null): void;
 
+    /**
+     * @param array<string, mixed> $parameters
+     */
     public function success(string $message, array $parameters = [], ?string $domain = null, ?string $locale = null): void;
 }

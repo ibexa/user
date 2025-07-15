@@ -12,8 +12,8 @@ use Ibexa\Core\Persistence\Legacy\User\Role\LimitationHandler;
 
 class UserPermissionsLimitationHandler extends LimitationHandler
 {
-    public const USER_GROUP_PREFIX = 'UserGroup_';
-    public const ROLE_PREFIX = 'Role_';
+    public const string USER_GROUP_PREFIX = 'UserGroup_';
+    public const string ROLE_PREFIX = 'Role_';
 
     public function toLegacy(Policy $policy): void
     {
@@ -42,11 +42,11 @@ class UserPermissionsLimitationHandler extends LimitationHandler
             'user_groups' => [],
         ];
         foreach ($policy->limitations[UserPermissionsLimitation::IDENTIFIER] as $value) {
-            if (strpos($value, self::ROLE_PREFIX) === 0) {
-                $values['roles'][] = (int) substr($value, strlen(self::ROLE_PREFIX));
+            if (str_starts_with((string) $value, self::ROLE_PREFIX)) {
+                $values['roles'][] = (int) substr((string) $value, strlen(self::ROLE_PREFIX));
             }
-            if (strpos($value, self::USER_GROUP_PREFIX) === 0) {
-                $values['user_groups'][] = (int) substr($value, strlen(self::USER_GROUP_PREFIX));
+            if (str_starts_with((string) $value, self::USER_GROUP_PREFIX)) {
+                $values['user_groups'][] = (int) substr((string) $value, strlen(self::USER_GROUP_PREFIX));
             }
         }
         $policy->limitations[UserPermissionsLimitation::IDENTIFIER] = $values;

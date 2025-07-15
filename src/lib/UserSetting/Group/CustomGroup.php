@@ -13,15 +13,15 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class CustomGroup extends AbstractGroup
 {
-    public const CUSTOM_GROUP_IDENTIFIER = 'custom';
+    public const string CUSTOM_GROUP_IDENTIFIER = 'custom';
 
-    private TranslatorInterface $translator;
-
+    /**
+     * @param array<string, \Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface> $values
+     */
     public function __construct(
-        TranslatorInterface $translator,
+        private readonly TranslatorInterface $translator,
         array $values = []
     ) {
-        $this->translator = $translator;
         parent::__construct($values);
     }
 

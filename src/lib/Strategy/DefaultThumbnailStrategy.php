@@ -14,24 +14,23 @@ use Ibexa\Contracts\Core\Repository\Values\Content\VersionInfo;
 use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-final class DefaultThumbnailStrategy implements ThumbnailStrategy
+final readonly class DefaultThumbnailStrategy implements ThumbnailStrategy
 {
-    private const THUMBNAIL_MIME_TYPE = 'image/svg+xml';
-    private const USER_TYPE_IDENTIFIER = 'ibexa_user';
+    private const string THUMBNAIL_MIME_TYPE = 'image/svg+xml';
+    private const string USER_TYPE_IDENTIFIER = 'ibexa_user';
 
-    private UrlGeneratorInterface $urlGenerator;
-
-    /** @var string[] */
-    private array $initialsFieldDefIdentifiers;
-
+    /**
+     * @param list<string> $initialsFieldDefIdentifiers
+     */
     public function __construct(
-        UrlGeneratorInterface $urlGenerator,
-        array $initialsFieldDefIdentifiers
+        private UrlGeneratorInterface $urlGenerator,
+        private array $initialsFieldDefIdentifiers
     ) {
-        $this->urlGenerator = $urlGenerator;
-        $this->initialsFieldDefIdentifiers = $initialsFieldDefIdentifiers;
     }
 
+    /**
+     * @param list<\Ibexa\Contracts\Core\Repository\Values\Content\Field> $fields
+     */
     public function getThumbnail(
         ContentType $contentType,
         array $fields,
@@ -51,6 +50,9 @@ final class DefaultThumbnailStrategy implements ThumbnailStrategy
         ]);
     }
 
+    /**
+     * @param list<\Ibexa\Contracts\Core\Repository\Values\Content\Field> $fields
+     */
     private function getInitials(array $fields): string
     {
         $initials = '';

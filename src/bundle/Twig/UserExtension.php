@@ -14,6 +14,7 @@ use Twig\TwigFunction;
 
 final class UserExtension extends AbstractExtension
 {
+    #[\Override]
     public function getFunctions(): array
     {
         return [

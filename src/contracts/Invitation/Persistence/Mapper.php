@@ -10,5 +10,8 @@ namespace Ibexa\Contracts\User\Invitation\Persistence;
 
 interface Mapper
 {
+    /**
+     * @param array<string, mixed> $row
+     */
     public function extractInvitationFromRow(array $row): Invitation;
 }

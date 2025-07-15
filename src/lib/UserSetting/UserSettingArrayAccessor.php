@@ -16,46 +16,29 @@ use Ibexa\Contracts\Core\Repository\Exceptions\NotImplementedException;
  */
 class UserSettingArrayAccessor implements ArrayAccess
 {
-    protected UserSettingService $userSettingService;
-
-    /**
-     * @param \Ibexa\User\UserSetting\UserSettingService $userSettingService
-     */
-    public function __construct(UserSettingService $userSettingService)
-    {
-        $this->userSettingService = $userSettingService;
+    public function __construct(
+        protected UserSettingService $userSettingService
+    ) {
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function offsetExists($offset): bool
+    public function offsetExists(mixed $offset): bool
     {
         // @todo refactor once UserSettingService supports this natively
 
         return null !== $this->userSettingService->getUserSetting($offset);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function offsetGet($offset): string
+    public function offsetGet(mixed $offset): string
     {
         return $this->userSettingService->getUserSetting($offset)->value;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function offsetSet($offset, $value): void
+    public function offsetSet(mixed $offset, mixed $value): void
     {
         $this->userSettingService->setUserSetting($offset, $value);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function offsetUnset($offset): void
+    public function offsetUnset(mixed $offset): void
     {
         // UserSettingService doesn't provide this feature
 

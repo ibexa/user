@@ -19,12 +19,10 @@ class ValueDefinitionPass implements CompilerPassInterface
 {
     use PriorityTaggedServiceTrait;
 
-    public const TAG_NAME = 'ibexa.user.setting.value';
-    public const GROUP_TAG_NAME = 'ibexa.user.setting.group';
+    public const string TAG_NAME = 'ibexa.user.setting.value';
+    public const string GROUP_TAG_NAME = 'ibexa.user.setting.group';
 
     /**
-     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
-     *
      * @throws \Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
      * @throws \Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException
      * @throws \Ibexa\Core\Base\Exceptions\InvalidArgumentException

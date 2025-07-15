@@ -13,33 +13,19 @@ use Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface;
 /**
  * @internal
  */
-final class ValueDefinitionRegistryEntry
+final readonly class ValueDefinitionRegistryEntry
 {
-    private ValueDefinitionInterface $definition;
-
-    private int $priority;
-
-    /**
-     * @param \Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface $definition
-     * @param int $priority
-     */
-    public function __construct(ValueDefinitionInterface $definition, int $priority = 0)
-    {
-        $this->definition = $definition;
-        $this->priority = $priority;
+    public function __construct(
+        private ValueDefinitionInterface $definition,
+        private int $priority = 0
+    ) {
     }
 
-    /**
-     * @return \Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface
-     */
     public function getDefinition(): ValueDefinitionInterface
     {
         return $this->definition;
     }
 
-    /**
-     * @return int
-     */
     public function getPriority(): int
     {
         return $this->priority;

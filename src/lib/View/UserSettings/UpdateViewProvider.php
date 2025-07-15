@@ -15,20 +15,12 @@ use Symfony\Component\HttpKernel\Controller\ControllerReference;
 
 class UpdateViewProvider implements ViewProvider
 {
-    protected MatcherFactoryInterface $matcherFactory;
-
-    /**
-     * @param \Ibexa\Core\MVC\Symfony\Matcher\MatcherFactoryInterface $matcherFactory
-     */
-    public function __construct(MatcherFactoryInterface $matcherFactory)
-    {
-        $this->matcherFactory = $matcherFactory;
+    public function __construct(
+        protected MatcherFactoryInterface $matcherFactory
+    ) {
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getView(View $view)
+    public function getView(View $view): ?UpdateView
     {
         if (($configHash = $this->matcherFactory->match($view)) === null) {
             return null;
@@ -38,9 +30,7 @@ class UpdateViewProvider implements ViewProvider
     }
 
     /**
-     * @param array $viewConfig
-     *
-     * @return \Ibexa\User\View\UserSettings\UpdateView
+     * @param array<string, mixed> $viewConfig
      *
      * @throws \Ibexa\Core\Base\Exceptions\InvalidArgumentType
      */

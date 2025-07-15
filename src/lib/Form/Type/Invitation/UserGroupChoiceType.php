@@ -12,6 +12,7 @@ use Ibexa\Contracts\Core\Repository\PermissionResolver;
 use Ibexa\Contracts\Core\Repository\Repository;
 use Ibexa\Contracts\Core\Repository\SearchService;
 use Ibexa\Contracts\Core\Repository\UserService;
+use Ibexa\Contracts\Core\Repository\Values\User\UserGroup;
 use Ibexa\User\Form\ChoiceList\Loader\UserGroupsChoiceLoader;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\ChoiceList\Loader\CallbackChoiceLoader;
@@ -20,45 +21,37 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class UserGroupChoiceType extends AbstractType
 {
-    private UserService $userService;
-
-    private SearchService $searchService;
-
-    private Repository $repository;
-
-    private PermissionResolver $permissionResolver;
-
     public function __construct(
-        Repository $repository,
-        UserService $userService,
-        SearchService $searchService,
-        PermissionResolver $permissionResolver
+        private readonly Repository $repository,
+        private readonly UserService $userService,
+        private readonly SearchService $searchService,
+        private readonly PermissionResolver $permissionResolver
     ) {
-        $this->userService = $userService;
-        $this->searchService = $searchService;
-        $this->repository = $repository;
-        $this->permissionResolver = $permissionResolver;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
             ->setDefaults([
-                'choice_loader' => new CallbackChoiceLoader([$this, 'loadFilteredGroups']),
+                'choice_loader' => new CallbackChoiceLoader($this->loadFilteredGroups(...)),
                 'choice_label' => 'name',
                 'choice_name' => 'id',
                 'choice_value' => 'id',
             ]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getParent(): ?string
+    #[\Override]
+    public function getParent(): string
     {
         return ChoiceType::class;
     }
 
+    /**
+     * @return array<int, \Ibexa\Contracts\Core\Repository\Values\User\UserGroup>
+     *
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\BadStateException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
+     */
     public function loadFilteredGroups(): array
     {
         return array_filter(
@@ -67,7 +60,7 @@ final class UserGroupChoiceType extends AbstractType
                 $this->searchService,
                 $this->userService
             ))->loadChoiceList()->getChoices(),
-            fn ($group): bool => $this->permissionResolver->canUser('user', 'invite', $group)
+            fn (UserGroup $group): bool => $this->permissionResolver->canUser('user', 'invite', $group)
         );
     }
 }

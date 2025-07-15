@@ -20,17 +20,11 @@ class Identifier implements ViewMatcherInterface
     /** @var string[] */
     private array $identifiers = [];
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setMatchingConfig($matchingConfig): void
+    public function setMatchingConfig(mixed $matchingConfig): void
     {
         $this->identifiers = (array)$matchingConfig;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function match(View $view): bool
     {
         if (!$view instanceof UpdateView || $view->getUserSettingGroup() === null) {

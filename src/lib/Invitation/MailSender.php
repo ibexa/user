@@ -18,22 +18,13 @@ use Ibexa\Contracts\User\Notification\UserInvitation;
 use Symfony\Component\Notifier\Recipient\Recipient;
 use Twig\Environment;
 
-final class MailSender implements InvitationSender
+final readonly class MailSender implements InvitationSender
 {
-    private Environment $twig;
-
-    private ConfigResolverInterface $configResolver;
-
-    private NotificationServiceInterface $notificationService;
-
     public function __construct(
-        Environment $twig,
-        ConfigResolverInterface $configResolver,
-        NotificationServiceInterface $notificationService
+        private Environment $twig,
+        private ConfigResolverInterface $configResolver,
+        private NotificationServiceInterface $notificationService
     ) {
-        $this->twig = $twig;
-        $this->configResolver = $configResolver;
-        $this->notificationService = $notificationService;
     }
 
     public function sendInvitation(Invitation $invitation): void

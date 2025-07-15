@@ -28,42 +28,18 @@ use Ibexa\Core\Base\Exceptions\UnauthorizedException;
 use Ibexa\Core\MVC\Symfony\SiteAccess\SiteAccessServiceInterface;
 use Ibexa\User\Invitation\Persistence\Handler;
 
-final class InvitationService implements InvitationServiceInterface
+final readonly class InvitationService implements InvitationServiceInterface
 {
-    private Handler $handler;
-
-    private HashGenerator $hashGenerator;
-
-    private SiteaccessServiceInterface $siteAccessService;
-
-    private PermissionResolver $permissionResolver;
-
-    private UserService $userService;
-
-    private TransactionHandler $transactionHandler;
-
-    private ConfigResolverInterface $configResolver;
-
-    private DomainMapper $domainMapper;
-
     public function __construct(
-        PermissionResolver $permissionResolver,
-        Handler $handler,
-        HashGenerator $hashGenerator,
-        UserService $userService,
-        SiteAccessServiceInterface $siteAccessService,
-        TransactionHandler $transactionHandler,
-        ConfigResolverInterface $configResolver,
-        DomainMapper $domainMapper
+        private PermissionResolver $permissionResolver,
+        private Handler $handler,
+        private HashGenerator $hashGenerator,
+        private UserService $userService,
+        private SiteaccessServiceInterface $siteAccessService,
+        private TransactionHandler $transactionHandler,
+        private ConfigResolverInterface $configResolver,
+        private DomainMapper $domainMapper
     ) {
-        $this->handler = $handler;
-        $this->hashGenerator = $hashGenerator;
-        $this->siteAccessService = $siteAccessService;
-        $this->permissionResolver = $permissionResolver;
-        $this->userService = $userService;
-        $this->transactionHandler = $transactionHandler;
-        $this->configResolver = $configResolver;
-        $this->domainMapper = $domainMapper;
     }
 
     /**
@@ -102,7 +78,7 @@ final class InvitationService implements InvitationServiceInterface
             if ($this->userService->loadUserByEmail($createStruct->getEmail())) {
                 throw new UserAlreadyExistsException();
             }
-        } catch (NotFoundException $exception) {
+        } catch (NotFoundException) {
         }
 
         $roleLimitation = $createStruct->getRoleLimitation();

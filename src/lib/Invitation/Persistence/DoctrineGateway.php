@@ -20,18 +20,16 @@ use Ibexa\Contracts\User\Invitation\Query\InvitationFilter;
  *
  * @phpstan-import-type TInvitationData from \Ibexa\Contracts\User\Invitation\Persistence\Gateway
  */
-final class DoctrineGateway implements Gateway
+final readonly class DoctrineGateway implements Gateway
 {
     private const string TABLE_USER_INVITATIONS = 'ibexa_user_invitation';
     private const string TABLE_USER_INVITATIONS_ASSIGNMENTS = 'ibexa_user_invitation_assignment';
 
     private const string TABLE_USER_INVITATIONS_SEQ = 'ibexa_user_invitation_id_seq';
 
-    private Connection $connection;
-
-    public function __construct(Connection $connection)
-    {
-        $this->connection = $connection;
+    public function __construct(
+        private Connection $connection
+    ) {
     }
 
     public function addInvitation(
@@ -78,7 +76,7 @@ final class DoctrineGateway implements Gateway
 
     public function getInvitation(
         string $hash
-    ) {
+    ): array {
         $query = $this->getSelectQuery();
         $query->where(
             $query->expr()->eq(
@@ -89,6 +87,7 @@ final class DoctrineGateway implements Gateway
 
         $statement = $query->executeQuery();
 
+        /** @var array<string, mixed> */
         return $statement->fetchAssociative();
     }
 
@@ -114,7 +113,7 @@ final class DoctrineGateway implements Gateway
     /**
      * @phpstan-return TInvitationData
      */
-    public function getInvitationByEmail(string $email)
+    public function getInvitationByEmail(string $email): array
     {
         $query = $this->getSelectQuery();
         $query->where(

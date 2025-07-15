@@ -12,24 +12,13 @@ use Ibexa\User\UserSetting\UserSettingService;
 
 abstract class AbstractDateTimeFormatterFactory implements DateTimeFormatterFactoryInterface
 {
-    protected UserSettingService $userSettingService;
-
-    /**
-     * @param \Ibexa\User\UserSetting\UserSettingService $userSettingService
-     */
-    public function __construct(UserSettingService $userSettingService)
-    {
-        $this->userSettingService = $userSettingService;
+    public function __construct(
+        protected UserSettingService $userSettingService
+    ) {
     }
 
-    /**
-     * @return string
-     */
     abstract protected function getFormat(): string;
 
-    /**
-     * {@inheritdoc}
-     */
     public function getFormatter(): FormatterInterface
     {
         $language = $this->userSettingService->getUserSetting('language')->value;

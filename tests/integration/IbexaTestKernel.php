@@ -20,6 +20,7 @@ use Symfony\Component\DependencyInjection\Definition;
 
 final class IbexaTestKernel extends BaseIbexaTestKernel
 {
+    #[\Override]
     public function getSchemaFiles(): iterable
     {
         yield from parent::getSchemaFiles();
@@ -29,6 +30,7 @@ final class IbexaTestKernel extends BaseIbexaTestKernel
         ];
     }
 
+    #[\Override]
     public function registerBundles(): iterable
     {
         yield from parent::registerBundles();
@@ -39,6 +41,7 @@ final class IbexaTestKernel extends BaseIbexaTestKernel
         ];
     }
 
+    #[\Override]
     protected static function getExposedServicesByClass(): iterable
     {
         yield from parent::getExposedServicesByClass();
@@ -46,6 +49,7 @@ final class IbexaTestKernel extends BaseIbexaTestKernel
         yield InvitationService::class;
     }
 
+    #[\Override]
     public function registerContainerConfiguration(LoaderInterface $loader): void
     {
         parent::registerContainerConfiguration($loader);
@@ -53,7 +57,7 @@ final class IbexaTestKernel extends BaseIbexaTestKernel
         $loader->load(static function (ContainerBuilder $container): void {
             $container->setParameter('locale_fallback', 'en');
 
-            self::createSyntheticService($container, UserDispatcher::class);
+            self::createSyntheticService($container);
 
             $container->loadFromExtension('framework', [
                 'router' => [
@@ -68,12 +72,10 @@ final class IbexaTestKernel extends BaseIbexaTestKernel
      * Additionally, those services can be replaced with mock implementations at runtime, allowing integration testing.
      *
      * You can set them up in KernelTestCase by calling `self::getContainer()->set($id, $this->createMock($class));`
-     *
-     * @phpstan-param class-string $class
      */
-    private static function createSyntheticService(ContainerBuilder $container, string $class, ?string $id = null): void
+    private static function createSyntheticService(ContainerBuilder $container): void
     {
-        $id = $id ?? $class;
+        $id = UserDispatcher::class;
         if ($container->has($id)) {
             throw new LogicException(sprintf(
                 'Expected test kernel to not contain "%s" service. A real service should not be overwritten by a mock',
@@ -81,7 +83,7 @@ final class IbexaTestKernel extends BaseIbexaTestKernel
             ));
         }
 
-        $definition = new Definition($class);
+        $definition = new Definition(UserDispatcher::class);
         $definition->setSynthetic(true);
         $container->setDefinition($id, $definition);
     }

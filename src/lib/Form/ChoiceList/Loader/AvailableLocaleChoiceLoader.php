@@ -25,24 +25,14 @@ class AvailableLocaleChoiceLoader implements ChoiceLoaderInterface
      */
     private const array EXCLUDED_TRANSLATIONS = ['ach-UG'];
 
-    private ValidatorInterface $validator;
-
-    private ConfigResolverInterface $configResolver;
-
-    /** @var string[] */
-    private array $availableTranslations;
-
     /**
      * @param string[] $availableTranslations
      */
     public function __construct(
-        ValidatorInterface $validator,
-        ConfigResolverInterface $configResolver,
-        array $availableTranslations
+        private readonly ValidatorInterface $validator,
+        private readonly ConfigResolverInterface $configResolver,
+        private readonly array $availableTranslations
     ) {
-        $this->validator = $validator;
-        $this->availableTranslations = $availableTranslations;
-        $this->configResolver = $configResolver;
     }
 
     /**

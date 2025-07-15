@@ -16,13 +16,10 @@ use Symfony\Component\Notifier\Recipient\EmailRecipientInterface;
 
 final class UserRegister extends Notification implements EmailNotificationInterface, UserAwareNotificationInterface
 {
-    private User $user;
-
-    public function __construct(User $user)
-    {
+    public function __construct(
+        private readonly User $user
+    ) {
         parent::__construct();
-
-        $this->user = $user;
     }
 
     public function asEmailMessage(EmailRecipientInterface $recipient, string $transport = null): ?EmailMessage

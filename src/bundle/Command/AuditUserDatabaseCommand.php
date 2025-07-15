@@ -19,26 +19,17 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 final class AuditUserDatabaseCommand extends Command
 {
-    private ContentTypeService $contentTypeService;
-
-    private UserService $userService;
-
-    private Connection $connection;
-
     public function __construct(
-        ContentTypeService $contentTypeService,
-        UserService $userService,
-        Connection $connection
+        private readonly ContentTypeService $contentTypeService,
+        private readonly UserService $userService,
+        private readonly Connection $connection
     ) {
         parent::__construct('ibexa:user:audit-database');
-
-        $this->contentTypeService = $contentTypeService;
-        $this->userService = $userService;
-        $this->connection = $connection;
     }
 
     /**
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
+     * @throws \Doctrine\DBAL\Exception
      */
     public function execute(
         InputInterface $input,
@@ -96,7 +87,7 @@ final class AuditUserDatabaseCommand extends Command
             foreach ($logins as $record) {
                 $login = $record['login'];
 
-                if (!preg_match(sprintf('/%s/', $pattern), $login)) {
+                if (!preg_match(sprintf('/%s/', $pattern), (string) $login)) {
                     $output->writeln(sprintf(' - Login %s does not match', $login));
                 }
             }
@@ -109,7 +100,7 @@ final class AuditUserDatabaseCommand extends Command
     }
 
     /**
-     * @return \Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition[]
+     * @return list<\Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition>
      */
     private function getUserFieldDefinitions(): array
     {
@@ -130,6 +121,9 @@ final class AuditUserDatabaseCommand extends Command
         return $userFieldDefinitions;
     }
 
+    /**
+     * @param list<\Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition> $userFieldDefinitions
+     */
     private function isUniqueEmailRequired(array $userFieldDefinitions): bool
     {
         foreach ($userFieldDefinitions as $userFieldDefinition) {

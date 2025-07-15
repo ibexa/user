@@ -16,25 +16,16 @@ use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 /**
  * Loads the registration content type from a configured, injected content type identifier.
  */
-class ConfigurableRegistrationContentTypeLoader implements RegistrationContentTypeLoader
+readonly class ConfigurableRegistrationContentTypeLoader implements RegistrationContentTypeLoader
 {
-    private ConfigResolverInterface $configResolver;
-
-    private Repository $repository;
-
-    private ContentTypeService $contentTypeService;
-
     public function __construct(
-        ConfigResolverInterface $configResolver,
-        Repository $repository,
-        ContentTypeService $contentTypeService
+        private ConfigResolverInterface $configResolver,
+        private Repository $repository,
+        private ContentTypeService $contentTypeService
     ) {
-        $this->configResolver = $configResolver;
-        $this->repository = $repository;
-        $this->contentTypeService = $contentTypeService;
     }
 
-    public function loadContentType(?string $siteAccessIdentifier = null)
+    public function loadContentType(?string $siteAccessIdentifier = null): ContentType
     {
         return $this->repository->sudo(
             fn (): ContentType => $this->contentTypeService->loadContentTypeByIdentifier(

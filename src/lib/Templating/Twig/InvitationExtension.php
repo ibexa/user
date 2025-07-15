@@ -15,17 +15,12 @@ use Twig\TwigFunction;
 
 class InvitationExtension extends AbstractExtension
 {
-    private InvitationService $invitationService;
-
     public function __construct(
-        InvitationService $invitationService
+        private readonly InvitationService $invitationService
     ) {
-        $this->invitationService = $invitationService;
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    #[\Override]
     public function getFunctions(): array
     {
         return [

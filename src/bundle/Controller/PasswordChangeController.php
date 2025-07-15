@@ -26,35 +26,19 @@ final class PasswordChangeController extends Controller implements RestrictedCon
 {
     use AuthenticatedRememberedCheckTrait;
 
-    private ActionResultHandler $actionResultHandler;
-
-    private UserService $userService;
-
-    private FormFactory $formFactory;
-
-    private TokenStorageInterface $tokenStorage;
-
-    private array $siteAccessGroups;
-
+    /**
+     * @param array<string, list<string>> $siteAccessGroups
+     */
     public function __construct(
-        ActionResultHandler $actionResultHandler,
-        UserService $userService,
-        FormFactory $formFactory,
-        TokenStorageInterface $tokenStorage,
-        array $siteAccessGroups
+        private ActionResultHandler $actionResultHandler,
+        private UserService $userService,
+        private FormFactory $formFactory,
+        private TokenStorageInterface $tokenStorage,
+        private array $siteAccessGroups
     ) {
-        $this->actionResultHandler = $actionResultHandler;
-        $this->userService = $userService;
-        $this->formFactory = $formFactory;
-        $this->tokenStorage = $tokenStorage;
-        $this->siteAccessGroups = $siteAccessGroups;
     }
 
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
-     * @return \Ibexa\User\View\ChangePassword\FormView|\Ibexa\User\View\ChangePassword\SuccessView|\Symfony\Component\HttpFoundation\RedirectResponse
-     *
      * @throws \Ibexa\Core\Base\Exceptions\InvalidArgumentType
      */
     public function userPasswordChangeAction(Request $request): RedirectResponse|SuccessView|FormView

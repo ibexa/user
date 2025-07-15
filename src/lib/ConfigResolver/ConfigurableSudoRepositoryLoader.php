@@ -26,40 +26,23 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 abstract class ConfigurableSudoRepositoryLoader
 {
-    private Repository $repository;
-
-    /** @var array */
-    private $params;
-
     /**
-     * @param \Ibexa\Contracts\Core\Repository\Repository $repository
-     * @param array $params
+     * @param array<string, mixed> $params
      */
-    public function __construct(Repository $repository, $params = [])
-    {
-        $this->repository = $repository;
-        $this->params = $params;
+    public function __construct(
+        private readonly Repository $repository,
+        private array $params = []
+    ) {
     }
 
-    /**
-     * @param $name
-     * @param $value
-     *
-     * @return $this
-     */
-    public function setParam($name, $value)
+    public function setParam(string $name, mixed $value): self
     {
         $this->params[$name] = $value;
 
         return $this;
     }
 
-    /**
-     * @param $name
-     *
-     * @return mixed
-     */
-    protected function getParam($name)
+    protected function getParam(string $name): mixed
     {
         if (!isset($this->params[$name])) {
             throw new OutOfBoundsException("There is no param '$name'");
@@ -68,22 +51,12 @@ abstract class ConfigurableSudoRepositoryLoader
         return $this->params[$name];
     }
 
-    /**
-     * @return \Ibexa\Contracts\Core\Repository\Repository
-     */
-    protected function getRepository()
+    protected function getRepository(): Repository
     {
         return $this->repository;
     }
 
-    /**
-     * @param \Closure $callback
-     *
-     * @return mixed
-     *
-     * @throws \Exception
-     */
-    protected function sudo(Closure $callback)
+    protected function sudo(Closure $callback): mixed
     {
         $resolver = new OptionsResolver();
         $this->configureOptions($resolver);
@@ -92,8 +65,5 @@ abstract class ConfigurableSudoRepositoryLoader
         return $this->repository->sudo($callback);
     }
 
-    /**
-     * @param \Symfony\Component\OptionsResolver\OptionsResolver $optionsResolver
-     */
-    abstract protected function configureOptions(OptionsResolver $optionsResolver);
+    abstract protected function configureOptions(OptionsResolver $optionsResolver): void;
 }

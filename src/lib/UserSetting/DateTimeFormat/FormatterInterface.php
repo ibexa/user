@@ -12,11 +12,5 @@ use DateTimeInterface;
 
 interface FormatterInterface
 {
-    /**
-     * @param \DateTimeInterface $datetime
-     * @param string|null $timezone
-     *
-     * @return string
-     */
-    public function format(DateTimeInterface $datetime, string $timezone = null): string;
+    public function format(DateTimeInterface $datetime, ?string $timezone = null): string;
 }

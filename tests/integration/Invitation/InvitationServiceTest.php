@@ -149,7 +149,7 @@ final class InvitationServiceTest extends IbexaKernelTestCase
     public function testRefreshInvitation(): void
     {
         ClockMock::register(Handler::class);
-        ClockMock::register(__CLASS__);
+        ClockMock::register(self::class);
 
         ClockMock::withClockMock(true);
 

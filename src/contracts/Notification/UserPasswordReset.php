@@ -19,29 +19,16 @@ use Twig\Environment;
 
 final class UserPasswordReset extends Notification implements EmailNotificationInterface, UserAwareNotificationInterface
 {
-    private User $user;
-
-    private string $token;
-
-    private ConfigResolverInterface $configResolver;
-
-    private Environment $twig;
-
     public function __construct(
-        User $user,
-        string $token,
-        ConfigResolverInterface $configResolver,
-        Environment $twig
+        private readonly User $user,
+        private readonly string $token,
+        private readonly ConfigResolverInterface $configResolver,
+        private readonly Environment $twig
     ) {
         parent::__construct();
-
-        $this->user = $user;
-        $this->token = $token;
-        $this->configResolver = $configResolver;
-        $this->twig = $twig;
     }
 
-    public function asEmailMessage(EmailRecipientInterface $recipient, string $transport = null): ?EmailMessage
+    public function asEmailMessage(EmailRecipientInterface $recipient, ?string $transport = null): ?EmailMessage
     {
         $templatePath = $this->configResolver->getParameter('user_forgot_password.templates.mail');
         $template = $this->twig->load($templatePath);

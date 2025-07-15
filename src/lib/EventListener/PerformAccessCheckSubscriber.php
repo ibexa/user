@@ -13,14 +13,14 @@ use Symfony\Component\DependencyInjection\Attribute\AutowireIterator;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\ControllerEvent;
 
-final class PerformAccessCheckSubscriber implements EventSubscriberInterface
+final readonly class PerformAccessCheckSubscriber implements EventSubscriberInterface
 {
     /**
      * @param iterable<object> $controllers
      */
     public function __construct(
         #[AutowireIterator('controller.service_arguments')]
-        private readonly iterable $controllers
+        private iterable $controllers
     ) {
     }
 

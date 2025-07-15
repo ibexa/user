@@ -39,9 +39,6 @@ class IbexaUserExtension extends Extension implements PrependExtensionInterface
         $this->prependJMSTranslation($container);
     }
 
-    /**
-     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
-     */
     public function prependJMSTranslation(ContainerBuilder $container): void
     {
         $container->prependExtensionConfig('jms_translation', [

@@ -13,20 +13,11 @@ use Ibexa\Contracts\Core\Repository\Values\User\UserGroup;
 
 final class InvitationFilter
 {
-    private ?Role $role;
-
-    private ?UserGroup $userGroup;
-
-    private ?bool $isUsed;
-
     public function __construct(
-        ?Role $role = null,
-        ?UserGroup $userGroup = null,
-        ?bool $isUsed = null
+        private ?Role $role = null,
+        private ?UserGroup $userGroup = null,
+        private ?bool $isUsed = null
     ) {
-        $this->role = $role;
-        $this->userGroup = $userGroup;
-        $this->isUsed = $isUsed;
     }
 
     public function setRole(?Role $role): void

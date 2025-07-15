@@ -15,38 +15,18 @@ use Ibexa\User\UserSetting\UserSettingService;
 
 class UpdateViewBuilder implements ViewBuilder
 {
-    private UserSettingService $userSettingService;
-
-    private Configurator $viewConfigurator;
-
-    private ParametersInjector $viewParametersInjector;
-
-    /**
-     * @param \Ibexa\User\UserSetting\UserSettingService $userSettingService
-     * @param \Ibexa\Core\MVC\Symfony\View\Configurator $viewConfigurator
-     * @param \Ibexa\Core\MVC\Symfony\View\ParametersInjector $viewParametersInjector
-     */
     public function __construct(
-        UserSettingService $userSettingService,
-        Configurator $viewConfigurator,
-        ParametersInjector $viewParametersInjector
+        private readonly UserSettingService $userSettingService,
+        private readonly Configurator $viewConfigurator,
+        private readonly ParametersInjector $viewParametersInjector
     ) {
-        $this->userSettingService = $userSettingService;
-        $this->viewConfigurator = $viewConfigurator;
-        $this->viewParametersInjector = $viewParametersInjector;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function matches($argument): bool
+    public function matches(mixed $argument): bool
     {
         return 'Ibexa\Bundle\User\Controller\UserSettingsController::updateAction' === $argument;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildView(array $parameters): UpdateView
     {
         $view = new UpdateView();

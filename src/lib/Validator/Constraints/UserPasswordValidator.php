@@ -20,33 +20,24 @@ use Symfony\Component\Validator\Exception\ConstraintDefinitionException;
  */
 class UserPasswordValidator extends ConstraintValidator
 {
-    private UserService $userService;
-
-    private TokenStorageInterface $tokenStorage;
-
-    /**
-     * @param \Ibexa\Contracts\Core\Repository\UserService $userService
-     * @param \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface $tokenStorage
-     */
-    public function __construct(UserService $userService, TokenStorageInterface $tokenStorage)
-    {
-        $this->userService = $userService;
-        $this->tokenStorage = $tokenStorage;
+    public function __construct(
+        private readonly UserService $userService,
+        private readonly TokenStorageInterface $tokenStorage
+    ) {
     }
 
     /**
      * Checks if the passed password exists for logged user.
-     *
-     * @param string $password The password that should be validated
-     * @param \Symfony\Component\Validator\Constraint|\Ibexa\User\Validator\Constraints\UserPassword $constraint The constraint for the validation
      */
-    public function validate($password, Constraint $constraint): void
+    public function validate(mixed $password, Constraint $constraint): void
     {
         if (null === $password || '' === $password) {
             $this->context->addViolation($constraint->message);
 
             return;
         }
+
+        assert(is_string($password));
 
         $user = $this->tokenStorage->getToken()->getUser()->getAPIUser();
 

@@ -13,5 +13,5 @@ final class UserFormEvents
     /**
      * Triggered when registering an user.
      */
-    public const USER_REGISTER = 'user.edit.register';
+    public const string USER_REGISTER = 'user.edit.register';
 }

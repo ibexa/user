@@ -10,6 +10,7 @@ namespace Ibexa\Tests\User\EventListener;
 
 use Ibexa\Tests\User\Stub\RestrictedControllerStub;
 use Ibexa\User\EventListener\PerformAccessCheckSubscriber;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\ControllerEvent;
@@ -19,7 +20,7 @@ final class PerformAccessCheckSubscriberTest extends TestCase
 {
     private PerformAccessCheckSubscriber $subscriber;
 
-    private HttpKernelInterface $kernel;
+    private HttpKernelInterface&MockObject $kernel;
 
     private Request $request;
 
@@ -35,7 +36,7 @@ final class PerformAccessCheckSubscriberTest extends TestCase
         $controller = new RestrictedControllerStub();
         $event = new ControllerEvent(
             $this->kernel,
-            [$controller, 'action'],
+            $controller->action(...),
             $this->request,
             HttpKernelInterface::MAIN_REQUEST
         );

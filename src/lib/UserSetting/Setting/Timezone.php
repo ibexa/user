@@ -17,51 +17,31 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class Timezone implements ValueDefinitionInterface, FormMapperInterface
 {
-    private TranslatorInterface $translator;
-
-    /**
-     * @param \Symfony\Contracts\Translation\TranslatorInterface $translator
-     */
-    public function __construct(TranslatorInterface $translator)
-    {
-        $this->translator = $translator;
+    public function __construct(
+        private readonly TranslatorInterface $translator
+    ) {
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName(): string
     {
         return $this->getTranslatedName();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getDescription(): string
     {
         return $this->getTranslatedDescription();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getDisplayValue(string $storageValue): string
     {
         return $storageValue;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getDefaultValue(): string
     {
         return date_default_timezone_get();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function mapFieldForm(FormBuilderInterface $formBuilder, ValueDefinitionInterface $value): FormBuilderInterface
     {
         return $formBuilder->create(
@@ -75,9 +55,6 @@ class Timezone implements ValueDefinitionInterface, FormMapperInterface
         );
     }
 
-    /**
-     * @return string
-     */
     private function getTranslatedName(): string
     {
         return $this->translator->trans(
@@ -88,9 +65,6 @@ class Timezone implements ValueDefinitionInterface, FormMapperInterface
         );
     }
 
-    /**
-     * @return string
-     */
     private function getTranslatedDescription(): string
     {
         return $this->translator->trans(

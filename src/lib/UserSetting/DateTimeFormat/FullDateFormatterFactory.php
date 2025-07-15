@@ -13,23 +13,13 @@ use Ibexa\User\UserSetting\UserSettingService;
 
 class FullDateFormatterFactory extends AbstractDateTimeFormatterFactory implements DateTimeFormatterFactoryInterface
 {
-    private DateTimeFormatSerializer $dateTimeFormatSerializer;
-
-    /**
-     * @param \Ibexa\User\UserSetting\UserSettingService $userSettingService
-     * @param \Ibexa\User\UserSetting\Setting\DateTimeFormatSerializer $dateTimeFormatSerializer
-     */
     public function __construct(
         UserSettingService $userSettingService,
-        DateTimeFormatSerializer $dateTimeFormatSerializer
+        private readonly DateTimeFormatSerializer $dateTimeFormatSerializer
     ) {
         parent::__construct($userSettingService);
-        $this->dateTimeFormatSerializer = $dateTimeFormatSerializer;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getFormat(): string
     {
         return (string)$this->dateTimeFormatSerializer->deserialize(

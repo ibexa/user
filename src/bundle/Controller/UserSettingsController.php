@@ -30,39 +30,19 @@ final class UserSettingsController extends Controller implements RestrictedContr
 {
     use AuthenticatedRememberedCheckTrait;
 
-    private FormFactory $formFactory;
-
-    private SubmitHandler $submitHandler;
-
-    private UserSettingService $userSettingService;
-
-    private ValueDefinitionRegistry $valueDefinitionRegistry;
-
-    private ActionResultHandler $actionResultHandler;
-
-    private PermissionResolver $permissionResolver;
-
     public function __construct(
-        FormFactory $formFactory,
-        SubmitHandler $submitHandler,
-        UserSettingService $userSettingService,
-        ValueDefinitionRegistry $valueDefinitionRegistry,
-        ActionResultHandler $actionResultHandler,
-        PermissionResolver $permissionResolver
+        private readonly FormFactory $formFactory,
+        private readonly SubmitHandler $submitHandler,
+        private readonly UserSettingService $userSettingService,
+        private readonly ValueDefinitionRegistry $valueDefinitionRegistry,
+        private readonly ActionResultHandler $actionResultHandler,
+        private readonly PermissionResolver $permissionResolver
     ) {
-        $this->formFactory = $formFactory;
-        $this->submitHandler = $submitHandler;
-        $this->userSettingService = $userSettingService;
-        $this->valueDefinitionRegistry = $valueDefinitionRegistry;
-        $this->actionResultHandler = $actionResultHandler;
-        $this->permissionResolver = $permissionResolver;
     }
 
     /**
-     * @param int $page
-     *
-     * @return \Ibexa\User\View\UserSettings\ListView
-     *
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\BadStateException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
      * @throws \Ibexa\Core\Base\Exceptions\InvalidArgumentType
      */
     public function listAction(int $page = 1): ListView

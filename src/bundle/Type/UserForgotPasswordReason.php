@@ -10,5 +10,5 @@ namespace Ibexa\Bundle\User\Type;
 
 class UserForgotPasswordReason
 {
-    public const MIGRATION = 'migration';
+    public const string MIGRATION = 'migration';
 }

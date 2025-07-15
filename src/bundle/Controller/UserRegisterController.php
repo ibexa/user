@@ -16,34 +16,22 @@ use Ibexa\User\Form\Type\UserRegisterType;
 use Ibexa\User\View\Register\ConfirmView;
 use Ibexa\User\View\Register\FormView;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
 class UserRegisterController extends Controller
 {
-    private UserRegisterMapper $userRegisterMapper;
-
-    private ActionDispatcherInterface $userActionDispatcher;
-
-    private InvitationService $invitationService;
-
     public function __construct(
-        UserRegisterMapper $userRegisterMapper,
-        ActionDispatcherInterface $userActionDispatcher,
-        InvitationService $invitationService
+        private readonly UserRegisterMapper $userRegisterMapper,
+        private readonly ActionDispatcherInterface $userActionDispatcher,
+        private readonly InvitationService $invitationService
     ) {
-        $this->userRegisterMapper = $userRegisterMapper;
-        $this->userActionDispatcher = $userActionDispatcher;
-        $this->invitationService = $invitationService;
     }
 
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
-     * @return \Ibexa\User\View\Register\FormView|\Symfony\Component\HttpFoundation\Response|null
-     *
      * @throws \Ibexa\Core\Base\Exceptions\InvalidArgumentType
      */
-    public function registerAction(Request $request)
+    public function registerAction(Request $request): Response|FormView
     {
         if (!$this->isGranted(new Attribute('user', 'register'))) {
             throw new UnauthorizedHttpException('You are not allowed to register a new account');
@@ -70,20 +58,12 @@ class UserRegisterController extends Controller
         return new FormView(null, ['form' => $form->createView()]);
     }
 
-    /**
-     * @return \Ibexa\User\View\Register\ConfirmView
-     *
-     * @throws \Ibexa\Core\Base\Exceptions\InvalidArgumentType
-     */
     public function registerConfirmAction(): ConfirmView
     {
         return new ConfirmView();
     }
 
-    /**
-     * @return \Ibexa\User\View\Register\FormView|\Symfony\Component\HttpFoundation\Response
-     */
-    public function registerFromInvitationAction(Request $request)
+    public function registerFromInvitationAction(Request $request): Response|FormView
     {
         $invitation = $this->invitationService->getInvitation($request->get('inviteHash'));
 

@@ -17,7 +17,7 @@ use Symfony\Component\Validator\Constraint;
  */
 class UserPassword extends Constraint implements TranslationContainerInterface
 {
-    public $message = 'ezplatform.change_user_password.not_match';
+    public string $message = 'ezplatform.change_user_password.not_match';
 
     /**
      * @return \JMS\TranslationBundle\Model\Message[]

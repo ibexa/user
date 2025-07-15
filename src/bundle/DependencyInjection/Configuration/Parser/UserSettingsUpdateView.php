@@ -12,6 +12,6 @@ use Ibexa\Bundle\Core\DependencyInjection\Configuration\Parser\View;
 
 class UserSettingsUpdateView extends View
 {
-    public const NODE_KEY = 'user_settings_update_view';
-    public const INFO = 'Template selection settings when displaying a user setting update form';
+    public const string NODE_KEY = 'user_settings_update_view';
+    public const string INFO = 'Template selection settings when displaying a user setting update form';
 }

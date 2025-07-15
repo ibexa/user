@@ -12,13 +12,11 @@ use Ibexa\Contracts\DoctrineSchema\Event\SchemaBuilderEvent;
 use Ibexa\Contracts\DoctrineSchema\SchemaBuilderEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-final class BuildSchemaSubscriber implements EventSubscriberInterface
+final readonly class BuildSchemaSubscriber implements EventSubscriberInterface
 {
-    private string $schemaFilePath;
-
-    public function __construct(string $schemaFilePath)
-    {
-        $this->schemaFilePath = $schemaFilePath;
+    public function __construct(
+        private string $schemaFilePath
+    ) {
     }
 
     public static function getSubscribedEvents(): array

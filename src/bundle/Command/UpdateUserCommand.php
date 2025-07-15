@@ -111,9 +111,7 @@ final class UpdateUserCommand extends Command
         $userUpdateStruct->enabled = $this->resolveEnabledFlag($enable, $disable);
 
         $this->repository->sudo(
-            function () use ($user, $userUpdateStruct): User {
-                return $this->userService->updateUser($user, $userUpdateStruct);
-            }
+            fn (): User => $this->userService->updateUser($user, $userUpdateStruct)
         );
 
         $io->success(sprintf(

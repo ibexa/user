@@ -8,25 +8,14 @@ declare(strict_types=1);
 
 namespace Ibexa\User\UserSetting\Setting\Value;
 
-final class DateTimeFormat
+final class DateTimeFormat implements \Stringable
 {
-    private ?string $dateFormat;
-
-    private ?string $timeFormat;
-
-    /**
-     * @param string|null $dateFormat
-     * @param string|null $timeFormat
-     */
-    public function __construct(?string $dateFormat = null, ?string $timeFormat = null)
-    {
-        $this->dateFormat = $dateFormat;
-        $this->timeFormat = $timeFormat;
+    public function __construct(
+        private ?string $dateFormat = null,
+        private ?string $timeFormat = null
+    ) {
     }
 
-    /**
-     * @return string|null
-     */
     public function getDateFormat(): ?string
     {
         return $this->dateFormat;
@@ -37,9 +26,6 @@ final class DateTimeFormat
         $this->dateFormat = $dateFormat;
     }
 
-    /**
-     * @return string|null
-     */
     public function getTimeFormat(): ?string
     {
         return $this->timeFormat;
@@ -50,9 +36,6 @@ final class DateTimeFormat
         $this->timeFormat = $timeFormat;
     }
 
-    /**
-     * @return string
-     */
     public function __toString(): string
     {
         $parts = [];
