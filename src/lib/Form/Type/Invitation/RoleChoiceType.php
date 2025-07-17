@@ -10,6 +10,7 @@ namespace Ibexa\User\Form\Type\Invitation;
 
 use Ibexa\Contracts\Core\Repository\PermissionResolver;
 use Ibexa\Contracts\Core\Repository\RoleService;
+use Ibexa\Contracts\Core\Repository\Values\User\Role;
 use Ibexa\Core\Repository\Repository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\ChoiceList\Loader\CallbackChoiceLoader;
@@ -18,45 +19,37 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class RoleChoiceType extends AbstractType
 {
-    private RoleService $roleService;
-
-    private Repository $repository;
-
-    private PermissionResolver $permissionResolver;
-
     public function __construct(
-        RoleService $roleService,
-        Repository $repository,
-        PermissionResolver $permissionResolver
+        private readonly RoleService $roleService,
+        private readonly Repository $repository,
+        private readonly PermissionResolver $permissionResolver
     ) {
-        $this->roleService = $roleService;
-        $this->repository = $repository;
-        $this->permissionResolver = $permissionResolver;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
             ->setDefaults([
-                'choice_loader' => new CallbackChoiceLoader([$this, 'loadFilteredRoles']),
+                'choice_loader' => new CallbackChoiceLoader($this->loadFilteredRoles(...)),
                 'choice_label' => 'identifier',
                 'choice_name' => 'id',
                 'choice_value' => 'id',
             ]);
     }
 
+    /**
+     * @return array<int, \Ibexa\Contracts\Core\Repository\Values\User\Role>
+     */
     public function loadFilteredRoles(): array
     {
         return array_filter(
             $this->repository->sudo(fn (): iterable => $this->roleService->loadRoles()),
-            fn ($role): bool => $this->permissionResolver->canUser('user', 'invite', $role)
+            fn (Role $role): bool => $this->permissionResolver->canUser('user', 'invite', $role)
         );
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getParent(): ?string
+    #[\Override]
+    public function getParent(): string
     {
         return ChoiceType::class;
     }

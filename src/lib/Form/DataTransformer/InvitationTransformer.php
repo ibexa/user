@@ -14,16 +14,14 @@ use Ibexa\Contracts\User\Invitation\InvitationService;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 
-class InvitationTransformer implements DataTransformerInterface
+readonly class InvitationTransformer implements DataTransformerInterface
 {
-    private InvitationService $invitationService;
-
-    public function __construct(InvitationService $invitationService)
-    {
-        $this->invitationService = $invitationService;
+    public function __construct(
+        private InvitationService $invitationService
+    ) {
     }
 
-    public function transform($value): ?string
+    public function transform(mixed $value): ?string
     {
         if (null === $value) {
             return null;
@@ -36,7 +34,7 @@ class InvitationTransformer implements DataTransformerInterface
         return $value->getHash();
     }
 
-    public function reverseTransform($value): ?Invitation
+    public function reverseTransform(mixed $value): ?Invitation
     {
         if (empty($value)) {
             return null;

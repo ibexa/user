@@ -12,46 +12,21 @@ use Ibexa\Contracts\Core\Repository\Values\ValueObject;
 
 final class Invitation extends ValueObject
 {
-    private string $email;
-
-    private string $hash;
-
-    private string $siteAccessIdentifier;
-
-    private int $createdAtTimestamp;
-
-    private bool $isUsed;
-
-    private ?int $roleId;
-
-    private ?int $groupId;
-
-    private ?string $limitation;
-
-    private ?array $limitationValue;
-
+    /**
+     * @param array<mixed>|null $limitationValue
+     */
     public function __construct(
-        string $email,
-        string $hash,
-        string $siteAccessIdentifier,
-        int $createdAtTimestamp,
-        bool $isUsed,
-        ?int $roleId = null,
-        ?int $groupId = null,
-        ?string $limitation = null,
-        ?array $limitationValue = null
+        private readonly string $email,
+        private readonly string $hash,
+        private readonly string $siteAccessIdentifier,
+        private readonly int $createdAtTimestamp,
+        private readonly bool $isUsed,
+        private readonly ?int $roleId = null,
+        private readonly ?int $groupId = null,
+        private readonly ?string $limitation = null,
+        private readonly ?array $limitationValue = null
     ) {
         parent::__construct();
-
-        $this->email = $email;
-        $this->hash = $hash;
-        $this->siteAccessIdentifier = $siteAccessIdentifier;
-        $this->createdAtTimestamp = $createdAtTimestamp;
-        $this->isUsed = $isUsed;
-        $this->roleId = $roleId;
-        $this->groupId = $groupId;
-        $this->limitation = $limitation;
-        $this->limitationValue = $limitationValue;
     }
 
     public function getEmail(): string
@@ -94,6 +69,9 @@ final class Invitation extends ValueObject
         return $this->limitation;
     }
 
+    /**
+     * @return array<mixed>|null
+     */
     public function getLimitationValue(): ?array
     {
         return $this->limitationValue;

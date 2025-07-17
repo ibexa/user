@@ -15,20 +15,15 @@ use Symfony\Component\Form\Exception\TransformationFailedException;
 
 class DateTimeFormatTransformer implements DataTransformerInterface
 {
-    private DateTimeFormatSerializer $serializer;
-
-    /**
-     * @param \Ibexa\User\UserSetting\Setting\DateTimeFormatSerializer $serializer
-     */
-    public function __construct(DateTimeFormatSerializer $serializer)
-    {
-        $this->serializer = $serializer;
+    public function __construct(
+        private readonly DateTimeFormatSerializer $serializer
+    ) {
     }
 
     /**
-     * {@inheritdoc}
+     * @return array{date_format: ?string, time_format: ?string}|null
      */
-    public function transform($value): ?array
+    public function transform(mixed $value): ?array
     {
         if (null === $value) {
             return null;
@@ -48,10 +43,7 @@ class DateTimeFormatTransformer implements DataTransformerInterface
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function reverseTransform($value): ?string
+    public function reverseTransform(mixed $value): ?string
     {
         if (empty($value)) {
             return null;

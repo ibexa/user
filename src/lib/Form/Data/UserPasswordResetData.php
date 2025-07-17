@@ -13,50 +13,31 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class UserPasswordResetData
 {
-    #[Assert\NotBlank]
-    private ?string $newPassword;
-
-    /**
-     * @deprecated ContentType should be passed as option to FormType.
-     */
-    private ?ContentType $contentType;
-
-    /**
-     * @param string|null $newPassword
-     */
-    public function __construct(?string $newPassword = null, ?ContentType $contentType = null)
-    {
-        $this->newPassword = $newPassword;
-        $this->contentType = $contentType;
+    public function __construct(
+        #[Assert\NotBlank]
+        private ?string $newPassword = null,
+        /**
+         * @deprecated ContentType should be passed as option to FormType.
+         */
+        private ?ContentType $contentType = null
+    ) {
     }
 
-    /**
-     * @param string|null $newPassword
-     */
     public function setNewPassword(?string $newPassword): void
     {
         $this->newPassword = $newPassword;
     }
 
-    /**
-     * @return string|null
-     */
     public function getNewPassword(): ?string
     {
         return $this->newPassword;
     }
 
-    /**
-     * @return \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType
-     */
     public function getContentType(): ?ContentType
     {
         return $this->contentType;
     }
 
-    /**
-     * @param \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType $contentType
-     */
     public function setContentType(ContentType $contentType): void
     {
         $this->contentType = $contentType;

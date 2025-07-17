@@ -37,7 +37,8 @@ class Security extends AbstractParser
     }
 
     /**
-     * {@inheritdoc}
+     * @param array<string, mixed> $scopeSettings
+     * @param string $currentScope
      */
     public function mapConfig(array &$scopeSettings, $currentScope, ContextualizerInterface $contextualizer): void
     {

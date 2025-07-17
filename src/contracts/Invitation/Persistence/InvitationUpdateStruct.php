@@ -12,22 +12,12 @@ use Ibexa\Contracts\Core\Repository\Values\ValueObject;
 
 final class InvitationUpdateStruct extends ValueObject
 {
-    private ?int $createdAt;
-
-    private ?bool $isUsed;
-
-    private ?string $hash;
-
     public function __construct(
-        ?int $createdAt = null,
-        ?bool $isUsed = null,
-        ?string $hash = null
+        private ?int $createdAt = null,
+        private ?bool $isUsed = null,
+        private ?string $hash = null
     ) {
         parent::__construct();
-
-        $this->createdAt = $createdAt;
-        $this->isUsed = $isUsed;
-        $this->hash = $hash;
     }
 
     public function getCreatedAt(): ?int

@@ -20,27 +20,15 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class UserSettingUpdateType extends AbstractType
 {
-    public const BTN_UPDATE_AND_EDIT = 'update_and_edit';
+    public const string BTN_UPDATE_AND_EDIT = 'update_and_edit';
 
-    protected FormMapperRegistry $formMapperRegistry;
-
-    protected ValueDefinitionRegistry $valueDefinitionRegistry;
-
-    /**
-     * @param \Ibexa\User\UserSetting\FormMapperRegistry $formMapperRegistry
-     * @param \Ibexa\User\UserSetting\ValueDefinitionRegistry $valueDefinitionRegistry
-     */
     public function __construct(
-        FormMapperRegistry $formMapperRegistry,
-        ValueDefinitionRegistry $valueDefinitionRegistry
+        protected FormMapperRegistry $formMapperRegistry,
+        protected ValueDefinitionRegistry $valueDefinitionRegistry
     ) {
-        $this->formMapperRegistry = $formMapperRegistry;
-        $this->valueDefinitionRegistry = $valueDefinitionRegistry;
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -71,9 +59,6 @@ class UserSettingUpdateType extends AbstractType
         $builder->add(self::BTN_UPDATE_AND_EDIT, SubmitType::class);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver

@@ -14,16 +14,11 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class FullDateTimeFormatType extends AbstractType
 {
-    private ConfigResolverInterface $configResolver;
-
-    public function __construct(ConfigResolverInterface $configResolver)
-    {
-        $this->configResolver = $configResolver;
+    public function __construct(
+        private readonly ConfigResolverInterface $configResolver
+    ) {
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
@@ -32,9 +27,7 @@ class FullDateTimeFormatType extends AbstractType
         ]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    #[\Override]
     public function getParent(): string
     {
         return DateTimeFormatType::class;

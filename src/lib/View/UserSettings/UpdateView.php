@@ -22,7 +22,7 @@ class UpdateView extends BaseView
      * @param array<string, mixed> $parameters
      */
     public function __construct(
-        $templateIdentifier = null,
+        ?string $templateIdentifier = null,
         array $parameters = [],
         string $viewType = 'full'
     ) {
@@ -31,17 +31,11 @@ class UpdateView extends BaseView
         parent::__construct($templateIdentifier, $parameters, $viewType);
     }
 
-    /**
-     * @return \Ibexa\User\UserSetting\UserSetting|null
-     */
     public function getUserSetting(): ?UserSetting
     {
         return $this->userSetting;
     }
 
-    /**
-     * @param \Ibexa\User\UserSetting\UserSetting|null $userSetting
-     */
     public function setUserSetting(?UserSetting $userSetting): void
     {
         $this->userSetting = $userSetting;
@@ -57,9 +51,7 @@ class UpdateView extends BaseView
         $this->userSettingGroup = $userSettingGroup;
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    #[\Override]
     protected function getInternalParameters(): array
     {
         return [

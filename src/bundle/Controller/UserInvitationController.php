@@ -26,26 +26,21 @@ final class UserInvitationController extends Controller implements RestrictedCon
 {
     use AuthenticatedRememberedCheckTrait;
 
-    private InvitationService $invitationService;
-
-    private InvitationSender $mailSender;
-
-    private FormFactoryInterface $formFactory;
-
-    private ActionResultHandler $actionResultHandler;
-
     public function __construct(
-        InvitationService $invitationService,
-        InvitationSender $mailSender,
-        FormFactoryInterface $formFactory,
-        ActionResultHandler $actionResultHandler
+        private InvitationService $invitationService,
+        private InvitationSender $mailSender,
+        private FormFactoryInterface $formFactory,
+        private ActionResultHandler $actionResultHandler
     ) {
-        $this->invitationService = $invitationService;
-        $this->mailSender = $mailSender;
-        $this->formFactory = $formFactory;
-        $this->actionResultHandler = $actionResultHandler;
     }
 
+    /**
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\BadStateException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
+     * @throws \Ibexa\Core\Base\Exceptions\InvalidArgumentType
+     * @throws \JsonException
+     */
     public function inviteUser(Request $request): FormView
     {
         $form = $this->formFactory->create(UserInvitationType::class);
@@ -73,14 +68,14 @@ final class UserInvitationController extends Controller implements RestrictedCon
                     ['%email%' => $data->getEmail()],
                     'ibexa_user_invitation'
                 );
-            } catch (InvitationAlreadyExistsException $e) {
+            } catch (InvitationAlreadyExistsException) {
                 $this->actionResultHandler->error(
                     /** @Desc("Invitation for '%email%' already exists.") */
                     'user_invitation.send.invitation_exist',
                     ['%email%' => $data->getEmail()],
                     'ibexa_user_invitation'
                 );
-            } catch (UserAlreadyExistsException $e) {
+            } catch (UserAlreadyExistsException) {
                 $this->actionResultHandler->error(
                     /** @Desc("User with '%email%' already exists.") */
                     'user_invitation.send.user_exist',

@@ -34,11 +34,11 @@ class AvailableLocaleChoiceLoaderTest extends TestCase
     }
 
     /**
-     * @dataProvider providerForGetChoiceList
+     * @param array<int, string> $availableTranslations
+     * @param array<int, string> $additionalTranslations
+     * @param array<string, string> $expectedLocales
      *
-     * @param array $availableTranslations
-     * @param array $additionalTranslations
-     * @param array $expectedLocales
+     * @dataProvider providerForGetChoiceList
      */
     public function testGetChoiceList(
         array $availableTranslations,
@@ -47,9 +47,7 @@ class AvailableLocaleChoiceLoaderTest extends TestCase
     ): void {
         $this->validator
             ->method('validate')
-            ->willReturnCallback(function ($locale): ConstraintViolationList {
-                return $locale === 'foo_BAR' ? new ConstraintViolationList([$this->constraintViolation]) : new ConstraintViolationList();
-            });
+            ->willReturnCallback(fn ($locale): ConstraintViolationList => $locale === 'foo_BAR' ? new ConstraintViolationList([$this->constraintViolation]) : new ConstraintViolationList());
 
         $this->configResolver
             ->method('getParameter')
@@ -65,6 +63,13 @@ class AvailableLocaleChoiceLoaderTest extends TestCase
         self::assertSame($expectedLocales, $availableLocaleChoiceLoader->getChoiceList());
     }
 
+    /**
+     * @return array<string, array{
+     *     0: array<int, string>,
+     *     1: array<int, string>,
+     *     2: array<string, string>
+     * }>
+     */
     public function providerForGetChoiceList(): array
     {
         return [

@@ -38,7 +38,10 @@ interface Gateway
         ?string $limitationValue = null
     ): array;
 
-    public function getInvitation(string $hash);
+    /**
+     * @return array<string, mixed>
+     */
+    public function getInvitation(string $hash): array;
 
     public function invitationExistsForEmail(string $email): bool;
 

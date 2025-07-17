@@ -14,7 +14,7 @@ use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 
 final class UserPermissionsLimitation extends Limitation implements TranslationContainerInterface
 {
-    public const IDENTIFIER = 'UserPermissions';
+    public const string IDENTIFIER = 'UserPermissions';
 
     public function getIdentifier(): string
     {

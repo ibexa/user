@@ -8,6 +8,8 @@ declare(strict_types=1);
 
 namespace Ibexa\User\ConfigResolver;
 
+use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType;
+
 /**
  * Loads the content type used by user registration.
  */
@@ -15,8 +17,6 @@ interface RegistrationContentTypeLoader
 {
     /**
      * Gets the content type used by user registration.
-     *
-     * @return \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType
      */
-    public function loadContentType();
+    public function loadContentType(): ContentType;
 }

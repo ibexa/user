@@ -16,48 +16,24 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 final class UserInvitationData
 {
-    #[Assert\NotBlank]
-    #[Assert\Email]
-    private string $email;
-
-    private ?Role $role;
-
-    #[Assert\NotBlank]
-    private ?SiteAccess $siteaccess;
-
-    private ?UserGroup $userGroup;
-
-    /** @var \Ibexa\Contracts\Core\Persistence\Content\Section[]|null */
-    private ?array $sections;
-
-    private ?string $locationPath;
-
-    private ?RoleLimitation $roleLimitation;
-
-    private ?string $limitationType;
-
-    private ?array $limitationValue;
-
+    /**
+     * @param array<int, \Ibexa\Contracts\Core\Repository\Values\Content\Section>|null $sections
+     * @param array<string, mixed>|null $limitationValue
+     */
     public function __construct(
-        string $email = null,
-        SiteAccess $siteaccess = null,
-        ?Role $role = null,
-        ?UserGroup $userGroup = null,
-        ?array $sections = null,
-        ?string $locationId = null,
-        ?RoleLimitation $roleLimitation = null,
-        ?string $limitationType = null,
-        ?array $limitationValue = null
+        #[Assert\NotBlank]
+        #[Assert\Email]
+        private string $email,
+        #[Assert\NotBlank]
+        private ?SiteAccess $siteaccess = null,
+        private ?Role $role = null,
+        private ?UserGroup $userGroup = null,
+        private ?array $sections = null,
+        private ?string $locationPath = null,
+        private ?RoleLimitation $roleLimitation = null,
+        private ?string $limitationType = null,
+        private ?array $limitationValue = null
     ) {
-        $this->email = $email;
-        $this->role = $role;
-        $this->siteaccess = $siteaccess;
-        $this->userGroup = $userGroup;
-        $this->sections = $sections;
-        $this->locationPath = $locationId;
-        $this->limitationType = $limitationType;
-        $this->limitationValue = $limitationValue;
-        $this->roleLimitation = $roleLimitation;
     }
 
     public function getLimitationType(): ?string

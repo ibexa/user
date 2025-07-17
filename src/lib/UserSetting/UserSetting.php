@@ -18,17 +18,13 @@ use Ibexa\Contracts\Core\Repository\Values\ValueObject;
  */
 class UserSetting extends ValueObject
 {
-    /** @var string */
-    protected $identifier;
+    protected string $identifier;
 
-    /** @var string */
-    protected $name;
+    protected string $name;
 
-    /** @var string */
-    protected $description;
+    protected string $description;
 
-    /** @var string */
-    protected $value;
+    protected string $value;
 
     public function getIdentifier(): string
     {

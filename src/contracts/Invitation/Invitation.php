@@ -16,42 +16,17 @@ use Ibexa\Contracts\Core\Repository\Values\ValueObject;
 
 final class Invitation extends ValueObject
 {
-    private string $email;
-
-    private string $hash;
-
-    private DateTimeInterface $createdAt;
-
-    private string $siteAccessIdentifier;
-
-    private bool $used;
-
-    private ?Role $role;
-
-    private ?UserGroup $userGroup;
-
-    private ?RoleLimitation $limitation;
-
     public function __construct(
-        string $email,
-        string $hash,
-        DateTimeInterface $createdAt,
-        string $siteAccessIdentifier,
-        bool $used,
-        ?Role $role = null,
-        ?UserGroup $userGroup = null,
-        ?RoleLimitation $limitation = null
+        private readonly string $email,
+        private readonly string $hash,
+        private readonly DateTimeInterface $createdAt,
+        private readonly string $siteAccessIdentifier,
+        private readonly bool $used,
+        private readonly ?Role $role = null,
+        private readonly ?UserGroup $userGroup = null,
+        private readonly ?RoleLimitation $limitation = null
     ) {
         parent::__construct();
-
-        $this->email = $email;
-        $this->hash = $hash;
-        $this->createdAt = $createdAt;
-        $this->siteAccessIdentifier = $siteAccessIdentifier;
-        $this->used = $used;
-        $this->role = $role;
-        $this->userGroup = $userGroup;
-        $this->limitation = $limitation;
     }
 
     public function getEmail(): string

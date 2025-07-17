@@ -14,12 +14,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class DefaultProfileImageController extends Controller
 {
-    private ConfigResolverInterface $configResolver;
-
     public function __construct(
-        ConfigResolverInterface $configResolver
+        private readonly ConfigResolverInterface $configResolver
     ) {
-        $this->configResolver = $configResolver;
     }
 
     public function initialsAction(Request $request): Response
@@ -38,6 +35,9 @@ final class DefaultProfileImageController extends Controller
         ], $response);
     }
 
+    /**
+     * @return array{text: string, background: string}
+     */
     private function getInitialsColors(string $initials): array
     {
         $colors = $this->configResolver->getParameter('user.default_profile_image.colors');

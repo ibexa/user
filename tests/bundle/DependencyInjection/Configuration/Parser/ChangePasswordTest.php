@@ -25,6 +25,7 @@ final class ChangePasswordTest extends AbstractParserTestCase
         ];
     }
 
+    #[\Override]
     protected function getMinimalConfiguration(): array
     {
         return [

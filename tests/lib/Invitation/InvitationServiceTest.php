@@ -76,6 +76,13 @@ class InvitationServiceTest extends TestCase
         );
     }
 
+    /**
+     * @return array<string, array{
+     *     0: \Ibexa\Contracts\User\Invitation\Invitation,
+     *     1: string,
+     *     2: bool
+     * }>
+     */
     public function invitationProvider(): array
     {
         return [

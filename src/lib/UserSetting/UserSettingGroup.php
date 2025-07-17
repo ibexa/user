@@ -18,9 +18,12 @@ class UserSettingGroup extends ValueObject
 
     protected string $description;
 
-    /** @var array<string, \Ibexa\User\UserSetting\UserSetting> */
+    /** @var list<\Ibexa\User\UserSetting\UserSetting> */
     protected array $settings;
 
+    /**
+     * @param list<\Ibexa\User\UserSetting\UserSetting> $settings
+     */
     public function __construct(string $identifier, string $name = '', string $description = '', array $settings = [])
     {
         parent::__construct([
@@ -46,6 +49,9 @@ class UserSettingGroup extends ValueObject
         return $this->description;
     }
 
+    /**
+     * @return list<\Ibexa\User\UserSetting\UserSetting>
+     */
     public function getSettings(): array
     {
         return $this->settings;

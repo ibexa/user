@@ -15,26 +15,20 @@ use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 /**
  * Loads the registration user group from a configured, injected group ID.
  */
-class ConfigurableRegistrationGroupLoader implements RegistrationGroupLoader
+readonly class ConfigurableRegistrationGroupLoader implements RegistrationGroupLoader
 {
-    private ConfigResolverInterface $configResolver;
-
-    private Repository $repository;
-
-    public function __construct(ConfigResolverInterface $configResolver, Repository $repository)
-    {
-        $this->configResolver = $configResolver;
-        $this->repository = $repository;
+    public function __construct(
+        private ConfigResolverInterface $configResolver,
+        private Repository $repository
+    ) {
     }
 
-    public function loadGroup()
+    public function loadGroup(): UserGroup
     {
-        return $this->repository->sudo(function (Repository $repository): UserGroup {
-            return $repository
-                ->getUserService()
-                ->loadUserGroupByRemoteId(
-                    $this->configResolver->getParameter('user_registration.group_remote_id')
-                );
-        });
+        return $this->repository->sudo(fn (Repository $repository): UserGroup => $repository
+            ->getUserService()
+            ->loadUserGroupByRemoteId(
+                $this->configResolver->getParameter('user_registration.group_remote_id')
+            ));
     }
 }

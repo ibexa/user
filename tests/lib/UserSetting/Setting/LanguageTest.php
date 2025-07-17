@@ -11,16 +11,15 @@ namespace Ibexa\Tests\User\UserSetting;
 use Ibexa\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface;
 use Ibexa\User\Form\ChoiceList\Loader\AvailableLocaleChoiceLoader;
 use Ibexa\User\UserSetting\Setting\Language;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class LanguageTest extends TestCase
 {
-    /** @var \Ibexa\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface&\PHPUnit\Framework\MockObject\MockObject */
-    private UserLanguagePreferenceProviderInterface $userLanguagePreferenceProvider;
+    private UserLanguagePreferenceProviderInterface&MockObject $userLanguagePreferenceProvider;
 
-    /** @var \Ibexa\User\Form\ChoiceList\Loader\AvailableLocaleChoiceLoader&\PHPUnit\Framework\MockObject\MockObject */
-    private AvailableLocaleChoiceLoader $availableLocaleChoiceLoader;
+    private AvailableLocaleChoiceLoader&MockObject $availableLocaleChoiceLoader;
 
     protected function setUp(): void
     {

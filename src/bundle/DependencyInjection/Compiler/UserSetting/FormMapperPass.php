@@ -16,14 +16,12 @@ use Symfony\Component\DependencyInjection\Reference;
 
 class FormMapperPass implements CompilerPassInterface
 {
-    public const TAG_NAME = 'ibexa.user.setting.mapper.form';
+    public const string TAG_NAME = 'ibexa.user.setting.mapper.form';
 
     /**
-     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
-     *
      * @throws \Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
      * @throws \Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException
-     * @throws \Ibexa\Core\Base\Exceptions\InvalidArgumentException;
+     * @throws \Ibexa\Core\Base\Exceptions\InvalidArgumentException
      */
     public function process(ContainerBuilder $container): void
     {

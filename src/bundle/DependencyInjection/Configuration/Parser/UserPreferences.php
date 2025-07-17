@@ -44,9 +44,6 @@ use Symfony\Component\Config\Definition\Builder\NodeBuilder;
  */
 class UserPreferences extends AbstractParser
 {
-    /**
-     * {@inheritdoc}
-     */
     public function addSemanticConfig(NodeBuilder $nodeBuilder): void
     {
         $nodeBuilder
@@ -107,7 +104,8 @@ class UserPreferences extends AbstractParser
     }
 
     /**
-     * {@inheritdoc}
+     * @param array<string, mixed> $scopeSettings
+     * @param string $currentScope
      */
     public function mapConfig(array &$scopeSettings, $currentScope, ContextualizerInterface $contextualizer): void
     {

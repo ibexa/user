@@ -16,6 +16,7 @@ use Symfony\Component\Security\Http\Authentication\DefaultAuthenticationFailureH
 
 final class DefaultAuthenticationFailureHandler extends HttpDefaultAuthenticationFailureHandler
 {
+    #[\Override]
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception): Response
     {
         if ($exception instanceof PasswordInUnsupportedFormatException) {

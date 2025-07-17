@@ -15,13 +15,11 @@ use Ibexa\Core\Persistence\Legacy\User\Gateway;
 
 class UserSetupContext implements Context
 {
-    private const UNSUPPORTED_USER_HASH = 5;
+    private const int UNSUPPORTED_USER_HASH = 5;
 
-    private Connection $connection;
-
-    public function __construct(Connection $connection)
-    {
-        $this->connection = $connection;
+    public function __construct(
+        private readonly Connection $connection
+    ) {
     }
 
     /**

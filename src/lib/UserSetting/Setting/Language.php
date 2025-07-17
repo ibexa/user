@@ -19,54 +19,28 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class Language implements ValueDefinitionInterface, FormMapperInterface
 {
-    private TranslatorInterface $translator;
-
-    private UserLanguagePreferenceProviderInterface $userLanguagePreferenceProvider;
-
-    private AvailableLocaleChoiceLoader $availableLocaleChoiceLoader;
-
-    /**
-     * @param \Symfony\Contracts\Translation\TranslatorInterface $translator
-     * @param \Ibexa\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface $userLanguagePreferenceProvider
-     * @param \Ibexa\User\Form\ChoiceList\Loader\AvailableLocaleChoiceLoader $availableLocaleChoiceLoader
-     */
     public function __construct(
-        TranslatorInterface $translator,
-        UserLanguagePreferenceProviderInterface $userLanguagePreferenceProvider,
-        AvailableLocaleChoiceLoader $availableLocaleChoiceLoader
+        private readonly TranslatorInterface $translator,
+        private readonly UserLanguagePreferenceProviderInterface $userLanguagePreferenceProvider,
+        private readonly AvailableLocaleChoiceLoader $availableLocaleChoiceLoader
     ) {
-        $this->translator = $translator;
-        $this->userLanguagePreferenceProvider = $userLanguagePreferenceProvider;
-        $this->availableLocaleChoiceLoader = $availableLocaleChoiceLoader;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName(): string
     {
         return $this->getTranslatedName();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getDescription(): string
     {
         return $this->getTranslatedDescription();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getDisplayValue(string $storageValue): string
     {
         return $storageValue;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getDefaultValue(): string
     {
         $defaultLocale = '';
@@ -81,9 +55,6 @@ class Language implements ValueDefinitionInterface, FormMapperInterface
         return $defaultLocale;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function mapFieldForm(FormBuilderInterface $formBuilder, ValueDefinitionInterface $value): FormBuilderInterface
     {
         return $formBuilder->create(
@@ -97,9 +68,6 @@ class Language implements ValueDefinitionInterface, FormMapperInterface
         );
     }
 
-    /**
-     * @return string
-     */
     private function getTranslatedName(): string
     {
         return $this->translator->trans(
@@ -110,9 +78,6 @@ class Language implements ValueDefinitionInterface, FormMapperInterface
         );
     }
 
-    /**
-     * @return string
-     */
     private function getTranslatedDescription(): string
     {
         return $this->translator->trans(

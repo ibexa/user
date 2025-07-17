@@ -22,35 +22,19 @@ use Ibexa\User\Form\UserFormEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\Routing\RouterInterface;
 
 /**
  * Listens for and processes User register events.
  */
-class UserRegisterFormProcessor implements EventSubscriberInterface
+readonly class UserRegisterFormProcessor implements EventSubscriberInterface
 {
-    private UserService $userService;
-
-    private UrlGeneratorInterface $urlGenerator;
-
-    private Repository $repository;
-
-    private RoleService $roleService;
-
-    private NotificationServiceInterface $notificationService;
-
     public function __construct(
-        Repository $repository,
-        UserService $userService,
-        RouterInterface $router,
-        RoleService $roleService,
-        NotificationServiceInterface $notificationService
+        private Repository $repository,
+        private UserService $userService,
+        private UrlGeneratorInterface $urlGenerator,
+        private RoleService $roleService,
+        private NotificationServiceInterface $notificationService
     ) {
-        $this->userService = $userService;
-        $this->urlGenerator = $router;
-        $this->repository = $repository;
-        $this->roleService = $roleService;
-        $this->notificationService = $notificationService;
     }
 
     public static function getSubscribedEvents(): array
@@ -61,8 +45,6 @@ class UserRegisterFormProcessor implements EventSubscriberInterface
     }
 
     /**
-     * @param \Ibexa\ContentForms\Event\FormActionEvent $event
-     *
      * @throws \Exception
      */
     public function processRegister(FormActionEvent $event): void

@@ -17,16 +17,10 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class SectionsChoiceType extends AbstractType
 {
-    private SectionService $sectionService;
-
-    private Repository $repository;
-
     public function __construct(
-        Repository $repository,
-        SectionService $sectionService
+        private readonly Repository $repository,
+        private readonly SectionService $sectionService
     ) {
-        $this->sectionService = $sectionService;
-        $this->repository = $repository;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
@@ -42,10 +36,8 @@ final class SectionsChoiceType extends AbstractType
             ]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getParent(): ?string
+    #[\Override]
+    public function getParent(): string
     {
         return ChoiceType::class;
     }

@@ -15,11 +15,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class SiteAccessChoiceType extends AbstractType
 {
-    private SiteAccessServiceInterface $siteAccessService;
-
-    public function __construct(SiteAccessServiceInterface $siteAccessService)
-    {
-        $this->siteAccessService = $siteAccessService;
+    public function __construct(
+        private readonly SiteAccessServiceInterface $siteAccessService
+    ) {
     }
 
     public function configureOptions(OptionsResolver $resolver): void
@@ -33,10 +31,8 @@ final class SiteAccessChoiceType extends AbstractType
             ]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getParent(): ?string
+    #[\Override]
+    public function getParent(): string
     {
         return ChoiceType::class;
     }

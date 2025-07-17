@@ -15,11 +15,9 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 final class InvitationType extends AbstractType
 {
-    private InvitationService $invitationService;
-
-    public function __construct(InvitationService $invitationService)
-    {
-        $this->invitationService = $invitationService;
+    public function __construct(
+        private readonly InvitationService $invitationService
+    ) {
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -27,7 +25,8 @@ final class InvitationType extends AbstractType
         $builder->addViewTransformer(new InvitationTransformer($this->invitationService));
     }
 
-    public function getParent(): ?string
+    #[\Override]
+    public function getParent(): string
     {
         return HiddenType::class;
     }

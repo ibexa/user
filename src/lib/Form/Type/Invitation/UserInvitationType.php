@@ -19,9 +19,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class UserInvitationType extends AbstractType
 {
-    public const LIMITATION_TYPE_NONE = 'none';
-    public const LIMITATION_TYPE_SECTION = 'section';
-    public const LIMITATION_TYPE_LOCATION = 'location';
+    public const string LIMITATION_TYPE_NONE = 'none';
+    public const string LIMITATION_TYPE_SECTION = 'section';
+    public const string LIMITATION_TYPE_LOCATION = 'location';
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {

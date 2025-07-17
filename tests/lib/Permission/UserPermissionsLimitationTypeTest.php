@@ -33,6 +33,11 @@ class UserPermissionsLimitationTypeTest extends Base
         (new UserPermissionsLimitationType($this->getPersistenceMock()))->acceptValue($limitation);
     }
 
+    /**
+     * @return array<int, array{
+     *     0: \Ibexa\User\Permission\UserPermissionsLimitation
+     * }>
+     */
     public function providerForTestAcceptValue(): array
     {
         return [
@@ -78,6 +83,11 @@ class UserPermissionsLimitationTypeTest extends Base
         (new UserPermissionsLimitationType($this->getPersistenceMock()))->acceptValue($limitation);
     }
 
+    /**
+     * @return array<int, array{
+     *     0: \Ibexa\User\Permission\UserPermissionsLimitation
+     * }>
+     */
     public function providerForTestAcceptValueException(): array
     {
         return [
@@ -178,10 +188,16 @@ class UserPermissionsLimitationTypeTest extends Base
         self::assertCount($errorCount, $validationErrors);
     }
 
+    /**
+     * @return array<string, array{
+     *     0: \Ibexa\User\Permission\UserPermissionsLimitation,
+     *     1: int
+     * }>
+     */
     public function providerForTestValidateError(): array
     {
         return [
-            [
+            'roles_limitation_only' => [
                 new UserPermissionsLimitation([
                     'limitationValues' => [
                         'roles' => [4, 8],
@@ -190,7 +206,7 @@ class UserPermissionsLimitationTypeTest extends Base
                 ]),
                 1,
             ],
-            [
+            'user_groups_limitation_only' => [
                 new UserPermissionsLimitation([
                     'limitationValues' => [
                         'roles' => null,
@@ -199,7 +215,7 @@ class UserPermissionsLimitationTypeTest extends Base
                 ]),
                 1,
             ],
-            [
+            'both_limitations' => [
                 new UserPermissionsLimitation(
                     [
                         'limitationValues' => [
@@ -230,6 +246,13 @@ class UserPermissionsLimitationTypeTest extends Base
         self::assertEquals($expected, $value);
     }
 
+    /**
+     * @return array<string, array{
+     *     limitation: \Ibexa\User\Permission\UserPermissionsLimitation,
+     *     object: \Ibexa\Contracts\Core\Repository\Values\ValueObject,
+     *     expected: bool|null
+     * }>
+     */
     public function providerForTestEvaluate(): array
     {
         return [

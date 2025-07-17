@@ -25,6 +25,7 @@ final class ForgotPasswordTest extends AbstractParserTestCase
         ];
     }
 
+    #[\Override]
     protected function getMinimalConfiguration(): array
     {
         return [

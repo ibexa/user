@@ -8,6 +8,8 @@ declare(strict_types=1);
 
 namespace Ibexa\User\ConfigResolver;
 
+use Ibexa\Contracts\Core\Repository\Values\User\UserGroup;
+
 /**
  * Used to load a user group during registration.
  */
@@ -15,8 +17,6 @@ interface RegistrationGroupLoader
 {
     /**
      * Loads a parent group.
-     *
-     * @return \Ibexa\Contracts\Core\Repository\Values\User\UserGroup
      */
-    public function loadGroup();
+    public function loadGroup(): UserGroup;
 }

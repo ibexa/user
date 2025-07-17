@@ -16,11 +16,9 @@ use Symfony\Component\Validator\ConstraintValidator;
 
 class PasswordValidator extends ConstraintValidator
 {
-    private UserService $userService;
-
-    public function __construct(UserService $userService)
-    {
-        $this->userService = $userService;
+    public function __construct(
+        private readonly UserService $userService
+    ) {
     }
 
     /**

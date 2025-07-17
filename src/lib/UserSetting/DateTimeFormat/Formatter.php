@@ -12,7 +12,7 @@ use DateTimeInterface;
 use IntlDateFormatter;
 use LogicException;
 
-class Formatter implements FormatterInterface
+readonly class Formatter implements FormatterInterface
 {
     private IntlDateFormatter $formatter;
 
@@ -28,7 +28,7 @@ class Formatter implements FormatterInterface
         );
     }
 
-    public function format(DateTimeInterface $datetime, string $timezone = null): string
+    public function format(DateTimeInterface $datetime, ?string $timezone = null): string
     {
         if ($timezone) {
             $currentTimezone = $this->formatter->getTimeZone();

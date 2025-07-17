@@ -17,11 +17,9 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class ViewTemplatesListener implements EventSubscriberInterface
 {
-    private ConfigResolverInterface $configResolver;
-
-    public function __construct(ConfigResolverInterface $configResolver)
-    {
-        $this->configResolver = $configResolver;
+    public function __construct(
+        private readonly ConfigResolverInterface $configResolver
+    ) {
     }
 
     public static function getSubscribedEvents(): array

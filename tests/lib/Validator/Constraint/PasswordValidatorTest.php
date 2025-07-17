@@ -40,7 +40,7 @@ class PasswordValidatorTest extends TestCase
     /**
      * @dataProvider dataProviderForValidateNotSupportedValueType
      */
-    public function testValidateShouldBeSkipped(mixed $value): void
+    public function testValidateShouldBeSkipped(\stdClass|string|null $value): void
     {
         $this->userService
             ->expects(self::never())
@@ -140,6 +140,9 @@ class PasswordValidatorTest extends TestCase
         ]));
     }
 
+    /**
+     * @return array<array{0: stdClass|string|null}>
+     */
     public function dataProviderForValidateNotSupportedValueType(): array
     {
         return [

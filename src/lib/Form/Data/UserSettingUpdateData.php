@@ -12,18 +12,14 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class UserSettingUpdateData
 {
-    #[Assert\NotBlank]
-    private string $identifier;
-
     /**
-     * @var array<string, mixed>
+     * @param array<string, array<string, mixed>> $values
      */
-    private array $values;
-
-    public function __construct(string $identifier, array $values)
-    {
-        $this->identifier = $identifier;
-        $this->values = $values;
+    public function __construct(
+        #[Assert\NotBlank]
+        private string $identifier,
+        private array $values
+    ) {
     }
 
     public function getIdentifier(): string
@@ -36,11 +32,17 @@ class UserSettingUpdateData
         $this->identifier = $identifier;
     }
 
+    /**
+     * @return array<string, array<string, mixed>>
+     */
     public function getValues(): array
     {
         return $this->values;
     }
 
+    /**
+     * @param array<string, array<string, mixed>> $values
+     */
     public function setValues(array $values): void
     {
         $this->values = $values;

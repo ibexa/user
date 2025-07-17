@@ -41,8 +41,6 @@ class UserPasswordValidatorTest extends TestCase
 
     /**
      * @dataProvider emptyDataProvider
-     *
-     * @param string|null $value
      */
     public function testEmptyValueType(?string $value): void
     {
@@ -59,6 +57,9 @@ class UserPasswordValidatorTest extends TestCase
         $this->validator->validate($value, new UserPassword());
     }
 
+    /**
+     * @return array<string, array{0: string|null}>
+     */
     public function emptyDataProvider(): array
     {
         return [

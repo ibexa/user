@@ -18,51 +18,32 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class SubitemsLimit implements ValueDefinitionInterface, FormMapperInterface
 {
-    private TranslatorInterface $translator;
-
-    private ConfigResolverInterface $configResolver;
-
-    public function __construct(TranslatorInterface $translator, ConfigResolverInterface $configResolver)
-    {
-        $this->translator = $translator;
-        $this->configResolver = $configResolver;
+    public function __construct(
+        private readonly TranslatorInterface $translator,
+        private readonly ConfigResolverInterface $configResolver
+    ) {
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName(): string
     {
         return $this->getTranslatedName();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getDescription(): string
     {
         return $this->getTranslatedDescription();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getDisplayValue(string $storageValue): string
     {
         return $storageValue;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getDefaultValue(): string
     {
         return (string)$this->configResolver->getParameter('subitems_module.limit');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function mapFieldForm(FormBuilderInterface $formBuilder, ValueDefinitionInterface $value): FormBuilderInterface
     {
         return $formBuilder->create(
@@ -76,9 +57,6 @@ class SubitemsLimit implements ValueDefinitionInterface, FormMapperInterface
         );
     }
 
-    /**
-     * @return string
-     */
     private function getTranslatedName(): string
     {
         return $this->translator->trans(
@@ -89,9 +67,6 @@ class SubitemsLimit implements ValueDefinitionInterface, FormMapperInterface
         );
     }
 
-    /**
-     * @return string
-     */
     private function getTranslatedDescription(): string
     {
         return $this->translator->trans(
