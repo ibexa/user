@@ -11,7 +11,7 @@ namespace Ibexa\User\EventListener;
 use Ibexa\Contracts\User\Controller\RestrictedControllerInterface;
 use Symfony\Component\DependencyInjection\Attribute\AutowireIterator;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpKernel\Event\ControllerEvent;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 
 final readonly class PerformAccessCheckSubscriber implements EventSubscriberInterface
 {
@@ -24,9 +24,10 @@ final readonly class PerformAccessCheckSubscriber implements EventSubscriberInte
     ) {
     }
 
-    public function onControllerEvent(ControllerEvent $event): void
+    public function onKernelRequest(RequestEvent $event): void
     {
-        $controller = $event->getController();
+        $controller = $event->getRequest()->attributes->get('_controller');
+
         if (is_array($controller) && $controller[0] instanceof RestrictedControllerInterface) {
             $controller[0]->performAccessCheck();
 
@@ -42,11 +43,16 @@ final readonly class PerformAccessCheckSubscriber implements EventSubscriberInte
         if (is_string($controller) && str_contains($controller, '::')) {
             [$class] = explode('::', $controller, 2);
 
-            foreach ($this->controllers as $controllerInstance) {
-                if ($controllerInstance::class === $class && $controllerInstance instanceof RestrictedControllerInterface) {
-                    $controllerInstance->performAccessCheck();
-                    break;
+            try {
+                foreach ($this->controllers as $controllerInstance) {
+                    if ($controllerInstance::class === $class && $controllerInstance instanceof RestrictedControllerInterface) {
+                        $controllerInstance->performAccessCheck();
+                        break;
+                    }
                 }
+            } catch (\Error $e) {
+                // Skip if iteration fails due to abstract classes
+                return;
             }
         }
     }
@@ -54,7 +60,7 @@ final readonly class PerformAccessCheckSubscriber implements EventSubscriberInte
     public static function getSubscribedEvents(): array
     {
         return [
-            ControllerEvent::class => 'onControllerEvent',
+            RequestEvent::class => ['onKernelRequest', 5],
         ];
     }
 }
