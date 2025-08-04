@@ -71,7 +71,7 @@ final class UserSettingsController extends Controller implements RestrictedContr
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
-            $result = $this->submitHandler->handle($form, function (UserSettingUpdateData $data) use ($form): RedirectResponse {
+            $result = $this->submitHandler->handle($form, function (UserSettingUpdateData $data): RedirectResponse {
                 foreach ($data->getValues() as $identifier => $value) {
                     $this->userSettingService->setUserSetting($identifier, (string)$value['value']);
                 }
