@@ -20,8 +20,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class UserSettingUpdateType extends AbstractType
 {
-    public const string BTN_UPDATE_AND_EDIT = 'update_and_edit';
-
     public function __construct(
         protected FormMapperRegistry $formMapperRegistry,
         protected ValueDefinitionRegistry $valueDefinitionRegistry
@@ -38,7 +36,7 @@ class UserSettingUpdateType extends AbstractType
         );
 
         $builder
-            ->add('identifier', HiddenType::class, []);
+            ->add('identifier', HiddenType::class);
 
         foreach ($groupDefinition->getValueDefinitions() as $identifier => $valueDefinition) {
             $formMapper = $this->formMapperRegistry->getFormMapper($identifier);
@@ -55,8 +53,7 @@ class UserSettingUpdateType extends AbstractType
 
             $builder->add($sub);
         }
-        $builder->add('update', SubmitType::class, []);
-        $builder->add(self::BTN_UPDATE_AND_EDIT, SubmitType::class);
+        $builder->add('update', SubmitType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

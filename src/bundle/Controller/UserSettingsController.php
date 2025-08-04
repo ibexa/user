@@ -83,14 +83,6 @@ final class UserSettingsController extends Controller implements RestrictedContr
                     'ibexa_user_settings'
                 );
 
-                if ($form->getClickedButton() instanceof Button
-                    && $form->getClickedButton()->getName() === UserSettingUpdateType::BTN_UPDATE_AND_EDIT
-                ) {
-                    return $this->redirectToRoute('ibexa.user_settings.update', [
-                        'identifier' => $data->getIdentifier(),
-                    ]);
-                }
-
                 return new RedirectResponse($this->generateUrl('ibexa.user_settings.list'));
             });
 
