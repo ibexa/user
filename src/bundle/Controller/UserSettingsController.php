@@ -15,13 +15,11 @@ use Ibexa\User\ExceptionHandler\ActionResultHandler;
 use Ibexa\User\Form\Data\UserSettingUpdateData;
 use Ibexa\User\Form\Factory\FormFactory;
 use Ibexa\User\Form\SubmitHandler;
-use Ibexa\User\Form\Type\UserSettingUpdateType;
 use Ibexa\User\UserSetting\UserSettingService;
 use Ibexa\User\UserSetting\ValueDefinitionRegistry;
 use Ibexa\User\View\UserSettings\ListView;
 use Ibexa\User\View\UserSettings\UpdateView;
 use JMS\TranslationBundle\Annotation\Desc;
-use Symfony\Component\Form\Button;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -71,7 +69,7 @@ final class UserSettingsController extends Controller implements RestrictedContr
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
-            $result = $this->submitHandler->handle($form, function (UserSettingUpdateData $data) use ($form): RedirectResponse {
+            $result = $this->submitHandler->handle($form, function (UserSettingUpdateData $data): RedirectResponse {
                 foreach ($data->getValues() as $identifier => $value) {
                     $this->userSettingService->setUserSetting($identifier, (string)$value['value']);
                 }
@@ -82,14 +80,6 @@ final class UserSettingsController extends Controller implements RestrictedContr
                     ['%identifier%' => $data->getIdentifier()],
                     'ibexa_user_settings'
                 );
-
-                if ($form->getClickedButton() instanceof Button
-                    && $form->getClickedButton()->getName() === UserSettingUpdateType::BTN_UPDATE_AND_EDIT
-                ) {
-                    return $this->redirectToRoute('ibexa.user_settings.update', [
-                        'identifier' => $data->getIdentifier(),
-                    ]);
-                }
 
                 return new RedirectResponse($this->generateUrl('ibexa.user_settings.list'));
             });
