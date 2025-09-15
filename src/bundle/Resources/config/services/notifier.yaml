@@ -1,0 +1,9 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    Ibexa\User\PasswordReset\Notifier: ~
+
+    Ibexa\Contracts\User\PasswordReset\Notifier: '@Ibexa\User\PasswordReset\Notifier'
