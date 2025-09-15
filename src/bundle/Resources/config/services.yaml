@@ -7,6 +7,7 @@ imports:
     - { resource: services/invitation.yaml }
     - { resource: services/installer.yaml }
     - { resource: services/twig.yaml }
+    - { resource: services/notifier.yaml }
 
 parameters:
     ibexa.user.content_type_identifier: user
