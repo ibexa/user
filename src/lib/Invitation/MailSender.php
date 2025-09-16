@@ -49,16 +49,18 @@ final class MailSender implements InvitationSender
 
         $subject = $template->renderBlock('subject', []);
         $from = $template->renderBlock('from', []) ?: $senderAddress;
+
+        $message = (new Swift_Message())
+            ->setSubject($subject)
+            ->setTo($invitation->getEmail());
+
         $body = $template->renderBlock('body', [
             'invite_hash' => $invitation->getHash(),
             'siteaccess' => $invitation->getSiteAccessIdentifier(),
             'invitation' => $invitation,
         ]);
 
-        $message = (new Swift_Message())
-            ->setSubject($subject)
-            ->setTo($invitation->getEmail())
-            ->setBody($body, 'text/html');
+        $message->setBody($body, 'text/html');
 
         if (empty($from) === false) {
             $message->setFrom($from);
