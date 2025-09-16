@@ -34,7 +34,7 @@ final class Notifier implements PasswordResetNotifierInterface
         ConfigResolverInterface $configResolver,
         Swift_Mailer $mailer,
         Environment $twig,
-        NotificationServiceInterface $notificationService,
+        NotificationServiceInterface $notificationService
     ) {
         $this->configResolver = $configResolver;
         $this->mailer = $mailer;
