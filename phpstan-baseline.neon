@@ -421,12 +421,6 @@ parameters:
 			path: src/lib/Form/Data/UserInvitationData.php
 
 		-
-			message: '#^Property Ibexa\\User\\Form\\Data\\UserInvitationData\:\:\$email \(string\) does not accept string\|null\.$#'
-			identifier: assign.propertyType
-			count: 1
-			path: src/lib/Form/Data/UserInvitationData.php
-
-		-
 			message: '#^Property Ibexa\\User\\Form\\Data\\UserInvitationData\:\:\$limitationValue type has no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
@@ -587,12 +581,6 @@ parameters:
 			identifier: identical.alwaysFalse
 			count: 1
 			path: src/lib/Form/DataTransformer/LimitationValueTransformer.php
-
-		-
-			message: '#^Cannot call method getContentType\(\) on Ibexa\\User\\Form\\Data\\UserPasswordResetData\|null\.$#'
-			identifier: method.nonObject
-			count: 1
-			path: src/lib/Form/Factory/FormFactory.php
 
 		-
 			message: '#^Method Ibexa\\User\\Form\\Factory\\FormFactory\:\:changeUserPassword\(\) return type with generic interface Symfony\\Component\\Form\\FormInterface does not specify its types\: TData$#'

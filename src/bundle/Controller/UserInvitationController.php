@@ -16,6 +16,7 @@ use Ibexa\Contracts\User\Invitation\InvitationService;
 use Ibexa\User\ExceptionHandler\ActionResultHandler;
 use Ibexa\User\Form\Type\Invitation\UserInvitationType;
 use Ibexa\User\View\Invitation\FormView;
+use InvalidArgumentException;
 use JMS\TranslationBundle\Annotation\Desc;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -50,6 +51,11 @@ final class UserInvitationController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var \Ibexa\User\Form\Data\UserInvitationData $data */
             $data = $form->getData();
+
+            if ($data->getEmail() === null){
+                throw new InvalidArgumentException('Email cannot be null');
+            }
+
             try {
                 $invitation = $this->invitationService->createInvitation(
                     new InvitationCreateStruct(
