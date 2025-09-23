@@ -18,7 +18,7 @@ interface FormatterInterface
      *
      * @return string
      */
-    public function format(DateTimeInterface $datetime, string $timezone = null): string;
+    public function format(DateTimeInterface $datetime, ?string $timezone = null): string;
 }
 
 class_alias(FormatterInterface::class, 'EzSystems\EzPlatformUser\UserSetting\DateTimeFormat\FormatterInterface');

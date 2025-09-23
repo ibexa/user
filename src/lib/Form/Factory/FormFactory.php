@@ -20,6 +20,7 @@ use Ibexa\User\Form\Type\UserPasswordForgotType;
 use Ibexa\User\Form\Type\UserPasswordForgotWithLoginType;
 use Ibexa\User\Form\Type\UserPasswordResetType;
 use Ibexa\User\Form\Type\UserSettingUpdateType;
+use InvalidArgumentException;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\Util\StringUtil;
@@ -45,7 +46,7 @@ class FormFactory
 
     public function changeUserPassword(
         ContentType $contentType,
-        UserPasswordChangeData $data = null,
+        ?UserPasswordChangeData $data = null,
         ?string $name = null,
         ?User $user = null
     ): FormInterface {
@@ -71,7 +72,7 @@ class FormFactory
      * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
      */
     public function forgotUserPassword(
-        UserPasswordForgotData $data = null,
+        ?UserPasswordForgotData $data = null,
         ?string $name = null
     ): FormInterface {
         $name = $name ?: StringUtil::fqcnToBlockPrefix(UserPasswordForgotType::class);
@@ -88,7 +89,7 @@ class FormFactory
      * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
      */
     public function forgotUserPasswordWithLogin(
-        UserPasswordForgotWithLoginData $data = null,
+        ?UserPasswordForgotWithLoginData $data = null,
         ?string $name = null
     ): FormInterface {
         $name = $name ?: StringUtil::fqcnToBlockPrefix(UserPasswordForgotWithLoginType::class);
@@ -97,21 +98,19 @@ class FormFactory
     }
 
     /**
-     * @param \Ibexa\User\Form\Data\UserPasswordResetData $data
-     * @param string|null $name
-     *
-     * @return \Symfony\Component\Form\FormInterface
-     *
      * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
      */
     public function resetUserPassword(
-        UserPasswordResetData $data = null,
+        ?UserPasswordResetData $data = null,
         ?string $name = null,
         ?ContentType $contentType = null,
         ?User $user = null
     ): FormInterface {
         $name = $name ?: StringUtil::fqcnToBlockPrefix(UserPasswordResetType::class);
 
+        if (null === $data) {
+            throw new InvalidArgumentException('UserPasswordResetData is required for resetting user password');
+        }
         $userContentType = $contentType ?? $data->getContentType();
 
         return $this->formFactory->createNamed(
@@ -127,7 +126,7 @@ class FormFactory
 
     public function updateUserSetting(
         string $userSettingIdentifier,
-        UserSettingUpdateData $data = null,
+        ?UserSettingUpdateData $data = null,
         ?string $name = null
     ): FormInterface {
         $name = $name ?: StringUtil::fqcnToBlockPrefix(UserSettingUpdateType::class);

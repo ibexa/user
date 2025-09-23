@@ -21,7 +21,7 @@ final class UserInvitationData
      *
      * @Assert\Email()
      */
-    private string $email;
+    private ?string $email;
 
     private ?Role $role;
 
@@ -44,8 +44,8 @@ final class UserInvitationData
     private ?array $limitationValue;
 
     public function __construct(
-        string $email = null,
-        SiteAccess $siteaccess = null,
+        ?string $email = null,
+        ?SiteAccess $siteaccess = null,
         ?Role $role = null,
         ?UserGroup $userGroup = null,
         ?array $sections = null,
@@ -85,7 +85,7 @@ final class UserInvitationData
         $this->limitationValue = $limitationValue;
     }
 
-    public function getEmail(): string
+    public function getEmail(): ?string
     {
         return $this->email;
     }

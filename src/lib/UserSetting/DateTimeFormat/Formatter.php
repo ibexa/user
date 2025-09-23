@@ -36,7 +36,7 @@ class Formatter implements FormatterInterface
     /**
      * {@inheritdoc}
      */
-    public function format(DateTimeInterface $datetime, string $timezone = null): string
+    public function format(DateTimeInterface $datetime, ?string $timezone = null): string
     {
         if ($timezone) {
             $currentTimezone = $this->formatter->getTimeZone();
