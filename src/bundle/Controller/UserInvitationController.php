@@ -52,10 +52,6 @@ final class UserInvitationController extends Controller
             /** @var \Ibexa\User\Form\Data\UserInvitationData $data */
             $data = $form->getData();
 
-            if ($data->getEmail() === null){
-                throw new InvalidArgumentException('Email cannot be null');
-            }
-
             try {
                 $invitation = $this->invitationService->createInvitation(
                     new InvitationCreateStruct(
