@@ -178,7 +178,7 @@ class DateTimeExtension extends AbstractExtension
      *
      * @throws \Exception
      */
-    public function format(FormatterInterface $formatter, $date = null, string $timezone = null): string
+    public function format(FormatterInterface $formatter, $date = null, ?string $timezone = null): string
     {
         if ($date === null) {
             $date = new DateTimeImmutable();
