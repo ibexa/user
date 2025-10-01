@@ -51,7 +51,6 @@ final class UserInvitationController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var \Ibexa\User\Form\Data\UserInvitationData $data */
             $data = $form->getData();
-
             try {
                 $invitation = $this->invitationService->createInvitation(
                     new InvitationCreateStruct(
