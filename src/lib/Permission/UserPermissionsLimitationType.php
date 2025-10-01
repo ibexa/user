@@ -140,7 +140,7 @@ class UserPermissionsLimitationType extends AbstractPersistenceLimitationType im
      * @param \Ibexa\Contracts\Core\Repository\Values\ValueObject $object
      * @param \Ibexa\Contracts\Core\Repository\Values\ValueObject[]|null $targets The context of the $object, like Location of Content, if null none where provided by caller
      */
-    public function evaluate(APILimitationValue $value, APIUserReference $currentUser, object $object, array $targets = null): ?bool
+    public function evaluate(APILimitationValue $value, APIUserReference $currentUser, object $object, ?array $targets = null): ?bool
     {
         if (!$value instanceof UserPermissionsLimitation) {
             throw new InvalidArgumentException('$value', 'Must be of type: APISiteAccessLimitation');

@@ -22,7 +22,7 @@ final class UserRegister extends Notification implements EmailNotificationInterf
         parent::__construct();
     }
 
-    public function asEmailMessage(EmailRecipientInterface $recipient, string $transport = null): ?EmailMessage
+    public function asEmailMessage(EmailRecipientInterface $recipient, ?string $transport = null): ?EmailMessage
     {
         return null;
     }

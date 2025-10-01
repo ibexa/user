@@ -157,12 +157,6 @@ parameters:
 			path: src/lib/Form/DataTransformer/LimitationValueTransformer.php
 
 		-
-			message: '#^Cannot call method getContentType\(\) on Ibexa\\User\\Form\\Data\\UserPasswordResetData\|null\.$#'
-			identifier: method.nonObject
-			count: 1
-			path: src/lib/Form/Factory/FormFactory.php
-
-		-
 			message: '#^Method Ibexa\\User\\Form\\Factory\\FormFactory\:\:changeUserPassword\(\) return type with generic interface Symfony\\Component\\Form\\FormInterface does not specify its types\: TData$#'
 			identifier: missingType.generics
 			count: 1
