@@ -17,7 +17,7 @@ use Ibexa\Contracts\Core\Repository\UserService;
 use Ibexa\Contracts\Core\Repository\Values\User\User;
 use Ibexa\Contracts\Core\Repository\Values\User\UserTokenUpdateStruct;
 use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
-use Ibexa\Contracts\User\PasswordReset\Notifier;
+use Ibexa\Contracts\User\PasswordReset\NotifierInterface;
 use Ibexa\User\ExceptionHandler\ActionResultHandler;
 use Ibexa\User\Form\Data\UserPasswordResetData;
 use Ibexa\User\Form\Factory\FormFactory;
@@ -42,7 +42,7 @@ class PasswordResetController extends Controller
 
     private ConfigResolverInterface $configResolver;
 
-    private Notifier $passwordResetMailer;
+    private NotifierInterface $passwordResetMailer;
 
     public function __construct(
         FormFactory $formFactory,
@@ -50,7 +50,7 @@ class PasswordResetController extends Controller
         ActionResultHandler $actionResultHandler,
         PermissionResolver $permissionResolver,
         ConfigResolverInterface $configResolver,
-        Notifier $passwordResetMailer
+        NotifierInterface $passwordResetMailer
     ) {
         $this->formFactory = $formFactory;
         $this->userService = $userService;

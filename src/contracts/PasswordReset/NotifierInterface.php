@@ -10,7 +10,7 @@ namespace Ibexa\Contracts\User\PasswordReset;
 
 use Ibexa\Contracts\Core\Repository\Values\User\User;
 
-interface Notifier
+interface NotifierInterface
 {
     public function sendMessage(User $user, string $hashKey): void;
 }

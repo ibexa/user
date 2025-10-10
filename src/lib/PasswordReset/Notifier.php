@@ -15,12 +15,12 @@ use Ibexa\Contracts\Notifications\Value\Notification\SymfonyNotificationAdapter;
 use Ibexa\Contracts\Notifications\Value\Recipent\SymfonyRecipientAdapter;
 use Ibexa\Contracts\Notifications\Value\Recipent\UserRecipient;
 use Ibexa\Contracts\User\Notification\UserPasswordReset;
-use Ibexa\Contracts\User\PasswordReset\Notifier as PasswordResetNotifierInterface;
+use Ibexa\Contracts\User\PasswordReset\NotifierInterface;
 use Swift_Mailer;
 use Swift_Message;
 use Twig\Environment;
 
-final class Notifier implements PasswordResetNotifierInterface
+final class Notifier implements NotifierInterface
 {
     private ConfigResolverInterface $configResolver;
 
