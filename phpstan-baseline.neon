@@ -493,12 +493,6 @@ parameters:
 			path: src/lib/Validator/Constraints/EmailInvitationValidator.php
 
 		-
-			message: '#^Method Ibexa\\User\\Validator\\Constraints\\Password\:\:getTargets\(\) return type has no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/lib/Validator/Constraints/Password.php
-
-		-
 			message: '#^Access to an undefined property Symfony\\Component\\Validator\\Constraint\:\:\$message\.$#'
 			identifier: property.notFound
 			count: 2
