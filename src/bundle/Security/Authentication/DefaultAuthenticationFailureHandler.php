@@ -12,6 +12,7 @@ use Ibexa\Contracts\Core\Repository\Exceptions\PasswordInUnsupportedFormatExcept
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
+use Symfony\Component\Security\Core\Exception\BadCredentialsException;
 use Symfony\Component\Security\Http\Authentication\DefaultAuthenticationFailureHandler as HttpDefaultAuthenticationFailureHandler;
 
 final class DefaultAuthenticationFailureHandler extends HttpDefaultAuthenticationFailureHandler
@@ -24,6 +25,17 @@ final class DefaultAuthenticationFailureHandler extends HttpDefaultAuthenticatio
             $this->setOptions([
                 'failure_path' => $resetPasswordUrl,
             ]);
+        }
+
+        if ($exception instanceof BadCredentialsException) {
+            $previous = $exception->getPrevious();
+            $code = $previous ? $previous->getCode() : 0;
+
+            $exception = new BadCredentialsException(
+                'Bad credentials.',
+                $code,
+                $previous
+            );
         }
 
         return parent::onAuthenticationFailure($request, $exception);
