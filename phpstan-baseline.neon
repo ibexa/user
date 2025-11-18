@@ -49,24 +49,6 @@ parameters:
 			path: src/bundle/Controller/PasswordChangeController.php
 
 		-
-			message: '#^Method Ibexa\\Bundle\\User\\Controller\\PasswordResetController\:\:sendNotification\(\) has parameter \$user with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/bundle/Controller/PasswordResetController.php
-
-		-
-			message: '#^Parameter \#1 \$user of method Ibexa\\Bundle\\User\\Controller\\PasswordResetController\:\:sendResetPasswordMessage\(\) expects Ibexa\\Contracts\\Core\\Repository\\Values\\User\\User, Ibexa\\Contracts\\Core\\Repository\\Values\\User\\User\|false given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/bundle/Controller/PasswordResetController.php
-
-		-
-			message: '#^Parameter \#1 \$user of method Ibexa\\Bundle\\User\\Controller\\PasswordResetController\:\:updateUserToken\(\) expects Ibexa\\Contracts\\Core\\Repository\\Values\\User\\User, Ibexa\\Contracts\\Core\\Repository\\Values\\User\\User\|false given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/bundle/Controller/PasswordResetController.php
-
-		-
 			message: '#^Parameter \#1 \$email of class Ibexa\\Contracts\\User\\Invitation\\InvitationCreateStruct constructor expects string, string\|null given\.$#'
 			identifier: argument.type
 			count: 1
@@ -1283,12 +1265,6 @@ parameters:
 			identifier: missingType.return
 			count: 1
 			path: src/lib/Validator/Constraints/EmailInvitationValidator.php
-
-		-
-			message: '#^Method Ibexa\\User\\Validator\\Constraints\\Password\:\:getTargets\(\) return type has no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/lib/Validator/Constraints/Password.php
 
 		-
 			message: '#^Access to an undefined property Symfony\\Component\\Validator\\Constraint\:\:\$contentType\.$#'
