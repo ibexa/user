@@ -13,18 +13,6 @@ parameters:
 			path: src/bundle/Controller/PasswordChangeController.php
 
 		-
-			message: '#^Parameter \#1 \$user of method Ibexa\\Bundle\\User\\Controller\\PasswordResetController\:\:sendResetPasswordMessage\(\) expects Ibexa\\Contracts\\Core\\Repository\\Values\\User\\User, Ibexa\\Contracts\\Core\\Repository\\Values\\User\\User\|false given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/bundle/Controller/PasswordResetController.php
-
-		-
-			message: '#^Parameter \#1 \$user of method Ibexa\\Bundle\\User\\Controller\\PasswordResetController\:\:updateUserToken\(\) expects Ibexa\\Contracts\\Core\\Repository\\Values\\User\\User, Ibexa\\Contracts\\Core\\Repository\\Values\\User\\User\|false given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/bundle/Controller/PasswordResetController.php
-
-		-
 			message: '#^Call to an undefined method Symfony\\Component\\Form\\FormInterface\<mixed\>\:\:getClickedButton\(\)\.$#'
 			identifier: method.notFound
 			count: 4

@@ -18,11 +18,7 @@ use Ibexa\Contracts\Core\Repository\UserService;
 use Ibexa\Contracts\Core\Repository\Values\User\User;
 use Ibexa\Contracts\Core\Repository\Values\User\UserTokenUpdateStruct;
 use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
-use Ibexa\Contracts\Notifications\Service\NotificationServiceInterface;
-use Ibexa\Contracts\Notifications\Value\Notification\SymfonyNotificationAdapter;
-use Ibexa\Contracts\Notifications\Value\Recipent\SymfonyRecipientAdapter;
-use Ibexa\Contracts\Notifications\Value\Recipent\UserRecipient;
-use Ibexa\Contracts\User\Notification\UserPasswordReset;
+use Ibexa\Contracts\User\PasswordReset\NotifierInterface;
 use Ibexa\User\ExceptionHandler\ActionResultHandler;
 use Ibexa\User\Form\Data\UserPasswordResetData;
 use Ibexa\User\Form\Factory\FormFactory;
@@ -35,18 +31,16 @@ use Ibexa\User\View\ResetPassword\SuccessView as UserResetPasswordSuccessView;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Twig\Environment;
 
 class PasswordResetController extends Controller
 {
     public function __construct(
         private readonly FormFactory $formFactory,
         private readonly UserService $userService,
-        private readonly Environment $twig,
         private readonly ActionResultHandler $actionResultHandler,
         private readonly PermissionResolver $permissionResolver,
         private readonly ConfigResolverInterface $configResolver,
-        private readonly NotificationServiceInterface $notificationService
+        private readonly NotifierInterface $passwordResetMailer
     ) {
     }
 
@@ -69,10 +63,11 @@ class PasswordResetController extends Controller
             }
 
             if (!empty($users)) {
+                /** @var \Ibexa\Contracts\Core\Repository\Values\User\User $user */
                 $user = reset($users);
                 $token = $this->updateUserToken($user);
 
-                $this->sendResetPasswordMessage($user, $token);
+                $this->passwordResetMailer->sendMessage($user, $token);
             }
 
             return new SuccessView(null);
@@ -109,7 +104,7 @@ class PasswordResetController extends Controller
             }
 
             $token = $this->updateUserToken($user);
-            $this->sendResetPasswordMessage($user, $token);
+            $this->passwordResetMailer->sendMessage($user, $token);
 
             return new SuccessView(null);
         }
@@ -192,15 +187,5 @@ class PasswordResetController extends Controller
         $this->userService->updateUserToken($user, $struct);
 
         return $struct->hashKey;
-    }
-
-    private function sendResetPasswordMessage(User $user, string $hashKey): void
-    {
-        $this->notificationService->send(
-            new SymfonyNotificationAdapter(
-                new UserPasswordReset($user, $hashKey, $this->configResolver, $this->twig),
-            ),
-            [new SymfonyRecipientAdapter(new UserRecipient($user))],
-        );
     }
 }
