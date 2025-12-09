@@ -14,11 +14,6 @@ use Symfony\Component\Config\Definition\Builder\NodeBuilder;
 
 class UserRegistration extends AbstractParser
 {
-    /**
-     * Adds semantic configuration definition.
-     *
-     * @param \Symfony\Component\Config\Definition\Builder\NodeBuilder $nodeBuilder Node just under ezpublish.system.<siteaccess>
-     */
     public function addSemanticConfig(NodeBuilder $nodeBuilder): void
     {
         $nodeBuilder
