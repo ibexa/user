@@ -14,10 +14,10 @@ use Symfony\Component\Validator\Constraints as Assert;
 class UserPasswordChangeData
 {
     public function __construct(
-        /**
-         * @UserAssert\UserPassword()
-         */
-        #[Assert\NotBlank]
+        #[Assert\Sequentially([
+            new Assert\NotBlank(),
+            new UserAssert\UserPassword(),
+        ])]
         private ?string $oldPassword = null,
         #[Assert\NotBlank]
         private ?string $newPassword = null
