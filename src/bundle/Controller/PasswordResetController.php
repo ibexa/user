@@ -55,7 +55,7 @@ class PasswordResetController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
-            $users = $this->userService->loadUsersByEmail($data->getEmail());
+            $users = iterator_to_array($this->userService->loadUsersByEmail($data->getEmail()));
 
             /** Because it is possible to have multiple user accounts with same email address we must gain a user login. */
             if (count($users) > 1) {
@@ -99,7 +99,11 @@ class PasswordResetController extends Controller
                 $user = null;
             }
 
-            if (!$user || count($this->userService->loadUsersByEmail($user->email)) < 2) {
+            $users = $user === null
+                ? []
+                : iterator_to_array($this->userService->loadUsersByEmail($user->email));
+
+            if (!$user || count($users) < 2) {
                 return new SuccessView(null);
             }
 

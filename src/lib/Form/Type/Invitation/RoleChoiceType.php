@@ -43,7 +43,7 @@ final class RoleChoiceType extends AbstractType
     public function loadFilteredRoles(): array
     {
         return array_filter(
-            $this->repository->sudo(fn (): iterable => $this->roleService->loadRoles()),
+            $this->repository->sudo(fn (): array => iterator_to_array($this->roleService->loadRoles())),
             fn (Role $role): bool => $this->permissionResolver->canUser('user', 'invite', $role)
         );
     }
