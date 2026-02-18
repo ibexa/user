@@ -19,13 +19,20 @@ use Ibexa\User\UserSetting\ValueDefinitionRegistry;
 use Ibexa\User\View\UserSettings\ListView;
 use Ibexa\User\View\UserSettings\UpdateView;
 use JMS\TranslationBundle\Annotation\Desc;
+use Psr\Log\LoggerAwareInterface;
+use Psr\Log\LoggerAwareTrait;
+use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 use Symfony\Component\Form\Button;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Exception\ExceptionInterface as RouteExceptionInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-class UserSettingsController extends Controller
+class UserSettingsController extends Controller implements LoggerAwareInterface
 {
+    use LoggerAwareTrait;
+
     /** @var \Ibexa\User\Form\Factory\FormFactory */
     private $formFactory;
 
@@ -43,13 +50,17 @@ class UserSettingsController extends Controller
 
     private PermissionResolver $permissionResolver;
 
+    private UrlGeneratorInterface $urlGenerator;
+
     public function __construct(
         FormFactory $formFactory,
         SubmitHandler $submitHandler,
         UserSettingService $userSettingService,
         ValueDefinitionRegistry $valueDefinitionRegistry,
         ActionResultHandler $actionResultHandler,
-        PermissionResolver $permissionResolver
+        PermissionResolver $permissionResolver,
+        UrlGeneratorInterface $urlGenerator,
+        LoggerInterface $logger = null
     ) {
         $this->formFactory = $formFactory;
         $this->submitHandler = $submitHandler;
@@ -57,6 +68,8 @@ class UserSettingsController extends Controller
         $this->valueDefinitionRegistry = $valueDefinitionRegistry;
         $this->actionResultHandler = $actionResultHandler;
         $this->permissionResolver = $permissionResolver;
+        $this->urlGenerator = $urlGenerator;
+        $this->logger = $logger ?? new NullLogger();
     }
 
     /**
@@ -92,7 +105,7 @@ class UserSettingsController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
-            $result = $this->submitHandler->handle($form, function (UserSettingUpdateData $data) use ($form) {
+            $result = $this->submitHandler->handle($form, function (UserSettingUpdateData $data) use ($form, $request) {
                 foreach ($data->getValues() as $identifier => $value) {
                     $this->userSettingService->setUserSetting($identifier, (string)$value['value']);
                 }
@@ -104,15 +117,28 @@ class UserSettingsController extends Controller
                     'ibexa_user_settings'
                 );
 
+                $route = $request->query->get('route');
+                $routeParameters = $request->query->all('routeParameters');
+                if (!$this->routeExists($route, $routeParameters)) {
+                    $route = null;
+                    $routeParameters = [];
+                }
+
                 if ($form->getClickedButton() instanceof Button
                     && $form->getClickedButton()->getName() === UserSettingUpdateType::BTN_UPDATE_AND_EDIT
                 ) {
                     return $this->redirectToRoute('ibexa.user_settings.update', [
                         'identifier' => $data->getIdentifier(),
+                        'route' => $route,
+                        'routeParameters' => $routeParameters,
                     ]);
                 }
 
-                return new RedirectResponse($this->generateUrl('ibexa.user_settings.list'));
+                if ($route !== null) {
+                    return $this->redirectToRoute($route, $routeParameters);
+                }
+
+                return $this->redirectToRoute('ibexa.user_settings.list');
             });
 
             if ($result instanceof Response) {
@@ -126,6 +152,27 @@ class UserSettingsController extends Controller
         ]);
 
         return $view;
+    }
+
+    /**
+     * @param array<mixed> $routeParameters
+     */
+    private function routeExists(string $route, array $routeParameters): bool
+    {
+        try {
+            $this->urlGenerator->generate($route, $routeParameters);
+
+            return true;
+        } catch (RouteExceptionInterface $e) {
+            $this->logger->warning(
+                sprintf('Invalid route in query. %s.', $e->getMessage()),
+                [
+                    'exception' => $e,
+                ],
+            );
+        }
+
+        return false;
     }
 }
 
