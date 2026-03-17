@@ -49,12 +49,6 @@ parameters:
 			path: src/contracts/Invitation/Persistence/Gateway.php
 
 		-
-			message: '#^Method Ibexa\\Contracts\\User\\Notification\\UserInvitation\:\:asEmailMessage\(\) never returns null so it can be removed from the return type\.$#'
-			identifier: return.unusedType
-			count: 1
-			path: src/contracts/Notification/UserInvitation.php
-
-		-
 			message: '#^Method Ibexa\\Contracts\\User\\Notification\\UserPasswordReset\:\:asEmailMessage\(\) never returns null so it can be removed from the return type\.$#'
 			identifier: return.unusedType
 			count: 1

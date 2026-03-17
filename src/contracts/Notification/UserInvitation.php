@@ -27,7 +27,7 @@ final class UserInvitation extends Notification implements EmailNotificationInte
         parent::__construct();
     }
 
-    public function asEmailMessage(EmailRecipientInterface $recipient, string $transport = null): ?EmailMessage
+    public function asEmailMessage(EmailRecipientInterface $recipient, ?string $transport = null): EmailMessage
     {
         $templatePath = $this->twig->load(
             $this->configResolver->getParameter(

@@ -35,7 +35,7 @@ final readonly class InvitationService implements InvitationServiceInterface
         private Handler $handler,
         private HashGenerator $hashGenerator,
         private UserService $userService,
-        private SiteaccessServiceInterface $siteAccessService,
+        private SiteAccessServiceInterface $siteAccessService,
         private TransactionHandler $transactionHandler,
         private ConfigResolverInterface $configResolver,
         private DomainMapper $domainMapper
