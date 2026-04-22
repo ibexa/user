@@ -20,7 +20,6 @@ final class UserRegisterTypeTest extends IbexaKernelTestCase
 {
     public function testAllowedFieldDefinitionsIdentifiers(): void
     {
-        // Arrange
         $expectedIdentifiers = ['last_name'];
         $data = self::prepareUserRegisterData();
         $language = 'eng-GB';
@@ -33,7 +32,6 @@ final class UserRegisterTypeTest extends IbexaKernelTestCase
         self::getContainer()->set(UserRegisterType::class, new UserRegisterType($configResolver));
         $formFactory = self::getServiceByClassName(FormFactoryInterface::class);
 
-        // Act
         $form = $formFactory->create(
             UserRegisterType::class,
             $data,
@@ -44,7 +42,6 @@ final class UserRegisterTypeTest extends IbexaKernelTestCase
             ]
         );
 
-        // Assert
         $fieldsData = $form->get('fieldsData');
         self::assertCount(count($expectedIdentifiers), $fieldsData);
         foreach ($expectedIdentifiers as $identifier) {
