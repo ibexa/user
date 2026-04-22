@@ -15,10 +15,10 @@ use Ibexa\ContentForms\Form\ActionDispatcher\UserDispatcher;
 use Ibexa\Contracts\Core\Test\IbexaTestKernel as BaseIbexaTestKernel;
 use Ibexa\Contracts\User\Invitation\InvitationService;
 use LogicException;
-use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\Form\FormFactoryInterface;
 
 final class IbexaTestKernel extends BaseIbexaTestKernel
 {
