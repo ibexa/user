@@ -16,7 +16,7 @@ use Ibexa\User\Form\Data\UserRegisterData;
 use Ibexa\User\Form\Type\UserRegisterType;
 use Symfony\Component\Form\FormFactoryInterface;
 
-class UserRegisterTypeTest extends IbexaKernelTestCase
+final class UserRegisterTypeTest extends IbexaKernelTestCase
 {
     public function testAllowedFieldDefinitionsIdentifiers(): void
     {
