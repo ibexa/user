@@ -8,12 +8,14 @@ declare(strict_types=1);
 
 namespace Ibexa\Tests\Integration\User;
 
+use Ibexa\Bundle\ContentForms\IbexaContentFormsBundle;
 use Ibexa\Bundle\Notifications\IbexaNotificationsBundle;
 use Ibexa\Bundle\User\IbexaUserBundle;
 use Ibexa\ContentForms\Form\ActionDispatcher\UserDispatcher;
 use Ibexa\Contracts\Core\Test\IbexaTestKernel as BaseIbexaTestKernel;
 use Ibexa\Contracts\User\Invitation\InvitationService;
 use LogicException;
+use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
@@ -38,6 +40,7 @@ final class IbexaTestKernel extends BaseIbexaTestKernel
         yield from [
             new IbexaUserBundle(),
             new IbexaNotificationsBundle(),
+            new IbexaContentFormsBundle(),
         ];
     }
 
@@ -47,6 +50,7 @@ final class IbexaTestKernel extends BaseIbexaTestKernel
         yield from parent::getExposedServicesByClass();
 
         yield InvitationService::class;
+        yield FormFactoryInterface::class;
     }
 
     #[\Override]
