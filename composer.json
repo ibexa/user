@@ -22,9 +22,9 @@
     },
     "require": {
         "php": " >=8.3",
-        "ibexa/content-forms": "~5.0.x-dev",
-        "ibexa/core": "~5.0.x-dev",
-        "ibexa/notifications": "~5.0.x-dev",
+        "ibexa/content-forms": "~6.0.x-dev",
+        "ibexa/core": "~6.0.x-dev",
+        "ibexa/notifications": "~6.0.x-dev",
         "jms/translation-bundle": "^2.4",
         "symfony/config": "^7.4",
         "symfony/dependency-injection": "^7.4",
@@ -43,13 +43,13 @@
     },
     "require-dev": {
         "ibexa/code-style": "~2.0.0",
-        "ibexa/design-engine": "~5.0.x-dev",
-        "ibexa/doctrine-schema": "~5.0.x-dev",
-        "ibexa/fieldtype-richtext": "~5.0.x-dev",
-        "ibexa/http-cache": "~5.0.x-dev",
-        "ibexa/rector": "~5.0.x-dev",
-        "ibexa/rest": "~5.0.x-dev",
-        "ibexa/search": "~5.0.x-dev",
+        "ibexa/design-engine": "~6.0.x-dev",
+        "ibexa/doctrine-schema": "~6.0.x-dev",
+        "ibexa/fieldtype-richtext": "~6.0.x-dev",
+        "ibexa/http-cache": "~6.0.x-dev",
+        "ibexa/rector": "~6.0.x-dev",
+        "ibexa/rest": "~6.0.x-dev",
+        "ibexa/search": "~6.0.x-dev",
         "matthiasnoback/symfony-dependency-injection-test": "^5.0",
         "phpstan/phpstan": "^2.0",
         "phpstan/phpstan-phpunit": "^2.0",
@@ -65,7 +65,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-main": "5.0.x-dev"
+            "dev-main": "6.0.x-dev"
         }
     },
     "config": {
