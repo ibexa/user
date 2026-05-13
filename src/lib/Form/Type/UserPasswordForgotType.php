@@ -27,7 +27,7 @@ class UserPasswordForgotType extends AbstractType
             ->add(
                 'reset',
                 SubmitType::class,
-                ['label' => /** @Desc("Reset password") */ 'ezplatform.forgot_user_password.reset_password']
+                ['label' => /** @Desc("Reset password") */ 'ezplatform.forgot_user_password.send']
             );
     }
 

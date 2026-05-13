@@ -41,10 +41,10 @@
         <target state="new">Reset</target>
         <note>key: ezplatform.forgot_user_password.reset</note>
       </trans-unit>
-      <trans-unit id="74369731b788ced69222ac7b2a87655971bc1594" resname="ezplatform.forgot_user_password.reset_password">
+      <trans-unit id="44c91aa5708f9b819f7f84b00925dc19d6798341" resname="ezplatform.forgot_user_password.send">
         <source>Reset password</source>
         <target state="new">Reset password</target>
-        <note>key: ezplatform.forgot_user_password.reset_password</note>
+        <note>key: ezplatform.forgot_user_password.send</note>
       </trans-unit>
       <trans-unit id="877b8a2a4e3b2c7c137b7776a54cd7531421e5d3" resname="ezplatform.reset_user_password.confirm_new_password">
         <source>Confirm password</source>
