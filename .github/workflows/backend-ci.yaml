@@ -1,71 +1,61 @@
 name: CI
 
 on:
-  push:
-    branches:
-      - main
-      - '[0-9]+.[0-9]+'
-  pull_request: ~
+    push:
+        branches:
+            - main
+            - '[0-9]+.[0-9]+'
+    pull_request: ~
 
 jobs:
-  cs_fix:
-    name: Run code style check
-    runs-on: "ubuntu-22.04"
-    strategy:
-      matrix:
-        php:
-          - '8.1'
-    steps:
-      - uses: actions/checkout@v6
+    cs-fix:
+        name: Run code style check
+        runs-on: "ubuntu-24.04"
+        strategy:
+            matrix:
+                php:
+                    - '8.1'
+        steps:
+            -   uses: actions/checkout@v6
 
-      - name: Setup PHP Action
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: ${{ matrix.php }}
-          coverage: none
-          extensions: 'pdo_sqlite, gd'
-          tools: cs2pr
+            -   uses: ibexa/gh-workflows/actions/composer-install@main
+                with:
+                    gh-client-id: ${{ secrets.AUTOMATION_CLIENT_ID }}
+                    gh-client-secret: ${{ secrets.AUTOMATION_CLIENT_SECRET }}
+                    satis-network-key: ${{ secrets.SATIS_NETWORK_KEY }}
+                    satis-network-token: ${{ secrets.SATIS_NETWORK_TOKEN }}
 
-      - uses: ramsey/composer-install@v3
-        with:
-          dependency-versions: "highest"
+            -   name: Run code style check
+                run: composer run-script check-cs -- --format=checkstyle | cs2pr
 
-      - name: Run code style check
-        run: composer run-script check-cs -- --format=checkstyle | cs2pr
+    tests:
+        name: Unit tests & SQLite integration tests
+        runs-on: "ubuntu-24.04"
+        timeout-minutes: 15
 
-  tests:
-    name: Tests
-    runs-on: "ubuntu-22.04"
-    timeout-minutes: 10
+        strategy:
+            fail-fast: false
+            matrix:
+                php:
+                    - '7.4'
+                    - '8.3'
+                    - '8.4'
 
-    strategy:
-      fail-fast: false
-      matrix:
-        php:
-          - '7.4'
-          - '8.3'
-          - '8.4'
+        steps:
+            -   uses: actions/checkout@v6
 
-    steps:
-      - uses: actions/checkout@v6
+            -   uses: ibexa/gh-workflows/actions/composer-install@main
+                with:
+                    gh-client-id: ${{ secrets.AUTOMATION_CLIENT_ID }}
+                    gh-client-secret: ${{ secrets.AUTOMATION_CLIENT_SECRET }}
+                    satis-network-key: ${{ secrets.SATIS_NETWORK_KEY }}
+                    satis-network-token: ${{ secrets.SATIS_NETWORK_TOKEN }}
 
-      - name: Setup PHP Action
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: ${{ matrix.php }}
-          coverage: none
-          extensions: pdo_sqlite, gd
-          tools: cs2pr
+            -   name: Setup problem matchers for PHPUnit
+                run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
 
-      - uses: ramsey/composer-install@v3
-        with:
-          dependency-versions: "highest"
+            -   name: Run PHPStan analysis
+                run: composer run-script phpstan
 
-      - name: Setup problem matchers for PHPUnit
-        run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
-
-      - name: Run test suite
-        run: composer run-script --timeout=600 test
-
-      - name: Run PHPStan analysis
-        run: composer run-script phpstan
+            -   name: Run test suite
+                run: composer run-script --timeout=600 test
