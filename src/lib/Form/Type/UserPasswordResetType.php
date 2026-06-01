@@ -42,7 +42,7 @@ class UserPasswordResetType extends AbstractType
             ->add(
                 'update',
                 SubmitType::class,
-                ['label' => /** @Desc("Update") */ 'ezplatform.reset_user_password.update']
+                ['label' => /** @Desc("Confirm password") */ 'ezplatform.reset_user_password.update']
             );
     }
 

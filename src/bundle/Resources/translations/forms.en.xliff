@@ -27,8 +27,8 @@
         <note>key: ezplatform.change_user_password.old_password</note>
       </trans-unit>
       <trans-unit id="859bfc3d21113eecb4a19d4a9305f2519eb4b331" resname="ezplatform.forgot_user_password.email">
-        <source>Enter your email</source>
-        <target state="new">Enter your email</target>
+        <source>Email</source>
+        <target state="new">Email</target>
         <note>key: ezplatform.forgot_user_password.email</note>
       </trans-unit>
       <trans-unit id="ffb6990d5e75fe6dc86e94166b77e40a79e4e2a3" resname="ezplatform.forgot_user_password.login">
@@ -42,8 +42,8 @@
         <note>key: ezplatform.forgot_user_password.reset</note>
       </trans-unit>
       <trans-unit id="44c91aa5708f9b819f7f84b00925dc19d6798341" resname="ezplatform.forgot_user_password.send">
-        <source>Send</source>
-        <target state="new">Send</target>
+        <source>Reset password</source>
+        <target state="new">Reset password</target>
         <note>key: ezplatform.forgot_user_password.send</note>
       </trans-unit>
       <trans-unit id="877b8a2a4e3b2c7c137b7776a54cd7531421e5d3" resname="ezplatform.reset_user_password.confirm_new_password">
@@ -57,8 +57,8 @@
         <note>key: ezplatform.reset_user_password.new_password</note>
       </trans-unit>
       <trans-unit id="7f0836bb06a0030f7595c4c5d5d4079cdcece47f" resname="ezplatform.reset_user_password.update">
-        <source>Update</source>
-        <target state="new">Update</target>
+        <source>Confirm password</source>
+        <target state="new">Confirm password</target>
         <note>key: ezplatform.reset_user_password.update</note>
       </trans-unit>
       <trans-unit id="ab90b332cf5f8d29b421427cdfc2ec676d5bebdb" resname="ibexa.user.invitation.email">
