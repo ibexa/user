@@ -121,13 +121,13 @@ parameters:
 			path: src/lib/Form/DataTransformer/DateTimeFormatTransformer.php
 
 		-
-			message: '#^Class Ibexa\\User\\Form\\DataTransformer\\DateTimeFormatTransformer implements generic interface Symfony\\Component\\Form\\DataTransformerInterface but does not specify its types\: T, R$#'
+			message: '#^Class Ibexa\\User\\Form\\DataTransformer\\DateTimeFormatTransformer implements generic interface Symfony\\Component\\Form\\DataTransformerInterface but does not specify its types\: TValue, TTransformedValue$#'
 			identifier: missingType.generics
 			count: 1
 			path: src/lib/Form/DataTransformer/DateTimeFormatTransformer.php
 
 		-
-			message: '#^Class Ibexa\\User\\Form\\DataTransformer\\InvitationTransformer implements generic interface Symfony\\Component\\Form\\DataTransformerInterface but does not specify its types\: T, R$#'
+			message: '#^Class Ibexa\\User\\Form\\DataTransformer\\InvitationTransformer implements generic interface Symfony\\Component\\Form\\DataTransformerInterface but does not specify its types\: TValue, TTransformedValue$#'
 			identifier: missingType.generics
 			count: 1
 			path: src/lib/Form/DataTransformer/InvitationTransformer.php
