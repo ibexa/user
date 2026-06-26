@@ -97,14 +97,11 @@ class UserSettingsController extends Controller
                     $this->userSettingService->setUserSetting($identifier, (string)$value['value']);
                 }
 
-                $locale = $this->userSettingService->getUserSetting('language')->getValue();
-
                 $this->actionResultHandler->success(
                     /** @Desc("User settings '%identifier%' updated.") */
                     'user_setting.update.success',
                     ['%identifier%' => $data->getIdentifier()],
-                    'ibexa_user_settings',
-                    $locale,
+                    'ibexa_user_settings'
                 );
 
                 if ($form->getClickedButton() instanceof Button

@@ -26,8 +26,8 @@ final class LocationGroup extends AbstractGroup
     public function getName(): string
     {
         return $this->translator->trans(
-            /** @Desc("Location") */
-            'settings.group.location.name',
+            /** @Desc("Locale") */
+            'settings.group.locale.name',
             [],
             'ibexa_user_settings'
         );
@@ -37,7 +37,7 @@ final class LocationGroup extends AbstractGroup
     {
         return $this->translator->trans(
             /** @Desc("") */
-            'settings.group.location.description',
+            'settings.group.locale.description',
             [],
             'ibexa_user_settings'
         );

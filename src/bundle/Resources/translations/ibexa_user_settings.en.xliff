@@ -96,15 +96,15 @@
         <target state="new">Custom Group</target>
         <note>key: settings.group.generic.name</note>
       </trans-unit>
-      <trans-unit id="64ca3f69fd80ec2885e8bdce3393e99d681d8527" resname="settings.group.location.description">
-        <source>settings.group.location.description</source>
+      <trans-unit id="dff80dfe7abacf18bea02d208fe2e51e5c662eaa" resname="settings.group.locale.description">
+        <source>settings.group.locale.description</source>
         <target state="new"></target>
-        <note>key: settings.group.location.description</note>
+        <note>key: settings.group.locale.description</note>
       </trans-unit>
-      <trans-unit id="bd70b10ce1c6e7fa2b82938496f27116fb10b1d9" resname="settings.group.location.name">
-        <source>Location</source>
-        <target state="new">Location</target>
-        <note>key: settings.group.location.name</note>
+      <trans-unit id="a2746dd6ec58ff00bb68db9a77ac0b2abe9e7e72" resname="settings.group.locale.name">
+        <source>Locale</source>
+        <target state="new">Locale</target>
+        <note>key: settings.group.locale.name</note>
       </trans-unit>
       <trans-unit id="3a4946ea2a7aaa360112cf1e657617e7ce7c7d9b" resname="settings.language.value.description">
         <source>Language</source>
