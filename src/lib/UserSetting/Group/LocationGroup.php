@@ -11,6 +11,10 @@ namespace Ibexa\User\UserSetting\Group;
 use JMS\TranslationBundle\Annotation\Desc;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
+/**
+ * The translation for the given group was changed to 'Locale' from 'Location'. However, for backwards compatibility
+ * we decided to keep the old configuration with corresponding classes and services as 'location'.
+ */
 final class LocationGroup extends AbstractGroup
 {
     private TranslatorInterface $translator;
@@ -26,8 +30,8 @@ final class LocationGroup extends AbstractGroup
     public function getName(): string
     {
         return $this->translator->trans(
-            /** @Desc("Location") */
-            'settings.group.location.name',
+            /** @Desc("Locale") */
+            'settings.group.locale.name',
             [],
             'ibexa_user_settings'
         );
@@ -37,7 +41,7 @@ final class LocationGroup extends AbstractGroup
     {
         return $this->translator->trans(
             /** @Desc("") */
-            'settings.group.location.description',
+            'settings.group.locale.description',
             [],
             'ibexa_user_settings'
         );
