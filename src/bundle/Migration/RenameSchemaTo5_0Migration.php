@@ -45,7 +45,6 @@ final class RenameSchemaTo5_0Migration extends AbstractMigration implements Ibex
             $this->addSql('ALTER TABLE ibexa_user_invitation_assignment DROP FOREIGN KEY ibexa_user_invitations_assignments_ibexa_user_invitations_id_fk');
             $this->addSql('ALTER TABLE ibexa_user_invitation_assignment ADD CONSTRAINT ibexa_user_invitation_assignment_ibexa_user_invitation_id_fk FOREIGN KEY (invitation_id) REFERENCES ibexa_user_invitation(id) ON DELETE CASCADE ON UPDATE CASCADE');
             $this->addSql('ALTER TABLE ibexa_user_invitation_assignment RENAME INDEX IDX_DA5A7872A35D7AF0 TO IDX_9E1E6F70A35D7AF0');
-
         } elseif ($this->platform instanceof PostgreSQLPlatform) {
             $this->addSql('ALTER TABLE ibexa_user_invitations RENAME TO ibexa_user_invitation');
             $this->addSql('ALTER INDEX ibexa_user_invitations_email_idx RENAME TO ibexa_user_invitation_email_idx');
@@ -56,7 +55,6 @@ final class RenameSchemaTo5_0Migration extends AbstractMigration implements Ibex
             $this->addSql('ALTER INDEX IDX_DA5A7872A35D7AF0 RENAME TO IDX_9E1E6F70A35D7AF0');
             $this->addSql('ALTER TABLE ibexa_user_invitation_assignment DROP CONSTRAINT ibexa_user_invitations_assignments_ibexa_user_invitations_id_fk');
             $this->addSql('ALTER TABLE ibexa_user_invitation_assignment ADD CONSTRAINT ibexa_user_invitation_assignment_ibexa_user_invitation_id_fk FOREIGN KEY (invitation_id) REFERENCES ibexa_user_invitation(id) ON DELETE CASCADE ON UPDATE CASCADE');
-
         } elseif ($this->platform instanceof SqlitePlatform) {
             $this->addSql('ALTER TABLE ibexa_user_invitations RENAME TO ibexa_user_invitation');
             $this->addSql('DROP INDEX ibexa_user_invitations_email_idx');
@@ -70,7 +68,6 @@ final class RenameSchemaTo5_0Migration extends AbstractMigration implements Ibex
             $this->addSql('ALTER TABLE ibexa_user_invitations_assignments RENAME TO ibexa_user_invitation_assignment');
             $this->addSql('DROP INDEX IDX_DA5A7872A35D7AF0');
             $this->addSql('CREATE INDEX IDX_9E1E6F70A35D7AF0 ON ibexa_user_invitation_assignment (invitation_id)');
-
         }
     }
 }
