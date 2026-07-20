@@ -30,6 +30,7 @@
         "php": " >=8.3",
         "ibexa/content-forms": "~6.0.x-dev",
         "ibexa/core": "~6.0.x-dev",
+        "ibexa/doctrine-migrations": "dev-feat/doctrine-migrations-6.0",
         "ibexa/notifications": "~6.0.x-dev",
         "jms/translation-bundle": "^2.4",
         "symfony/config": "^7.4",
