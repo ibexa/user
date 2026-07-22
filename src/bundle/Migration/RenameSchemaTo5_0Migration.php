@@ -12,6 +12,7 @@ use DateTimeImmutable;
 use Doctrine\DBAL\Schema\Schema;
 use Ibexa\Contracts\DoctrineMigrations\Migrations\AbstractSqlMigration;
 use Ibexa\Contracts\DoctrineMigrations\Migrations\IbexaMigrationInterface;
+use Ibexa\DoctrineMigrations\Migration\SqlPlatform;
 
 final class RenameSchemaTo5_0Migration extends AbstractSqlMigration implements IbexaMigrationInterface
 {
@@ -32,6 +33,8 @@ final class RenameSchemaTo5_0Migration extends AbstractSqlMigration implements I
 
     public function up(Schema $schema): void
     {
+        $this->abortIfUnsupportedPlatform(SqlPlatform::MYSQL, SqlPlatform::POSTGRESQL, SqlPlatform::SQLITE);
+
         if ($this->isMySQL()) {
             $this->addSqlFile(__DIR__ . '/sql/rename-schema-to-5-0-mysql.sql');
         } elseif ($this->isPostgreSQL()) {
