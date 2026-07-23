@@ -35,6 +35,8 @@ final class RenameSchemaTo5_0Migration extends AbstractSqlMigration implements I
     {
         $this->abortIfUnsupportedPlatform(SqlPlatform::MYSQL, SqlPlatform::POSTGRESQL, SqlPlatform::SQLITE);
 
+        $this->skipIf($schema->hasTable('ibexa_user_invitation'), 'Schema already migrated: table "ibexa_user_invitation" already exists.');
+
         if ($this->isMySQL()) {
             $this->addSqlFile(__DIR__ . '/sql/rename-schema-to-5-0-mysql.sql');
         } elseif ($this->isPostgreSQL()) {
