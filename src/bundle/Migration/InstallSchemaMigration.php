@@ -35,7 +35,7 @@ final class InstallSchemaMigration extends AbstractSqlMigration implements Ibexa
     {
         $this->abortIfUnsupportedPlatform(SqlPlatform::MYSQL, SqlPlatform::POSTGRESQL, SqlPlatform::SQLITE);
 
-        if ($schema->hasTable('ibexa_user_invitation')) {
+        if ($schema->hasTable('ibexa_user_invitations')) {
             return;
         }
 
