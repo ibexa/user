@@ -20,6 +20,12 @@
             "Ibexa\\Tests\\Integration\\User\\": "tests/integration/"
         }
     },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/ibexa/doctrine-migrations.git"
+        }
+    ],
     "require": {
         "php": " >=8.3",
         "ibexa/content-forms": "~6.0.x-dev",
