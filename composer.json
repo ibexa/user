@@ -24,12 +24,6 @@
             "EzSystems\\EzPlatformUser\\Tests\\": "tests/lib/"
         }
     },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/ibexa/doctrine-migrations.git"
-        }
-    ],
     "require": {
         "php": "^7.4 || ^8.0",
         "ibexa/core": "~4.6.0@dev",
