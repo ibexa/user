@@ -8,14 +8,29 @@ declare(strict_types=1);
 
 namespace Ibexa\User\Validator\Constraints;
 
-use Ibexa\ContentForms\Validator\ValidationErrorsProcessor;
 use Ibexa\Contracts\Core\Repository\UserService;
+use Ibexa\Contracts\Core\Repository\Values\Translation\Plural;
 use Ibexa\Contracts\Core\Repository\Values\User\PasswordValidationContext;
+use Ibexa\Contracts\User\Password\PasswordRequirement;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
 class PasswordValidator extends ConstraintValidator
 {
+    /**
+     * Message templates from {@see \Ibexa\Core\Repository\Validator\UserPasswordValidator}
+     * and {@see \Ibexa\Core\Repository\User\PasswordValidator}.
+     */
+    private const array REQUIREMENT_CODE_MAP = [
+        'User password must be at least %length% characters long' => PasswordRequirement::MIN_LENGTH,
+        'User password must include at least one upper case letter' => PasswordRequirement::UPPER_CASE,
+        'User password must include at least one lower case letter' => PasswordRequirement::LOWER_CASE,
+        'User password must include at least one number' => PasswordRequirement::NUMERIC,
+        'User password must include at least one special character' => PasswordRequirement::NON_ALPHANUMERIC,
+        'New password cannot be the same as old password' => PasswordRequirement::NEW_PASSWORD,
+        'This password has been leaked in a data breach, it must not be used. Please use another password.' => PasswordRequirement::NOT_COMPROMISED,
+    ];
+
     public function __construct(
         private readonly UserService $userService
     ) {
@@ -41,14 +56,21 @@ class PasswordValidator extends ConstraintValidator
             $value,
             $passwordValidationContext
         );
-        if (!empty($validationErrors)) {
-            $validationErrorsProcessor = $this->createValidationErrorsProcessor();
-            $validationErrorsProcessor->processValidationErrors($validationErrors);
-        }
-    }
 
-    protected function createValidationErrorsProcessor(): ValidationErrorsProcessor
-    {
-        return new ValidationErrorsProcessor($this->context);
+        foreach ($validationErrors as $validationError) {
+            $message = $validationError->getTranslatableMessage();
+            $messageTemplate = $message instanceof Plural ? $message->getPlural() : $message->getMessage();
+
+            $violationBuilder = $this->context
+                ->buildViolation($messageTemplate)
+                ->setParameters($message->getValues());
+
+            $code = self::REQUIREMENT_CODE_MAP[$messageTemplate] ?? null;
+            if ($code !== null) {
+                $violationBuilder->setCode($code);
+            }
+
+            $violationBuilder->addViolation();
+        }
     }
 }

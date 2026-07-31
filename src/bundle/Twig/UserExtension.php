@@ -8,13 +8,14 @@ declare(strict_types=1);
 
 namespace Ibexa\Bundle\User\Twig;
 
+use Override;
 use Twig\DeprecatedCallableInfo;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
 final class UserExtension extends AbstractExtension
 {
-    #[\Override]
+    #[Override]
     public function getFunctions(): array
     {
         return [
@@ -24,6 +25,10 @@ final class UserExtension extends AbstractExtension
                 [
                     'deprecation_info' => new DeprecatedCallableInfo('ibexa/user', '4.6', 'ibexa_current_user'),
                 ]
+            ),
+            new TwigFunction(
+                'ibexa_password_requirements',
+                [UserRuntime::class, 'getPasswordRequirements']
             ),
         ];
     }

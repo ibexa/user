@@ -172,6 +172,7 @@ class PasswordResetController extends Controller
 
         $view = new UserResetPasswordFormView(null, [
             'form_reset_user_password' => $form->createView(),
+            'content_type' => $user->getContentType(),
         ]);
         $view->setResponse($response);
 
