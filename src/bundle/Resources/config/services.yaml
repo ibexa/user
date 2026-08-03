@@ -76,4 +76,3 @@ services:
     Ibexa\User\Form\SubmitHandler: '@Ibexa\User\Form\BaseSubmitHandler'
 
     Ibexa\User\Password\PasswordRequirementsResolver: ~
-    Ibexa\Contracts\User\Password\PasswordRequirementsResolverInterface: '@Ibexa\User\Password\PasswordRequirementsResolver'

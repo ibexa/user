@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace Ibexa\Contracts\User\Password;
+namespace Ibexa\User\Password;
 
 final readonly class PasswordRequirement
 {

@@ -9,9 +9,8 @@ declare(strict_types=1);
 namespace Ibexa\User\Validator\Constraints;
 
 use Ibexa\Contracts\Core\Repository\UserService;
-use Ibexa\Contracts\Core\Repository\Values\Translation\Plural;
 use Ibexa\Contracts\Core\Repository\Values\User\PasswordValidationContext;
-use Ibexa\Contracts\User\Password\PasswordRequirement;
+use Ibexa\User\Password\PasswordRequirement;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
@@ -59,7 +58,7 @@ class PasswordValidator extends ConstraintValidator
 
         foreach ($validationErrors as $validationError) {
             $message = $validationError->getTranslatableMessage();
-            $messageTemplate = $message instanceof Plural ? $message->getPlural() : $message->getMessage();
+            $messageTemplate = $message->getMessageTemplate();
 
             $violationBuilder = $this->context
                 ->buildViolation($messageTemplate)

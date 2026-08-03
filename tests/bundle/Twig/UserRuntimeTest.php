@@ -12,10 +12,11 @@ use Ibexa\Bundle\User\Twig\UserRuntime;
 use Ibexa\Contracts\Core\Repository\PermissionResolver;
 use Ibexa\Contracts\Core\Repository\UserService;
 use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType;
+use Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition;
 use Ibexa\Contracts\Core\Repository\Values\User\User;
 use Ibexa\Contracts\Core\Repository\Values\User\UserReference;
-use Ibexa\Contracts\User\Password\PasswordRequirement;
-use Ibexa\Contracts\User\Password\PasswordRequirementsResolverInterface;
+use Ibexa\User\Password\PasswordRequirement;
+use Ibexa\User\Password\PasswordRequirementsResolver;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
@@ -27,69 +28,88 @@ final class UserRuntimeTest extends TestCase
 
     private UserService&MockObject $userService;
 
-    private PasswordRequirementsResolverInterface&MockObject $passwordRequirementsResolver;
-
     private UserRuntime $runtime;
 
     protected function setUp(): void
     {
         $this->permissionResolver = $this->createMock(PermissionResolver::class);
         $this->userService = $this->createMock(UserService::class);
-        $this->passwordRequirementsResolver = $this->createMock(
-            PasswordRequirementsResolverInterface::class
-        );
 
         $this->runtime = new UserRuntime(
             $this->permissionResolver,
             $this->userService,
-            $this->passwordRequirementsResolver
+            new PasswordRequirementsResolver()
         );
     }
 
     public function testGetPasswordRequirementsFallsBackToCurrentUserContentType(): void
     {
-        $contentType = $this->createMock(ContentType::class);
-        $requirements = [new PasswordRequirement(PasswordRequirement::MIN_LENGTH, ['%length%' => 10])];
+        $this->mockCurrentUserWithContentType($this->createContentTypeWithMinLength(10));
 
-        $this->mockCurrentUserWithContentType($contentType);
-        $this->passwordRequirementsResolver
-            ->expects(self::once())
-            ->method('getRequirements')
-            ->with($contentType)
-            ->willReturn($requirements);
+        $requirements = $this->runtime->getPasswordRequirements();
 
-        self::assertSame($requirements, $this->runtime->getPasswordRequirements());
+        self::assertCount(1, $requirements);
+        self::assertSame(PasswordRequirement::MIN_LENGTH, $requirements[0]->getIdentifier());
+        self::assertSame(['%length%' => 10], $requirements[0]->getParameters());
     }
 
     public function testGetPasswordRequirementsForGivenContentType(): void
     {
-        $contentType = $this->createMock(ContentType::class);
-        $requirements = [new PasswordRequirement(PasswordRequirement::UPPER_CASE)];
-
         $this->userService
             ->expects(self::never())
             ->method('loadUser');
-        $this->passwordRequirementsResolver
-            ->expects(self::once())
-            ->method('getRequirements')
-            ->with($contentType)
-            ->willReturn($requirements);
 
-        self::assertSame($requirements, $this->runtime->getPasswordRequirements($contentType));
+        $requirements = $this->runtime->getPasswordRequirements(
+            $this->createContentTypeWithMinLength(16)
+        );
+
+        self::assertCount(1, $requirements);
+        self::assertSame(PasswordRequirement::MIN_LENGTH, $requirements[0]->getIdentifier());
+        self::assertSame(['%length%' => 16], $requirements[0]->getParameters());
+    }
+
+    private function createContentTypeWithMinLength(int $minLength): ContentType
+    {
+        $fieldDefinition = $this->createMock(FieldDefinition::class);
+        $fieldDefinition
+            ->expects(self::once())
+            ->method('getValidatorConfiguration')
+            ->willReturn(['PasswordValueValidator' => ['minLength' => $minLength]]);
+        $fieldDefinition
+            ->expects(self::once())
+            ->method('getFieldSettings')
+            ->willReturn([]);
+
+        $contentType = $this->createMock(ContentType::class);
+        $contentType
+            ->expects(self::once())
+            ->method('getFirstFieldDefinitionOfType')
+            ->with('ibexa_user')
+            ->willReturn($fieldDefinition);
+
+        return $contentType;
     }
 
     private function mockCurrentUserWithContentType(ContentType $contentType): void
     {
         $userReference = $this->createMock(UserReference::class);
-        $userReference->method('getUserId')->willReturn(self::CURRENT_USER_ID);
+        $userReference
+            ->expects(self::once())
+            ->method('getUserId')
+            ->willReturn(self::CURRENT_USER_ID);
 
         $user = $this->createMock(User::class);
-        $user->method('getContentType')->willReturn($contentType);
+        $user
+            ->expects(self::once())
+            ->method('getContentType')
+            ->willReturn($contentType);
 
         $this->permissionResolver
+            ->expects(self::once())
             ->method('getCurrentUserReference')
             ->willReturn($userReference);
         $this->userService
+            ->expects(self::once())
             ->method('loadUser')
             ->with(self::CURRENT_USER_ID)
             ->willReturn($user);

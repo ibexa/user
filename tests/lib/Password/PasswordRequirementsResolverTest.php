@@ -8,9 +8,13 @@ declare(strict_types=1);
 
 namespace Ibexa\Tests\User\Password;
 
+use Ibexa\Contracts\Core\Persistence\User\Handler as UserHandler;
+use Ibexa\Contracts\Core\Repository\PasswordHashService;
 use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType;
 use Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition;
-use Ibexa\Contracts\User\Password\PasswordRequirement;
+use Ibexa\Core\FieldType\User\Type as UserType;
+use Ibexa\Core\Repository\User\PasswordValidatorInterface;
+use Ibexa\User\Password\PasswordRequirement;
 use Ibexa\User\Password\PasswordRequirementsResolver;
 use PHPUnit\Framework\TestCase;
 
@@ -27,6 +31,7 @@ final class PasswordRequirementsResolverTest extends TestCase
     {
         $contentType = $this->createMock(ContentType::class);
         $contentType
+            ->expects(self::once())
             ->method('getFirstFieldDefinitionOfType')
             ->with('ibexa_user')
             ->willReturn(null);
@@ -121,6 +126,35 @@ final class PasswordRequirementsResolverTest extends TestCase
         ];
     }
 
+    /**
+     * Guards against core adding a new rule to the PasswordValueValidator schema
+     * that this resolver would silently not expose.
+     */
+    public function testCoversEveryCoreValidatorSchemaRule(): void
+    {
+        $schema = (new UserType(
+            $this->createMock(UserHandler::class),
+            $this->createMock(PasswordHashService::class),
+            $this->createMock(PasswordValidatorInterface::class)
+        ))->getValidatorConfigurationSchema()['PasswordValueValidator'];
+
+        $allRulesEnabled = array_map(
+            static fn (array $rule) => $rule['type'] === 'int' ? 1 : true,
+            $schema
+        );
+        $allRulesEnabled['minLength'] = 10;
+
+        $requirements = $this->resolver->getRequirements(
+            $this->createContentType($allRulesEnabled, [])
+        );
+
+        self::assertCount(
+            count($schema),
+            $requirements,
+            'Every rule in the core PasswordValueValidator schema must produce a password requirement.'
+        );
+    }
+
     public function testMinLengthRequirementCarriesParameters(): void
     {
         $requirements = $this->resolver->getRequirements(
@@ -141,14 +175,17 @@ final class PasswordRequirementsResolverTest extends TestCase
     {
         $fieldDefinition = $this->createMock(FieldDefinition::class);
         $fieldDefinition
+            ->expects(self::once())
             ->method('getValidatorConfiguration')
             ->willReturn($constraints === [] ? [] : ['PasswordValueValidator' => $constraints]);
         $fieldDefinition
+            ->expects(self::once())
             ->method('getFieldSettings')
             ->willReturn($fieldSettings);
 
         $contentType = $this->createMock(ContentType::class);
         $contentType
+            ->expects(self::once())
             ->method('getFirstFieldDefinitionOfType')
             ->with('ibexa_user')
             ->willReturn($fieldDefinition);
