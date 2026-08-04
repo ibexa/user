@@ -12,8 +12,8 @@ use JMS\TranslationBundle\Annotation\Desc;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
- * The translation for the given group was changed to 'Locale' from 'Location'. However, for backwards compatibility
- * we decided to keep the old configuration with corresponding classes and services as 'location'.
+ * The 'location' group was renamed to 'locale', including its identifier in the service configuration.
+ * However, for backwards compatibility the class name remains 'LocationGroup'.
  */
 final class LocationGroup extends AbstractGroup
 {

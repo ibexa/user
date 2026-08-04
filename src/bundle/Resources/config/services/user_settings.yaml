@@ -73,7 +73,7 @@ services:
     #
     Ibexa\User\UserSetting\Setting\Timezone:
         tags:
-            - { name: ibexa.user.setting.value, identifier: timezone, group: location, priority: 50 }
+            - { name: ibexa.user.setting.value, identifier: timezone, group: locale, priority: 50 }
             - { name: ibexa.user.setting.mapper.form, identifier: timezone }
 
     Ibexa\User\UserSetting\Setting\SubitemsLimit:
@@ -90,7 +90,7 @@ services:
         arguments:
             $availableLocaleChoiceLoader: '@Ibexa\User\Form\ChoiceList\Loader\AvailableLocaleChoiceLoader'
         tags:
-            - { name: ibexa.user.setting.value, identifier: language, group: location, priority: 10 }
+            - { name: ibexa.user.setting.value, identifier: language, group: locale, priority: 10 }
             - { name: ibexa.user.setting.mapper.form, identifier: language }
 
     Ibexa\User\UserSetting\DateTimeFormat\FullDateTimeFormatterFactory: ~
@@ -104,7 +104,7 @@ services:
         arguments:
             $formatter: '@ibexa.user.settings.full_datetime_format.formatter'
         tags:
-            - { name: ibexa.user.setting.value, identifier: full_datetime_format, group: location, priority: 20 }
+            - { name: ibexa.user.setting.value, identifier: full_datetime_format, group: locale, priority: 20 }
             - { name: ibexa.user.setting.mapper.form, identifier: full_datetime_format }
 
     Ibexa\User\UserSetting\DateTimeFormat\ShortDateTimeFormatterFactory: ~
@@ -118,7 +118,7 @@ services:
         arguments:
             $formatter: '@ibexa.user.settings.short_datetime_format.formatter'
         tags:
-            - { name: ibexa.user.setting.value, identifier: short_datetime_format, group: location, priority: 30 }
+            - { name: ibexa.user.setting.value, identifier: short_datetime_format, group: locale, priority: 30 }
             - { name: ibexa.user.setting.mapper.form, identifier: short_datetime_format }
 
     Ibexa\User\UserSetting\DateTimeFormat\FullDateFormatterFactory: ~
@@ -151,7 +151,7 @@ services:
 
     Ibexa\User\UserSetting\Group\LocationGroup:
         tags:
-            - { name: ibexa.user.setting.group, identifier: location, priority: 30 }
+            - { name: ibexa.user.setting.group, identifier: locale, priority: 30 }
 
     Ibexa\User\UserSetting\Group\EditContentGroup:
         tags:
