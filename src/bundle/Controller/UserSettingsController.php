@@ -97,10 +97,12 @@ class UserSettingsController extends Controller
                     $this->userSettingService->setUserSetting($identifier, (string)$value['value']);
                 }
 
+                $identifier = $data->getIdentifier();
+
                 $this->actionResultHandler->success(
                     /** @Desc("User settings '%identifier%' updated.") */
                     'user_setting.update.success',
-                    ['%identifier%' => $data->getIdentifier()],
+                    ['%identifier%' => $identifier === 'location' ? 'locale' : $identifier],
                     'ibexa_user_settings'
                 );
 
