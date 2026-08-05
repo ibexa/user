@@ -20,8 +20,11 @@ final readonly class PasswordRequirementsResolver implements TranslationContaine
      * schema => requirement identifier and its English label. Adding a rule here
      * is all that is needed — translations are generated from this list.
      */
+    /** Constraint key in the core PasswordValueValidator schema, unlike {@see PasswordRequirement::MIN_LENGTH}. */
+    private const string MIN_LENGTH_CONSTRAINT = 'minLength';
+
     private const array RULES = [
-        'minLength' => [PasswordRequirement::MIN_LENGTH, 'At least %length% characters long'],
+        self::MIN_LENGTH_CONSTRAINT => [PasswordRequirement::MIN_LENGTH, 'At least %length% characters long'],
         'requireAtLeastOneUpperCaseCharacter' => [PasswordRequirement::UPPER_CASE, 'At least one uppercase letter'],
         'requireAtLeastOneLowerCaseCharacter' => [PasswordRequirement::LOWER_CASE, 'At least one lowercase letter'],
         'requireAtLeastOneNumericCharacter' => [PasswordRequirement::NUMERIC, 'At least one number'],
@@ -60,10 +63,11 @@ final readonly class PasswordRequirementsResolver implements TranslationContaine
     private function isEnabled(string $constraintKey, array $constraints, array $fieldSettings): bool
     {
         return match ($constraintKey) {
-            'minLength' => (int)($constraints['minLength'] ?? 0) > 0,
+            self::MIN_LENGTH_CONSTRAINT => (int)($constraints[self::MIN_LENGTH_CONSTRAINT] ?? 0) > 0,
             // A configured password TTL implies this rule, {@see \Ibexa\Core\FieldType\User\Type::isNewPasswordRequired()}
             'requireNewPassword' => !empty($constraints['requireNewPassword'])
                 || (int)($fieldSettings[UserType::PASSWORD_TTL_SETTING] ?? 0) > 0,
+            // Covers boolean on/off flags only; a numeric rule needs its own arm, like minLength above
             default => !empty($constraints[$constraintKey]),
         };
     }
@@ -75,8 +79,8 @@ final readonly class PasswordRequirementsResolver implements TranslationContaine
      */
     private function getParameters(string $constraintKey, array $constraints): array
     {
-        return $constraintKey === 'minLength'
-            ? ['%length%' => (int)$constraints['minLength']]
+        return $constraintKey === self::MIN_LENGTH_CONSTRAINT
+            ? ['%length%' => (int)$constraints[self::MIN_LENGTH_CONSTRAINT]]
             : [];
     }
 

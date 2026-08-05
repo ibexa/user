@@ -194,6 +194,7 @@ class PasswordValidatorTest extends TestCase
 
         $constraintViolationBuilder = $this->createMock(ConstraintViolationBuilderInterface::class);
         $constraintViolationBuilder
+            ->expects(self::once())
             ->method('setParameters')
             ->willReturn($constraintViolationBuilder);
         $constraintViolationBuilder
@@ -277,6 +278,7 @@ class PasswordValidatorTest extends TestCase
 
         $constraintViolationBuilder = $this->createMock(ConstraintViolationBuilderInterface::class);
         $constraintViolationBuilder
+            ->expects(self::exactly(count($validationErrors)))
             ->method('setParameters')
             ->willReturn($constraintViolationBuilder);
         $constraintViolationBuilder
