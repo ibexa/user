@@ -14,16 +14,16 @@ use Ibexa\Contracts\DoctrineMigrations\Migrations\AbstractSqlMigration;
 use Ibexa\Contracts\DoctrineMigrations\Migrations\IbexaMigrationInterface;
 use Ibexa\DoctrineMigrations\Migration\SqlPlatform;
 
-final class InstallSchemaMigration extends AbstractSqlMigration implements IbexaMigrationInterface
+final class RenameSchemaTo5_0Migration extends AbstractSqlMigration implements IbexaMigrationInterface
 {
     public function getDescription(): string
     {
-        return 'Creates the ibexa/user database schema';
+        return 'Renames the user-invitation database schema to singular table names (introduced in 5.0)';
     }
 
     public static function getTargetVersion(): string
     {
-        return '4.6.0';
+        return '5.0.0';
     }
 
     public static function getCreationDate(): DateTimeImmutable
@@ -40,11 +40,11 @@ final class InstallSchemaMigration extends AbstractSqlMigration implements Ibexa
         }
 
         if ($this->isMySQL()) {
-            $this->addSqlFile(__DIR__ . '/sql/install-schema-mysql.sql');
+            $this->addSqlFile(__DIR__ . '/sql/rename-schema-to-5-0-mysql.sql');
         } elseif ($this->isPostgreSQL()) {
-            $this->addSqlFile(__DIR__ . '/sql/install-schema-postgresql.sql');
+            $this->addSqlFile(__DIR__ . '/sql/rename-schema-to-5-0-postgresql.sql');
         } elseif ($this->isSqlite()) {
-            $this->addSqlFile(__DIR__ . '/sql/install-schema-sqlite.sql');
+            $this->addSqlFile(__DIR__ . '/sql/rename-schema-to-5-0-sqlite.sql');
         }
     }
 }
