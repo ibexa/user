@@ -14,6 +14,7 @@ use Doctrine\DBAL\Query\QueryBuilder;
 use Ibexa\Contracts\User\Invitation\Persistence\Gateway;
 use Ibexa\Contracts\User\Invitation\Persistence\InvitationUpdateStruct;
 use Ibexa\Contracts\User\Invitation\Query\InvitationFilter;
+use Ibexa\Core\Base\Exceptions\NotFoundException;
 
 /**
  * @internal
@@ -31,6 +32,9 @@ final readonly class DoctrineGateway implements Gateway
         private Connection $connection
     ) {}
 
+    /**
+     * @phpstan-return TInvitationData
+     */
     public function addInvitation(
         string $email,
         string $siteAccessName,
@@ -73,6 +77,9 @@ final readonly class DoctrineGateway implements Gateway
         return $this->getInvitationByEmail($email);
     }
 
+    /**
+     * @phpstan-return TInvitationData
+     */
     public function getInvitation(
         string $hash
     ): array {
@@ -85,9 +92,14 @@ final readonly class DoctrineGateway implements Gateway
         );
 
         $statement = $query->executeQuery();
+        $result = $statement->fetchAssociative();
 
-        /** @var array<string, mixed> */
-        return $statement->fetchAssociative();
+        if ($result === false) {
+            throw new NotFoundException('invitation', $hash);
+        }
+
+        /** @phpstan-var TInvitationData */
+        return $result;
     }
 
     public function invitationExistsForEmail(
@@ -123,9 +135,14 @@ final readonly class DoctrineGateway implements Gateway
         );
 
         $statement = $query->executeQuery();
+        $result = $statement->fetchAssociative();
+
+        if ($result === false) {
+            throw new NotFoundException('invitation', $email);
+        }
 
         /** @phpstan-var TInvitationData */
-        return $statement->fetchAssociative();
+        return $result;
     }
 
     private function getSelectQuery(): QueryBuilder
