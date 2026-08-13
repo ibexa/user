@@ -14,6 +14,7 @@ use Ibexa\Bundle\User\IbexaUserBundle;
 use Ibexa\ContentForms\Form\ActionDispatcher\UserDispatcher;
 use Ibexa\Contracts\Core\Test\IbexaTestKernel as BaseIbexaTestKernel;
 use Ibexa\Contracts\User\Invitation\InvitationService;
+use Ibexa\User\Invitation\Persistence\DoctrineGateway;
 use LogicException;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -51,6 +52,7 @@ final class IbexaTestKernel extends BaseIbexaTestKernel
 
         yield InvitationService::class;
         yield FormFactoryInterface::class;
+        yield DoctrineGateway::class;
     }
 
     #[\Override]
