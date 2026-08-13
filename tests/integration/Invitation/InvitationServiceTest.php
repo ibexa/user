@@ -174,12 +174,12 @@ final class InvitationServiceTest extends IbexaKernelTestCase
     {
         $invitation = $this->invitationService->createInvitation(
             new InvitationCreateStruct(
-                'gateway-existing@ibexa.co',
+                'invitation-service@ibexa.co',
                 'admin',
             )
         );
 
-        $invitationByEmail = $this->invitationService->getInvitationByEmail('gateway-existing@ibexa.co');
+        $invitationByEmail = $this->invitationService->getInvitationByEmail($invitation->getEmail());
 
         self::assertSame($invitation->getEmail(), $invitationByEmail->getEmail());
         self::assertSame($invitation->getHash(), $invitationByEmail->getHash());
@@ -196,7 +196,7 @@ final class InvitationServiceTest extends IbexaKernelTestCase
     {
         $invitation = $this->invitationService->createInvitation(
             new InvitationCreateStruct(
-                'gateway-existing-by-hash@ibexa.co',
+                'invitation-service-by-hash@ibexa.co',
                 'admin',
             )
         );
@@ -207,10 +207,10 @@ final class InvitationServiceTest extends IbexaKernelTestCase
         self::assertSame($invitation->getHash(), $invitationByHash->getHash());
     }
 
-    public function testGetInvitationReturnsEmptyArrayWhenHashDoesNotExist(): void
+    public function testGetInvitationThrowExceptionWhenHashDoesNotExist(): void
     {
         $this->expectException(NotFoundException::class);
 
-        $this->invitationService->getInvitation('gateway-missing-hash');
+        $this->invitationService->getInvitation('invitation-service-missing-hash');
     }
 }
