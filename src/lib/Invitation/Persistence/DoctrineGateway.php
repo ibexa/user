@@ -94,7 +94,7 @@ final readonly class DoctrineGateway implements Gateway
     ): bool {
         $query = $this->connection->createQueryBuilder();
         $query
-            ->select(1)
+            ->select('1')
             ->from(self::TABLE_USER_INVITATIONS)
             ->where(
                 $query->expr()->eq(

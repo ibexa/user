@@ -307,12 +307,6 @@ parameters:
 			path: src/lib/Invitation/InvitationService.php
 
 		-
-			message: '#^Parameter \#1 \$select of method Doctrine\\DBAL\\Query\\QueryBuilder\:\:select\(\) expects array\<string\>\|string\|null, int given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/lib/Invitation/Persistence/DoctrineGateway.php
-
-		-
 			message: '#^Method Ibexa\\User\\Pagination\\Pagerfanta\\UserSettingsAdapter\:\:getNbResults\(\) should return int\<0, max\> but returns int\.$#'
 			identifier: return.type
 			count: 1

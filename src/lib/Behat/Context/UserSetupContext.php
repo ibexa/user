@@ -29,11 +29,12 @@ class UserSetupContext implements Context
     {
         $queryBuilder = $this->connection->createQueryBuilder();
         $update = $queryBuilder
-            ->update(Gateway::USER_TABLE, 'u')
-            ->set('password_hash_type', self::UNSUPPORTED_USER_HASH)
+            ->update(Gateway::USER_TABLE)
+            ->set('password_hash_type', ':hash_type')
             ->andWhere(
-                $queryBuilder->expr()->eq('u.login', ':login')
+                $queryBuilder->expr()->eq('login', ':login')
             )
+            ->setParameter('hash_type', self::UNSUPPORTED_USER_HASH, ParameterType::INTEGER)
             ->setParameter('login', $login, ParameterType::STRING);
 
         $update->executeStatement();
