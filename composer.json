@@ -54,6 +54,7 @@
         "ibexa/http-cache": "~4.6.0@dev",
         "ibexa/fieldtype-richtext": "~4.6.0@dev",
         "ibexa/rest": "~4.6.0@dev",
+        "ibexa/test-core": "~4.6.0@dev",
         "symfony/proxy-manager-bridge": "^5.0",
         "friendsofphp/php-cs-fixer": "^3.0",
         "ibexa/code-style": "^1.0",

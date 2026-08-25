@@ -9,9 +9,10 @@ declare(strict_types=1);
 namespace Ibexa\Tests\Integration\User;
 
 use Ibexa\Bundle\Notifications\IbexaNotificationsBundle;
+use Ibexa\Bundle\Test\Core\IbexaTestCoreBundle;
 use Ibexa\Bundle\User\IbexaUserBundle;
 use Ibexa\ContentForms\Form\ActionDispatcher\UserDispatcher;
-use Ibexa\Contracts\Core\Test\IbexaTestKernel as BaseIbexaTestKernel;
+use Ibexa\Contracts\Test\Core\IbexaTestKernel as BaseIbexaTestKernel;
 use Ibexa\Contracts\User\Invitation\InvitationService;
 use LogicException;
 use Swift_Mailer;
@@ -21,18 +22,11 @@ use Symfony\Component\DependencyInjection\Definition;
 
 final class IbexaTestKernel extends BaseIbexaTestKernel
 {
-    public function getSchemaFiles(): iterable
-    {
-        yield from parent::getSchemaFiles();
-
-        yield from [
-            $this->locateResource('@IbexaUserBundle/Resources/config/storage/schema.yaml'),
-        ];
-    }
-
     public function registerBundles(): iterable
     {
         yield from parent::registerBundles();
+
+        yield new IbexaTestCoreBundle();
 
         yield from [
             new IbexaUserBundle(),
@@ -50,6 +44,8 @@ final class IbexaTestKernel extends BaseIbexaTestKernel
     public function registerContainerConfiguration(LoaderInterface $loader): void
     {
         parent::registerContainerConfiguration($loader);
+
+        $loader->load(__DIR__ . '/Resources/services.php');
 
         $loader->load(static function (ContainerBuilder $container): void {
             $container->setParameter('locale_fallback', 'en');
