@@ -11,15 +11,18 @@ namespace Ibexa\Tests\Integration\User;
 use Ibexa\Bundle\ContentForms\IbexaContentFormsBundle;
 use Ibexa\Bundle\Notifications\IbexaNotificationsBundle;
 use Ibexa\Bundle\Test\Core\IbexaTestCoreBundle;
+use Ibexa\Bundle\User\Controller\UserRegisterController;
 use Ibexa\Bundle\User\IbexaUserBundle;
 use Ibexa\ContentForms\Form\ActionDispatcher\UserDispatcher;
 use Ibexa\Contracts\Test\Core\IbexaTestKernel as BaseIbexaTestKernel;
 use Ibexa\Contracts\User\Invitation\InvitationService;
+use Ibexa\Core\MVC\Symfony\SiteAccess\SiteAccessServiceInterface;
 use LogicException;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 final class IbexaTestKernel extends BaseIbexaTestKernel
 {
@@ -44,6 +47,9 @@ final class IbexaTestKernel extends BaseIbexaTestKernel
 
         yield InvitationService::class;
         yield FormFactoryInterface::class;
+        yield UserRegisterController::class;
+        yield SiteAccessServiceInterface::class;
+        yield RequestStack::class;
     }
 
     #[\Override]
@@ -55,6 +61,14 @@ final class IbexaTestKernel extends BaseIbexaTestKernel
             $container->setParameter('locale_fallback', 'en');
 
             self::createSyntheticService($container);
+
+            $container->loadFromExtension('ibexa', [
+                'system' => [
+                    'default' => [
+                        'languages' => ['eng-GB'],
+                    ],
+                ],
+            ]);
 
             $container->loadFromExtension('framework', [
                 'router' => [
