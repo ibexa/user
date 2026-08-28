@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace Ibexa\User\Behat\Context;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\When;
 use Ibexa\Contracts\Core\Repository\PermissionResolver;
 use Ibexa\Contracts\Core\Repository\UserService;
 use Ibexa\User\UserSetting\UserSettingService;
@@ -22,9 +23,7 @@ class UserSettingsContext implements Context
     ) {
     }
 
-    /**
-     * @When I set autosave interval value to :autosaveInterval for user :userLogin
-     */
+    #[When('I set autosave interval value to :autosaveInterval for user :userLogin')]
     public function iSetAutosaveDraftIntervalValue(string $autosaveInterval, string $userLogin): void
     {
         $currentUser = $this->permissionResolver->getCurrentUserReference();
