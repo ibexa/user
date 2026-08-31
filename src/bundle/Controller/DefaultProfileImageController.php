@@ -30,7 +30,6 @@ final class DefaultProfileImageController extends Controller
         return $this->render('@IbexaUser/profile_image/initials.svg.twig', [
             'initials' => $initials,
             'text_color' => $colors['text'],
-            'border_color' => $colors['text'],
             'background_color' => $colors['background'],
         ], $response);
     }
