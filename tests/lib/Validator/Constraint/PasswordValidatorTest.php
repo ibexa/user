@@ -13,6 +13,8 @@ use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType;
 use Ibexa\Contracts\Core\Repository\Values\User\PasswordValidationContext;
 use Ibexa\Contracts\Core\Repository\Values\User\User;
 use Ibexa\Core\FieldType\ValidationError;
+use Ibexa\Core\Repository\Validator\UserPasswordValidator;
+use Ibexa\User\Password\PasswordRequirement;
 use Ibexa\User\Validator\Constraints\Password;
 use Ibexa\User\Validator\Constraints\PasswordValidator;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -132,11 +134,167 @@ class PasswordValidatorTest extends TestCase
             ->with(['%foo%' => $errorParameter])
             ->willReturn($constraintViolationBuilder);
         $constraintViolationBuilder
+            ->expects(self::never())
+            ->method('setCode');
+        $constraintViolationBuilder
             ->expects(self::once())
             ->method('addViolation');
 
         $this->validator->validate('pass', new Password([
             'contentType' => $contentType,
+        ]));
+    }
+
+    public function testPluralValidationErrorUsesPluralMessageTemplate(): void
+    {
+        $contentType = $this->createMock(ContentType::class);
+
+        $this->userService
+            ->method('validatePassword')
+            ->willReturn([
+                new ValidationError('singular error', 'plural error', ['%limit%' => 2]),
+            ]);
+
+        $constraintViolationBuilder = $this->createMock(ConstraintViolationBuilderInterface::class);
+        $constraintViolationBuilder
+            ->expects(self::once())
+            ->method('setParameters')
+            ->with(['%limit%' => 2])
+            ->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder
+            ->expects(self::never())
+            ->method('setCode');
+        $constraintViolationBuilder
+            ->expects(self::once())
+            ->method('addViolation');
+
+        $this->executionContext
+            ->expects(self::once())
+            ->method('buildViolation')
+            ->with('plural error')
+            ->willReturn($constraintViolationBuilder);
+
+        $this->validator->validate('pass', new Password([
+            'contentType' => $contentType,
+        ]));
+    }
+
+    /**
+     * @dataProvider dataProviderForKnownValidationErrorsGetRequirementCode
+     */
+    public function testKnownValidationErrorsGetRequirementCode(
+        string $errorMessage,
+        string $expectedCode
+    ): void {
+        $contentType = $this->createMock(ContentType::class);
+
+        $this->userService
+            ->method('validatePassword')
+            ->willReturn([new ValidationError($errorMessage)]);
+
+        $constraintViolationBuilder = $this->createMock(ConstraintViolationBuilderInterface::class);
+        $constraintViolationBuilder
+            ->expects(self::once())
+            ->method('setParameters')
+            ->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder
+            ->expects(self::once())
+            ->method('setCode')
+            ->with($expectedCode)
+            ->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder
+            ->expects(self::once())
+            ->method('addViolation');
+
+        $this->executionContext
+            ->expects(self::once())
+            ->method('buildViolation')
+            ->with($errorMessage)
+            ->willReturn($constraintViolationBuilder);
+
+        $this->validator->validate('pass', new Password([
+            'contentType' => $contentType,
+        ]));
+    }
+
+    /**
+     * @return array<string, array{0: string, 1: string}>
+     */
+    public function dataProviderForKnownValidationErrorsGetRequirementCode(): array
+    {
+        return [
+            'min length' => [
+                'User password must be at least %length% characters long',
+                PasswordRequirement::MIN_LENGTH,
+            ],
+            'upper case' => [
+                'User password must include at least one upper case letter',
+                PasswordRequirement::UPPER_CASE,
+            ],
+            'lower case' => [
+                'User password must include at least one lower case letter',
+                PasswordRequirement::LOWER_CASE,
+            ],
+            'numeric' => [
+                'User password must include at least one number',
+                PasswordRequirement::NUMERIC,
+            ],
+            'non alphanumeric' => [
+                'User password must include at least one special character',
+                PasswordRequirement::NON_ALPHANUMERIC,
+            ],
+            'new password' => [
+                'New password cannot be the same as old password',
+                PasswordRequirement::NEW_PASSWORD,
+            ],
+            'not compromised' => [
+                'This password has been leaked in a data breach, it must not be used. Please use another password.',
+                PasswordRequirement::NOT_COMPROMISED,
+            ],
+        ];
+    }
+
+    /**
+     * Guards against core rewording validation messages, which would silently
+     * break the message template → requirement code mapping.
+     */
+    public function testEveryCoreCharacterRuleErrorProducesRequirementCode(): void
+    {
+        $coreValidator = new UserPasswordValidator([
+            'minLength' => 10,
+            'requireAtLeastOneUpperCaseCharacter' => 1,
+            'requireAtLeastOneLowerCaseCharacter' => 1,
+            'requireAtLeastOneNumericCharacter' => 1,
+            'requireAtLeastOneNonAlphanumericCharacter' => 1,
+            'requireNewPassword' => null,
+            'requireNotCompromisedPassword' => false,
+        ]);
+        $validationErrors = $coreValidator->validate('');
+        self::assertCount(5, $validationErrors);
+
+        $this->userService
+            ->method('validatePassword')
+            ->willReturn($validationErrors);
+
+        $constraintViolationBuilder = $this->createMock(ConstraintViolationBuilderInterface::class);
+        $constraintViolationBuilder
+            ->expects(self::exactly(count($validationErrors)))
+            ->method('setParameters')
+            ->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder
+            ->expects(self::exactly(count($validationErrors)))
+            ->method('setCode')
+            ->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder
+            ->expects(self::exactly(count($validationErrors)))
+            ->method('addViolation');
+
+        $this->executionContext
+            ->method('buildViolation')
+            ->willReturn($constraintViolationBuilder);
+
+        $this->validator->validate('pass', new Password([
+            'contentType' => $this->createMock(ContentType::class),
         ]));
     }
 
