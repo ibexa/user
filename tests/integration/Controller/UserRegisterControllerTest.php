@@ -54,8 +54,9 @@ final class UserRegisterControllerTest extends IbexaKernelTestCase
 
     protected function tearDown(): void
     {
-        // Fixtures are imported once per run, so without this the invitation survives into
-        // InvitationServiceTest, which asserts absolute findInvitations() counts and fails
+        // Database is imported once per run and there is no per-test rollback, so without this the
+        // invitation survives into InvitationServiceTest, which asserts absolute findInvitations()
+        // counts and fails
         $connection = self::getDoctrineConnection();
         $connection->executeStatement(
             'DELETE FROM ibexa_user_invitation_assignment WHERE invitation_id IN '
