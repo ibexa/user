@@ -63,6 +63,14 @@ final class IbexaTestKernel extends BaseIbexaTestKernel
 
             self::createSyntheticService($container);
 
+            $container->loadFromExtension('ibexa', [
+                'system' => [
+                    'default' => [
+                        'languages' => ['eng-GB'],
+                    ],
+                ],
+            ]);
+
             $container->loadFromExtension('framework', [
                 'router' => [
                     'resource' => __DIR__ . '/Resources/routing.yaml',
