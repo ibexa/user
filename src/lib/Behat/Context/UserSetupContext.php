@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace Ibexa\User\Behat\Context;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\Given;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\ParameterType;
 use Ibexa\Core\Persistence\Legacy\User\Gateway;
@@ -22,9 +23,7 @@ class UserSetupContext implements Context
     ) {
     }
 
-    /**
-     * @Given a user :login has password in unsupported format
-     */
+    #[Given('a user :login has password in unsupported format')]
     public function aUserHasPasswordInUnsupportedFormat(string $login): void
     {
         $queryBuilder = $this->connection->createQueryBuilder();
