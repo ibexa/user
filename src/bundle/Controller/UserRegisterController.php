@@ -69,7 +69,7 @@ class UserRegisterController extends Controller
 
     public function registerFromInvitationAction(Request $request): Response|FormView
     {
-        $invitation = $this->invitationService->getInvitation($request->get('inviteHash'));
+        $invitation = $this->invitationService->getInvitation($request->attributes->get('inviteHash'));
 
         if (!$this->invitationService->isValid($invitation)) {
             throw new UnauthorizedHttpException('You are not allowed to register a new account');
