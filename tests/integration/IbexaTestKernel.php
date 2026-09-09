@@ -45,8 +45,6 @@ final class IbexaTestKernel extends BaseIbexaTestKernel
     {
         parent::registerContainerConfiguration($loader);
 
-        $loader->load(__DIR__ . '/Resources/services.php');
-
         $loader->load(static function (ContainerBuilder $container): void {
             $container->setParameter('locale_fallback', 'en');
 
