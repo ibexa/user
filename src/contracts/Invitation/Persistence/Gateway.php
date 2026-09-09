@@ -40,6 +40,8 @@ interface Gateway
 
     /**
      * @phpstan-return TInvitationData
+     *
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      */
     public function getInvitation(string $hash): array;
 
@@ -47,6 +49,8 @@ interface Gateway
 
     /**
      * @phpstan-return TInvitationData
+     *
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      */
     public function getInvitationByEmail(string $email): array;
 
