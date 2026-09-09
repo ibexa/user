@@ -33,9 +33,6 @@ final readonly class DoctrineGateway implements Gateway
     ) {
     }
 
-    /**
-     * @phpstan-return TInvitationData
-     */
     public function addInvitation(
         string $email,
         string $siteAccessName,
@@ -78,9 +75,6 @@ final readonly class DoctrineGateway implements Gateway
         return $this->getInvitationByEmail($email);
     }
 
-    /**
-     * @phpstan-return TInvitationData
-     */
     public function getInvitation(
         string $hash
     ): array {
@@ -122,9 +116,6 @@ final readonly class DoctrineGateway implements Gateway
         return (bool) $statement->fetchOne();
     }
 
-    /**
-     * @phpstan-return TInvitationData
-     */
     public function getInvitationByEmail(string $email): array
     {
         $query = $this->getSelectQuery();
