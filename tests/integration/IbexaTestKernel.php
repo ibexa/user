@@ -10,9 +10,10 @@ namespace Ibexa\Tests\Integration\User;
 
 use Ibexa\Bundle\ContentForms\IbexaContentFormsBundle;
 use Ibexa\Bundle\Notifications\IbexaNotificationsBundle;
+use Ibexa\Bundle\Test\Core\IbexaTestCoreBundle;
 use Ibexa\Bundle\User\IbexaUserBundle;
 use Ibexa\ContentForms\Form\ActionDispatcher\UserDispatcher;
-use Ibexa\Contracts\Core\Test\IbexaTestKernel as BaseIbexaTestKernel;
+use Ibexa\Contracts\Test\Core\IbexaTestKernel as BaseIbexaTestKernel;
 use Ibexa\Contracts\User\Invitation\InvitationService;
 use LogicException;
 use Symfony\Component\Config\Loader\LoaderInterface;
@@ -23,19 +24,11 @@ use Symfony\Component\Form\FormFactoryInterface;
 final class IbexaTestKernel extends BaseIbexaTestKernel
 {
     #[\Override]
-    public function getSchemaFiles(): iterable
-    {
-        yield from parent::getSchemaFiles();
-
-        yield from [
-            $this->locateResource('@IbexaUserBundle/Resources/config/storage/schema.yaml'),
-        ];
-    }
-
-    #[\Override]
     public function registerBundles(): iterable
     {
         yield from parent::registerBundles();
+
+        yield new IbexaTestCoreBundle();
 
         yield from [
             new IbexaUserBundle(),
