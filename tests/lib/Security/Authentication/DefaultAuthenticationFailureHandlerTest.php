@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace Ibexa\Tests\Bundle\User\Security\Authentication;
 
 use Ibexa\Bundle\User\Security\Authentication\DefaultAuthenticationFailureHandler;
+use Ibexa\Bundle\User\Security\Exception\BlankCredentialsException;
 use Ibexa\Contracts\Core\Repository\Exceptions\PasswordInUnsupportedFormatException;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -59,13 +60,14 @@ final class DefaultAuthenticationFailureHandlerTest extends TestCase
                 '_security.last_error',
                 self::callback(static function (AuthenticationException $exception): bool {
                     self::assertInstanceOf(BadCredentialsException::class, $exception);
+                    self::assertNotInstanceOf(BlankCredentialsException::class, $exception);
                     self::assertSame('Bad credentials.', $exception->getMessage());
 
                     return true;
                 })
             );
 
-        $request = $this->getRequest($session);
+        $request = $this->getRequest($session, 'admin', 'secret');
         $originalException = new BadCredentialsException('Original message');
 
         $this->httpUtils
@@ -76,9 +78,100 @@ final class DefaultAuthenticationFailureHandlerTest extends TestCase
         $this->handler->onAuthenticationFailure($request, $originalException);
     }
 
-    private function getRequest(?Session $session = null): Request
+    /**
+     * @dataProvider dataProviderForBlankCredentials
+     *
+     * @param list<BlankCredentialsException::FIELD_*> $expectedBlankFields
+     */
+    public function testOnAuthenticationFailureReportsBlankCredentialFields(
+        string $username,
+        string $password,
+        array $expectedBlankFields
+    ): void {
+        $session = $this->getSession();
+        $session
+            ->expects(self::once())
+            ->method('set')
+            ->with(
+                '_security.last_error',
+                self::callback(
+                    static function (AuthenticationException $exception) use ($expectedBlankFields): bool {
+                        self::assertInstanceOf(BlankCredentialsException::class, $exception);
+                        self::assertSame($expectedBlankFields, $exception->getBlankFields());
+                        self::assertSame('Bad credentials.', $exception->getMessage());
+
+                        return true;
+                    }
+                )
+            );
+
+        $request = $this->getRequest($session, $username, $password);
+
+        $this->handler->onAuthenticationFailure($request, new BadCredentialsException('Original message'));
+    }
+
+    public function testOnAuthenticationFailureTreatsWhitespacePasswordAsFilled(): void
     {
-        $request = new Request();
+        $session = $this->getSession();
+        $session
+            ->expects(self::once())
+            ->method('set')
+            ->with(
+                '_security.last_error',
+                self::callback(static function (AuthenticationException $exception): bool {
+                    self::assertNotInstanceOf(BlankCredentialsException::class, $exception);
+
+                    return true;
+                })
+            );
+
+        $request = $this->getRequest($session, 'admin', '   ');
+
+        $this->handler->onAuthenticationFailure($request, new BadCredentialsException('Original message'));
+    }
+
+    /**
+     * @return array<string, array{0: string, 1: string, 2: list<BlankCredentialsException::FIELD_*>}>
+     */
+    public function dataProviderForBlankCredentials(): array
+    {
+        return [
+            'both fields blank' => [
+                '',
+                '',
+                [BlankCredentialsException::FIELD_USERNAME, BlankCredentialsException::FIELD_PASSWORD],
+            ],
+            'blank username only' => [
+                '',
+                'secret',
+                [BlankCredentialsException::FIELD_USERNAME],
+            ],
+            'blank password only' => [
+                'admin',
+                '',
+                [BlankCredentialsException::FIELD_PASSWORD],
+            ],
+            'whitespace-only username' => [
+                '   ',
+                'secret',
+                [BlankCredentialsException::FIELD_USERNAME],
+            ],
+        ];
+    }
+
+    private function getRequest(?Session $session = null, ?string $username = null, ?string $password = null): Request
+    {
+        $parameters = [];
+
+        if ($username !== null) {
+            $parameters['_username'] = $username;
+        }
+
+        if ($password !== null) {
+            $parameters['_password'] = $password;
+        }
+
+        $request = new Request([], $parameters);
         $request->setSession($session ?? $this->getSession());
 
         return $request;
