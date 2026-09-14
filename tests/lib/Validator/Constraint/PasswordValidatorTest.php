@@ -85,10 +85,10 @@ class PasswordValidatorTest extends TestCase
 
         $this->validator->validate(
             $password,
-            new Password([
-                'contentType' => $contentType,
-                'user' => $user,
-            ])
+            new Password(
+                contentType: $contentType,
+                user: $user,
+            )
         );
     }
 
@@ -140,9 +140,9 @@ class PasswordValidatorTest extends TestCase
             ->expects(self::once())
             ->method('addViolation');
 
-        $this->validator->validate('pass', new Password([
-            'contentType' => $contentType,
-        ]));
+        $this->validator->validate('pass', new Password(
+            contentType: $contentType,
+        ));
     }
 
     public function testPluralValidationErrorUsesPluralMessageTemplate(): void
@@ -174,9 +174,9 @@ class PasswordValidatorTest extends TestCase
             ->with('plural error')
             ->willReturn($constraintViolationBuilder);
 
-        $this->validator->validate('pass', new Password([
-            'contentType' => $contentType,
-        ]));
+        $this->validator->validate('pass', new Password(
+            contentType: $contentType,
+        ));
     }
 
     /**
@@ -212,9 +212,9 @@ class PasswordValidatorTest extends TestCase
             ->with($errorMessage)
             ->willReturn($constraintViolationBuilder);
 
-        $this->validator->validate('pass', new Password([
-            'contentType' => $contentType,
-        ]));
+        $this->validator->validate('pass', new Password(
+            contentType: $contentType,
+        ));
     }
 
     /**
@@ -293,9 +293,9 @@ class PasswordValidatorTest extends TestCase
             ->method('buildViolation')
             ->willReturn($constraintViolationBuilder);
 
-        $this->validator->validate('pass', new Password([
-            'contentType' => $this->createMock(ContentType::class),
-        ]));
+        $this->validator->validate('pass', new Password(
+            contentType: $this->createMock(ContentType::class),
+        ));
     }
 
     /**

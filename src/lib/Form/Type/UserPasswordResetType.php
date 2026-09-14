@@ -32,10 +32,8 @@ class UserPasswordResetType extends AbstractType
                 'second_options' => ['label' => /** @Desc("Confirm password") */ 'ezplatform.reset_user_password.confirm_new_password'],
                 'constraints' => [
                     new Password(
-                        [
-                            'contentType' => $options['content_type'],
-                            'user' => $options['user'] ?? null,
-                        ]
+                        contentType: $options['content_type'],
+                        user: $options['user'] ?? null,
                     ),
                 ],
             ])

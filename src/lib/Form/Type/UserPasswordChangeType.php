@@ -35,10 +35,10 @@ class UserPasswordChangeType extends AbstractType
                 'first_options' => ['label' => /** @Desc("New password") */ 'ezplatform.change_user_password.new_password'],
                 'second_options' => ['label' => /** @Desc("Confirm password") */ 'ezplatform.change_user_password.confirm_new_password'],
                 'constraints' => [
-                    new Password([
-                        'contentType' => $options['content_type'],
-                        'user' => $options['user'] ?? null,
-                    ]),
+                    new Password(
+                        contentType: $options['content_type'],
+                        user: $options['user'] ?? null,
+                    ),
                 ],
             ])
             ->add(
