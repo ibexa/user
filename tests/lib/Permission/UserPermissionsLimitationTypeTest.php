@@ -12,6 +12,7 @@ use Ibexa\Contracts\Core\Exception\InvalidArgumentType;
 use Ibexa\Contracts\Core\Persistence\Content\Handler as ContentHandlerInterface;
 use Ibexa\Contracts\Core\Persistence\User\Handler as UserHandlerInterface;
 use Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo;
+use Ibexa\Contracts\Core\Repository\Values\User\User as APIUser;
 use Ibexa\Contracts\Core\Repository\Values\ValueObject;
 use Ibexa\Core\Base\Exceptions\NotFoundException;
 use Ibexa\Core\Repository\Values\Content\Content;
@@ -21,12 +22,11 @@ use Ibexa\Core\Repository\Values\User\UserGroup;
 use Ibexa\Tests\Core\Limitation\Base;
 use Ibexa\User\Permission\UserPermissionsLimitation;
 use Ibexa\User\Permission\UserPermissionsLimitationType;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 class UserPermissionsLimitationTypeTest extends Base
 {
-    /**
-     * @dataProvider providerForTestAcceptValue
-     */
+    #[DataProvider('providerForTestAcceptValue')]
     public function testAcceptValue(UserPermissionsLimitation $limitation): void
     {
         $this->expectNotToPerformAssertions();
@@ -38,7 +38,7 @@ class UserPermissionsLimitationTypeTest extends Base
      *     0: \Ibexa\User\Permission\UserPermissionsLimitation
      * }>
      */
-    public function providerForTestAcceptValue(): array
+    public static function providerForTestAcceptValue(): array
     {
         return [
             [
@@ -74,9 +74,7 @@ class UserPermissionsLimitationTypeTest extends Base
         ];
     }
 
-    /**
-     * @dataProvider providerForTestAcceptValueException
-     */
+    #[DataProvider('providerForTestAcceptValueException')]
     public function testAcceptValueException(UserPermissionsLimitation $limitation): void
     {
         $this->expectException(InvalidArgumentType::class);
@@ -88,7 +86,7 @@ class UserPermissionsLimitationTypeTest extends Base
      *     0: \Ibexa\User\Permission\UserPermissionsLimitation
      * }>
      */
-    public function providerForTestAcceptValueException(): array
+    public static function providerForTestAcceptValueException(): array
     {
         return [
             [
@@ -115,18 +113,28 @@ class UserPermissionsLimitationTypeTest extends Base
         ];
     }
 
-    /**
-     * @dataProvider providerForTestAcceptValue
-     */
+    #[DataProvider('providerForTestAcceptValue')]
     public function testValidatePass(UserPermissionsLimitation $limitation): void
     {
         $userHandlerMock = $this->createMock(UserHandlerInterface::class);
         $contentHandlerMock = $this->createMock(ContentHandlerInterface::class);
 
         if ($limitation->limitationValues['roles'] !== null) {
-            $userHandlerMock
+            // Original test never asserted an invocation count here (bare ->method(), no
+            // ->expects()), only the per-call arguments via withConsecutive - some data sets
+            // (e.g. empty 'roles' arrays) legitimately invoke loadRole() zero times.
+            $roleMatcher = self::any();
+            $userHandlerMock->expects($roleMatcher)
                 ->method('loadRole')
-                ->withConsecutive([4, Role::STATUS_DEFINED], [8, Role::STATUS_DEFINED]);
+                ->willReturnCallback(static function (int $roleId, int $status) use ($roleMatcher): ?Role {
+                    if ($roleMatcher->numberOfInvocations() === 1) {
+                        self::assertSame([4, Role::STATUS_DEFINED], [$roleId, $status]);
+                    } else {
+                        self::assertSame([8, Role::STATUS_DEFINED], [$roleId, $status]);
+                    }
+
+                    return null;
+                });
 
             $this->getPersistenceMock()
                 ->method('userHandler')
@@ -134,9 +142,18 @@ class UserPermissionsLimitationTypeTest extends Base
         }
 
         if ($limitation->limitationValues['roles'] !== null) {
-            $contentHandlerMock
+            $contentMatcher = self::any();
+            $contentHandlerMock->expects($contentMatcher)
                 ->method('loadContentInfo')
-                ->withConsecutive([14], [21]);
+                ->willReturnCallback(static function (int $contentId) use ($contentMatcher): ?ContentInfo {
+                    if ($contentMatcher->numberOfInvocations() === 1) {
+                        self::assertSame(14, $contentId);
+                    } else {
+                        self::assertSame(21, $contentId);
+                    }
+
+                    return null;
+                });
 
             $this->getPersistenceMock()
                 ->method('contentHandler')
@@ -148,22 +165,27 @@ class UserPermissionsLimitationTypeTest extends Base
         self::assertEmpty($validationErrors);
     }
 
-    /**
-     * @dataProvider providerForTestValidateError
-     */
+    #[DataProvider('providerForTestValidateError')]
     public function testValidateError(UserPermissionsLimitation $limitation, int $errorCount): void
     {
         $userHandlerMock = $this->createMock(UserHandlerInterface::class);
         $contentHandlerMock = $this->createMock(ContentHandlerInterface::class);
 
         if ($limitation->limitationValues['roles'] !== null) {
-            $userHandlerMock
+            $roleMatcher = self::exactly(2);
+            $userHandlerMock->expects($roleMatcher)
                 ->method('loadRole')
-                ->withConsecutive([4, Role::STATUS_DEFINED], [8, Role::STATUS_DEFINED])
-                ->willReturnOnConsecutiveCalls(
-                    self::throwException(new NotFoundException('Role', 4)),
-                    new Role()
-                );
+                ->willReturnCallback(static function (int $roleId, int $status) use ($roleMatcher): Role {
+                    if ($roleMatcher->numberOfInvocations() === 1) {
+                        self::assertSame([4, Role::STATUS_DEFINED], [$roleId, $status]);
+
+                        throw new NotFoundException('Role', 4);
+                    }
+
+                    self::assertSame([8, Role::STATUS_DEFINED], [$roleId, $status]);
+
+                    return new Role();
+                });
 
             $this->getPersistenceMock()
                 ->method('userHandler')
@@ -171,13 +193,20 @@ class UserPermissionsLimitationTypeTest extends Base
         }
 
         if ($limitation->limitationValues['user_groups'] !== null) {
-            $contentHandlerMock
+            $contentMatcher = self::exactly(2);
+            $contentHandlerMock->expects($contentMatcher)
                 ->method('loadContentInfo')
-                ->withConsecutive([14], [18])
-                ->willReturnOnConsecutiveCalls(
-                    self::throwException(new NotFoundException('Role', 4)),
-                    new ContentInfo()
-                );
+                ->willReturnCallback(static function (int $contentId) use ($contentMatcher): ContentInfo {
+                    if ($contentMatcher->numberOfInvocations() === 1) {
+                        self::assertSame(14, $contentId);
+
+                        throw new NotFoundException('Role', 4);
+                    }
+
+                    self::assertSame(18, $contentId);
+
+                    return new ContentInfo();
+                });
 
             $this->getPersistenceMock()
                 ->method('contentHandler')
@@ -194,7 +223,7 @@ class UserPermissionsLimitationTypeTest extends Base
      *     1: int
      * }>
      */
-    public function providerForTestValidateError(): array
+    public static function providerForTestValidateError(): array
     {
         return [
             'roles_limitation_only' => [
@@ -229,9 +258,7 @@ class UserPermissionsLimitationTypeTest extends Base
         ];
     }
 
-    /**
-     * @dataProvider providerForTestEvaluate
-     */
+    #[DataProvider('providerForTestEvaluate')]
     public function testEvaluate(
         UserPermissionsLimitation $limitation,
         ValueObject $object,
@@ -239,7 +266,7 @@ class UserPermissionsLimitationTypeTest extends Base
     ): void {
         $value = (new UserPermissionsLimitationType($this->getPersistenceMock()))->evaluate(
             $limitation,
-            $this->getUserMock(),
+            $this->createStub(APIUser::class),
             $object,
         );
 
@@ -253,7 +280,7 @@ class UserPermissionsLimitationTypeTest extends Base
      *     expected: bool|null
      * }>
      */
-    public function providerForTestEvaluate(): array
+    public static function providerForTestEvaluate(): array
     {
         return [
             'valid_role_limitation' => [

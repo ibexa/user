@@ -17,9 +17,9 @@ class ValueDefinitionRegistryTest extends TestCase
     public function testGetValueDefinitions(): void
     {
         $definitions = [
-            'foo' => $this->createMock(ValueDefinitionInterface::class),
-            'bar' => $this->createMock(ValueDefinitionInterface::class),
-            'baz' => $this->createMock(ValueDefinitionInterface::class),
+            'foo' => $this->createStub(ValueDefinitionInterface::class),
+            'bar' => $this->createStub(ValueDefinitionInterface::class),
+            'baz' => $this->createStub(ValueDefinitionInterface::class),
         ];
 
         $registry = new ValueDefinitionRegistry($definitions);
@@ -29,7 +29,7 @@ class ValueDefinitionRegistryTest extends TestCase
 
     public function testAddValueDefinition(): void
     {
-        $foo = $this->createMock(ValueDefinitionInterface::class);
+        $foo = $this->createStub(ValueDefinitionInterface::class);
 
         $registry = new ValueDefinitionRegistry([]);
         $registry->addValueDefinition('foo', $foo);
@@ -40,7 +40,7 @@ class ValueDefinitionRegistryTest extends TestCase
     public function testHasValueDefinition(): void
     {
         $registry = new ValueDefinitionRegistry([
-            'foo' => $this->createMock(ValueDefinitionInterface::class),
+            'foo' => $this->createStub(ValueDefinitionInterface::class),
         ]);
 
         self::assertTrue($registry->hasValueDefinition('foo'));
@@ -49,7 +49,7 @@ class ValueDefinitionRegistryTest extends TestCase
 
     public function testGetValueDefinition(): void
     {
-        $foo = $this->createMock(ValueDefinitionInterface::class);
+        $foo = $this->createStub(ValueDefinitionInterface::class);
 
         $registry = new ValueDefinitionRegistry([
             'foo' => $foo,
@@ -61,8 +61,8 @@ class ValueDefinitionRegistryTest extends TestCase
     public function testCountValueDefinitions(): void
     {
         $definitions = [
-            'foo' => $this->createMock(ValueDefinitionInterface::class),
-            'bar' => $this->createMock(ValueDefinitionInterface::class),
+            'foo' => $this->createStub(ValueDefinitionInterface::class),
+            'bar' => $this->createStub(ValueDefinitionInterface::class),
         ];
 
         $registry = new ValueDefinitionRegistry($definitions);
