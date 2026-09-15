@@ -14,7 +14,6 @@ use Ibexa\Contracts\User\Invitation\Persistence\Invitation;
 use Ibexa\Contracts\User\Invitation\Persistence\InvitationUpdateStruct;
 use Ibexa\Contracts\User\Invitation\Persistence\Mapper;
 use Ibexa\Contracts\User\Invitation\Query\InvitationFilter;
-use Ibexa\Core\Base\Exceptions\NotFoundException;
 
 class Handler implements HandlerInterface
 {
@@ -51,10 +50,6 @@ class Handler implements HandlerInterface
     ): Invitation {
         $invitationRow = $this->gateway->getInvitation($hash);
 
-        if (empty($invitationRow)) {
-            throw new NotFoundException('invitation', $hash);
-        }
-
         return $this->mapper->extractInvitationFromRow($invitationRow);
     }
 
@@ -62,10 +57,6 @@ class Handler implements HandlerInterface
         string $email
     ): Invitation {
         $invitationRow = $this->gateway->getInvitationByEmail($email);
-
-        if (empty($invitationRow)) {
-            throw new NotFoundException('invitation', $email);
-        }
 
         return $this->mapper->extractInvitationFromRow($invitationRow);
     }
