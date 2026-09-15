@@ -17,6 +17,7 @@ use Ibexa\Core\Repository\Validator\UserPasswordValidator;
 use Ibexa\User\Password\PasswordRequirement;
 use Ibexa\User\Validator\Constraints\Password;
 use Ibexa\User\Validator\Constraints\PasswordValidator;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use stdClass;
@@ -39,9 +40,7 @@ class PasswordValidatorTest extends TestCase
         $this->validator->initialize($this->executionContext);
     }
 
-    /**
-     * @dataProvider dataProviderForValidateNotSupportedValueType
-     */
+    #[DataProvider('dataProviderForValidateNotSupportedValueType')]
     public function testValidateShouldBeSkipped(\stdClass|string|null $value): void
     {
         $this->userService
@@ -58,8 +57,8 @@ class PasswordValidatorTest extends TestCase
     public function testValid(): void
     {
         $password = 'pass';
-        $contentType = $this->createMock(ContentType::class);
-        $user = $this->createMock(User::class);
+        $contentType = $this->createStub(ContentType::class);
+        $user = $this->createStub(User::class);
 
         $this->userService
             ->expects(self::once())
@@ -94,7 +93,7 @@ class PasswordValidatorTest extends TestCase
 
     public function testInvalid(): void
     {
-        $contentType = $this->createMock(ContentType::class);
+        $contentType = $this->createStub(ContentType::class);
         $password = 'pass';
         $errorParameter = 'foo';
         $errorMessage = 'error';
@@ -147,7 +146,7 @@ class PasswordValidatorTest extends TestCase
 
     public function testPluralValidationErrorUsesPluralMessageTemplate(): void
     {
-        $contentType = $this->createMock(ContentType::class);
+        $contentType = $this->createStub(ContentType::class);
 
         $this->userService
             ->method('validatePassword')
@@ -179,14 +178,12 @@ class PasswordValidatorTest extends TestCase
         ));
     }
 
-    /**
-     * @dataProvider dataProviderForKnownValidationErrorsGetRequirementCode
-     */
+    #[DataProvider('dataProviderForKnownValidationErrorsGetRequirementCode')]
     public function testKnownValidationErrorsGetRequirementCode(
         string $errorMessage,
         string $expectedCode
     ): void {
-        $contentType = $this->createMock(ContentType::class);
+        $contentType = $this->createStub(ContentType::class);
 
         $this->userService
             ->method('validatePassword')
@@ -220,7 +217,7 @@ class PasswordValidatorTest extends TestCase
     /**
      * @return array<string, array{0: string, 1: string}>
      */
-    public function dataProviderForKnownValidationErrorsGetRequirementCode(): array
+    public static function dataProviderForKnownValidationErrorsGetRequirementCode(): array
     {
         return [
             'min length' => [
@@ -294,14 +291,14 @@ class PasswordValidatorTest extends TestCase
             ->willReturn($constraintViolationBuilder);
 
         $this->validator->validate('pass', new Password(
-            contentType: $this->createMock(ContentType::class),
+            contentType: $this->createStub(ContentType::class),
         ));
     }
 
     /**
      * @return array<array{0: stdClass|string|null}>
      */
-    public function dataProviderForValidateNotSupportedValueType(): array
+    public static function dataProviderForValidateNotSupportedValueType(): array
     {
         return [
             [new stdClass()],

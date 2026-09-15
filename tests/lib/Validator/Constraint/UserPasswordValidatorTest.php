@@ -13,6 +13,7 @@ use Ibexa\Contracts\Core\Repository\Values\User\User as APIUser;
 use Ibexa\Core\MVC\Symfony\Security\ReferenceUserInterface;
 use Ibexa\User\Validator\Constraints\UserPassword;
 use Ibexa\User\Validator\Constraints\UserPasswordValidator;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -39,9 +40,7 @@ class UserPasswordValidatorTest extends TestCase
         $this->validator->initialize($this->executionContext);
     }
 
-    /**
-     * @dataProvider emptyDataProvider
-     */
+    #[DataProvider('emptyDataProvider')]
     public function testEmptyValueType(?string $value): void
     {
         $this->userService
@@ -60,7 +59,7 @@ class UserPasswordValidatorTest extends TestCase
     /**
      * @return array<string, array{0: string|null}>
      */
-    public function emptyDataProvider(): array
+    public static function emptyDataProvider(): array
     {
         return [
             'empty_string' => [''],
@@ -102,7 +101,7 @@ class UserPasswordValidatorTest extends TestCase
             ->with($apiUser, 'password')
             ->willReturn(false);
         $constraint = new UserPassword();
-        $constraintViolationBuilder = $this->createMock(ConstraintViolationBuilderInterface::class);
+        $constraintViolationBuilder = $this->createStub(ConstraintViolationBuilderInterface::class);
         $this->executionContext
             ->expects(self::once())
             ->method('buildViolation')

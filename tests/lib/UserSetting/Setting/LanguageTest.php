@@ -11,6 +11,7 @@ namespace Ibexa\Tests\User\UserSetting;
 use Ibexa\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface;
 use Ibexa\User\Form\ChoiceList\Loader\AvailableLocaleChoiceLoader;
 use Ibexa\User\UserSetting\Setting\Language;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -32,11 +33,10 @@ final class LanguageTest extends TestCase
     }
 
     /**
-     * @dataProvider providerForDefaultValue
-     *
      * @param string[] $availableLocales
      * @param string[] $preferredLocales
      */
+    #[DataProvider('providerForDefaultValue')]
     public function testGetDefaultValue(
         array $preferredLocales,
         array $availableLocales,
@@ -46,7 +46,7 @@ final class LanguageTest extends TestCase
         $this->availableLocaleChoiceLoader->method('getChoiceList')->willReturn($availableLocales);
 
         $language = new Language(
-            $this->createMock(TranslatorInterface::class),
+            $this->createStub(TranslatorInterface::class),
             $this->userLanguagePreferenceProvider,
             $this->availableLocaleChoiceLoader,
         );
@@ -57,7 +57,7 @@ final class LanguageTest extends TestCase
     /**
      * @return iterable<string, array<mixed>>
      */
-    public function providerForDefaultValue(): iterable
+    public static function providerForDefaultValue(): iterable
     {
         yield 'intersection' => [['en_GB', 'en'], ['en', 'de', 'el', 'en_US'], 'en'];
         yield 'no available locale' => [['en_GB', 'en'], ['de', 'el', 'en_US'], ''];

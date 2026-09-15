@@ -50,11 +50,11 @@
         "ibexa/rector": "~6.0.x-dev",
         "ibexa/rest": "~6.0.x-dev",
         "ibexa/search": "~6.0.x-dev",
-        "matthiasnoback/symfony-dependency-injection-test": "^5.0",
+        "matthiasnoback/symfony-dependency-injection-test": "^6.0",
         "phpstan/phpstan": "^2.0",
         "phpstan/phpstan-phpunit": "^2.0",
         "phpstan/phpstan-symfony": "^2.0",
-        "phpunit/phpunit": "^9.6",
+        "phpunit/phpunit": "^11.5",
         "symfony/phpunit-bridge": "^7.4"
     },
     "scripts": {

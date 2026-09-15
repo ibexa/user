@@ -22,6 +22,7 @@ use Ibexa\Core\MVC\Symfony\SiteAccess;
 use Ibexa\Core\MVC\Symfony\SiteAccess\SiteAccessServiceInterface;
 use Ibexa\User\Invitation\InvitationService;
 use Ibexa\User\Invitation\Persistence\Handler;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
@@ -39,20 +40,18 @@ class InvitationServiceTest extends TestCase
         $this->configResolver = $this->createMock(ConfigResolverInterface::class);
 
         $this->invitationService = new InvitationService(
-            $this->createMock(PermissionResolver::class),
-            $this->createMock(Handler::class),
-            $this->createMock(HashGenerator::class),
-            $this->createMock(UserService::class),
+            $this->createStub(PermissionResolver::class),
+            $this->createStub(Handler::class),
+            $this->createStub(HashGenerator::class),
+            $this->createStub(UserService::class),
             $this->siteAccessService,
-            $this->createMock(TransactionHandler::class),
+            $this->createStub(TransactionHandler::class),
             $this->configResolver,
-            $this->createMock(DomainMapper::class)
+            $this->createStub(DomainMapper::class)
         );
     }
 
-    /**
-     * @dataProvider invitationProvider
-     */
+    #[DataProvider('invitationProvider')]
     public function testIsValid(
         InvitationContract $invitation,
         string $usedInSiteAccessName,
@@ -83,7 +82,7 @@ class InvitationServiceTest extends TestCase
      *     2: bool
      * }>
      */
-    public function invitationProvider(): array
+    public static function invitationProvider(): array
     {
         return [
             'valid' => [
