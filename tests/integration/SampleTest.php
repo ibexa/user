@@ -8,11 +8,11 @@ declare(strict_types=1);
 
 namespace Ibexa\Tests\Integration\User;
 
-/**
- * @group integration
- *
- * @coversNothing
- */
+use PHPUnit\Framework\Attributes\CoversNothing;
+use PHPUnit\Framework\Attributes\Group;
+
+#[Group('integration')]
+#[CoversNothing]
 final class SampleTest extends IbexaKernelTestCase
 {
     public function testCompilesSuccessfully(): void

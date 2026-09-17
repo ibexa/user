@@ -16,6 +16,7 @@ use Ibexa\Core\FieldType\User\Type as UserType;
 use Ibexa\Core\Repository\User\PasswordValidatorInterface;
 use Ibexa\User\Password\PasswordRequirement;
 use Ibexa\User\Password\PasswordRequirementsResolver;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 final class PasswordRequirementsResolverTest extends TestCase
@@ -40,12 +41,11 @@ final class PasswordRequirementsResolverTest extends TestCase
     }
 
     /**
-     * @dataProvider dataProviderForGetRequirements
-     *
      * @param array<string, mixed> $constraints
      * @param array<string, mixed> $fieldSettings
      * @param string[] $expectedIdentifiers
      */
+    #[DataProvider('dataProviderForGetRequirements')]
     public function testGetRequirements(
         array $constraints,
         array $fieldSettings,
@@ -71,7 +71,7 @@ final class PasswordRequirementsResolverTest extends TestCase
      *     2: string[],
      * }>
      */
-    public function dataProviderForGetRequirements(): array
+    public static function dataProviderForGetRequirements(): array
     {
         return [
             'all rules disabled' => [
@@ -133,9 +133,9 @@ final class PasswordRequirementsResolverTest extends TestCase
     public function testCoversEveryCoreValidatorSchemaRule(): void
     {
         $schema = (new UserType(
-            $this->createMock(UserHandler::class),
-            $this->createMock(PasswordHashService::class),
-            $this->createMock(PasswordValidatorInterface::class)
+            $this->createStub(UserHandler::class),
+            $this->createStub(PasswordHashService::class),
+            $this->createStub(PasswordValidatorInterface::class)
         ))->getValidatorConfigurationSchema()['PasswordValueValidator'];
 
         $allRulesEnabled = array_map(

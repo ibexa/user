@@ -10,7 +10,9 @@ namespace Ibexa\Tests\User\Form\Type\ChoiceList\Loader;
 
 use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 use Ibexa\User\Form\ChoiceList\Loader\AvailableLocaleChoiceLoader;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Validator\ConstraintViolationInterface;
 use Symfony\Component\Validator\ConstraintViolationList;
@@ -20,7 +22,7 @@ class AvailableLocaleChoiceLoaderTest extends TestCase
 {
     private ValidatorInterface&MockObject $validator;
 
-    private ConstraintViolationInterface&MockObject $constraintViolation;
+    private ConstraintViolationInterface&Stub $constraintViolation;
 
     private ConfigResolverInterface&MockObject $configResolver;
 
@@ -29,7 +31,7 @@ class AvailableLocaleChoiceLoaderTest extends TestCase
         parent::setUp();
 
         $this->validator = $this->createMock(ValidatorInterface::class);
-        $this->constraintViolation = $this->createMock(ConstraintViolationInterface::class);
+        $this->constraintViolation = $this->createStub(ConstraintViolationInterface::class);
         $this->configResolver = $this->createMock(ConfigResolverInterface::class);
     }
 
@@ -37,9 +39,8 @@ class AvailableLocaleChoiceLoaderTest extends TestCase
      * @param array<int, string> $availableTranslations
      * @param array<int, string> $additionalTranslations
      * @param array<string, string> $expectedLocales
-     *
-     * @dataProvider providerForGetChoiceList
      */
+    #[DataProvider('providerForGetChoiceList')]
     public function testGetChoiceList(
         array $availableTranslations,
         array $additionalTranslations,
@@ -70,7 +71,7 @@ class AvailableLocaleChoiceLoaderTest extends TestCase
      *     2: array<string, string>
      * }>
      */
-    public function providerForGetChoiceList(): array
+    public static function providerForGetChoiceList(): array
     {
         return [
             'available_translations' => [
