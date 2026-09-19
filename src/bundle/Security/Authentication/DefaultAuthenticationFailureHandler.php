@@ -18,6 +18,7 @@ use Symfony\Component\Security\Http\Authentication\DefaultAuthenticationFailureH
 
 final class DefaultAuthenticationFailureHandler extends HttpDefaultAuthenticationFailureHandler
 {
+    // Symfony's form_login defaults, not read from the firewall configuration.
     private const string USERNAME_PARAMETER = '_username';
 
     private const string PASSWORD_PARAMETER = '_password';
