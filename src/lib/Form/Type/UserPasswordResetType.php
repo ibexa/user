@@ -18,6 +18,7 @@ use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class UserPasswordResetType extends AbstractType
 {
@@ -29,7 +30,10 @@ class UserPasswordResetType extends AbstractType
                 'invalid_message' => /** @Desc("Passwords do not match.") */ 'ezplatform.reset_user_password.passwords_must_match',
                 'required' => true,
                 'first_options' => ['label' => /** @Desc("New password") */ 'ezplatform.reset_user_password.new_password'],
-                'second_options' => ['label' => /** @Desc("Confirm password") */ 'ezplatform.reset_user_password.confirm_new_password'],
+                'second_options' => [
+                    'label' => /** @Desc("Confirm password") */ 'ezplatform.reset_user_password.confirm_new_password',
+                    'constraints' => [new NotBlank()],
+                ],
                 'constraints' => [
                     new Password(
                         contentType: $options['content_type'],
