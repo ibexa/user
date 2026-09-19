@@ -17,29 +17,16 @@ final class BlankCredentialsException extends BadCredentialsException
 
     public const string FIELD_PASSWORD = 'password';
 
-    /** @var list<self::FIELD_*> */
-    private array $blankFields;
-
     /**
      * @param list<self::FIELD_*> $blankFields
      */
     public function __construct(
-        array $blankFields,
+        public readonly array $blankFields,
         string $message = '',
         int $code = 0,
         ?Throwable $previous = null
     ) {
         parent::__construct($message, $code, $previous);
-
-        $this->blankFields = $blankFields;
-    }
-
-    /**
-     * @return list<self::FIELD_*>
-     */
-    public function getBlankFields(): array
-    {
-        return $this->blankFields;
     }
 
     /**
