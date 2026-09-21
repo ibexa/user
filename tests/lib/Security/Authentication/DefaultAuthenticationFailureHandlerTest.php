@@ -133,7 +133,7 @@ final class DefaultAuthenticationFailureHandlerTest extends TestCase
     /**
      * @return array<string, array{0: string, 1: string, 2: list<BlankCredentialsException::FIELD_*>}>
      */
-    public function dataProviderForBlankCredentials(): array
+    public static function dataProviderForBlankCredentials(): array
     {
         return [
             'both fields blank' => [
