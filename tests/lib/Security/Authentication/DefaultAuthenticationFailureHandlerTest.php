@@ -97,7 +97,7 @@ final class DefaultAuthenticationFailureHandlerTest extends TestCase
                 self::callback(
                     static function (AuthenticationException $exception) use ($expectedBlankFields): bool {
                         self::assertInstanceOf(BlankCredentialsException::class, $exception);
-                        self::assertSame($expectedBlankFields, $exception->getBlankFields());
+                        self::assertSame($expectedBlankFields, $exception->blankFields);
                         self::assertSame('Bad credentials.', $exception->getMessage());
 
                         return true;
