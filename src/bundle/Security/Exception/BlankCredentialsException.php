@@ -18,7 +18,7 @@ final class BlankCredentialsException extends BadCredentialsException
     public const string FIELD_PASSWORD = 'password';
 
     /**
-     * @param list<self::FIELD_*> $blankFields
+     * @phpstan-param list<self::FIELD_*> $blankFields
      */
     public function __construct(
         public readonly array $blankFields,
@@ -30,7 +30,7 @@ final class BlankCredentialsException extends BadCredentialsException
     }
 
     /**
-     * @return array{list<self::FIELD_*>, array<mixed>}
+     * @phpstan-return array{list<self::FIELD_*>, array<mixed>}
      */
     public function __serialize(): array
     {
@@ -38,7 +38,7 @@ final class BlankCredentialsException extends BadCredentialsException
     }
 
     /**
-     * @param array{list<self::FIELD_*>, array<mixed>} $data
+     * @phpstan-param array{list<self::FIELD_*>, array<mixed>} $data
      */
     public function __unserialize(array $data): void
     {

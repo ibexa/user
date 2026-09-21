@@ -11,6 +11,7 @@ namespace Ibexa\Tests\Bundle\User\Security\Authentication;
 use Ibexa\Bundle\User\Security\Authentication\DefaultAuthenticationFailureHandler;
 use Ibexa\Bundle\User\Security\Exception\BlankCredentialsException;
 use Ibexa\Contracts\Core\Repository\Exceptions\PasswordInUnsupportedFormatException;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
@@ -79,10 +80,9 @@ final class DefaultAuthenticationFailureHandlerTest extends TestCase
     }
 
     /**
-     * @dataProvider dataProviderForBlankCredentials
-     *
-     * @param list<BlankCredentialsException::FIELD_*> $expectedBlankFields
+     * @phpstan-param list<BlankCredentialsException::FIELD_*> $expectedBlankFields
      */
+    #[DataProvider('dataProviderForBlankCredentials')]
     public function testOnAuthenticationFailureReportsBlankCredentialFields(
         string $username,
         string $password,
@@ -131,7 +131,7 @@ final class DefaultAuthenticationFailureHandlerTest extends TestCase
     }
 
     /**
-     * @return array<string, array{0: string, 1: string, 2: list<BlankCredentialsException::FIELD_*>}>
+     * @phpstan-return array<string, array{0: string, 1: string, 2: list<BlankCredentialsException::FIELD_*>}>
      */
     public static function dataProviderForBlankCredentials(): array
     {

@@ -56,7 +56,7 @@ final class DefaultAuthenticationFailureHandler extends HttpDefaultAuthenticatio
     }
 
     /**
-     * @return list<BlankCredentialsException::FIELD_*>
+     * @phpstan-return list<BlankCredentialsException::FIELD_*>
      */
     private function getBlankCredentialFields(Request $request): array
     {
