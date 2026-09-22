@@ -133,9 +133,9 @@ final class PasswordRequirementsResolverTest extends TestCase
     public function testCoversEveryCoreValidatorSchemaRule(): void
     {
         $schema = (new UserType(
-            $this->createStub(UserHandler::class),
-            $this->createStub(PasswordHashService::class),
-            $this->createStub(PasswordValidatorInterface::class)
+            self::createStub(UserHandler::class),
+            self::createStub(PasswordHashService::class),
+            self::createStub(PasswordValidatorInterface::class)
         ))->getValidatorConfigurationSchema()['PasswordValueValidator'];
 
         $allRulesEnabled = array_map(

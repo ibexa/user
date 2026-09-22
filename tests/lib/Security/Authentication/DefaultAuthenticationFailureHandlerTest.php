@@ -29,7 +29,7 @@ final class DefaultAuthenticationFailureHandlerTest extends TestCase
     {
         $this->httpUtils = $this->createMock(HttpUtils::class);
         $this->handler = new DefaultAuthenticationFailureHandler(
-            $this->createStub(HttpKernelInterface::class),
+            self::createStub(HttpKernelInterface::class),
             $this->httpUtils
         );
     }
