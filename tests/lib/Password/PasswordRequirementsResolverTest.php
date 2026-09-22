@@ -139,7 +139,7 @@ final class PasswordRequirementsResolverTest extends TestCase
         ))->getValidatorConfigurationSchema()['PasswordValueValidator'];
 
         $allRulesEnabled = array_map(
-            static fn (array $rule) => $rule['type'] === 'int' ? 1 : true,
+            static fn (array $rule): int|true => $rule['type'] === 'int' ? 1 : true,
             $schema
         );
         $allRulesEnabled['minLength'] = 10;
