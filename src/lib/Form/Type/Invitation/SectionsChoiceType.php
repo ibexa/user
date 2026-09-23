@@ -29,7 +29,7 @@ final class SectionsChoiceType extends AbstractType
             ->setDefaults([
                 'choice_loader' => ChoiceList::lazy(
                     $this,
-                    fn () => $this->repository->sudo(fn (): iterable => $this->sectionService->loadSections())
+                    fn (): iterable => $this->repository->sudo(fn (): iterable => $this->sectionService->loadSections())
                 ),
                 'choice_label' => 'name',
                 'choice_value' => 'id',
