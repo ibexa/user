@@ -12,7 +12,7 @@ use DateTimeImmutable;
 use Doctrine\DBAL\Schema\Schema;
 use Ibexa\Contracts\DoctrineMigrations\Migrations\AbstractSqlMigration;
 use Ibexa\Contracts\DoctrineMigrations\Migrations\IbexaMigrationInterface;
-use Ibexa\DoctrineMigrations\Migration\SqlPlatform;
+use Ibexa\Contracts\DoctrineSchema\Database\DatabasePlatformName;
 
 final class InstallSchemaMigration extends AbstractSqlMigration implements IbexaMigrationInterface
 {
@@ -33,7 +33,7 @@ final class InstallSchemaMigration extends AbstractSqlMigration implements Ibexa
 
     public function up(Schema $schema): void
     {
-        $this->abortIfUnsupportedPlatform(SqlPlatform::MYSQL, SqlPlatform::POSTGRESQL, SqlPlatform::SQLITE);
+        $this->abortIfUnsupportedPlatform(DatabasePlatformName::MYSQL, DatabasePlatformName::POSTGRESQL, DatabasePlatformName::SQLITE);
 
         if ($schema->hasTable('ibexa_user_invitations')) {
             return;
