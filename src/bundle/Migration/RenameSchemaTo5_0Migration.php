@@ -12,18 +12,18 @@ use DateTimeImmutable;
 use Doctrine\DBAL\Schema\Schema;
 use Ibexa\Contracts\DoctrineMigrations\Migrations\AbstractSqlMigration;
 use Ibexa\Contracts\DoctrineMigrations\Migrations\IbexaMigrationInterface;
-use Ibexa\Contracts\DoctrineMigrations\Migrations\SqlPlatform;
+use Ibexa\Contracts\DoctrineSchema\Database\DatabasePlatformName;
 
-final class InstallSchemaMigration extends AbstractSqlMigration implements IbexaMigrationInterface
+final class RenameSchemaTo5_0Migration extends AbstractSqlMigration implements IbexaMigrationInterface
 {
     public function getDescription(): string
     {
-        return 'Creates the ibexa/user database schema';
+        return 'Renames the user-invitation database schema to singular table names (introduced in 5.0)';
     }
 
     public static function getTargetVersion(): string
     {
-        return '4.6.0';
+        return '5.0.0';
     }
 
     public static function getCreationDate(): DateTimeImmutable
@@ -33,18 +33,18 @@ final class InstallSchemaMigration extends AbstractSqlMigration implements Ibexa
 
     public function up(Schema $schema): void
     {
-        $this->abortIfUnsupportedPlatform(SqlPlatform::MYSQL, SqlPlatform::MARIADB, SqlPlatform::POSTGRESQL, SqlPlatform::SQLITE);
+        $this->abortIfUnsupportedPlatform(DatabasePlatformName::MySQL, DatabasePlatformName::PostgreSQL, DatabasePlatformName::SQLite);
 
         if ($schema->hasTable('ibexa_user_invitation')) {
             return;
         }
 
-        if ($this->isMySQL() || $this->isMariaDB()) {
-            $this->addSqlFile(__DIR__ . '/sql/install-schema-mysql.sql');
+        if ($this->isMySQL()) {
+            $this->addSqlFile(__DIR__ . '/sql/rename-schema-to-5-0-mysql.sql');
         } elseif ($this->isPostgreSQL()) {
-            $this->addSqlFile(__DIR__ . '/sql/install-schema-postgresql.sql');
+            $this->addSqlFile(__DIR__ . '/sql/rename-schema-to-5-0-postgresql.sql');
         } elseif ($this->isSqlite()) {
-            $this->addSqlFile(__DIR__ . '/sql/install-schema-sqlite.sql');
+            $this->addSqlFile(__DIR__ . '/sql/rename-schema-to-5-0-sqlite.sql');
         }
     }
 }
