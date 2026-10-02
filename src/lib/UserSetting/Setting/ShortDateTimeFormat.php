@@ -46,7 +46,7 @@ class ShortDateTimeFormat extends AbstractDateTimeFormat
             'value',
             ShortDateTimeFormatType::class,
             [
-                'label' => false,
+                'label' => $this->getName(),
             ]
         );
 

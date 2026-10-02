@@ -46,7 +46,7 @@ class FullDateTimeFormat extends AbstractDateTimeFormat
             'value',
             FullDateTimeFormatType::class,
             [
-                'label' => false,
+                'label' => $this->getName(),
             ]
         );
 
