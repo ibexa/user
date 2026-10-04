@@ -23,7 +23,7 @@ CREATE TABLE ibexa_user_invitations_assignments (
     limitation_type VARCHAR(255) DEFAULT NULL,
     limitation_value VARCHAR(255) DEFAULT NULL,
     CONSTRAINT ibexa_user_invitations_assignments_ibexa_user_invitations_id_fk FOREIGN KEY (invitation_id)
-        REFERENCES ibexa_user_invitations (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE
+        REFERENCES ibexa_user_invitations (id) ON UPDATE CASCADE ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE
 );
 -- ibexa:sql-statement-separator
 CREATE INDEX IDX_DA5A7872A35D7AF0 ON ibexa_user_invitations_assignments (invitation_id);
