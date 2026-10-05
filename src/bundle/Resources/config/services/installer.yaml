@@ -4,3 +4,11 @@ services:
         public: false
         arguments:
             - '@=service("kernel").locateResource("@IbexaUserBundle/Resources/config/storage/schema.yaml")'
+
+    Ibexa\Bundle\User\Migration\InstallSchemaMigration:
+        autowire: true
+        public: false
+        arguments:
+            $connection: '@ibexa.persistence.connection'
+        tags:
+            - { name: !php/const Ibexa\Contracts\DoctrineMigrations\Migrations\IbexaMigrationTag::TAG }
