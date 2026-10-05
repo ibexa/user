@@ -48,6 +48,7 @@
         "symfony/security-http": "^5.0"
     },
     "require-dev": {
+        "doctrine/doctrine-migrations-bundle": "^3.2",
         "ibexa/ci-scripts": "^0.2@dev",
         "ibexa/doctrine-schema": "~4.6.0@dev",
         "ibexa/search": "~4.6.0@dev",
