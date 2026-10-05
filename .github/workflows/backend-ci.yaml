@@ -33,7 +33,7 @@ jobs:
                     composer run-script check-cs -- --format=checkstyle | cs2pr
 
     tests:
-        name: Unit tests & SQLite integration tests
+        name: Unit tests & SQLite integration tests (${{ matrix.php }}${{ !matrix.schema_builder_event && ', Doctrine Migrations' || '' }})
         runs-on: "ubuntu-26.04"
         timeout-minutes: 15
 
@@ -44,6 +44,12 @@ jobs:
                     - '7.4'
                     - '8.3'
                     - '8.4'
+                schema_builder_event:
+                    - true
+                # One more run, on the Doctrine Migrations install path.
+                include:
+                    -   php: '8.4'
+                        schema_builder_event: false
 
         steps:
             -   uses: actions/checkout@v7
@@ -60,7 +66,10 @@ jobs:
                 run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
 
             -   name: Run PHPStan analysis
+                if: matrix.schema_builder_event
                 run: composer run-script phpstan
 
             -   name: Run test suite
                 run: composer run-script --timeout=600 test
+                env:
+                    IBEXA_TEST_SCHEMA_BUILDER_EVENT_ENABLED: ${{ matrix.schema_builder_event && '1' || '0' }}
