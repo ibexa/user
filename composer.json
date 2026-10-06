@@ -21,7 +21,7 @@
         }
     },
     "require": {
-        "php": " >=8.3",
+        "php": ">=8.5",
         "ibexa/content-forms": "~6.0.x-dev",
         "ibexa/core": "~6.0.x-dev",
         "ibexa/jms-translation-bundle": "^3.0",
