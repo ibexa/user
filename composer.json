@@ -40,7 +40,8 @@
         "symfony/security-http": "^7.4 || ^8.1",
         "symfony/translation": "^7.4 || ^8.1",
         "symfony/validator": "^7.4 || ^8.1",
-        "twig/twig": "^3.0"
+        "twig/twig": "^3.0",
+        "jms/translation-bundle": "^2.4"
     },
     "require-dev": {
         "ibexa/code-style": "~2.0.0",
