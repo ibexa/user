@@ -46,7 +46,7 @@ final class LanguageTest extends TestCase
         $this->availableLocaleChoiceLoader->method('getChoiceList')->willReturn($availableLocales);
 
         $language = new Language(
-            $this->createStub(TranslatorInterface::class),
+            self::createStub(TranslatorInterface::class),
             $this->userLanguagePreferenceProvider,
             $this->availableLocaleChoiceLoader,
         );

@@ -101,7 +101,7 @@ class UserPasswordValidatorTest extends TestCase
             ->with($apiUser, 'password')
             ->willReturn(false);
         $constraint = new UserPassword();
-        $constraintViolationBuilder = $this->createStub(ConstraintViolationBuilderInterface::class);
+        $constraintViolationBuilder = self::createStub(ConstraintViolationBuilderInterface::class);
         $this->executionContext
             ->expects(self::once())
             ->method('buildViolation')

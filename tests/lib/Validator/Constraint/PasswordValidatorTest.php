@@ -57,8 +57,8 @@ class PasswordValidatorTest extends TestCase
     public function testValid(): void
     {
         $password = 'pass';
-        $contentType = $this->createStub(ContentType::class);
-        $user = $this->createStub(User::class);
+        $contentType = self::createStub(ContentType::class);
+        $user = self::createStub(User::class);
 
         $this->userService
             ->expects(self::once())
@@ -93,7 +93,7 @@ class PasswordValidatorTest extends TestCase
 
     public function testInvalid(): void
     {
-        $contentType = $this->createStub(ContentType::class);
+        $contentType = self::createStub(ContentType::class);
         $password = 'pass';
         $errorParameter = 'foo';
         $errorMessage = 'error';
@@ -101,15 +101,15 @@ class PasswordValidatorTest extends TestCase
         $this->userService
             ->expects(self::once())
             ->method('validatePassword')
-            ->willReturnCallback(function (string $actualPassword, PasswordValidationContext $actualContext) use (
+            ->willReturnCallback(static function (string $actualPassword, PasswordValidationContext $actualContext) use (
                 $password,
                 $contentType,
                 $errorMessage,
                 $errorParameter
             ): array {
-                $this->assertEquals($password, $actualPassword);
-                $this->assertInstanceOf(PasswordValidationContext::class, $actualContext);
-                $this->assertSame($contentType, $actualContext->contentType);
+                self::assertEquals($password, $actualPassword);
+                self::assertInstanceOf(PasswordValidationContext::class, $actualContext);
+                self::assertSame($contentType, $actualContext->contentType);
 
                 return [
                     new ValidationError($errorMessage, null, ['%foo%' => $errorParameter]),
@@ -146,7 +146,7 @@ class PasswordValidatorTest extends TestCase
 
     public function testPluralValidationErrorUsesPluralMessageTemplate(): void
     {
-        $contentType = $this->createStub(ContentType::class);
+        $contentType = self::createStub(ContentType::class);
 
         $this->userService
             ->method('validatePassword')
@@ -183,7 +183,7 @@ class PasswordValidatorTest extends TestCase
         string $errorMessage,
         string $expectedCode
     ): void {
-        $contentType = $this->createStub(ContentType::class);
+        $contentType = self::createStub(ContentType::class);
 
         $this->userService
             ->method('validatePassword')
@@ -291,7 +291,7 @@ class PasswordValidatorTest extends TestCase
             ->willReturn($constraintViolationBuilder);
 
         $this->validator->validate('pass', new Password(
-            contentType: $this->createStub(ContentType::class),
+            contentType: self::createStub(ContentType::class),
         ));
     }
 

@@ -31,7 +31,7 @@ class AvailableLocaleChoiceLoaderTest extends TestCase
         parent::setUp();
 
         $this->validator = $this->createMock(ValidatorInterface::class);
-        $this->constraintViolation = $this->createStub(ConstraintViolationInterface::class);
+        $this->constraintViolation = self::createStub(ConstraintViolationInterface::class);
         $this->configResolver = $this->createMock(ConfigResolverInterface::class);
     }
 

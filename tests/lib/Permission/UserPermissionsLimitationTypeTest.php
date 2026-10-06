@@ -266,7 +266,7 @@ class UserPermissionsLimitationTypeTest extends Base
     ): void {
         $value = (new UserPermissionsLimitationType($this->getPersistenceMock()))->evaluate(
             $limitation,
-            $this->createStub(APIUser::class),
+            self::createStub(APIUser::class),
             $object,
         );
 

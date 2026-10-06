@@ -40,14 +40,14 @@ class InvitationServiceTest extends TestCase
         $this->configResolver = $this->createMock(ConfigResolverInterface::class);
 
         $this->invitationService = new InvitationService(
-            $this->createStub(PermissionResolver::class),
-            $this->createStub(Handler::class),
-            $this->createStub(HashGenerator::class),
-            $this->createStub(UserService::class),
+            self::createStub(PermissionResolver::class),
+            self::createStub(Handler::class),
+            self::createStub(HashGenerator::class),
+            self::createStub(UserService::class),
             $this->siteAccessService,
-            $this->createStub(TransactionHandler::class),
+            self::createStub(TransactionHandler::class),
             $this->configResolver,
-            $this->createStub(DomainMapper::class)
+            self::createStub(DomainMapper::class)
         );
     }
 

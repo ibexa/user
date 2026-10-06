@@ -26,7 +26,7 @@ final class PerformAccessCheckSubscriberTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->kernel = $this->createStub(HttpKernelInterface::class);
+        $this->kernel = self::createStub(HttpKernelInterface::class);
         $this->request = new Request();
         $this->subscriber = new PerformAccessCheckSubscriber([]);
     }

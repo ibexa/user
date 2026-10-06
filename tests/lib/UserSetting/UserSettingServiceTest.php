@@ -20,7 +20,7 @@ class UserSettingServiceTest extends TestCase
 {
     public function testCountUserSettings(): void
     {
-        $userPreferenceService = $this->createStub(UserPreferenceService::class);
+        $userPreferenceService = self::createStub(UserPreferenceService::class);
         $valueRegistry = $this->createMock(ValueDefinitionRegistry::class);
         $valueRegistry->method('countValueDefinitions')->willReturn(2);
         $userSettingService = new UserSettingService($userPreferenceService, $valueRegistry);

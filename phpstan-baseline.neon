@@ -529,13 +529,7 @@ parameters:
 			path: tests/integration/Invitation/InvitationServiceTest.php
 
 		-
-			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\User\\\\PasswordValidationContext'' and Ibexa\\Contracts\\Core\\Repository\\Values\\User\\PasswordValidationContext will always evaluate to true\.$#'
-			identifier: method.alreadyNarrowedType
-			count: 1
-			path: tests/lib/Validator/Constraint/PasswordValidatorTest.php
-
-		-
 			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\User\\\\PasswordValidationContext'' and Ibexa\\Contracts\\Core\\Repository\\Values\\User\\PasswordValidationContext will always evaluate to true\.$#'
 			identifier: staticMethod.alreadyNarrowedType
-			count: 1
+			count: 2
 			path: tests/lib/Validator/Constraint/PasswordValidatorTest.php

@@ -32,7 +32,7 @@ final class UserGroupsChoiceLoader extends AbstractChoiceLoader
      */
     protected function loadChoices(): iterable
     {
-        return $this->repository->sudo(function () {
+        return $this->repository->sudo(function (): array {
             $query = new Query();
             $query->filter = new ContentTypeIdentifier('user_group');
             $query->offset = 0;
