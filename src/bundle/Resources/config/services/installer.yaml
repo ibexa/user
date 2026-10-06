@@ -20,3 +20,11 @@ services:
             $connection: '@ibexa.persistence.connection'
         tags:
             - { name: !php/const Ibexa\Contracts\DoctrineMigrations\Migrations\IbexaMigrationTag::TAG }
+
+    Ibexa\Bundle\User\Migration\RenamePostgreSqlPrimaryKeysMigration:
+        autowire: true
+        public: false
+        arguments:
+            $connection: '@ibexa.persistence.connection'
+        tags:
+            - { name: !php/const Ibexa\Contracts\DoctrineMigrations\Migrations\IbexaMigrationTag::TAG }

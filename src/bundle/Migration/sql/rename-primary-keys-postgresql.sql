@@ -1,0 +1,4 @@
+ALTER TABLE ibexa_user_invitation RENAME CONSTRAINT ibexa_user_invitations_pkey TO ibexa_user_invitation_pkey;
+-- ibexa:sql-statement-separator
+ALTER TABLE ibexa_user_invitation_assignment
+    RENAME CONSTRAINT ibexa_user_invitations_assignments_pkey TO ibexa_user_invitation_assignment_pkey;
