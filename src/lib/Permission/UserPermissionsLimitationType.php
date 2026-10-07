@@ -14,10 +14,8 @@ use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
 use Ibexa\Contracts\Core\Repository\Exceptions\NotImplementedException;
 use Ibexa\Contracts\Core\Repository\Values\Content\Content;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\CriterionInterface;
-use Ibexa\Contracts\Core\Repository\Values\User\Limitation;
 use Ibexa\Contracts\Core\Repository\Values\User\Limitation as APILimitationValue;
 use Ibexa\Contracts\Core\Repository\Values\User\Role;
-use Ibexa\Contracts\Core\Repository\Values\User\UserReference;
 use Ibexa\Contracts\Core\Repository\Values\User\UserReference as APIUserReference;
 use Ibexa\Contracts\Core\Repository\Values\ValueObject;
 use Ibexa\Core\Base\Exceptions\InvalidArgumentException;
@@ -33,7 +31,7 @@ class UserPermissionsLimitationType extends AbstractPersistenceLimitationType im
      *
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException If the value does not match the expected type/structure
      *
-     * @param Limitation $limitationValue
+     * @param APILimitationValue $limitationValue
      */
     public function acceptValue(APILimitationValue $limitationValue)
     {
@@ -81,7 +79,7 @@ class UserPermissionsLimitationType extends AbstractPersistenceLimitationType im
      *
      * Make sure {@link acceptValue()} is checked first!
      *
-     * @param Limitation $limitationValue
+     * @param APILimitationValue $limitationValue
      *
      * @return \Ibexa\Contracts\Core\FieldType\ValidationError[]
      */
@@ -131,7 +129,7 @@ class UserPermissionsLimitationType extends AbstractPersistenceLimitationType im
      *
      * @param mixed[] $limitationValues
      *
-     * @return Limitation
+     * @return APILimitationValue
      */
     public function buildValue(array $limitationValues)
     {
@@ -146,8 +144,8 @@ class UserPermissionsLimitationType extends AbstractPersistenceLimitationType im
      * @throws BadStateException If value of the LimitationValue is unsupported
      *         Example if OwnerLimitationValue->limitationValues[0] is not one of: [ 1 ]
      *
-     * @param Limitation $value
-     * @param UserReference $currentUser
+     * @param APILimitationValue $value
+     * @param APIUserReference $currentUser
      * @param ValueObject $object
      * @param ValueObject[]|null $targets The context of the $object, like Location of Content, if null none where provided by caller
      *
@@ -185,8 +183,8 @@ class UserPermissionsLimitationType extends AbstractPersistenceLimitationType im
     /**
      * Returns Criterion for use in find() query.
      *
-     * @param Limitation $value
-     * @param UserReference $currentUser
+     * @param APILimitationValue $value
+     * @param APIUserReference $currentUser
      *
      * @return CriterionInterface
      */
