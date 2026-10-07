@@ -16,11 +16,11 @@ use Ibexa\Contracts\Core\Repository\Exceptions\NotImplementedException;
  */
 class UserSettingArrayAccessor implements ArrayAccess
 {
-    /** @var \Ibexa\User\UserSetting\UserSettingService */
+    /** @var UserSettingService */
     protected $userSettingService;
 
     /**
-     * @param \Ibexa\User\UserSetting\UserSettingService $userSettingService
+     * @param UserSettingService $userSettingService
      */
     public function __construct(UserSettingService $userSettingService)
     {
@@ -48,8 +48,10 @@ class UserSettingArrayAccessor implements ArrayAccess
     /**
      * {@inheritdoc}
      */
-    public function offsetSet($offset, $value): void
-    {
+    public function offsetSet(
+        $offset,
+        $value
+    ): void {
         $this->userSettingService->setUserSetting($offset, $value);
     }
 

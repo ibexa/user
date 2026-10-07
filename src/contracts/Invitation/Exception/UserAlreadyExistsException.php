@@ -10,6 +10,4 @@ namespace Ibexa\Contracts\User\Invitation\Exception;
 
 use RuntimeException;
 
-final class UserAlreadyExistsException extends RuntimeException
-{
-}
+final class UserAlreadyExistsException extends RuntimeException {}

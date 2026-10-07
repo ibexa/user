@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\User\Form\Type;
 
 use Ibexa\ContentForms\Form\EventSubscriber\UserFieldsSubscriber;
@@ -47,8 +48,10 @@ class UserRegisterType extends AbstractType
         return BaseContentType::class;
     }
 
-    public function buildForm(FormBuilderInterface $builder, array $options)
-    {
+    public function buildForm(
+        FormBuilderInterface $builder,
+        array $options
+    ) {
         $builder
             ->add('register', SubmitType::class, ['label' => /** @Desc("Register") */ 'user.register_button'])
             ->addEventSubscriber(new UserFieldsSubscriber());

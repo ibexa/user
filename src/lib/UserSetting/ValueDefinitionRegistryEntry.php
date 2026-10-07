@@ -15,24 +15,26 @@ use Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface;
  */
 final class ValueDefinitionRegistryEntry
 {
-    /** @var \Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface */
+    /** @var ValueDefinitionInterface */
     private $definition;
 
     /** @var int */
     private $priority;
 
     /**
-     * @param \Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface $definition
+     * @param ValueDefinitionInterface $definition
      * @param int $priority
      */
-    public function __construct(ValueDefinitionInterface $definition, int $priority = 0)
-    {
+    public function __construct(
+        ValueDefinitionInterface $definition,
+        int $priority = 0
+    ) {
         $this->definition = $definition;
         $this->priority = $priority;
     }
 
     /**
-     * @return \Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface
+     * @return ValueDefinitionInterface
      */
     public function getDefinition(): ValueDefinitionInterface
     {

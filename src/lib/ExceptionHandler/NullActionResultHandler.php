@@ -15,16 +15,14 @@ class NullActionResultHandler implements ActionResultHandler
         array $parameters = [],
         ?string $domain = null,
         ?string $locale = null
-    ): void {
-    }
+    ): void {}
 
     public function success(
         string $message,
         array $parameters = [],
         ?string $domain = null,
         ?string $locale = null
-    ): void {
-    }
+    ): void {}
 }
 
 class_alias(NullActionResultHandler::class, 'EzSystems\EzPlatformUser\ExceptionHandler\NullActionResultHandler');

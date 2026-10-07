@@ -18,6 +18,7 @@ use Ibexa\Contracts\Core\Repository\Values\User\User;
 use Ibexa\Contracts\Core\Repository\Values\User\UserTokenUpdateStruct;
 use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 use Ibexa\Contracts\User\PasswordReset\NotifierInterface;
+use Ibexa\Core\Base\Exceptions\InvalidArgumentType;
 use Ibexa\User\ExceptionHandler\ActionResultHandler;
 use Ibexa\User\Form\Data\UserPasswordResetData;
 use Ibexa\User\Form\Factory\FormFactory;
@@ -27,6 +28,7 @@ use Ibexa\User\View\ForgotPassword\SuccessView;
 use Ibexa\User\View\ResetPassword\FormView as UserResetPasswordFormView;
 use Ibexa\User\View\ResetPassword\InvalidLinkView;
 use Ibexa\User\View\ResetPassword\SuccessView as UserResetPasswordSuccessView;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -61,12 +63,14 @@ class PasswordResetController extends Controller
     }
 
     /**
-     * @return \Ibexa\User\View\ForgotPassword\FormView|\Ibexa\User\View\ForgotPassword\SuccessView|\Symfony\Component\HttpFoundation\RedirectResponse
+     * @return FormView|SuccessView|RedirectResponse
      *
-     * @throws \Ibexa\Core\Base\Exceptions\InvalidArgumentType
+     * @throws InvalidArgumentType
      */
-    public function userForgotPasswordAction(Request $request, ?string $reason = null)
-    {
+    public function userForgotPasswordAction(
+        Request $request,
+        ?string $reason = null
+    ) {
         $form = $this->formFactory->forgotUserPassword();
         $form->handleRequest($request);
 
@@ -80,7 +84,7 @@ class PasswordResetController extends Controller
             }
 
             if (!empty($users)) {
-                /** @var \Ibexa\Contracts\Core\Repository\Values\User\User $user */
+                /** @var User $user */
                 $user = reset($users);
                 $token = $this->updateUserToken($user);
 
@@ -98,11 +102,11 @@ class PasswordResetController extends Controller
     }
 
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param Request $request
      *
-     * @return \Ibexa\User\View\ForgotPassword\LoginView|\Ibexa\User\View\ForgotPassword\SuccessView
+     * @return LoginView|SuccessView
      *
-     * @throws \Ibexa\Core\Base\Exceptions\InvalidArgumentType
+     * @throws InvalidArgumentType
      */
     public function userForgotPasswordLoginAction(Request $request)
     {
@@ -135,15 +139,17 @@ class PasswordResetController extends Controller
     }
 
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param Request $request
      * @param string $hashKey
      *
-     * @return \Ibexa\User\View\ResetPassword\FormView|\Ibexa\User\View\ResetPassword\InvalidLinkView|\Ibexa\User\View\ResetPassword\SuccessView
+     * @return UserResetPasswordFormView|InvalidLinkView|UserResetPasswordSuccessView
      *
-     * @throws \Ibexa\Core\Base\Exceptions\InvalidArgumentType
+     * @throws InvalidArgumentType
      */
-    public function userResetPasswordAction(Request $request, string $hashKey)
-    {
+    public function userResetPasswordAction(
+        Request $request,
+        string $hashKey
+    ) {
         $response = new Response();
         $response->headers->set('X-Robots-Tag', 'noindex');
 
@@ -200,7 +206,7 @@ class PasswordResetController extends Controller
     }
 
     /**
-     * @param \Ibexa\Contracts\Core\Repository\Values\User\User $user
+     * @param User $user
      *
      * @return string
      *

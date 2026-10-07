@@ -9,25 +9,27 @@ declare(strict_types=1);
 namespace Ibexa\User\UserSetting;
 
 use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
+use Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException;
 use Ibexa\Contracts\Core\Repository\UserPreferenceService;
 use Ibexa\Contracts\Core\Repository\Values\UserPreference\UserPreferenceSetStruct;
 use Ibexa\Contracts\User\UserSetting\ValueDefinitionGroupInterface;
 use Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface;
+use Ibexa\Core\Base\Exceptions\InvalidArgumentException;
 
 /**
  * @internal
  */
 class UserSettingService
 {
-    /** @var \Ibexa\Contracts\Core\Repository\UserPreferenceService */
+    /** @var UserPreferenceService */
     protected $userPreferenceService;
 
-    /** @var \Ibexa\User\UserSetting\ValueDefinitionRegistry */
+    /** @var ValueDefinitionRegistry */
     protected $valueRegistry;
 
     /**
-     * @param \Ibexa\Contracts\Core\Repository\UserPreferenceService $userPreferenceService
-     * @param \Ibexa\User\UserSetting\ValueDefinitionRegistry $valueRegistry
+     * @param UserPreferenceService $userPreferenceService
+     * @param ValueDefinitionRegistry $valueRegistry
      */
     public function __construct(
         UserPreferenceService $userPreferenceService,
@@ -41,11 +43,13 @@ class UserSettingService
      * @param string $identifier
      * @param string $value
      *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     * @throws \Ibexa\Core\Base\Exceptions\InvalidArgumentException
+     * @throws UnauthorizedException
+     * @throws InvalidArgumentException
      */
-    public function setUserSetting(string $identifier, string $value): void
-    {
+    public function setUserSetting(
+        string $identifier,
+        string $value
+    ): void {
         $userPreferenceSetStructs = [
             new UserPreferenceSetStruct(['name' => $identifier, 'value' => $value]),
         ];
@@ -56,10 +60,10 @@ class UserSettingService
     /**
      * @param string $identifier
      *
-     * @return \Ibexa\User\UserSetting\UserSetting
+     * @return UserSetting
      *
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
+     * @throws UnauthorizedException
      */
     public function getUserSetting(string $identifier): UserSetting
     {
@@ -88,12 +92,14 @@ class UserSettingService
      *
      * @return array
      *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
+     * @throws UnauthorizedException
      */
-    public function loadUserSettings(int $offset = 0, int $limit = 25): array
-    {
+    public function loadUserSettings(
+        int $offset = 0,
+        int $limit = 25
+    ): array {
         $values = $this->valueRegistry->getValueDefinitions();
-        /** @var \Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface[] $slice */
+        /** @var ValueDefinitionInterface[] $slice */
         $slice = \array_slice($values, $offset, $limit, true);
 
         $userPreferences = [];
@@ -153,10 +159,10 @@ class UserSettingService
 
     /**
      * @param string $identifier
-     * @param \Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface $value
+     * @param ValueDefinitionInterface $value
      * @param string $userPreferenceValue
      *
-     * @return \Ibexa\User\UserSetting\UserSetting
+     * @return UserSetting
      */
     private function createUserSetting(
         string $identifier,
@@ -173,14 +179,16 @@ class UserSettingService
 
     /**
      * @param string $identifier
-     * @param \Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface $value
+     * @param ValueDefinitionInterface $value
      *
      * @return string
      *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
+     * @throws UnauthorizedException
      */
-    private function getUserSettingValue(string $identifier, ValueDefinitionInterface $value): string
-    {
+    private function getUserSettingValue(
+        string $identifier,
+        ValueDefinitionInterface $value
+    ): string {
         try {
             $userPreference = $this->userPreferenceService->getUserPreference($identifier);
             $userPreferenceValue = $userPreference->value;

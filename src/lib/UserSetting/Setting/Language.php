@@ -19,19 +19,19 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class Language implements ValueDefinitionInterface, FormMapperInterface
 {
-    /** @var \Symfony\Contracts\Translation\TranslatorInterface */
+    /** @var TranslatorInterface */
     private $translator;
 
-    /** @var \Ibexa\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface */
+    /** @var UserLanguagePreferenceProviderInterface */
     private $userLanguagePreferenceProvider;
 
-    /** @var \Ibexa\User\Form\ChoiceList\Loader\AvailableLocaleChoiceLoader */
+    /** @var AvailableLocaleChoiceLoader */
     private $availableLocaleChoiceLoader;
 
     /**
-     * @param \Symfony\Contracts\Translation\TranslatorInterface $translator
-     * @param \Ibexa\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface $userLanguagePreferenceProvider
-     * @param \Ibexa\User\Form\ChoiceList\Loader\AvailableLocaleChoiceLoader $availableLocaleChoiceLoader
+     * @param TranslatorInterface $translator
+     * @param UserLanguagePreferenceProviderInterface $userLanguagePreferenceProvider
+     * @param AvailableLocaleChoiceLoader $availableLocaleChoiceLoader
      */
     public function __construct(
         TranslatorInterface $translator,
@@ -87,8 +87,10 @@ class Language implements ValueDefinitionInterface, FormMapperInterface
     /**
      * {@inheritdoc}
      */
-    public function mapFieldForm(FormBuilderInterface $formBuilder, ValueDefinitionInterface $value): FormBuilderInterface
-    {
+    public function mapFieldForm(
+        FormBuilderInterface $formBuilder,
+        ValueDefinitionInterface $value
+    ): FormBuilderInterface {
         return $formBuilder->create(
             'value',
             LocaleType::class,

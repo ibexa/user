@@ -13,7 +13,7 @@ use IntlDateFormatter;
 
 class Formatter implements FormatterInterface
 {
-    /** @var \IntlDateFormatter */
+    /** @var IntlDateFormatter */
     private $formatter;
 
     /**
@@ -21,8 +21,11 @@ class Formatter implements FormatterInterface
      * @param string $timezone
      * @param string $format
      */
-    public function __construct(string $locale, string $timezone, string $format)
-    {
+    public function __construct(
+        string $locale,
+        string $timezone,
+        string $format
+    ) {
         $this->formatter = new IntlDateFormatter(
             $locale,
             IntlDateFormatter::LONG,
@@ -36,8 +39,10 @@ class Formatter implements FormatterInterface
     /**
      * {@inheritdoc}
      */
-    public function format(DateTimeInterface $datetime, ?string $timezone = null): string
-    {
+    public function format(
+        DateTimeInterface $datetime,
+        ?string $timezone = null
+    ): string {
         if ($timezone) {
             $currentTimezone = $this->formatter->getTimeZone();
             $this->formatter->setTimeZone($timezone);

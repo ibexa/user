@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\User\Form\Type\Invitation;
 
 use Ibexa\User\Form\Data\UserInvitationData;
@@ -22,8 +23,10 @@ final class UserInvitationType extends AbstractType
     public const LIMITATION_TYPE_SECTION = 'section';
     public const LIMITATION_TYPE_LOCATION = 'location';
 
-    public function buildForm(FormBuilderInterface $builder, array $options)
-    {
+    public function buildForm(
+        FormBuilderInterface $builder,
+        array $options
+    ) {
         $builder
             ->add('email', EmailType::class, [
                 'label' => /** @Desc("Enter email") */ 'ibexa.user.invitation.email',

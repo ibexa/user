@@ -26,18 +26,20 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 abstract class ConfigurableSudoRepositoryLoader
 {
-    /** @var \Ibexa\Contracts\Core\Repository\Repository */
+    /** @var Repository */
     private $repository;
 
     /** @var array */
     private $params;
 
     /**
-     * @param \Ibexa\Contracts\Core\Repository\Repository $repository
+     * @param Repository $repository
      * @param array $params
      */
-    public function __construct(Repository $repository, $params = [])
-    {
+    public function __construct(
+        Repository $repository,
+        $params = []
+    ) {
         $this->repository = $repository;
         $this->params = $params;
     }
@@ -48,8 +50,10 @@ abstract class ConfigurableSudoRepositoryLoader
      *
      * @return $this
      */
-    public function setParam($name, $value)
-    {
+    public function setParam(
+        $name,
+        $value
+    ) {
         $this->params[$name] = $value;
 
         return $this;
@@ -70,7 +74,7 @@ abstract class ConfigurableSudoRepositoryLoader
     }
 
     /**
-     * @return \Ibexa\Contracts\Core\Repository\Repository
+     * @return Repository
      */
     protected function getRepository()
     {
@@ -78,7 +82,7 @@ abstract class ConfigurableSudoRepositoryLoader
     }
 
     /**
-     * @param \Closure $callback
+     * @param Closure $callback
      *
      * @return mixed
      *
@@ -94,7 +98,7 @@ abstract class ConfigurableSudoRepositoryLoader
     }
 
     /**
-     * @param \Symfony\Component\OptionsResolver\OptionsResolver $optionsResolver
+     * @param OptionsResolver $optionsResolver
      */
     abstract protected function configureOptions(OptionsResolver $optionsResolver);
 }

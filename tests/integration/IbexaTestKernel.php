@@ -67,8 +67,11 @@ final class IbexaTestKernel extends BaseIbexaTestKernel
      *
      * @phpstan-param class-string $class
      */
-    private static function createSyntheticService(ContainerBuilder $container, string $class, ?string $id = null): void
-    {
+    private static function createSyntheticService(
+        ContainerBuilder $container,
+        string $class,
+        ?string $id = null
+    ): void {
         $id = $id ?? $class;
         if ($container->has($id)) {
             throw new LogicException(sprintf(

@@ -20,17 +20,17 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ShortDateTimeFormat extends AbstractDateTimeFormat
 {
-    /** @var \Symfony\Contracts\Translation\TranslatorInterface */
+    /** @var TranslatorInterface */
     private $translator;
 
-    /** @var \Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface */
+    /** @var ConfigResolverInterface */
     private $configResolver;
 
     /**
-     * @param \Ibexa\User\UserSetting\Setting\DateTimeFormatSerializer $serializer
-     * @param \Symfony\Contracts\Translation\TranslatorInterface $translator
-     * @param \Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface $configResolver
-     * @param \Ibexa\User\UserSetting\DateTimeFormat\FormatterInterface $formatter
+     * @param DateTimeFormatSerializer $serializer
+     * @param TranslatorInterface $translator
+     * @param ConfigResolverInterface $configResolver
+     * @param FormatterInterface $formatter
      */
     public function __construct(
         DateTimeFormatSerializer $serializer,

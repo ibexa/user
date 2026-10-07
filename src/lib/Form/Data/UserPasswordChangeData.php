@@ -33,8 +33,10 @@ class UserPasswordChangeData
      * @param string|null $oldPassword
      * @param string|null $newPassword
      */
-    public function __construct(?string $oldPassword = null, ?string $newPassword = null)
-    {
+    public function __construct(
+        ?string $oldPassword = null,
+        ?string $newPassword = null
+    ) {
         $this->oldPassword = $oldPassword;
         $this->newPassword = $newPassword;
     }

@@ -15,8 +15,10 @@ use Symfony\Component\Security\Http\Authentication\DefaultAuthenticationFailureH
 
 final class DefaultAuthenticationFailureHandler extends HttpDefaultAuthenticationFailureHandler
 {
-    public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
-    {
+    public function onAuthenticationFailure(
+        Request $request,
+        AuthenticationException $exception
+    ) {
         if ($exception instanceof PasswordInUnsupportedFormatException) {
             $resetPasswordUrl = $this->httpUtils->generateUri($request, 'ibexa.user.forgot_password.migration');
             $this->setOptions([

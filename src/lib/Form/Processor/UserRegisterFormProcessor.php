@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\User\Form\Processor;
 
 use Ibexa\ContentForms\Event\FormActionEvent;
@@ -60,13 +61,13 @@ class UserRegisterFormProcessor implements EventSubscriberInterface
     }
 
     /**
-     * @param \Ibexa\ContentForms\Event\FormActionEvent $event
+     * @param FormActionEvent $event
      *
      * @throws \Exception
      */
     public function processRegister(FormActionEvent $event)
     {
-        /** @var \Ibexa\User\Form\Data\UserRegisterData $data */
+        /** @var UserRegisterData $data */
         if (!($data = $event->getData()) instanceof UserRegisterData) {
             return;
         }
@@ -80,8 +81,10 @@ class UserRegisterFormProcessor implements EventSubscriberInterface
         $event->stopPropagation();
     }
 
-    private function createUser(UserRegisterData $data, string $languageCode): User
-    {
+    private function createUser(
+        UserRegisterData $data,
+        string $languageCode
+    ): User {
         foreach ($data->fieldsData as $fieldDefIdentifier => $fieldData) {
             $data->setField($fieldDefIdentifier, $fieldData->value, $languageCode);
         }
