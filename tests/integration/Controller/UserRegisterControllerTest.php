@@ -15,7 +15,7 @@ use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * @covers \Ibexa\Bundle\User\Controller\UserRegisterController::registerFromInvitationAction
+ * @covers \Ibexa\Bundle\User\Controller\UserRegisterController
  */
 final class UserRegisterControllerTest extends IbexaKernelTestCase
 {
