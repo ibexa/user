@@ -38,12 +38,12 @@ abstract class AbstractDateTimeFormat implements ValueDefinitionInterface, FormM
         $allowedDateFormats = array_flip($this->getAllowedDateFormats());
         $allowedTimeFormats = array_flip($this->getAllowedTimeFormats());
 
-        $dateFormatLabel = $dateTimeFormat->getDateFormat();
+        $dateFormatLabel = $dateTimeFormat->getDateFormat() ?? '';
         if (isset($allowedDateFormats[$dateFormatLabel])) {
             $dateFormatLabel = $allowedDateFormats[$dateFormatLabel];
         }
 
-        $timeFormatLabel = $dateTimeFormat->getTimeFormat();
+        $timeFormatLabel = $dateTimeFormat->getTimeFormat() ?? '';
         if (isset($allowedTimeFormats[$timeFormatLabel])) {
             $timeFormatLabel = $allowedTimeFormats[$timeFormatLabel];
         }

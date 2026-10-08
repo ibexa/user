@@ -11,6 +11,7 @@ jobs:
         name: "User password format tests"
         uses: ibexa/gh-workflows/.github/workflows/browser-tests.yml@main
         with:
+            php-image: 'ghcr.io/ibexa/docker/php:8.5-node22'
             project-edition: 'oss'
             test-suite:  '--profile=browser --suite=password'
         secrets:
@@ -22,6 +23,7 @@ jobs:
         name: "User login providers tests"
         uses: ibexa/gh-workflows/.github/workflows/browser-tests.yml@main
         with:
+            php-image: 'ghcr.io/ibexa/docker/php:8.5-node22'
             project-edition: 'oss'
             test-suite:  '--profile=browser --suite=providers'
             test-setup-phase-1: '--mode=standard --profile=setup --suite=login-methods'
