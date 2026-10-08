@@ -13,6 +13,8 @@ use DateTime;
 use Exception;
 use Ibexa\Contracts\Core\HashGenerator;
 use Ibexa\Contracts\Core\Persistence\TransactionHandler;
+use Ibexa\Contracts\Core\Repository\Exceptions\BadStateException;
+use Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException;
 use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
 use Ibexa\Contracts\Core\Repository\PermissionResolver;
 use Ibexa\Contracts\Core\Repository\UserService;
@@ -34,7 +36,7 @@ final class InvitationService implements InvitationServiceInterface
 
     private HashGenerator $hashGenerator;
 
-    private SiteaccessServiceInterface $siteAccessService;
+    private SiteAccessServiceInterface $siteAccessService;
 
     private PermissionResolver $permissionResolver;
 
@@ -67,8 +69,8 @@ final class InvitationService implements InvitationServiceInterface
     }
 
     /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\BadStateException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
+     * @throws BadStateException
+     * @throws InvalidArgumentException
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
      * @throws \JsonException
      */
@@ -178,10 +180,10 @@ final class InvitationService implements InvitationServiceInterface
     }
 
     /**
-     * @return \Ibexa\Contracts\User\Invitation\Invitation[]
+     * @return Invitation[]
      *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\BadStateException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
+     * @throws BadStateException
+     * @throws InvalidArgumentException
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
      */
     public function findInvitations(?InvitationFilter $invitationsFilter = null): array

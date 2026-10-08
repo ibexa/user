@@ -4,8 +4,10 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Bundle\User;
 
+use Ibexa\Bundle\Core\DependencyInjection\IbexaCoreExtension;
 use Ibexa\Bundle\User\DependencyInjection\Compiler\SecurityPass;
 use Ibexa\Bundle\User\DependencyInjection\Compiler\UserSetting;
 use Ibexa\Bundle\User\DependencyInjection\Configuration\Parser\ChangePassword;
@@ -28,7 +30,7 @@ class IbexaUserBundle extends Bundle
      */
     public function build(ContainerBuilder $container)
     {
-        /** @var \Ibexa\Bundle\Core\DependencyInjection\IbexaCoreExtension $core */
+        /** @var IbexaCoreExtension $core */
         $core = $container->getExtension('ibexa');
         $core->addConfigParser(new Security());
         $core->addConfigParser(new ChangePassword());

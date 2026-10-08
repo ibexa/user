@@ -15,19 +15,20 @@ use Ibexa\Contracts\Core\Repository\Values\User\User;
 use Ibexa\Core\FieldType\ValidationError;
 use Ibexa\User\Validator\Constraints\Password;
 use Ibexa\User\Validator\Constraints\PasswordValidator;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 
 class PasswordValidatorTest extends TestCase
 {
-    /** @var \Ibexa\Contracts\Core\Repository\UserService|\PHPUnit\Framework\MockObject\MockObject */
+    /** @var UserService|MockObject */
     private $userService;
 
-    /** @var \PHPUnit\Framework\MockObject\MockObject|\Symfony\Component\Validator\Context\ExecutionContextInterface */
+    /** @var MockObject|ExecutionContextInterface */
     private $executionContext;
 
-    /** @var \Ibexa\User\Validator\Constraints\PasswordValidator */
+    /** @var PasswordValidator */
     private $validator;
 
     protected function setUp(): void
@@ -64,7 +65,10 @@ class PasswordValidatorTest extends TestCase
             ->expects(self::once())
             ->method('validatePassword')
             ->willReturnCallback(
-                static function (string $actualPassword, PasswordValidationContext $actualContext) use (
+                static function (
+                    string $actualPassword,
+                    PasswordValidationContext $actualContext
+                ) use (
                     $password,
                     $contentType,
                     $user
@@ -101,7 +105,10 @@ class PasswordValidatorTest extends TestCase
         $this->userService
             ->expects(self::once())
             ->method('validatePassword')
-            ->willReturnCallback(function (string $actualPassword, PasswordValidationContext $actualContext) use (
+            ->willReturnCallback(function (
+                string $actualPassword,
+                PasswordValidationContext $actualContext
+            ) use (
                 $password,
                 $contentType,
                 $errorMessage,

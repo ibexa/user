@@ -10,6 +10,4 @@ namespace Ibexa\User\View\Invitation;
 
 use Ibexa\Core\MVC\Symfony\View\BaseView;
 
-class FormView extends BaseView
-{
-}
+class FormView extends BaseView {}

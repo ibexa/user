@@ -21,18 +21,18 @@ class AvailableLocaleChoiceLoader implements ChoiceLoaderInterface
     // and should not be present on the list of available translations.
     private const EXCLUDED_TRANSLATIONS = ['ach-UG'];
 
-    /** @var \Symfony\Component\Validator\Validator\ValidatorInterface */
+    /** @var ValidatorInterface */
     private $validator;
 
-    /** @var \Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface */
+    /** @var ConfigResolverInterface */
     private $configResolver;
 
     /** @var string[] */
     private $availableTranslations;
 
     /**
-     * @param \Symfony\Component\Validator\Validator\ValidatorInterface $validator
-     * @param \Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface $configResolver
+     * @param ValidatorInterface $validator
+     * @param ConfigResolverInterface $configResolver
      * @param string[] $availableTranslations
      */
     public function __construct(
@@ -67,8 +67,10 @@ class AvailableLocaleChoiceLoader implements ChoiceLoaderInterface
         return new ArrayChoiceList($this->getChoiceList(), $value);
     }
 
-    public function loadChoicesForValues(array $values, $value = null)
-    {
+    public function loadChoicesForValues(
+        array $values,
+        $value = null
+    ) {
         // Optimize
         $values = array_filter($values);
         if (empty($values)) {
@@ -78,8 +80,10 @@ class AvailableLocaleChoiceLoader implements ChoiceLoaderInterface
         return $this->loadChoiceList($value)->getChoicesForValues($values);
     }
 
-    public function loadValuesForChoices(array $choices, $value = null)
-    {
+    public function loadValuesForChoices(
+        array $choices,
+        $value = null
+    ) {
         // Optimize
         $choices = array_filter($choices);
         if (empty($choices)) {

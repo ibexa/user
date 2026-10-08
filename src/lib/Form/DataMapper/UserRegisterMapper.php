@@ -4,10 +4,12 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\User\Form\DataMapper;
 
 use Ibexa\Contracts\ContentForms\Data\Content\FieldData;
 use Ibexa\Contracts\Core\Repository\Values\Content\Field;
+use Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition;
 use Ibexa\Contracts\User\Invitation\Invitation;
 use Ibexa\User\ConfigResolver\RegistrationContentTypeLoader;
 use Ibexa\User\ConfigResolver\RegistrationGroupLoader;
@@ -19,18 +21,18 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class UserRegisterMapper
 {
-    /** @var \Ibexa\User\ConfigResolver\RegistrationContentTypeLoader */
+    /** @var RegistrationContentTypeLoader */
     private $contentTypeLoader;
 
-    /** @var \Ibexa\User\ConfigResolver\RegistrationContentTypeLoader */
+    /** @var RegistrationContentTypeLoader */
     private $parentGroupLoader;
 
     /** @var array */
     private $params;
 
     /**
-     * @param \Ibexa\User\ConfigResolver\RegistrationContentTypeLoader $contentTypeLoader
-     * @param \Ibexa\User\ConfigResolver\RegistrationGroupLoader $registrationGroupLoader
+     * @param RegistrationContentTypeLoader $contentTypeLoader
+     * @param RegistrationGroupLoader $registrationGroupLoader
      */
     public function __construct(
         RegistrationContentTypeLoader $contentTypeLoader,
@@ -44,13 +46,15 @@ class UserRegisterMapper
      * @param $name
      * @param $value
      */
-    public function setParam($name, $value)
-    {
+    public function setParam(
+        $name,
+        $value
+    ) {
         $this->params[$name] = $value;
     }
 
     /**
-     * @return \Ibexa\User\Form\Data\UserRegisterData
+     * @return UserRegisterData
      */
     public function mapToFormData()
     {
@@ -58,7 +62,7 @@ class UserRegisterMapper
         $this->configureOptions($resolver);
         $this->params = $resolver->resolve($this->params);
 
-        /** @var \Ibexa\Contracts\User\Invitation\Invitation|null $invitation */
+        /** @var Invitation|null $invitation */
         $invitation = $this->params['invitation'] ?? null;
         $contentType = $this->contentTypeLoader->loadContentType(
             $invitation ? $invitation->getSiteAccessIdentifier() : null
@@ -84,7 +88,7 @@ class UserRegisterMapper
             $data->email = $invitation->getEmail();
         }
 
-        /** @var \Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition $fieldDef */
+        /** @var FieldDefinition $fieldDef */
         foreach ($contentType->fieldDefinitions as $fieldDef) {
             $value = $fieldDef->defaultValue;
             if ($invitation && $fieldDef->fieldTypeIdentifier === 'ezuser') {

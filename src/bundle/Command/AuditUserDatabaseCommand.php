@@ -12,7 +12,9 @@ use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\FetchMode;
 use Ibexa\Bundle\Core\Command\BackwardCompatibleCommand;
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
+use Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException;
 use Ibexa\Contracts\Core\Repository\UserService;
+use Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition;
 use Ibexa\Core\FieldType\User\Type;
 use Ibexa\Core\FieldType\User\UserStorage\Gateway\DoctrineStorage;
 use Symfony\Component\Console\Command\Command;
@@ -21,13 +23,13 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 final class AuditUserDatabaseCommand extends Command implements BackwardCompatibleCommand
 {
-    /** @var \Ibexa\Contracts\Core\Repository\ContentTypeService */
+    /** @var ContentTypeService */
     private $contentTypeService;
 
-    /** @var \Ibexa\Contracts\Core\Repository\UserService */
+    /** @var UserService */
     private $userService;
 
-    /** @var \Doctrine\DBAL\Connection */
+    /** @var Connection */
     private $connection;
 
     public function __construct(
@@ -48,7 +50,7 @@ final class AuditUserDatabaseCommand extends Command implements BackwardCompatib
     }
 
     /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function execute(
         InputInterface $input,
@@ -119,7 +121,7 @@ final class AuditUserDatabaseCommand extends Command implements BackwardCompatib
     }
 
     /**
-     * @return \Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition[]
+     * @return FieldDefinition[]
      */
     private function getUserFieldDefinitions(): array
     {

@@ -13,8 +13,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 class BaseSubmitHandler implements SubmitHandler
 {
-    public function handle(FormInterface $form, callable $handler): ?Response
-    {
+    public function handle(
+        FormInterface $form,
+        callable $handler
+    ): ?Response {
         $data = $form->getData();
 
         if ($form->isValid()) {

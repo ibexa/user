@@ -28,13 +28,17 @@ final class UserRegister extends Notification implements EmailNotificationInterf
         $this->user = $user;
     }
 
-    public function asEmailMessage(EmailRecipientInterface $recipient, ?string $transport = null): ?EmailMessage
-    {
+    public function asEmailMessage(
+        EmailRecipientInterface $recipient,
+        ?string $transport = null
+    ): ?EmailMessage {
         return null;
     }
 
-    public function asSmsMessage(SmsRecipientInterface $recipient, ?string $transport = null): ?SmsMessage
-    {
+    public function asSmsMessage(
+        SmsRecipientInterface $recipient,
+        ?string $transport = null
+    ): ?SmsMessage {
         return null;
     }
 

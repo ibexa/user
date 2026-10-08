@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\User\Form\Type\Invitation;
 
 use Ibexa\Contracts\User\Invitation\InvitationService;
@@ -21,8 +22,10 @@ final class InvitationType extends AbstractType
         $this->invitationService = $invitationService;
     }
 
-    public function buildForm(FormBuilderInterface $builder, array $options)
-    {
+    public function buildForm(
+        FormBuilderInterface $builder,
+        array $options
+    ) {
         $builder->addViewTransformer(new InvitationTransformer($this->invitationService));
     }
 

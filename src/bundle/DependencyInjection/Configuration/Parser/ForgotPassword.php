@@ -60,8 +60,11 @@ final class ForgotPassword extends AbstractParser
         ;
     }
 
-    public function mapConfig(array &$scopeSettings, $currentScope, ContextualizerInterface $contextualizer)
-    {
+    public function mapConfig(
+        array &$scopeSettings,
+        $currentScope,
+        ContextualizerInterface $contextualizer
+    ) {
         if (!empty($scopeSettings['user_forgot_password'])) {
             $settings = $scopeSettings['user_forgot_password']['templates'];
             if (!empty($settings['form'])) {

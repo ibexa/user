@@ -21,8 +21,10 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class UserPasswordChangeType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
-    {
+    public function buildForm(
+        FormBuilderInterface $builder,
+        array $options
+    ) {
         $builder
             ->add('oldPassword', PasswordType::class, [
                 'required' => true,

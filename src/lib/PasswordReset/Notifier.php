@@ -42,8 +42,10 @@ final class Notifier implements NotifierInterface
         $this->notificationService = $notificationService;
     }
 
-    public function sendMessage(User $user, string $hashKey): void
-    {
+    public function sendMessage(
+        User $user,
+        string $hashKey
+    ): void {
         if ($this->isNotifierConfigured()) {
             $this->sendNotification($user, $hashKey);
 
@@ -74,8 +76,10 @@ final class Notifier implements NotifierInterface
         $this->mailer->send($message);
     }
 
-    private function sendNotification(User $user, string $token): void
-    {
+    private function sendNotification(
+        User $user,
+        string $token
+    ): void {
         $this->notificationService->send(
             new SymfonyNotificationAdapter(
                 new UserPasswordReset($user, $token),

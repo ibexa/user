@@ -11,22 +11,25 @@ namespace Ibexa\User\UserSetting\Setting;
 use DateTimeImmutable;
 use Ibexa\Contracts\User\UserSetting\FormMapperInterface;
 use Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface;
+use Ibexa\User\UserSetting\DateTimeFormat\Formatter;
 use Ibexa\User\UserSetting\DateTimeFormat\FormatterInterface;
 
 abstract class AbstractDateTimeFormat implements ValueDefinitionInterface, FormMapperInterface
 {
-    /** @var \Ibexa\User\UserSetting\Setting\DateTimeFormatSerializer */
+    /** @var DateTimeFormatSerializer */
     protected $serializer;
 
-    /** @var \Ibexa\User\UserSetting\DateTimeFormat\Formatter|null */
+    /** @var Formatter|null */
     protected $formatter;
 
     /**
-     * @param \Ibexa\User\UserSetting\Setting\DateTimeFormatSerializer $serializer
-     * @param \Ibexa\User\UserSetting\DateTimeFormat\FormatterInterface $formatter
+     * @param DateTimeFormatSerializer $serializer
+     * @param FormatterInterface $formatter
      */
-    public function __construct(DateTimeFormatSerializer $serializer, FormatterInterface $formatter)
-    {
+    public function __construct(
+        DateTimeFormatSerializer $serializer,
+        FormatterInterface $formatter
+    ) {
         $this->serializer = $serializer;
         $this->formatter = $formatter;
     }

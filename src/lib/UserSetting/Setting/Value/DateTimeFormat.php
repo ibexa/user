@@ -20,8 +20,10 @@ final class DateTimeFormat
      * @param string|null $dateFormat
      * @param string|null $timeFormat
      */
-    public function __construct(?string $dateFormat = null, ?string $timeFormat = null)
-    {
+    public function __construct(
+        ?string $dateFormat = null,
+        ?string $timeFormat = null
+    ) {
         $this->dateFormat = $dateFormat;
         $this->timeFormat = $timeFormat;
     }

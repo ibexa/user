@@ -30,8 +30,11 @@ interface Handler
 
     public function markAsUsed(string $hash): void;
 
-    /** @return \Ibexa\Contracts\User\Invitation\Persistence\Invitation[] */
+    /** @return Invitation[] */
     public function findInvitations(?InvitationFilter $invitationsFilter = null): array;
 
-    public function refreshInvitation(string $hash, string $newHash): Invitation;
+    public function refreshInvitation(
+        string $hash,
+        string $newHash
+    ): Invitation;
 }

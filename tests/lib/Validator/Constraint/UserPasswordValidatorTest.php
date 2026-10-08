@@ -13,6 +13,7 @@ use Ibexa\Contracts\Core\Repository\Values\User\User as APIUser;
 use Ibexa\Core\MVC\Symfony\Security\ReferenceUserInterface;
 use Ibexa\User\Validator\Constraints\UserPassword;
 use Ibexa\User\Validator\Constraints\UserPasswordValidator;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
@@ -22,22 +23,22 @@ use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 class UserPasswordValidatorTest extends TestCase
 {
     /**
-     * @var \Ibexa\Contracts\Core\Repository\UserService|\PHPUnit\Framework\MockObject\MockObject
+     * @var UserService|MockObject
      */
     private $userService;
 
     /**
-     * @var \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface|\PHPUnit\Framework\MockObject\MockObject
+     * @var TokenStorageInterface|MockObject
      */
     private $tokenStorage;
 
     /**
-     * @var \Symfony\Component\Validator\Context\ExecutionContextInterface|\PHPUnit\Framework\MockObject\MockObject
+     * @var ExecutionContextInterface|MockObject
      */
     private $executionContext;
 
     /**
-     * @var \Ibexa\User\Validator\Constraints\UserPasswordValidator
+     * @var UserPasswordValidator
      */
     private $validator;
 

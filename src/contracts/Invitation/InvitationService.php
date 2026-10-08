@@ -8,14 +8,17 @@ declare(strict_types=1);
 
 namespace Ibexa\Contracts\User\Invitation;
 
+use Ibexa\Contracts\Core\Repository\Exceptions\BadStateException;
+use Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException;
+use Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException;
 use Ibexa\Contracts\User\Invitation\Query\InvitationFilter;
 
 interface InvitationService
 {
     /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\BadStateException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
+     * @throws BadStateException
+     * @throws InvalidArgumentException
+     * @throws UnauthorizedException
      * @throws \JsonException
      */
     public function createInvitation(
@@ -33,11 +36,11 @@ interface InvitationService
     public function markAsUsed(Invitation $invitation): void;
 
     /**
-     * @return \Ibexa\Contracts\User\Invitation\Invitation[]
+     * @return Invitation[]
      *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\BadStateException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
+     * @throws BadStateException
+     * @throws InvalidArgumentException
+     * @throws UnauthorizedException
      */
     public function findInvitations(?InvitationFilter $invitationsFilter = null): array;
 

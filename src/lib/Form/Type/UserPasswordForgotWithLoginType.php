@@ -17,8 +17,10 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class UserPasswordForgotWithLoginType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
-    {
+    public function buildForm(
+        FormBuilderInterface $builder,
+        array $options
+    ) {
         $builder
             ->add('login', TextType::class, [
                 'required' => true,

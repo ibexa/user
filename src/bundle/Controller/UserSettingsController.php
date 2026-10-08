@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace Ibexa\Bundle\User\Controller;
 
 use Ibexa\Contracts\Core\Repository\PermissionResolver;
+use Ibexa\Core\Base\Exceptions\InvalidArgumentType;
 use Ibexa\User\ExceptionHandler\ActionResultHandler;
 use Ibexa\User\Form\Data\UserSettingUpdateData;
 use Ibexa\User\Form\Factory\FormFactory;
@@ -26,19 +27,19 @@ use Symfony\Component\HttpFoundation\Response;
 
 class UserSettingsController extends Controller
 {
-    /** @var \Ibexa\User\Form\Factory\FormFactory */
+    /** @var FormFactory */
     private $formFactory;
 
-    /** @var \Ibexa\User\Form\SubmitHandler */
+    /** @var SubmitHandler */
     private $submitHandler;
 
-    /** @var \Ibexa\User\UserSetting\UserSettingService */
+    /** @var UserSettingService */
     private $userSettingService;
 
-    /** @var \Ibexa\User\UserSetting\ValueDefinitionRegistry */
+    /** @var ValueDefinitionRegistry */
     private $valueDefinitionRegistry;
 
-    /** @var \Ibexa\User\ExceptionHandler\ActionResultHandler */
+    /** @var ActionResultHandler */
     private $actionResultHandler;
 
     private PermissionResolver $permissionResolver;
@@ -62,9 +63,9 @@ class UserSettingsController extends Controller
     /**
      * @param int $page
      *
-     * @return \Ibexa\User\View\UserSettings\ListView
+     * @return ListView
      *
-     * @throws \Ibexa\Core\Base\Exceptions\InvalidArgumentType
+     * @throws InvalidArgumentType
      */
     public function listAction(int $page = 1): ListView
     {
@@ -78,8 +79,10 @@ class UserSettingsController extends Controller
         ]);
     }
 
-    public function updateAction(Request $request, UpdateView $view)
-    {
+    public function updateAction(
+        Request $request,
+        UpdateView $view
+    ) {
         $userSettingGroup = $view->getUserSettingGroup();
 
         $values = [];

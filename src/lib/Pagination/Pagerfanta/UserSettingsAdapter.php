@@ -8,16 +8,18 @@ declare(strict_types=1);
 
 namespace Ibexa\User\Pagination\Pagerfanta;
 
+use Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException;
+use Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException;
 use Ibexa\User\UserSetting\UserSettingService;
 use Pagerfanta\Adapter\AdapterInterface;
 
 class UserSettingsAdapter implements AdapterInterface
 {
-    /** @var \Ibexa\User\UserSetting\UserSettingService */
+    /** @var UserSettingService */
     private $userSettingService;
 
     /**
-     * @param \Ibexa\User\UserSetting\UserSettingService $userSettingService
+     * @param UserSettingService $userSettingService
      */
     public function __construct(UserSettingService $userSettingService)
     {
@@ -27,7 +29,7 @@ class UserSettingsAdapter implements AdapterInterface
     /**
      * {@inheritdoc}
      *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function getNbResults(): int
     {
@@ -37,10 +39,12 @@ class UserSettingsAdapter implements AdapterInterface
     /**
      * {@inheritdoc}
      *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
+     * @throws UnauthorizedException
      */
-    public function getSlice($offset, $length): array
-    {
+    public function getSlice(
+        $offset,
+        $length
+    ): array {
         return $this->userSettingService->loadUserSettings($offset, $length);
     }
 }

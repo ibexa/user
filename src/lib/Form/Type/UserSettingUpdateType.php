@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\User\Form\Type;
 
+use Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException;
 use Ibexa\User\Form\Data\UserSettingUpdateData;
 use Ibexa\User\UserSetting\FormMapperRegistry;
 use Ibexa\User\UserSetting\ValueDefinitionRegistry;
@@ -22,15 +23,15 @@ class UserSettingUpdateType extends AbstractType
 {
     public const BTN_UPDATE_AND_EDIT = 'update_and_edit';
 
-    /** @var \Ibexa\User\UserSetting\FormMapperRegistry */
+    /** @var FormMapperRegistry */
     protected $formMapperRegistry;
 
-    /** @var \Ibexa\User\UserSetting\ValueDefinitionRegistry */
+    /** @var ValueDefinitionRegistry */
     protected $valueDefinitionRegistry;
 
     /**
-     * @param \Ibexa\User\UserSetting\FormMapperRegistry $formMapperRegistry
-     * @param \Ibexa\User\UserSetting\ValueDefinitionRegistry $valueDefinitionRegistry
+     * @param FormMapperRegistry $formMapperRegistry
+     * @param ValueDefinitionRegistry $valueDefinitionRegistry
      */
     public function __construct(
         FormMapperRegistry $formMapperRegistry,
@@ -43,10 +44,12 @@ class UserSettingUpdateType extends AbstractType
     /**
      * {@inheritdoc}
      *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
-    {
+    public function buildForm(
+        FormBuilderInterface $builder,
+        array $options
+    ) {
         $groupDefinition = $this->valueDefinitionRegistry->getValueDefinitionGroup(
             $options['user_setting_group_identifier']
         );
