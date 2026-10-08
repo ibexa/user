@@ -103,7 +103,7 @@ parameters:
 			path: src/bundle/DependencyInjection/Compiler/UserSetting/FormMapperPass.php
 
 		-
-			message: '#^PHPDoc tag @throws has invalid value \(\\Ibexa\\Core\\Base\\Exceptions\\InvalidArgumentException;\)\: Unexpected token ";", expected TOKEN_HORIZONTAL_WS at offset 337 on line 6$#'
+			message: '#^PHPDoc tag @throws has invalid value \(\\Ibexa\\Core\\Base\\Exceptions\\InvalidArgumentException;\)\: Unexpected token ";", expected TOKEN_HORIZONTAL_WS at offset 249 on line 6$#'
 			identifier: phpDoc.parseError
 			count: 1
 			path: src/bundle/DependencyInjection/Compiler/UserSetting/FormMapperPass.php
