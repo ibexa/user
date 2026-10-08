@@ -10,11 +10,17 @@ namespace Ibexa\Tests\Integration\User;
 
 use Ibexa\Contracts\Core\Test\IbexaKernelTestCase as BaseIbexaKernelTestCase;
 use Ibexa\Contracts\User\Invitation\InvitationService;
+use Ibexa\User\Invitation\Persistence\DoctrineGateway;
 
 abstract class IbexaKernelTestCase extends BaseIbexaKernelTestCase
 {
     protected static function getInvitationService(): InvitationService
     {
         return self::getServiceByClassName(InvitationService::class);
+    }
+
+    protected static function getInvitationGateway(): DoctrineGateway
+    {
+        return self::getServiceByClassName(DoctrineGateway::class);
     }
 }
