@@ -24,6 +24,7 @@
         "php": ">=8.5",
         "ibexa/content-forms": "~6.0.x-dev",
         "ibexa/core": "~6.0.x-dev",
+        "ibexa/doctrine-migrations": "~6.0.x-dev",
         "ibexa/jms-translation-bundle": "^3.0",
         "ibexa/notifications": "~6.0.x-dev",
         "symfony/config": "^8.1",
