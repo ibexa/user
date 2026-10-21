@@ -52,7 +52,7 @@ interface Gateway
      *
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      */
-    public function getInvitationByEmail(string $email): array;
+    public function getInvitationByEmail(string $email);
 
     /**
      * @phpstan-return TInvitationData[]
