@@ -10,6 +10,7 @@ namespace Ibexa\User\Permission;
 
 use Ibexa\Contracts\Core\Exception\InvalidArgumentType;
 use Ibexa\Contracts\Core\Limitation\Type as SPILimitationTypeInterface;
+use Ibexa\Contracts\Core\Repository\Exceptions\BadStateException;
 use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
 use Ibexa\Contracts\Core\Repository\Exceptions\NotImplementedException;
 use Ibexa\Contracts\Core\Repository\Values\Content\Content;
@@ -17,6 +18,7 @@ use Ibexa\Contracts\Core\Repository\Values\Content\Query\CriterionInterface;
 use Ibexa\Contracts\Core\Repository\Values\User\Limitation as APILimitationValue;
 use Ibexa\Contracts\Core\Repository\Values\User\Role;
 use Ibexa\Contracts\Core\Repository\Values\User\UserReference as APIUserReference;
+use Ibexa\Contracts\Core\Repository\Values\ValueObject;
 use Ibexa\Core\Base\Exceptions\InvalidArgumentException;
 use Ibexa\Core\FieldType\ValidationError;
 use Ibexa\Core\Limitation\AbstractPersistenceLimitationType;
@@ -134,14 +136,18 @@ class UserPermissionsLimitationType extends AbstractPersistenceLimitationType im
      *
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException If any of the arguments are invalid
      *         Example: If LimitationValue is instance of ContentTypeLimitationValue, and Type is SectionLimitationType.
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\BadStateException If value of the LimitationValue is unsupported
+     * @throws BadStateException If value of the LimitationValue is unsupported
      *         Example if OwnerLimitationValue->limitationValues[0] is not one of: [ 1 ]
      *
-     * @param \Ibexa\Contracts\Core\Repository\Values\ValueObject $object
-     * @param \Ibexa\Contracts\Core\Repository\Values\ValueObject[]|null $targets The context of the $object, like Location of Content, if null none where provided by caller
+     * @param ValueObject $object
+     * @param ValueObject[]|null $targets The context of the $object, like Location of Content, if null none where provided by caller
      */
-    public function evaluate(APILimitationValue $value, APIUserReference $currentUser, object $object, ?array $targets = null): ?bool
-    {
+    public function evaluate(
+        APILimitationValue $value,
+        APIUserReference $currentUser,
+        object $object,
+        ?array $targets = null
+    ): ?bool {
         if (!$value instanceof UserPermissionsLimitation) {
             throw new InvalidArgumentException('$value', 'Must be of type: APISiteAccessLimitation');
         }
@@ -168,8 +174,10 @@ class UserPermissionsLimitationType extends AbstractPersistenceLimitationType im
     /**
      * Returns Criterion for use in find() query.
      */
-    public function getCriterion(APILimitationValue $value, APIUserReference $currentUser): CriterionInterface
-    {
+    public function getCriterion(
+        APILimitationValue $value,
+        APIUserReference $currentUser
+    ): CriterionInterface {
         throw new NotImplementedException(__METHOD__);
     }
 
@@ -179,7 +187,7 @@ class UserPermissionsLimitationType extends AbstractPersistenceLimitationType im
      * @return mixed[]|int In case of array, a hash with key as valid limitations value and value as human readable name
      *                     of that option, in case of int on of VALUE_SCHEMA_ constants.
      */
-    public function valueSchema(): int|array
+    public function valueSchema(): int | array
     {
         throw new NotImplementedException(__METHOD__);
     }

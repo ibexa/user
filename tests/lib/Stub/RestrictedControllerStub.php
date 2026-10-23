@@ -24,15 +24,9 @@ final class RestrictedControllerStub implements RestrictedControllerInterface
         return $this->checkPerformed;
     }
 
-    public function __invoke(): void
-    {
-    }
+    public function __invoke(): void {}
 
-    public function action(): void
-    {
-    }
+    public function action(): void {}
 
-    public static function staticAction(): void
-    {
-    }
+    public static function staticAction(): void {}
 }

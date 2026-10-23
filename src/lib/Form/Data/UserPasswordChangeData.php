@@ -21,8 +21,7 @@ class UserPasswordChangeData
         private ?string $oldPassword = null,
         #[Assert\NotBlank]
         private ?string $newPassword = null
-    ) {
-    }
+    ) {}
 
     public function setOldPassword(?string $oldPassword): void
     {

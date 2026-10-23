@@ -35,7 +35,7 @@ class UserPermissionsLimitationTypeTest extends Base
 
     /**
      * @return array<int, array{
-     *     0: \Ibexa\User\Permission\UserPermissionsLimitation
+     *     0: UserPermissionsLimitation
      * }>
      */
     public static function providerForTestAcceptValue(): array
@@ -83,7 +83,7 @@ class UserPermissionsLimitationTypeTest extends Base
 
     /**
      * @return array<int, array{
-     *     0: \Ibexa\User\Permission\UserPermissionsLimitation
+     *     0: UserPermissionsLimitation
      * }>
      */
     public static function providerForTestAcceptValueException(): array
@@ -123,10 +123,13 @@ class UserPermissionsLimitationTypeTest extends Base
             // Original test never asserted an invocation count here (bare ->method(), no
             // ->expects()), only the per-call arguments via withConsecutive - some data sets
             // (e.g. empty 'roles' arrays) legitimately invoke loadRole() zero times.
-            $roleMatcher = self::any();
+            $roleMatcher = $this->any();
             $userHandlerMock->expects($roleMatcher)
                 ->method('loadRole')
-                ->willReturnCallback(static function (int $roleId, int $status) use ($roleMatcher): ?Role {
+                ->willReturnCallback(static function (
+                    int $roleId,
+                    int $status
+                ) use ($roleMatcher): ?Role {
                     if ($roleMatcher->numberOfInvocations() === 1) {
                         self::assertSame([4, Role::STATUS_DEFINED], [$roleId, $status]);
                     } else {
@@ -142,7 +145,7 @@ class UserPermissionsLimitationTypeTest extends Base
         }
 
         if ($limitation->limitationValues['roles'] !== null) {
-            $contentMatcher = self::any();
+            $contentMatcher = $this->any();
             $contentHandlerMock->expects($contentMatcher)
                 ->method('loadContentInfo')
                 ->willReturnCallback(static function (int $contentId) use ($contentMatcher): ?ContentInfo {
@@ -166,16 +169,21 @@ class UserPermissionsLimitationTypeTest extends Base
     }
 
     #[DataProvider('providerForTestValidateError')]
-    public function testValidateError(UserPermissionsLimitation $limitation, int $errorCount): void
-    {
+    public function testValidateError(
+        UserPermissionsLimitation $limitation,
+        int $errorCount
+    ): void {
         $userHandlerMock = $this->createMock(UserHandlerInterface::class);
         $contentHandlerMock = $this->createMock(ContentHandlerInterface::class);
 
         if ($limitation->limitationValues['roles'] !== null) {
-            $roleMatcher = self::exactly(2);
+            $roleMatcher = $this->exactly(2);
             $userHandlerMock->expects($roleMatcher)
                 ->method('loadRole')
-                ->willReturnCallback(static function (int $roleId, int $status) use ($roleMatcher): Role {
+                ->willReturnCallback(static function (
+                    int $roleId,
+                    int $status
+                ) use ($roleMatcher): Role {
                     if ($roleMatcher->numberOfInvocations() === 1) {
                         self::assertSame([4, Role::STATUS_DEFINED], [$roleId, $status]);
 
@@ -193,7 +201,7 @@ class UserPermissionsLimitationTypeTest extends Base
         }
 
         if ($limitation->limitationValues['user_groups'] !== null) {
-            $contentMatcher = self::exactly(2);
+            $contentMatcher = $this->exactly(2);
             $contentHandlerMock->expects($contentMatcher)
                 ->method('loadContentInfo')
                 ->willReturnCallback(static function (int $contentId) use ($contentMatcher): ContentInfo {
@@ -219,7 +227,7 @@ class UserPermissionsLimitationTypeTest extends Base
 
     /**
      * @return array<string, array{
-     *     0: \Ibexa\User\Permission\UserPermissionsLimitation,
+     *     0: UserPermissionsLimitation,
      *     1: int
      * }>
      */
@@ -275,8 +283,8 @@ class UserPermissionsLimitationTypeTest extends Base
 
     /**
      * @return array<string, array{
-     *     limitation: \Ibexa\User\Permission\UserPermissionsLimitation,
-     *     object: \Ibexa\Contracts\Core\Repository\Values\ValueObject,
+     *     limitation: UserPermissionsLimitation,
+     *     object: ValueObject,
      *     expected: bool|null
      * }>
      */

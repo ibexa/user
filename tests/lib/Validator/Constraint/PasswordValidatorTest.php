@@ -26,9 +26,9 @@ use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 
 class PasswordValidatorTest extends TestCase
 {
-    private UserService&MockObject $userService;
+    private UserService & MockObject $userService;
 
-    private ExecutionContextInterface&MockObject $executionContext;
+    private ExecutionContextInterface & MockObject $executionContext;
 
     private PasswordValidator $validator;
 
@@ -41,14 +41,14 @@ class PasswordValidatorTest extends TestCase
     }
 
     #[DataProvider('dataProviderForValidateNotSupportedValueType')]
-    public function testValidateShouldBeSkipped(\stdClass|string|null $value): void
+    public function testValidateShouldBeSkipped(stdClass | string | null $value): void
     {
         $this->userService
-            ->expects(self::never())
+            ->expects($this->never())
             ->method('validatePassword');
 
         $this->executionContext
-            ->expects(self::never())
+            ->expects($this->never())
             ->method('buildViolation');
 
         $this->validator->validate($value, new Password());
@@ -61,10 +61,13 @@ class PasswordValidatorTest extends TestCase
         $user = self::createStub(User::class);
 
         $this->userService
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('validatePassword')
             ->willReturnCallback(
-                static function (string $actualPassword, PasswordValidationContext $actualContext) use (
+                static function (
+                    string $actualPassword,
+                    PasswordValidationContext $actualContext
+                ) use (
                     $password,
                     $contentType,
                     $user
@@ -79,7 +82,7 @@ class PasswordValidatorTest extends TestCase
             );
 
         $this->executionContext
-            ->expects(self::never())
+            ->expects($this->never())
             ->method('buildViolation');
 
         $this->validator->validate(
@@ -99,9 +102,12 @@ class PasswordValidatorTest extends TestCase
         $errorMessage = 'error';
 
         $this->userService
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('validatePassword')
-            ->willReturnCallback(static function (string $actualPassword, PasswordValidationContext $actualContext) use (
+            ->willReturnCallback(static function (
+                string $actualPassword,
+                PasswordValidationContext $actualContext
+            ) use (
                 $password,
                 $contentType,
                 $errorMessage,
@@ -119,24 +125,24 @@ class PasswordValidatorTest extends TestCase
         $constraintViolationBuilder = $this->createMock(ConstraintViolationBuilderInterface::class);
 
         $this->executionContext
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('buildViolation')
             ->willReturn($constraintViolationBuilder);
         $this->executionContext
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('buildViolation')
             ->with($errorMessage)
             ->willReturn($constraintViolationBuilder);
         $constraintViolationBuilder
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('setParameters')
             ->with(['%foo%' => $errorParameter])
             ->willReturn($constraintViolationBuilder);
         $constraintViolationBuilder
-            ->expects(self::never())
+            ->expects($this->never())
             ->method('setCode');
         $constraintViolationBuilder
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('addViolation');
 
         $this->validator->validate('pass', new Password(
@@ -156,19 +162,19 @@ class PasswordValidatorTest extends TestCase
 
         $constraintViolationBuilder = $this->createMock(ConstraintViolationBuilderInterface::class);
         $constraintViolationBuilder
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('setParameters')
             ->with(['%limit%' => 2])
             ->willReturn($constraintViolationBuilder);
         $constraintViolationBuilder
-            ->expects(self::never())
+            ->expects($this->never())
             ->method('setCode');
         $constraintViolationBuilder
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('addViolation');
 
         $this->executionContext
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('buildViolation')
             ->with('plural error')
             ->willReturn($constraintViolationBuilder);
@@ -191,20 +197,20 @@ class PasswordValidatorTest extends TestCase
 
         $constraintViolationBuilder = $this->createMock(ConstraintViolationBuilderInterface::class);
         $constraintViolationBuilder
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('setParameters')
             ->willReturn($constraintViolationBuilder);
         $constraintViolationBuilder
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('setCode')
             ->with($expectedCode)
             ->willReturn($constraintViolationBuilder);
         $constraintViolationBuilder
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('addViolation');
 
         $this->executionContext
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('buildViolation')
             ->with($errorMessage)
             ->willReturn($constraintViolationBuilder);
@@ -275,15 +281,15 @@ class PasswordValidatorTest extends TestCase
 
         $constraintViolationBuilder = $this->createMock(ConstraintViolationBuilderInterface::class);
         $constraintViolationBuilder
-            ->expects(self::exactly(count($validationErrors)))
+            ->expects($this->exactly(count($validationErrors)))
             ->method('setParameters')
             ->willReturn($constraintViolationBuilder);
         $constraintViolationBuilder
-            ->expects(self::exactly(count($validationErrors)))
+            ->expects($this->exactly(count($validationErrors)))
             ->method('setCode')
             ->willReturn($constraintViolationBuilder);
         $constraintViolationBuilder
-            ->expects(self::exactly(count($validationErrors)))
+            ->expects($this->exactly(count($validationErrors)))
             ->method('addViolation');
 
         $this->executionContext

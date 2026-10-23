@@ -21,8 +21,7 @@ final readonly class PerformAccessCheckSubscriber implements EventSubscriberInte
     public function __construct(
         #[AutowireIterator('controller.service_arguments')]
         private iterable $controllers
-    ) {
-    }
+    ) {}
 
     public function onControllerEvent(ControllerEvent $event): void
     {

@@ -8,6 +8,8 @@ declare(strict_types=1);
 
 namespace Ibexa\User\Form\Type\Invitation;
 
+use Ibexa\Contracts\Core\Repository\Exceptions\BadStateException;
+use Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException;
 use Ibexa\Contracts\Core\Repository\PermissionResolver;
 use Ibexa\Contracts\Core\Repository\Repository;
 use Ibexa\Contracts\Core\Repository\SearchService;
@@ -26,8 +28,7 @@ final class UserGroupChoiceType extends AbstractType
         private readonly UserService $userService,
         private readonly SearchService $searchService,
         private readonly PermissionResolver $permissionResolver
-    ) {
-    }
+    ) {}
 
     public function configureOptions(OptionsResolver $resolver): void
     {
@@ -47,10 +48,10 @@ final class UserGroupChoiceType extends AbstractType
     }
 
     /**
-     * @return array<int, \Ibexa\Contracts\Core\Repository\Values\User\UserGroup>
+     * @return array<int, UserGroup>
      *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\BadStateException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
+     * @throws BadStateException
+     * @throws InvalidArgumentException
      */
     public function loadFilteredGroups(): array
     {

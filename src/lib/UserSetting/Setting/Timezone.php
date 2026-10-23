@@ -19,8 +19,7 @@ class Timezone implements ValueDefinitionInterface, FormMapperInterface
 {
     public function __construct(
         private readonly TranslatorInterface $translator
-    ) {
-    }
+    ) {}
 
     public function getName(): string
     {
@@ -42,8 +41,10 @@ class Timezone implements ValueDefinitionInterface, FormMapperInterface
         return date_default_timezone_get();
     }
 
-    public function mapFieldForm(FormBuilderInterface $formBuilder, ValueDefinitionInterface $value): FormBuilderInterface
-    {
+    public function mapFieldForm(
+        FormBuilderInterface $formBuilder,
+        ValueDefinitionInterface $value
+    ): FormBuilderInterface {
         return $formBuilder->create(
             'value',
             TimezoneType::class,

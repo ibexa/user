@@ -16,8 +16,7 @@ final class DefaultProfileImageController extends Controller
 {
     public function __construct(
         private readonly ConfigResolverInterface $configResolver
-    ) {
-    }
+    ) {}
 
     public function initialsAction(Request $request): Response
     {

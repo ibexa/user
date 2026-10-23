@@ -22,8 +22,10 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 class UserPasswordResetType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options): void
-    {
+    public function buildForm(
+        FormBuilderInterface $builder,
+        array $options
+    ): void {
         $builder
             ->add('new_password', RepeatedType::class, [
                 'type' => PasswordType::class,

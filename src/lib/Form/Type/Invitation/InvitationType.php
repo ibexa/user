@@ -17,11 +17,12 @@ final class InvitationType extends AbstractType
 {
     public function __construct(
         private readonly InvitationService $invitationService
-    ) {
-    }
+    ) {}
 
-    public function buildForm(FormBuilderInterface $builder, array $options): void
-    {
+    public function buildForm(
+        FormBuilderInterface $builder,
+        array $options
+    ): void {
         $builder->addViewTransformer(new InvitationTransformer($this->invitationService));
     }
 

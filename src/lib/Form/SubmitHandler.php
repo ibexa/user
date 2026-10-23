@@ -13,5 +13,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 interface SubmitHandler
 {
-    public function handle(FormInterface $form, callable $handler): ?Response;
+    public function handle(
+        FormInterface $form,
+        callable $handler
+    ): ?Response;
 }

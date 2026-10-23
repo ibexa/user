@@ -20,21 +20,22 @@ use Traversable;
 final class ValueDefinitionGroupRegistryEntry implements IteratorAggregate
 {
     /**
-     * @param array<string, \Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface> $valueDefinitions
+     * @param array<string, ValueDefinitionInterface> $valueDefinitions
      */
     public function __construct(
         private readonly ValueDefinitionGroupInterface $definition,
         private array $valueDefinitions = []
-    ) {
-    }
+    ) {}
 
-    public function addToValueDefinitions(string $identifier, ValueDefinitionInterface $valueDefinition): void
-    {
+    public function addToValueDefinitions(
+        string $identifier,
+        ValueDefinitionInterface $valueDefinition
+    ): void {
         $this->valueDefinitions[$identifier] = $valueDefinition;
     }
 
     /**
-     * @return array<string, \Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface>
+     * @return array<string, ValueDefinitionInterface>
      */
     public function getValueDefinitions(): array
     {

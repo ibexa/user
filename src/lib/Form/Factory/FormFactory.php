@@ -24,6 +24,7 @@ use InvalidArgumentException;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\Util\StringUtil;
+use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class FormFactory
@@ -31,8 +32,7 @@ class FormFactory
     public function __construct(
         protected FormFactoryInterface $formFactory,
         protected UrlGeneratorInterface $urlGenerator
-    ) {
-    }
+    ) {}
 
     public function changeUserPassword(
         ContentType $contentType,
@@ -54,7 +54,7 @@ class FormFactory
     }
 
     /**
-     * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
+     * @throws InvalidOptionsException
      */
     public function forgotUserPassword(
         ?UserPasswordForgotData $data = null,
@@ -66,7 +66,7 @@ class FormFactory
     }
 
     /**
-     * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
+     * @throws InvalidOptionsException
      */
     public function forgotUserPasswordWithLogin(
         ?UserPasswordForgotWithLoginData $data = null,
@@ -78,7 +78,7 @@ class FormFactory
     }
 
     /**
-     * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
+     * @throws InvalidOptionsException
      */
     public function resetUserPassword(
         ?UserPasswordResetData $data = null,

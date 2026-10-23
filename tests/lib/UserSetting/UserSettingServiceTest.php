@@ -34,11 +34,11 @@ class UserSettingServiceTest extends TestCase
         $userPreferenceService->method('getUserPreference')
             ->willReturnMap(
                 [
-                ['identifier_1', new UserPreference(['value' => '1'])],
-                ['identifier_2', new UserPreference(['value' => '2'])],
-                ['identifier_3', new UserPreference(['value' => '3'])],
-                ['identifier_4', new UserPreference(['value' => '4'])],
-            ]
+                    ['identifier_1', new UserPreference(['value' => '1'])],
+                    ['identifier_2', new UserPreference(['value' => '2'])],
+                    ['identifier_3', new UserPreference(['value' => '3'])],
+                    ['identifier_4', new UserPreference(['value' => '4'])],
+                ]
             );
 
         $valueRegistry = $this->createMock(ValueDefinitionRegistry::class);
@@ -68,8 +68,10 @@ class UserSettingServiceTest extends TestCase
         self::assertEquals($expected, $settings);
     }
 
-    private function getValueDefinition(string $name = 'name', string $description = 'description'): ValueDefinitionInterface
-    {
+    private function getValueDefinition(
+        string $name = 'name',
+        string $description = 'description'
+    ): ValueDefinitionInterface {
         $valueDefinition = $this->createMock(ValueDefinitionInterface::class);
         $valueDefinition->method('getName')->willReturn($name);
         $valueDefinition->method('getDescription')->willReturn($description);

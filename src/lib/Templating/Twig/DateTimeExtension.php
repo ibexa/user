@@ -24,8 +24,7 @@ class DateTimeExtension extends AbstractExtension
         private readonly FormatterInterface $fullDateTimeFormatter,
         private readonly FormatterInterface $fullDateFormatter,
         private readonly FormatterInterface $fullTimeFormatter
-    ) {
-    }
+    ) {}
 
     #[\Override]
     public function getFilters(): array
@@ -61,8 +60,11 @@ class DateTimeExtension extends AbstractExtension
     /**
      * @throws \Exception
      */
-    public function format(FormatterInterface $formatter, mixed $date = null, ?string $timezone = null): string
-    {
+    public function format(
+        FormatterInterface $formatter,
+        mixed $date = null,
+        ?string $timezone = null
+    ): string {
         if ($date === null) {
             $date = new DateTimeImmutable();
         }

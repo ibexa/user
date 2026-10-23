@@ -20,7 +20,7 @@ final class PerformAccessCheckSubscriberTest extends TestCase
 {
     private PerformAccessCheckSubscriber $subscriber;
 
-    private HttpKernelInterface&Stub $kernel;
+    private HttpKernelInterface & Stub $kernel;
 
     private Request $request;
 

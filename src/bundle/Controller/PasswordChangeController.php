@@ -10,8 +10,10 @@ namespace Ibexa\Bundle\User\Controller;
 
 use Exception;
 use Ibexa\Contracts\Core\Repository\UserService;
+use Ibexa\Contracts\Core\Repository\Values\User\User;
 use Ibexa\Contracts\User\Controller\AuthenticatedRememberedCheckTrait;
 use Ibexa\Contracts\User\Controller\RestrictedControllerInterface;
+use Ibexa\Core\Base\Exceptions\InvalidArgumentType;
 use Ibexa\Core\MVC\Symfony\SiteAccess;
 use Ibexa\User\ExceptionHandler\ActionResultHandler;
 use Ibexa\User\Form\Factory\FormFactory;
@@ -35,15 +37,14 @@ final class PasswordChangeController extends Controller implements RestrictedCon
         private FormFactory $formFactory,
         private TokenStorageInterface $tokenStorage,
         private array $siteAccessGroups
-    ) {
-    }
+    ) {}
 
     /**
-     * @throws \Ibexa\Core\Base\Exceptions\InvalidArgumentType
+     * @throws InvalidArgumentType
      */
-    public function userPasswordChangeAction(Request $request): RedirectResponse|SuccessView|FormView
+    public function userPasswordChangeAction(Request $request): RedirectResponse | SuccessView | FormView
     {
-        /** @var \Ibexa\Contracts\Core\Repository\Values\User\User $user */
+        /** @var User $user */
         $user = $this->tokenStorage->getToken()->getUser()->getAPIUser();
         $form = $this->formFactory->changeUserPassword($user->getContentType(), null, null, $user);
         $form->handleRequest($request);

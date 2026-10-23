@@ -13,6 +13,8 @@ use DateTime;
 use Exception;
 use Ibexa\Contracts\Core\HashGenerator;
 use Ibexa\Contracts\Core\Persistence\TransactionHandler;
+use Ibexa\Contracts\Core\Repository\Exceptions\BadStateException;
+use Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException;
 use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
 use Ibexa\Contracts\Core\Repository\PermissionResolver;
 use Ibexa\Contracts\Core\Repository\UserService;
@@ -39,12 +41,11 @@ final readonly class InvitationService implements InvitationServiceInterface
         private TransactionHandler $transactionHandler,
         private ConfigResolverInterface $configResolver,
         private DomainMapper $domainMapper
-    ) {
-    }
+    ) {}
 
     /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\BadStateException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
+     * @throws BadStateException
+     * @throws InvalidArgumentException
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
      * @throws \JsonException
      */
@@ -154,10 +155,10 @@ final readonly class InvitationService implements InvitationServiceInterface
     }
 
     /**
-     * @return \Ibexa\Contracts\User\Invitation\Invitation[]
+     * @return Invitation[]
      *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\BadStateException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
+     * @throws BadStateException
+     * @throws InvalidArgumentException
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
      */
     public function findInvitations(?InvitationFilter $invitationsFilter = null): array

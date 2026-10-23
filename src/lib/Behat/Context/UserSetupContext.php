@@ -20,8 +20,7 @@ class UserSetupContext implements Context
 
     public function __construct(
         private readonly Connection $connection
-    ) {
-    }
+    ) {}
 
     #[Given('a user :login has password in unsupported format')]
     public function aUserHasPasswordInUnsupportedFormat(string $login): void

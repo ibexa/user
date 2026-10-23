@@ -14,15 +14,16 @@ use Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface;
 abstract class AbstractGroup implements ValueDefinitionGroupInterface
 {
     /**
-     * @param array<string, \Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface> $values
+     * @param array<string, ValueDefinitionInterface> $values
      */
     public function __construct(
         protected array $values = []
-    ) {
-    }
+    ) {}
 
-    public function addValueDefinition(string $identifier, ValueDefinitionInterface $valueDefinition): void
-    {
+    public function addValueDefinition(
+        string $identifier,
+        ValueDefinitionInterface $valueDefinition
+    ): void {
         $this->values[$identifier] = $valueDefinition;
     }
 

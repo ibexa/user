@@ -24,8 +24,7 @@ final readonly class MailSender implements InvitationSender
         private Environment $twig,
         private ConfigResolverInterface $configResolver,
         private NotificationServiceInterface $notificationService
-    ) {
-    }
+    ) {}
 
     public function sendInvitation(Invitation $invitation): void
     {

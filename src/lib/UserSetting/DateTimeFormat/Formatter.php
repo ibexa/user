@@ -16,8 +16,11 @@ readonly class Formatter implements FormatterInterface
 {
     private IntlDateFormatter $formatter;
 
-    public function __construct(string $locale, string $timezone, string $format)
-    {
+    public function __construct(
+        string $locale,
+        string $timezone,
+        string $format
+    ) {
         $this->formatter = new IntlDateFormatter(
             $locale,
             IntlDateFormatter::LONG,
@@ -28,8 +31,10 @@ readonly class Formatter implements FormatterInterface
         );
     }
 
-    public function format(DateTimeInterface $datetime, ?string $timezone = null): string
-    {
+    public function format(
+        DateTimeInterface $datetime,
+        ?string $timezone = null
+    ): string {
         if ($timezone) {
             $currentTimezone = $this->formatter->getTimeZone();
             $this->formatter->setTimeZone($timezone);

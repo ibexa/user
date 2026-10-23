@@ -18,8 +18,7 @@ final readonly class ValueDefinitionRegistryEntry
     public function __construct(
         private ValueDefinitionInterface $definition,
         private int $priority = 0
-    ) {
-    }
+    ) {}
 
     public function getDefinition(): ValueDefinitionInterface
     {

@@ -17,8 +17,7 @@ final class SiteAccessChoiceType extends AbstractType
 {
     public function __construct(
         private readonly SiteAccessServiceInterface $siteAccessService
-    ) {
-    }
+    ) {}
 
     public function configureOptions(OptionsResolver $resolver): void
     {

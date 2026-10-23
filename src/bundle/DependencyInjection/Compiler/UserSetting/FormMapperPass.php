@@ -12,6 +12,7 @@ use Ibexa\Core\Base\Exceptions\InvalidArgumentException;
 use Ibexa\User\UserSetting\FormMapperRegistry;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 use Symfony\Component\DependencyInjection\Reference;
 
 class FormMapperPass implements CompilerPassInterface
@@ -20,8 +21,8 @@ class FormMapperPass implements CompilerPassInterface
 
     /**
      * @throws \Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
-     * @throws \Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException
-     * @throws \Ibexa\Core\Base\Exceptions\InvalidArgumentException
+     * @throws ServiceNotFoundException
+     * @throws InvalidArgumentException
      */
     public function process(ContainerBuilder $container): void
     {

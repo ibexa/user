@@ -12,5 +12,8 @@ use Ibexa\Contracts\Core\Repository\Values\User\User;
 
 interface NotifierInterface
 {
-    public function sendMessage(User $user, string $hashKey): void;
+    public function sendMessage(
+        User $user,
+        string $hashKey
+    ): void;
 }

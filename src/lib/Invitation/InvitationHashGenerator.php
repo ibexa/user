@@ -14,8 +14,7 @@ final readonly class InvitationHashGenerator implements HashGenerator
 {
     public function __construct(
         private int $length = 16
-    ) {
-    }
+    ) {}
 
     public function generate(): string
     {

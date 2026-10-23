@@ -35,7 +35,7 @@ class UserPassword extends Constraint implements TranslationContainerInterface
     }
 
     /**
-     * @return \JMS\TranslationBundle\Model\Message[]
+     * @return Message[]
      */
     public static function getTranslationMessages(): array
     {

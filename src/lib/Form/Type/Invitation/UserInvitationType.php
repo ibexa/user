@@ -23,8 +23,10 @@ final class UserInvitationType extends AbstractType
     public const string LIMITATION_TYPE_SECTION = 'section';
     public const string LIMITATION_TYPE_LOCATION = 'location';
 
-    public function buildForm(FormBuilderInterface $builder, array $options): void
-    {
+    public function buildForm(
+        FormBuilderInterface $builder,
+        array $options
+    ): void {
         $builder
             ->add('email', EmailType::class, [
                 'label' => /** @Desc("Enter email") */ 'ibexa.user.invitation.email',

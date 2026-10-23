@@ -23,8 +23,7 @@ class Language implements ValueDefinitionInterface, FormMapperInterface
         private readonly TranslatorInterface $translator,
         private readonly UserLanguagePreferenceProviderInterface $userLanguagePreferenceProvider,
         private readonly AvailableLocaleChoiceLoader $availableLocaleChoiceLoader
-    ) {
-    }
+    ) {}
 
     public function getName(): string
     {
@@ -55,8 +54,10 @@ class Language implements ValueDefinitionInterface, FormMapperInterface
         return $defaultLocale;
     }
 
-    public function mapFieldForm(FormBuilderInterface $formBuilder, ValueDefinitionInterface $value): FormBuilderInterface
-    {
+    public function mapFieldForm(
+        FormBuilderInterface $formBuilder,
+        ValueDefinitionInterface $value
+    ): FormBuilderInterface {
         return $formBuilder->create(
             'value',
             LocaleType::class,

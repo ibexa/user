@@ -8,9 +8,12 @@ declare(strict_types=1);
 
 namespace Ibexa\Bundle\User\Controller;
 
+use Ibexa\Contracts\Core\Repository\Exceptions\BadStateException;
+use Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException;
 use Ibexa\Contracts\Core\Repository\PermissionResolver;
 use Ibexa\Contracts\User\Controller\AuthenticatedRememberedCheckTrait;
 use Ibexa\Contracts\User\Controller\RestrictedControllerInterface;
+use Ibexa\Core\Base\Exceptions\InvalidArgumentType;
 use Ibexa\User\ExceptionHandler\ActionResultHandler;
 use Ibexa\User\Form\Data\UserSettingUpdateData;
 use Ibexa\User\Form\Factory\FormFactory;
@@ -35,13 +38,12 @@ final class UserSettingsController extends Controller implements RestrictedContr
         private readonly ValueDefinitionRegistry $valueDefinitionRegistry,
         private readonly ActionResultHandler $actionResultHandler,
         private readonly PermissionResolver $permissionResolver
-    ) {
-    }
+    ) {}
 
     /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\BadStateException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
-     * @throws \Ibexa\Core\Base\Exceptions\InvalidArgumentType
+     * @throws BadStateException
+     * @throws InvalidArgumentException
+     * @throws InvalidArgumentType
      */
     public function listAction(int $page = 1): ListView
     {
@@ -55,8 +57,10 @@ final class UserSettingsController extends Controller implements RestrictedContr
         ]);
     }
 
-    public function updateAction(Request $request, UpdateView $view): Response|UpdateView
-    {
+    public function updateAction(
+        Request $request,
+        UpdateView $view
+    ): Response | UpdateView {
         $userSettingGroup = $view->getUserSettingGroup();
 
         $values = [];

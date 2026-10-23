@@ -20,11 +20,11 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class AvailableLocaleChoiceLoaderTest extends TestCase
 {
-    private ValidatorInterface&MockObject $validator;
+    private ValidatorInterface & MockObject $validator;
 
-    private ConstraintViolationInterface&Stub $constraintViolation;
+    private ConstraintViolationInterface & Stub $constraintViolation;
 
-    private ConfigResolverInterface&MockObject $configResolver;
+    private ConfigResolverInterface & MockObject $configResolver;
 
     protected function setUp(): void
     {

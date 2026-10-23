@@ -8,8 +8,10 @@ declare(strict_types=1);
 
 namespace Ibexa\User\Validator\Constraints;
 
+use Ibexa\Contracts\Core\Repository\Exceptions\ContentValidationException;
 use Ibexa\Contracts\Core\Repository\UserService;
 use Ibexa\Contracts\Core\Repository\Values\User\PasswordValidationContext;
+use Ibexa\Core\Repository\Validator\UserPasswordValidator;
 use Ibexa\User\Password\PasswordRequirement;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
@@ -17,7 +19,7 @@ use Symfony\Component\Validator\ConstraintValidator;
 class PasswordValidator extends ConstraintValidator
 {
     /**
-     * Message templates from {@see \Ibexa\Core\Repository\Validator\UserPasswordValidator}
+     * Message templates from {@see UserPasswordValidator}
      * and {@see \Ibexa\Core\Repository\User\PasswordValidator}.
      */
     private const array REQUIREMENT_CODE_MAP = [
@@ -32,16 +34,17 @@ class PasswordValidator extends ConstraintValidator
 
     public function __construct(
         private readonly UserService $userService
-    ) {
-    }
+    ) {}
 
     /**
-     * @param \Ibexa\User\Validator\Constraints\Password $constraint
+     * @param Password $constraint
      *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ContentValidationException
+     * @throws ContentValidationException
      */
-    public function validate(mixed $value, Constraint $constraint): void
-    {
+    public function validate(
+        mixed $value,
+        Constraint $constraint
+    ): void {
         if (!is_string($value) || empty($value)) {
             return;
         }

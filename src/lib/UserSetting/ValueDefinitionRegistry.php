@@ -17,14 +17,14 @@ use Ibexa\Core\Base\Exceptions\InvalidArgumentException;
  */
 class ValueDefinitionRegistry
 {
-    /** @var array<string, \Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface> */
+    /** @var array<string, ValueDefinitionInterface> */
     protected array $valueDefinitions;
 
-    /** @var array<string, \Ibexa\Contracts\User\UserSetting\ValueDefinitionGroupInterface> */
+    /** @var array<string, ValueDefinitionGroupInterface> */
     protected array $groupedDefinitions;
 
     /**
-     * @param array<string, \Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface> $valueDefinitions
+     * @param array<string, ValueDefinitionInterface> $valueDefinitions
      */
     public function __construct(
         array $valueDefinitions = []
@@ -58,7 +58,7 @@ class ValueDefinitionRegistry
     }
 
     /**
-     * @return array<string, \Ibexa\Contracts\User\UserSetting\ValueDefinitionGroupInterface>
+     * @return array<string, ValueDefinitionGroupInterface>
      */
     public function getValueDefinitionGroups(): array
     {
@@ -101,7 +101,7 @@ class ValueDefinitionRegistry
     }
 
     /**
-     * @return \Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface[]
+     * @return ValueDefinitionInterface[]
      */
     public function getValueDefinitions(): array
     {

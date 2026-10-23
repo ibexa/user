@@ -25,7 +25,7 @@ final class DefaultAuthenticationFailureHandlerTest extends TestCase
 {
     private DefaultAuthenticationFailureHandler $handler;
 
-    private MockObject&HttpUtils $httpUtils;
+    private MockObject & HttpUtils $httpUtils;
 
     protected function setUp(): void
     {
@@ -177,7 +177,7 @@ final class DefaultAuthenticationFailureHandlerTest extends TestCase
         return $request;
     }
 
-    public function getSession(): MockObject&Session
+    public function getSession(): MockObject & Session
     {
         $session = $this->createMock(Session::class);
         $session->expects(self::any())->method('isStarted')->willReturn(true);

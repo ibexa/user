@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\User\Form\Type;
 
+use Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException;
 use Ibexa\User\Form\Data\UserSettingUpdateData;
 use Ibexa\User\UserSetting\FormMapperRegistry;
 use Ibexa\User\UserSetting\ValueDefinitionRegistry;
@@ -23,14 +24,15 @@ class UserSettingUpdateType extends AbstractType
     public function __construct(
         protected FormMapperRegistry $formMapperRegistry,
         protected ValueDefinitionRegistry $valueDefinitionRegistry
-    ) {
-    }
+    ) {}
 
     /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public function buildForm(FormBuilderInterface $builder, array $options): void
-    {
+    public function buildForm(
+        FormBuilderInterface $builder,
+        array $options
+    ): void {
         $groupDefinition = $this->valueDefinitionRegistry->getValueDefinitionGroup(
             $options['user_setting_group_identifier']
         );

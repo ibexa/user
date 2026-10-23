@@ -16,6 +16,7 @@ use Ibexa\Contracts\Core\Repository\UserService;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\ContentTypeIdentifier;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\ContentName;
+use Ibexa\Contracts\Core\Repository\Values\User\UserGroup;
 use Symfony\Component\Form\ChoiceList\Loader\AbstractChoiceLoader;
 
 final class UserGroupsChoiceLoader extends AbstractChoiceLoader
@@ -24,11 +25,10 @@ final class UserGroupsChoiceLoader extends AbstractChoiceLoader
         private readonly Repository $repository,
         private readonly SearchService $searchService,
         private readonly UserService $userService
-    ) {
-    }
+    ) {}
 
     /**
-     * @return iterable<\Ibexa\Contracts\Core\Repository\Values\User\UserGroup>
+     * @return iterable<UserGroup>
      */
     protected function loadChoices(): iterable
     {

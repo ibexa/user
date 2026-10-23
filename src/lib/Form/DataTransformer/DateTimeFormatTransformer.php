@@ -17,8 +17,7 @@ class DateTimeFormatTransformer implements DataTransformerInterface
 {
     public function __construct(
         private readonly DateTimeFormatSerializer $serializer
-    ) {
-    }
+    ) {}
 
     /**
      * @return array{date_format: ?string, time_format: ?string}|null

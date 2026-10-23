@@ -21,8 +21,7 @@ class SubitemsLimit implements ValueDefinitionInterface, FormMapperInterface
     public function __construct(
         private readonly TranslatorInterface $translator,
         private readonly ConfigResolverInterface $configResolver
-    ) {
-    }
+    ) {}
 
     public function getName(): string
     {
@@ -44,8 +43,10 @@ class SubitemsLimit implements ValueDefinitionInterface, FormMapperInterface
         return (string)$this->configResolver->getParameter('subitems_module.limit');
     }
 
-    public function mapFieldForm(FormBuilderInterface $formBuilder, ValueDefinitionInterface $value): FormBuilderInterface
-    {
+    public function mapFieldForm(
+        FormBuilderInterface $formBuilder,
+        ValueDefinitionInterface $value
+    ): FormBuilderInterface {
         return $formBuilder->create(
             'value',
             NumberType::class,

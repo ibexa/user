@@ -12,6 +12,7 @@ use Ibexa\Contracts\Core\Repository\PermissionResolver;
 use Ibexa\Contracts\Core\Repository\UserService;
 use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType;
 use Ibexa\Contracts\Core\Repository\Values\User\User;
+use Ibexa\User\Password\PasswordRequirement;
 use Ibexa\User\Password\PasswordRequirementsResolver;
 use Twig\Extension\RuntimeExtensionInterface;
 
@@ -21,8 +22,7 @@ final readonly class UserRuntime implements RuntimeExtensionInterface
         private PermissionResolver $permissionResolver,
         private UserService $userService,
         private PasswordRequirementsResolver $passwordRequirementsResolver
-    ) {
-    }
+    ) {}
 
     public function getCurrentUser(): User
     {
@@ -32,10 +32,10 @@ final readonly class UserRuntime implements RuntimeExtensionInterface
     }
 
     /**
-     * @param \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType|null $contentType required
+     * @param ContentType|null $contentType required
      * on anonymous pages (e.g. password reset); defaults to the current user's content type
      *
-     * @return \Ibexa\User\Password\PasswordRequirement[]
+     * @return PasswordRequirement[]
      */
     public function getPasswordRequirements(?ContentType $contentType = null): array
     {

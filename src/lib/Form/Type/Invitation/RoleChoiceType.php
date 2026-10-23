@@ -23,8 +23,7 @@ final class RoleChoiceType extends AbstractType
         private readonly RoleService $roleService,
         private readonly Repository $repository,
         private readonly PermissionResolver $permissionResolver
-    ) {
-    }
+    ) {}
 
     public function configureOptions(OptionsResolver $resolver): void
     {
@@ -38,7 +37,7 @@ final class RoleChoiceType extends AbstractType
     }
 
     /**
-     * @return array<int, \Ibexa\Contracts\Core\Repository\Values\User\Role>
+     * @return array<int, Role>
      */
     public function loadFilteredRoles(): array
     {

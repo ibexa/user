@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\Bundle\User;
 
+use Ibexa\Bundle\Core\DependencyInjection\IbexaCoreExtension;
 use Ibexa\Bundle\User\DependencyInjection\Compiler\SecurityPass;
 use Ibexa\Bundle\User\DependencyInjection\Compiler\UserSetting;
 use Ibexa\Bundle\User\DependencyInjection\Configuration\Parser\ChangePassword;
@@ -27,7 +28,7 @@ class IbexaUserBundle extends Bundle
 {
     public function build(ContainerBuilder $container): void
     {
-        /** @var \Ibexa\Bundle\Core\DependencyInjection\IbexaCoreExtension $core */
+        /** @var IbexaCoreExtension $core */
         $core = $container->getExtension('ibexa');
         $core->addConfigParser(new Security());
         $core->addConfigParser(new ChangePassword());

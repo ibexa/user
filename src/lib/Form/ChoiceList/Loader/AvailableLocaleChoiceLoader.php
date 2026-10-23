@@ -32,8 +32,7 @@ class AvailableLocaleChoiceLoader implements ChoiceLoaderInterface
         private readonly ValidatorInterface $validator,
         private readonly ConfigResolverInterface $configResolver,
         private readonly array $availableTranslations
-    ) {
-    }
+    ) {}
 
     /**
      * @return array<string, string>
@@ -60,8 +59,10 @@ class AvailableLocaleChoiceLoader implements ChoiceLoaderInterface
         return new ArrayChoiceList($this->getChoiceList(), $value);
     }
 
-    public function loadChoicesForValues(array $values, ?callable $value = null): array
-    {
+    public function loadChoicesForValues(
+        array $values,
+        ?callable $value = null
+    ): array {
         // Optimize
         $values = array_filter($values);
         if (empty($values)) {
@@ -71,8 +72,10 @@ class AvailableLocaleChoiceLoader implements ChoiceLoaderInterface
         return $this->loadChoiceList($value)->getChoicesForValues($values);
     }
 
-    public function loadValuesForChoices(array $choices, ?callable $value = null): array
-    {
+    public function loadValuesForChoices(
+        array $choices,
+        ?callable $value = null
+    ): array {
         // Optimize
         $choices = array_filter($choices);
         if (empty($choices)) {

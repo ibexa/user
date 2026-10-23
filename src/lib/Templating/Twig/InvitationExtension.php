@@ -17,8 +17,7 @@ class InvitationExtension extends AbstractExtension
 {
     public function __construct(
         private readonly InvitationService $invitationService
-    ) {
-    }
+    ) {}
 
     #[\Override]
     public function getFunctions(): array

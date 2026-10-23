@@ -12,5 +12,8 @@ use DateTimeInterface;
 
 interface FormatterInterface
 {
-    public function format(DateTimeInterface $datetime, ?string $timezone = null): string;
+    public function format(
+        DateTimeInterface $datetime,
+        ?string $timezone = null
+    ): string;
 }

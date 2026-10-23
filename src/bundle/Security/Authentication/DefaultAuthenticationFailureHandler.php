@@ -24,8 +24,10 @@ final class DefaultAuthenticationFailureHandler extends HttpDefaultAuthenticatio
     private const string PASSWORD_PARAMETER = '_password';
 
     #[\Override]
-    public function onAuthenticationFailure(Request $request, AuthenticationException $exception): Response
-    {
+    public function onAuthenticationFailure(
+        Request $request,
+        AuthenticationException $exception
+    ): Response {
         if ($exception instanceof PasswordInUnsupportedFormatException) {
             $resetPasswordUrl = $this->httpUtils->generateUri($request, 'ibexa.user.forgot_password.migration');
             $this->setOptions([

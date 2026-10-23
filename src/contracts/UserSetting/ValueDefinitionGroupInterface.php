@@ -26,7 +26,10 @@ interface ValueDefinitionGroupInterface
      */
     public function getDescription(): string;
 
-    public function addValueDefinition(string $identifier, ValueDefinitionInterface $valueDefinition): void;
+    public function addValueDefinition(
+        string $identifier,
+        ValueDefinitionInterface $valueDefinition
+    ): void;
 
     /** @return array<string, ValueDefinitionInterface> */
     public function getValueDefinitions(): array;

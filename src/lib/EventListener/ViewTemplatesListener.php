@@ -19,8 +19,7 @@ class ViewTemplatesListener implements EventSubscriberInterface
 {
     public function __construct(
         private readonly ConfigResolverInterface $configResolver
-    ) {
-    }
+    ) {}
 
     public static function getSubscribedEvents(): array
     {

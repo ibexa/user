@@ -30,9 +30,9 @@ class InvitationServiceTest extends TestCase
 {
     private InvitationService $invitationService;
 
-    private SiteAccessServiceInterface&MockObject $siteAccessService;
+    private SiteAccessServiceInterface & MockObject $siteAccessService;
 
-    private ConfigResolverInterface&MockObject $configResolver;
+    private ConfigResolverInterface & MockObject $configResolver;
 
     protected function setUp(): void
     {
@@ -77,7 +77,7 @@ class InvitationServiceTest extends TestCase
 
     /**
      * @return array<string, array{
-     *     0: \Ibexa\Contracts\User\Invitation\Invitation,
+     *     0: InvitationContract,
      *     1: string,
      *     2: bool
      * }>

@@ -34,8 +34,7 @@ readonly class UserRegisterFormProcessor implements EventSubscriberInterface
         private UrlGeneratorInterface $urlGenerator,
         private RoleService $roleService,
         private NotificationServiceInterface $notificationService
-    ) {
-    }
+    ) {}
 
     public static function getSubscribedEvents(): array
     {
@@ -49,7 +48,7 @@ readonly class UserRegisterFormProcessor implements EventSubscriberInterface
      */
     public function processRegister(FormActionEvent $event): void
     {
-        /** @var \Ibexa\User\Form\Data\UserRegisterData $data */
+        /** @var UserRegisterData $data */
         if (!($data = $event->getData()) instanceof UserRegisterData) {
             return;
         }
@@ -63,8 +62,10 @@ readonly class UserRegisterFormProcessor implements EventSubscriberInterface
         $event->stopPropagation();
     }
 
-    private function createUser(UserRegisterData $data, string $languageCode): User
-    {
+    private function createUser(
+        UserRegisterData $data,
+        string $languageCode
+    ): User {
         foreach ($data->fieldsData as $fieldDefIdentifier => $fieldData) {
             $data->setField($fieldDefIdentifier, $fieldData->value, $languageCode);
         }

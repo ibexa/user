@@ -21,8 +21,7 @@ class Handler implements HandlerInterface
     public function __construct(
         private readonly Gateway $gateway,
         private readonly Mapper $mapper
-    ) {
-    }
+    ) {}
 
     public function createInvitation(
         string $email,
@@ -95,8 +94,10 @@ class Handler implements HandlerInterface
         return $invitations;
     }
 
-    public function refreshInvitation(string $hash, string $newHash): Invitation
-    {
+    public function refreshInvitation(
+        string $hash,
+        string $newHash
+    ): Invitation {
         $updateStruct = new InvitationUpdateStruct();
         $updateStruct->setCreatedAt(time());
         $updateStruct->setHash($newHash);

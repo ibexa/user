@@ -14,8 +14,7 @@ abstract class AbstractDateTimeFormatterFactory implements DateTimeFormatterFact
 {
     public function __construct(
         protected UserSettingService $userSettingService
-    ) {
-    }
+    ) {}
 
     abstract protected function getFormat(): string;
 

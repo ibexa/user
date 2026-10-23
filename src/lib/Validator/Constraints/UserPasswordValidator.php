@@ -23,14 +23,15 @@ class UserPasswordValidator extends ConstraintValidator
     public function __construct(
         private readonly UserService $userService,
         private readonly TokenStorageInterface $tokenStorage
-    ) {
-    }
+    ) {}
 
     /**
      * Checks if the passed password exists for logged user.
      */
-    public function validate(mixed $password, Constraint $constraint): void
-    {
+    public function validate(
+        mixed $password,
+        Constraint $constraint
+    ): void {
         if (null === $password || '' === $password) {
             $this->context->addViolation($constraint->message);
 
