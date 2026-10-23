@@ -24,22 +24,25 @@ use InvalidArgumentException;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\Util\StringUtil;
+use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class FormFactory
 {
-    /** @var \Symfony\Component\Form\FormFactoryInterface */
+    /** @var FormFactoryInterface */
     protected $formFactory;
 
-    /** @var \Symfony\Component\Routing\Generator\UrlGeneratorInterface */
+    /** @var UrlGeneratorInterface */
     protected $urlGenerator;
 
     /**
-     * @param \Symfony\Component\Form\FormFactoryInterface $formFactory
-     * @param \Symfony\Component\Routing\Generator\UrlGeneratorInterface $urlGenerator
+     * @param FormFactoryInterface $formFactory
+     * @param UrlGeneratorInterface $urlGenerator
      */
-    public function __construct(FormFactoryInterface $formFactory, UrlGeneratorInterface $urlGenerator)
-    {
+    public function __construct(
+        FormFactoryInterface $formFactory,
+        UrlGeneratorInterface $urlGenerator
+    ) {
         $this->formFactory = $formFactory;
         $this->urlGenerator = $urlGenerator;
     }
@@ -64,12 +67,12 @@ class FormFactory
     }
 
     /**
-     * @param \Ibexa\User\Form\Data\UserPasswordForgotData $data
+     * @param UserPasswordForgotData $data
      * @param string|null $name
      *
-     * @return \Symfony\Component\Form\FormInterface
+     * @return FormInterface
      *
-     * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
+     * @throws InvalidOptionsException
      */
     public function forgotUserPassword(
         ?UserPasswordForgotData $data = null,
@@ -81,12 +84,12 @@ class FormFactory
     }
 
     /**
-     * @param \Ibexa\User\Form\Data\UserPasswordForgotWithLoginData $data
+     * @param UserPasswordForgotWithLoginData $data
      * @param string|null $name
      *
-     * @return \Symfony\Component\Form\FormInterface
+     * @return FormInterface
      *
-     * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
+     * @throws InvalidOptionsException
      */
     public function forgotUserPasswordWithLogin(
         ?UserPasswordForgotWithLoginData $data = null,
@@ -98,7 +101,7 @@ class FormFactory
     }
 
     /**
-     * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
+     * @throws InvalidOptionsException
      */
     public function resetUserPassword(
         ?UserPasswordResetData $data = null,

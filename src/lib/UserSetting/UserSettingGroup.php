@@ -18,11 +18,15 @@ class UserSettingGroup extends ValueObject
 
     protected string $description;
 
-    /** @var array<string, \Ibexa\User\UserSetting\UserSetting> */
+    /** @var array<string, UserSetting> */
     protected array $settings;
 
-    public function __construct(string $identifier, string $name = '', string $description = '', array $settings = [])
-    {
+    public function __construct(
+        string $identifier,
+        string $name = '',
+        string $description = '',
+        array $settings = []
+    ) {
         parent::__construct([
             'identifier' => $identifier,
             'name' => $name,

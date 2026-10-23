@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\User\Form\Data;
 
+use Ibexa\Contracts\Core\Persistence\Content\Section;
 use Ibexa\Contracts\Core\Repository\Values\User\Limitation\RoleLimitation;
 use Ibexa\Contracts\Core\Repository\Values\User\Role;
 use Ibexa\Contracts\Core\Repository\Values\User\UserGroup;
@@ -32,7 +33,7 @@ final class UserInvitationData
 
     private ?UserGroup $userGroup;
 
-    /** @var \Ibexa\Contracts\Core\Persistence\Content\Section[]|null */
+    /** @var Section[]|null */
     private ?array $sections;
 
     private ?string $locationPath;

@@ -10,20 +10,22 @@ namespace Ibexa\Bundle\User\Controller;
 
 use Ibexa\ContentForms\Form\ActionDispatcher\ActionDispatcherInterface;
 use Ibexa\Contracts\User\Invitation\InvitationService;
+use Ibexa\Core\Base\Exceptions\InvalidArgumentType;
 use Ibexa\Core\MVC\Symfony\Security\Authorization\Attribute;
 use Ibexa\User\Form\DataMapper\UserRegisterMapper;
 use Ibexa\User\Form\Type\UserRegisterType;
 use Ibexa\User\View\Register\ConfirmView;
 use Ibexa\User\View\Register\FormView;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
 class UserRegisterController extends Controller
 {
-    /** @var \Ibexa\User\Form\DataMapper\UserRegisterMapper */
+    /** @var UserRegisterMapper */
     private $userRegisterMapper;
 
-    /** @var \Ibexa\ContentForms\Form\ActionDispatcher\ActionDispatcherInterface */
+    /** @var ActionDispatcherInterface */
     private $userActionDispatcher;
 
     private InvitationService $invitationService;
@@ -39,11 +41,11 @@ class UserRegisterController extends Controller
     }
 
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param Request $request
      *
-     * @return \Ibexa\User\View\Register\FormView|\Symfony\Component\HttpFoundation\Response|null
+     * @return FormView|Response|null
      *
-     * @throws \Ibexa\Core\Base\Exceptions\InvalidArgumentType
+     * @throws InvalidArgumentType
      */
     public function registerAction(Request $request)
     {
@@ -73,9 +75,9 @@ class UserRegisterController extends Controller
     }
 
     /**
-     * @return \Ibexa\User\View\Register\ConfirmView
+     * @return ConfirmView
      *
-     * @throws \Ibexa\Core\Base\Exceptions\InvalidArgumentType
+     * @throws InvalidArgumentType
      */
     public function registerConfirmAction(): ConfirmView
     {
@@ -83,7 +85,7 @@ class UserRegisterController extends Controller
     }
 
     /**
-     * @return \Ibexa\User\View\Register\FormView|\Symfony\Component\HttpFoundation\Response
+     * @return FormView|Response
      */
     public function registerFromInvitationAction(Request $request)
     {

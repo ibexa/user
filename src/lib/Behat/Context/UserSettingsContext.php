@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\User\Behat\Context;
 
 use Behat\Behat\Context\Context;
@@ -14,22 +15,25 @@ use Ibexa\User\UserSetting\UserSettingService;
 class UserSettingsContext implements Context
 {
     /**
-     * @var \Ibexa\User\UserSetting\UserSettingService
+     * @var UserSettingService
      */
     private $userSettingService;
 
     /**
-     * @var \Ibexa\Contracts\Core\Repository\PermissionResolver
+     * @var PermissionResolver
      */
     private $permissionResolver;
 
     /**
-     * @var \Ibexa\Contracts\Core\Repository\UserService
+     * @var UserService
      */
     private $userService;
 
-    public function __construct(UserSettingService $userSettingService, PermissionResolver $permissionResolver, UserService $userService)
-    {
+    public function __construct(
+        UserSettingService $userSettingService,
+        PermissionResolver $permissionResolver,
+        UserService $userService
+    ) {
         $this->userSettingService = $userSettingService;
         $this->permissionResolver = $permissionResolver;
         $this->userService = $userService;
@@ -38,8 +42,10 @@ class UserSettingsContext implements Context
     /**
      * @When I set autosave interval value to :autosaveInterval for user :userLogin
      */
-    public function iSetAutosaveDraftIntervalValue(string $autosaveInterval, string $userLogin): void
-    {
+    public function iSetAutosaveDraftIntervalValue(
+        string $autosaveInterval,
+        string $userLogin
+    ): void {
         $currentUser = $this->permissionResolver->getCurrentUserReference();
         $user = $this->userService->loadUserByLogin($userLogin);
         $this->permissionResolver->setCurrentUserReference($user);

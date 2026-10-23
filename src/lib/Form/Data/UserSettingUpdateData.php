@@ -22,8 +22,10 @@ class UserSettingUpdateData
      */
     private array $values;
 
-    public function __construct(string $identifier, array $values)
-    {
+    public function __construct(
+        string $identifier,
+        array $values
+    ) {
         $this->identifier = $identifier;
         $this->values = $values;
     }

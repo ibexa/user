@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\User\View\UserSettings;
 
+use Ibexa\Core\Base\Exceptions\InvalidArgumentType;
 use Ibexa\Core\MVC\Symfony\Matcher\MatcherFactoryInterface;
 use Ibexa\Core\MVC\Symfony\View\View;
 use Ibexa\Core\MVC\Symfony\View\ViewProvider;
@@ -15,11 +16,11 @@ use Symfony\Component\HttpKernel\Controller\ControllerReference;
 
 class UpdateViewProvider implements ViewProvider
 {
-    /** @var \Ibexa\Core\MVC\Symfony\Matcher\MatcherFactoryInterface */
+    /** @var MatcherFactoryInterface */
     protected $matcherFactory;
 
     /**
-     * @param \Ibexa\Core\MVC\Symfony\Matcher\MatcherFactoryInterface $matcherFactory
+     * @param MatcherFactoryInterface $matcherFactory
      */
     public function __construct(MatcherFactoryInterface $matcherFactory)
     {
@@ -41,9 +42,9 @@ class UpdateViewProvider implements ViewProvider
     /**
      * @param array $viewConfig
      *
-     * @return \Ibexa\User\View\UserSettings\UpdateView
+     * @return UpdateView
      *
-     * @throws \Ibexa\Core\Base\Exceptions\InvalidArgumentType
+     * @throws InvalidArgumentType
      */
     protected function buildUpdateSettingView(array $viewConfig): UpdateView
     {

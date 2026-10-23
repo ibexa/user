@@ -29,7 +29,7 @@ class UpdateView extends BaseView
     }
 
     /**
-     * @return \Ibexa\User\UserSetting\UserSetting|null
+     * @return UserSetting|null
      */
     public function getUserSetting(): ?UserSetting
     {
@@ -37,7 +37,7 @@ class UpdateView extends BaseView
     }
 
     /**
-     * @param \Ibexa\User\UserSetting\UserSetting|null $userSetting
+     * @param UserSetting|null $userSetting
      */
     public function setUserSetting(?UserSetting $userSetting): void
     {

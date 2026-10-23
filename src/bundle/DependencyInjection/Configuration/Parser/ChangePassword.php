@@ -17,7 +17,7 @@ class ChangePassword extends AbstractParser
     /**
      * Adds semantic configuration definition.
      *
-     * @param \Symfony\Component\Config\Definition\Builder\NodeBuilder $nodeBuilder Node just under ezpublish.system.<siteaccess>
+     * @param NodeBuilder $nodeBuilder Node just under ezpublish.system.<siteaccess>
      */
     public function addSemanticConfig(NodeBuilder $nodeBuilder)
     {
@@ -40,8 +40,11 @@ class ChangePassword extends AbstractParser
             ->end();
     }
 
-    public function mapConfig(array &$scopeSettings, $currentScope, ContextualizerInterface $contextualizer)
-    {
+    public function mapConfig(
+        array &$scopeSettings,
+        $currentScope,
+        ContextualizerInterface $contextualizer
+    ) {
         if (empty($scopeSettings['user_change_password'])) {
             return;
         }

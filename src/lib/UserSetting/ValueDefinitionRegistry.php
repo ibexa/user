@@ -18,10 +18,10 @@ use Ibexa\User\UserSetting\Group\CustomGroup;
  */
 class ValueDefinitionRegistry
 {
-    /** @var \Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface[] */
+    /** @var ValueDefinitionInterface[] */
     protected $valueDefinitions;
 
-    /** @var \Ibexa\Contracts\User\UserSetting\ValueDefinitionGroupInterface[] */
+    /** @var ValueDefinitionGroupInterface[] */
     protected $groupedDefinitions;
 
     public function __construct(array $valueDefinitions = [])
@@ -35,7 +35,7 @@ class ValueDefinitionRegistry
 
     /**
      * @param string $identifier
-     * @param \Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface $valueDefinition
+     * @param ValueDefinitionInterface $valueDefinition
      * @param int $priority
      */
     public function addValueDefinition(
@@ -68,7 +68,7 @@ class ValueDefinitionRegistry
     /**
      * @param string $identifier
      *
-     * @return \Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface
+     * @return ValueDefinitionInterface
      *
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
      */
@@ -107,7 +107,7 @@ class ValueDefinitionRegistry
     }
 
     /**
-     * @return \Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface[]
+     * @return ValueDefinitionInterface[]
      */
     public function getValueDefinitions(): array
     {

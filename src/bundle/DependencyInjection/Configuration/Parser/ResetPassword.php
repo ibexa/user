@@ -39,8 +39,11 @@ final class ResetPassword extends AbstractParser
         ;
     }
 
-    public function mapConfig(array &$scopeSettings, $currentScope, ContextualizerInterface $contextualizer)
-    {
+    public function mapConfig(
+        array &$scopeSettings,
+        $currentScope,
+        ContextualizerInterface $contextualizer
+    ) {
         if (empty($scopeSettings['user_reset_password'])) {
             return;
         }

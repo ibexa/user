@@ -13,9 +13,19 @@ namespace Ibexa\User\ExceptionHandler;
  */
 interface ActionResultHandler
 {
-    public function error(string $message, array $parameters = [], ?string $domain = null, ?string $locale = null): void;
+    public function error(
+        string $message,
+        array $parameters = [],
+        ?string $domain = null,
+        ?string $locale = null
+    ): void;
 
-    public function success(string $message, array $parameters = [], ?string $domain = null, ?string $locale = null): void;
+    public function success(
+        string $message,
+        array $parameters = [],
+        ?string $domain = null,
+        ?string $locale = null
+    ): void;
 }
 
 class_alias(ActionResultHandler::class, 'EzSystems\EzPlatformUser\ExceptionHandler\ActionResultHandler');

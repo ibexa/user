@@ -16,35 +16,35 @@ use Twig\TwigFilter;
 
 class DateTimeExtension extends AbstractExtension
 {
-    /** @var \Ibexa\User\UserSetting\Setting\DateTimeFormatSerializer */
+    /** @var DateTimeFormatSerializer */
     private $dateTimeFormatSerializer;
 
-    /** @var \Ibexa\User\UserSetting\DateTimeFormat\FormatterInterface */
+    /** @var FormatterInterface */
     private $shortDateTimeFormatter;
 
-    /** @var \Ibexa\User\UserSetting\DateTimeFormat\FormatterInterface */
+    /** @var FormatterInterface */
     private $shortDateFormatter;
 
-    /** @var \Ibexa\User\UserSetting\DateTimeFormat\FormatterInterface */
+    /** @var FormatterInterface */
     private $shortTimeFormatter;
 
-    /** @var \Ibexa\User\UserSetting\DateTimeFormat\FormatterInterface */
+    /** @var FormatterInterface */
     private $fullDateTimeFormatter;
 
-    /** @var \Ibexa\User\UserSetting\DateTimeFormat\FormatterInterface */
+    /** @var FormatterInterface */
     private $fullDateFormatter;
 
-    /** @var \Ibexa\User\UserSetting\DateTimeFormat\FormatterInterface */
+    /** @var FormatterInterface */
     private $fullTimeFormatter;
 
     /**
-     * @param \Ibexa\User\UserSetting\Setting\DateTimeFormatSerializer $dateTimeFormatSerializer
-     * @param \Ibexa\User\UserSetting\DateTimeFormat\FormatterInterface $shortDateTimeFormatter
-     * @param \Ibexa\User\UserSetting\DateTimeFormat\FormatterInterface $shortDateFormatter
-     * @param \Ibexa\User\UserSetting\DateTimeFormat\FormatterInterface $shortTimeFormatter
-     * @param \Ibexa\User\UserSetting\DateTimeFormat\FormatterInterface $fullDateTimeFormatter
-     * @param \Ibexa\User\UserSetting\DateTimeFormat\FormatterInterface $fullDateFormatter
-     * @param \Ibexa\User\UserSetting\DateTimeFormat\FormatterInterface $fullTimeFormatter
+     * @param DateTimeFormatSerializer $dateTimeFormatSerializer
+     * @param FormatterInterface $shortDateTimeFormatter
+     * @param FormatterInterface $shortDateFormatter
+     * @param FormatterInterface $shortTimeFormatter
+     * @param FormatterInterface $fullDateTimeFormatter
+     * @param FormatterInterface $fullDateFormatter
+     * @param FormatterInterface $fullTimeFormatter
      */
     public function __construct(
         DateTimeFormatSerializer $dateTimeFormatSerializer,
@@ -72,43 +72,64 @@ class DateTimeExtension extends AbstractExtension
         return [
             new TwigFilter(
                 'ibexa_short_datetime',
-                function ($date, $timezone = null) {
+                function (
+                    $date,
+                    $timezone = null
+                ) {
                     return $this->format($this->shortDateTimeFormatter, $date, $timezone);
                 }
             ),
             new TwigFilter(
                 'ibexa_short_date',
-                function ($date, $timezone = null) {
+                function (
+                    $date,
+                    $timezone = null
+                ) {
                     return $this->format($this->shortDateFormatter, $date, $timezone);
                 }
             ),
             new TwigFilter(
                 'ibexa_short_time',
-                function ($date, $timezone = null) {
+                function (
+                    $date,
+                    $timezone = null
+                ) {
                     return $this->format($this->shortTimeFormatter, $date, $timezone);
                 }
             ),
             new TwigFilter(
                 'ibexa_full_datetime',
-                function ($date, $timezone = null) {
+                function (
+                    $date,
+                    $timezone = null
+                ) {
                     return $this->format($this->fullDateTimeFormatter, $date, $timezone);
                 }
             ),
             new TwigFilter(
                 'ibexa_full_date',
-                function ($date, $timezone = null) {
+                function (
+                    $date,
+                    $timezone = null
+                ) {
                     return $this->format($this->fullDateFormatter, $date, $timezone);
                 }
             ),
             new TwigFilter(
                 'ibexa_full_time',
-                function ($date, $timezone = null) {
+                function (
+                    $date,
+                    $timezone = null
+                ) {
                     return $this->format($this->fullTimeFormatter, $date, $timezone);
                 }
             ),
             new TwigFilter(
                 'ez_short_datetime',
-                function ($date, $timezone = null) {
+                function (
+                    $date,
+                    $timezone = null
+                ) {
                     return $this->format($this->shortDateTimeFormatter, $date, $timezone);
                 },
                 [
@@ -118,7 +139,10 @@ class DateTimeExtension extends AbstractExtension
             ),
             new TwigFilter(
                 'ez_short_date',
-                function ($date, $timezone = null) {
+                function (
+                    $date,
+                    $timezone = null
+                ) {
                     return $this->format($this->shortDateFormatter, $date, $timezone);
                 },
                 [
@@ -128,7 +152,10 @@ class DateTimeExtension extends AbstractExtension
             ),
             new TwigFilter(
                 'ez_short_time',
-                function ($date, $timezone = null) {
+                function (
+                    $date,
+                    $timezone = null
+                ) {
                     return $this->format($this->shortTimeFormatter, $date, $timezone);
                 },
                 [
@@ -138,7 +165,10 @@ class DateTimeExtension extends AbstractExtension
             ),
             new TwigFilter(
                 'ez_full_datetime',
-                function ($date, $timezone = null) {
+                function (
+                    $date,
+                    $timezone = null
+                ) {
                     return $this->format($this->fullDateTimeFormatter, $date, $timezone);
                 },
                 [
@@ -148,7 +178,10 @@ class DateTimeExtension extends AbstractExtension
             ),
             new TwigFilter(
                 'ez_full_date',
-                function ($date, $timezone = null) {
+                function (
+                    $date,
+                    $timezone = null
+                ) {
                     return $this->format($this->fullDateFormatter, $date, $timezone);
                 },
                 [
@@ -158,7 +191,10 @@ class DateTimeExtension extends AbstractExtension
             ),
             new TwigFilter(
                 'ez_full_time',
-                function ($date, $timezone = null) {
+                function (
+                    $date,
+                    $timezone = null
+                ) {
                     return $this->format($this->fullTimeFormatter, $date, $timezone);
                 },
                 [
@@ -170,7 +206,7 @@ class DateTimeExtension extends AbstractExtension
     }
 
     /**
-     * @param \Ibexa\User\UserSetting\DateTimeFormat\FormatterInterface $formatter
+     * @param FormatterInterface $formatter
      * @param mixed|null $date
      * @param string|null $timezone
      *
@@ -178,8 +214,11 @@ class DateTimeExtension extends AbstractExtension
      *
      * @throws \Exception
      */
-    public function format(FormatterInterface $formatter, $date = null, ?string $timezone = null): string
-    {
+    public function format(
+        FormatterInterface $formatter,
+        $date = null,
+        ?string $timezone = null
+    ): string {
         if ($date === null) {
             $date = new DateTimeImmutable();
         }

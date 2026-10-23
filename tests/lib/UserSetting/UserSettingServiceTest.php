@@ -72,10 +72,12 @@ class UserSettingServiceTest extends TestCase
      * @param string $name
      * @param string $description
      *
-     * @return \Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface
+     * @return ValueDefinitionInterface
      */
-    private function getValueDefinition(string $name = 'name', string $description = 'description'): ValueDefinitionInterface
-    {
+    private function getValueDefinition(
+        string $name = 'name',
+        string $description = 'description'
+    ): ValueDefinitionInterface {
         $valueDefinition = $this->createMock(ValueDefinitionInterface::class);
         $valueDefinition->method('getName')->willReturn($name);
         $valueDefinition->method('getDescription')->willReturn($description);

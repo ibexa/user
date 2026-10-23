@@ -10,27 +10,30 @@ namespace Ibexa\Bundle\User\Controller;
 
 use Exception;
 use Ibexa\Contracts\Core\Repository\UserService;
+use Ibexa\Contracts\Core\Repository\Values\User\User;
+use Ibexa\Core\Base\Exceptions\InvalidArgumentType;
 use Ibexa\Core\MVC\Symfony\SiteAccess;
 use Ibexa\User\ExceptionHandler\ActionResultHandler;
 use Ibexa\User\Form\Factory\FormFactory;
 use Ibexa\User\View\ChangePassword\FormView;
 use Ibexa\User\View\ChangePassword\SuccessView;
 use JMS\TranslationBundle\Annotation\Desc;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class PasswordChangeController extends Controller
 {
-    /** @var \Ibexa\User\ExceptionHandler\ActionResultHandler */
+    /** @var ActionResultHandler */
     private $actionResultHandler;
 
-    /** @var \Ibexa\Contracts\Core\Repository\UserService */
+    /** @var UserService */
     private $userService;
 
-    /** @var \Ibexa\User\Form\Factory\FormFactory */
+    /** @var FormFactory */
     private $formFactory;
 
-    /** @var \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface */
+    /** @var TokenStorageInterface */
     private $tokenStorage;
 
     /** @var array */
@@ -51,15 +54,15 @@ class PasswordChangeController extends Controller
     }
 
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param Request $request
      *
-     * @return \Ibexa\User\View\ChangePassword\FormView|\Ibexa\User\View\ChangePassword\SuccessView|\Symfony\Component\HttpFoundation\RedirectResponse
+     * @return FormView|SuccessView|RedirectResponse
      *
-     * @throws \Ibexa\Core\Base\Exceptions\InvalidArgumentType
+     * @throws InvalidArgumentType
      */
     public function userPasswordChangeAction(Request $request)
     {
-        /** @var \Ibexa\Contracts\Core\Repository\Values\User\User $user */
+        /** @var User $user */
         $user = $this->tokenStorage->getToken()->getUser()->getAPIUser();
         $form = $this->formFactory->changeUserPassword($user->getContentType(), null, null, $user);
         $form->handleRequest($request);

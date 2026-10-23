@@ -12,6 +12,7 @@ use Ibexa\Core\Base\Exceptions\InvalidArgumentException;
 use Ibexa\User\UserSetting\FormMapperRegistry;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 use Symfony\Component\DependencyInjection\Reference;
 
 class FormMapperPass implements CompilerPassInterface
@@ -19,10 +20,10 @@ class FormMapperPass implements CompilerPassInterface
     public const TAG_NAME = 'ibexa.user.setting.mapper.form';
 
     /**
-     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
+     * @param ContainerBuilder $container
      *
      * @throws \Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
-     * @throws \Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException
+     * @throws ServiceNotFoundException
      * @throws \Ibexa\Core\Base\Exceptions\InvalidArgumentException;
      */
     public function process(ContainerBuilder $container)

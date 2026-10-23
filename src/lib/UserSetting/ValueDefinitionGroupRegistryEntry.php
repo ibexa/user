@@ -22,14 +22,18 @@ final class ValueDefinitionGroupRegistryEntry implements \IteratorAggregate
 
     private array $valueDefinitions;
 
-    public function __construct(ValueDefinitionGroupInterface $definition, array $valueDefinitions = [])
-    {
+    public function __construct(
+        ValueDefinitionGroupInterface $definition,
+        array $valueDefinitions = []
+    ) {
         $this->definition = $definition;
         $this->valueDefinitions = $valueDefinitions;
     }
 
-    public function addToValueDefinitions(string $identifier, ValueDefinitionInterface $valueDefinition): void
-    {
+    public function addToValueDefinitions(
+        string $identifier,
+        ValueDefinitionInterface $valueDefinition
+    ): void {
         $this->valueDefinitions[$identifier] = $valueDefinition;
     }
 

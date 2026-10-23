@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace Ibexa\User\Strategy;
 
 use Ibexa\Contracts\Core\Repository\Strategy\ContentThumbnail\ThumbnailStrategy;
+use Ibexa\Contracts\Core\Repository\Values\Content\Field;
 use Ibexa\Contracts\Core\Repository\Values\Content\Thumbnail;
 use Ibexa\Contracts\Core\Repository\Values\Content\VersionInfo;
 use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType;
@@ -55,7 +56,7 @@ final class DefaultThumbnailStrategy implements ThumbnailStrategy
     {
         $initials = '';
         foreach ($this->initialsFieldDefIdentifiers as $identifier) {
-            /** @var \Ibexa\Contracts\Core\Repository\Values\Content\Field $field */
+            /** @var Field $field */
             foreach ($fields as $field) {
                 if ($field->getFieldDefinitionIdentifier() === $identifier) {
                     $initials .= substr((string)$field->getValue(), 0, 1);

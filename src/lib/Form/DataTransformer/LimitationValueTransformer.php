@@ -10,6 +10,7 @@ namespace Ibexa\User\Form\DataTransformer;
 
 use Ibexa\Contracts\Core\Repository\Values\User\Limitation\SectionLimitation;
 use Ibexa\Contracts\Core\Repository\Values\User\Limitation\SubtreeLimitation;
+use Ibexa\User\Form\Data\UserInvitationData;
 use Ibexa\User\Form\Type\Invitation\UserInvitationType;
 use Symfony\Component\Form\DataTransformerInterface;
 
@@ -21,9 +22,9 @@ final class LimitationValueTransformer implements DataTransformerInterface
     }
 
     /**
-     * @param \Ibexa\User\Form\Data\UserInvitationData $value
+     * @param UserInvitationData $value
      *
-     * @return \Ibexa\User\Form\Data\UserInvitationData|null
+     * @return UserInvitationData|null
      */
     public function reverseTransform($value)
     {

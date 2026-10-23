@@ -23,15 +23,17 @@ class UserPasswordResetData
     /**
      * @deprecated ContentType should be passed as option to FormType.
      *
-     * @var \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType
+     * @var ContentType
      */
     private $contentType;
 
     /**
      * @param string|null $newPassword
      */
-    public function __construct(?string $newPassword = null, ?ContentType $contentType = null)
-    {
+    public function __construct(
+        ?string $newPassword = null,
+        ?ContentType $contentType = null
+    ) {
         $this->newPassword = $newPassword;
         $this->contentType = $contentType;
     }
@@ -53,7 +55,7 @@ class UserPasswordResetData
     }
 
     /**
-     * @return \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType
+     * @return ContentType
      */
     public function getContentType(): ?ContentType
     {
@@ -61,7 +63,7 @@ class UserPasswordResetData
     }
 
     /**
-     * @param \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType $contentType
+     * @param ContentType $contentType
      */
     public function setContentType(ContentType $contentType): void
     {

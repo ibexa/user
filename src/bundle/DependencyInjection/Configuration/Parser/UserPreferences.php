@@ -109,8 +109,11 @@ class UserPreferences extends AbstractParser
     /**
      * {@inheritdoc}
      */
-    public function mapConfig(array &$scopeSettings, $currentScope, ContextualizerInterface $contextualizer): void
-    {
+    public function mapConfig(
+        array &$scopeSettings,
+        $currentScope,
+        ContextualizerInterface $contextualizer
+    ): void {
         if (empty($scopeSettings['user_preferences'])) {
             return;
         }

@@ -21,11 +21,11 @@ class CharacterCounter implements ValueDefinitionInterface, FormMapperInterface
     public const ENABLED_OPTION = 'enabled';
     public const DISABLED_OPTION = 'disabled';
 
-    /** @var \Symfony\Contracts\Translation\TranslatorInterface */
+    /** @var TranslatorInterface */
     private $translator;
 
     /**
-     * @param \Symfony\Contracts\Translation\TranslatorInterface $translator
+     * @param TranslatorInterface $translator
      */
     public function __construct(TranslatorInterface $translator)
     {
@@ -77,8 +77,10 @@ class CharacterCounter implements ValueDefinitionInterface, FormMapperInterface
     /**
      * {@inheritdoc}
      */
-    public function mapFieldForm(FormBuilderInterface $formBuilder, ValueDefinitionInterface $value): FormBuilderInterface
-    {
+    public function mapFieldForm(
+        FormBuilderInterface $formBuilder,
+        ValueDefinitionInterface $value
+    ): FormBuilderInterface {
         $choices = [
             $this->getTranslatedOptionEnabled() => self::ENABLED_OPTION,
             $this->getTranslatedOptionDisabled() => self::DISABLED_OPTION,

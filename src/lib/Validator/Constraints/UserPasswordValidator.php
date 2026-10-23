@@ -20,18 +20,20 @@ use Symfony\Component\Validator\Exception\ConstraintDefinitionException;
  */
 class UserPasswordValidator extends ConstraintValidator
 {
-    /** @var \Ibexa\Contracts\Core\Repository\UserService */
+    /** @var UserService */
     private $userService;
 
-    /** @var \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface */
+    /** @var TokenStorageInterface */
     private $tokenStorage;
 
     /**
-     * @param \Ibexa\Contracts\Core\Repository\UserService $userService
-     * @param \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface $tokenStorage
+     * @param UserService $userService
+     * @param TokenStorageInterface $tokenStorage
      */
-    public function __construct(UserService $userService, TokenStorageInterface $tokenStorage)
-    {
+    public function __construct(
+        UserService $userService,
+        TokenStorageInterface $tokenStorage
+    ) {
         $this->userService = $userService;
         $this->tokenStorage = $tokenStorage;
     }
@@ -40,10 +42,12 @@ class UserPasswordValidator extends ConstraintValidator
      * Checks if the passed password exists for logged user.
      *
      * @param string $password The password that should be validated
-     * @param \Symfony\Component\Validator\Constraint|\Ibexa\User\Validator\Constraints\UserPassword $constraint The constraint for the validation
+     * @param Constraint|UserPassword $constraint The constraint for the validation
      */
-    public function validate($password, Constraint $constraint)
-    {
+    public function validate(
+        $password,
+        Constraint $constraint
+    ) {
         if (null === $password || '' === $password) {
             $this->context->addViolation($constraint->message);
 

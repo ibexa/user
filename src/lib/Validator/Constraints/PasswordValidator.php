@@ -16,7 +16,7 @@ use Symfony\Component\Validator\ConstraintValidator;
 
 class PasswordValidator extends ConstraintValidator
 {
-    /** @var \Ibexa\Contracts\Core\Repository\UserService */
+    /** @var UserService */
     private $userService;
 
     public function __construct(UserService $userService)
@@ -24,8 +24,10 @@ class PasswordValidator extends ConstraintValidator
         $this->userService = $userService;
     }
 
-    public function validate($value, Constraint $constraint): void
-    {
+    public function validate(
+        $value,
+        Constraint $constraint
+    ): void {
         if (!\is_string($value) || empty($value)) {
             return;
         }

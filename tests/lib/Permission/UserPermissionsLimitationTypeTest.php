@@ -141,8 +141,10 @@ class UserPermissionsLimitationTypeTest extends Base
     /**
      * @dataProvider providerForTestValidateError
      */
-    public function testValidateError(UserPermissionsLimitation $limitation, int $errorCount): void
-    {
+    public function testValidateError(
+        UserPermissionsLimitation $limitation,
+        int $errorCount
+    ): void {
         $userHandlerMock = $this->createMock(UserHandlerInterface::class);
         $contentHandlerMock = $this->createMock(ContentHandlerInterface::class);
 

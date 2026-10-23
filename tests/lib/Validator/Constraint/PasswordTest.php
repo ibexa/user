@@ -14,7 +14,7 @@ use PHPUnit\Framework\TestCase;
 
 class PasswordTest extends TestCase
 {
-    /** @var \Ibexa\User\Validator\Constraints\Password */
+    /** @var Password */
     private $constraint;
 
     protected function setUp(): void

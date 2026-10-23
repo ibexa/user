@@ -16,7 +16,7 @@ class UserSetupContext implements Context
 {
     private const UNSUPPORTED_USER_HASH = 5;
 
-    /** @var \Doctrine\DBAL\Connection */
+    /** @var Connection */
     private $connection;
 
     public function __construct(Connection $connection)
