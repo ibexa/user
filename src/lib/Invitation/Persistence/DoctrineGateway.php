@@ -29,8 +29,7 @@ final readonly class DoctrineGateway implements Gateway
 
     public function __construct(
         private Connection $connection
-    ) {
-    }
+    ) {}
 
     public function addInvitation(
         string $email,

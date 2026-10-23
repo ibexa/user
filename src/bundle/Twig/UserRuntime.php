@@ -18,8 +18,7 @@ final readonly class UserRuntime implements RuntimeExtensionInterface
     public function __construct(
         private PermissionResolver $permissionResolver,
         private UserService $userService
-    ) {
-    }
+    ) {}
 
     public function getCurrentUser(): User
     {

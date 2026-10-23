@@ -8,6 +8,9 @@ declare(strict_types=1);
 
 namespace Ibexa\Bundle\User\Controller;
 
+use Ibexa\Contracts\Core\Repository\Exceptions\BadStateException;
+use Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException;
+use Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException;
 use Ibexa\Contracts\User\Controller\AuthenticatedRememberedCheckTrait;
 use Ibexa\Contracts\User\Controller\RestrictedControllerInterface;
 use Ibexa\Contracts\User\Invitation\Exception\InvitationAlreadyExistsException;
@@ -15,6 +18,7 @@ use Ibexa\Contracts\User\Invitation\Exception\UserAlreadyExistsException;
 use Ibexa\Contracts\User\Invitation\InvitationCreateStruct;
 use Ibexa\Contracts\User\Invitation\InvitationSender;
 use Ibexa\Contracts\User\Invitation\InvitationService;
+use Ibexa\Core\Base\Exceptions\InvalidArgumentType;
 use Ibexa\User\ExceptionHandler\ActionResultHandler;
 use Ibexa\User\Form\Data\UserInvitationData;
 use Ibexa\User\Form\Type\Invitation\UserInvitationType;
@@ -32,14 +36,13 @@ final class UserInvitationController extends Controller implements RestrictedCon
         private InvitationSender $mailSender,
         private FormFactoryInterface $formFactory,
         private ActionResultHandler $actionResultHandler
-    ) {
-    }
+    ) {}
 
     /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\BadStateException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     * @throws \Ibexa\Core\Base\Exceptions\InvalidArgumentType
+     * @throws InvalidArgumentException
+     * @throws BadStateException
+     * @throws UnauthorizedException
+     * @throws InvalidArgumentType
      * @throws \JsonException
      */
     public function inviteUser(Request $request): FormView

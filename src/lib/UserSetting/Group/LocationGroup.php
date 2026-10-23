@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\User\UserSetting\Group;
 
+use Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface;
 use JMS\TranslationBundle\Annotation\Desc;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -18,7 +19,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 final class LocationGroup extends AbstractGroup
 {
     /**
-     * @param array<string, \Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface> $values
+     * @param array<string, ValueDefinitionInterface> $values
      */
     public function __construct(
         private readonly TranslatorInterface $translator,

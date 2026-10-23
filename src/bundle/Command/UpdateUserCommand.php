@@ -8,6 +8,8 @@ declare(strict_types=1);
 
 namespace Ibexa\Bundle\User\Command;
 
+use Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException;
+use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
 use Ibexa\Contracts\Core\Repository\Repository;
 use Ibexa\Contracts\Core\Repository\UserService;
 use Ibexa\Contracts\Core\Repository\Values\User\User;
@@ -64,8 +66,10 @@ final class UpdateUserCommand extends Command
         );
     }
 
-    protected function interact(InputInterface $input, OutputInterface $output): void
-    {
+    protected function interact(
+        InputInterface $input,
+        OutputInterface $output
+    ): void {
         $io = new SymfonyStyle($input, $output);
         $password = $input->getOption('password');
 
@@ -78,11 +82,13 @@ final class UpdateUserCommand extends Command
     }
 
     /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+     * @throws InvalidArgumentException
+     * @throws NotFoundException
      */
-    protected function execute(InputInterface $input, OutputInterface $output): int
-    {
+    protected function execute(
+        InputInterface $input,
+        OutputInterface $output
+    ): int {
         $io = new SymfonyStyle($input, $output);
 
         $userReference = $input->getArgument('user');
@@ -122,8 +128,10 @@ final class UpdateUserCommand extends Command
         return Command::SUCCESS;
     }
 
-    private function resolveEnabledFlag(bool $enable, bool $disable): ?bool
-    {
+    private function resolveEnabledFlag(
+        bool $enable,
+        bool $disable
+    ): ?bool {
         if (!$enable && !$disable) {
             return null;
         }

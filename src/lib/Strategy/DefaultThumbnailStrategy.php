@@ -26,11 +26,10 @@ final readonly class DefaultThumbnailStrategy implements ThumbnailStrategy
     public function __construct(
         private UrlGeneratorInterface $urlGenerator,
         private array $initialsFieldDefIdentifiers
-    ) {
-    }
+    ) {}
 
     /**
-     * @param list<\Ibexa\Contracts\Core\Repository\Values\Content\Field> $fields
+     * @param list<Field> $fields
      */
     public function getThumbnail(
         ContentType $contentType,
@@ -52,7 +51,7 @@ final readonly class DefaultThumbnailStrategy implements ThumbnailStrategy
     }
 
     /**
-     * @param list<\Ibexa\Contracts\Core\Repository\Values\Content\Field> $fields
+     * @param list<Field> $fields
      */
     private function getInitials(array $fields): string
     {

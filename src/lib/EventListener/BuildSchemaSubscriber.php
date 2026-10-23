@@ -16,8 +16,7 @@ final readonly class BuildSchemaSubscriber implements EventSubscriberInterface
 {
     public function __construct(
         private string $schemaFilePath
-    ) {
-    }
+    ) {}
 
     public static function getSubscribedEvents(): array
     {

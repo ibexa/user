@@ -20,8 +20,7 @@ final class SectionsChoiceType extends AbstractType
     public function __construct(
         private readonly Repository $repository,
         private readonly SectionService $sectionService
-    ) {
-    }
+    ) {}
 
     public function configureOptions(OptionsResolver $resolver): void
     {

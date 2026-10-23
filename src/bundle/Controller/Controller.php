@@ -10,6 +10,4 @@ namespace Ibexa\Bundle\User\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-abstract class Controller extends AbstractController
-{
-}
+abstract class Controller extends AbstractController {}

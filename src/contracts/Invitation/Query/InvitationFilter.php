@@ -17,8 +17,7 @@ final class InvitationFilter
         private ?Role $role = null,
         private ?UserGroup $userGroup = null,
         private ?bool $isUsed = null
-    ) {
-    }
+    ) {}
 
     public function setRole(?Role $role): void
     {

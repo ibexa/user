@@ -15,8 +15,7 @@ class UserPasswordForgotData
     public function __construct(
         #[Assert\NotBlank]
         private ?string $email = null
-    ) {
-    }
+    ) {}
 
     public function setEmail(?string $email): void
     {

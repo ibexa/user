@@ -21,8 +21,7 @@ class Handler implements HandlerInterface
     public function __construct(
         private readonly Gateway $gateway,
         private readonly Mapper $mapper
-    ) {
-    }
+    ) {}
 
     public function createInvitation(
         string $email,

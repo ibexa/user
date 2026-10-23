@@ -35,7 +35,7 @@ class UserPermissionsLimitationTypeTest extends Base
 
     /**
      * @return array<int, array{
-     *     0: \Ibexa\User\Permission\UserPermissionsLimitation
+     *     0: UserPermissionsLimitation
      * }>
      */
     public function providerForTestAcceptValue(): array
@@ -85,7 +85,7 @@ class UserPermissionsLimitationTypeTest extends Base
 
     /**
      * @return array<int, array{
-     *     0: \Ibexa\User\Permission\UserPermissionsLimitation
+     *     0: UserPermissionsLimitation
      * }>
      */
     public function providerForTestAcceptValueException(): array
@@ -192,7 +192,7 @@ class UserPermissionsLimitationTypeTest extends Base
 
     /**
      * @return array<string, array{
-     *     0: \Ibexa\User\Permission\UserPermissionsLimitation,
+     *     0: UserPermissionsLimitation,
      *     1: int
      * }>
      */
@@ -250,8 +250,8 @@ class UserPermissionsLimitationTypeTest extends Base
 
     /**
      * @return array<string, array{
-     *     limitation: \Ibexa\User\Permission\UserPermissionsLimitation,
-     *     object: \Ibexa\Contracts\Core\Repository\Values\ValueObject,
+     *     limitation: UserPermissionsLimitation,
+     *     object: ValueObject,
      *     expected: bool|null
      * }>
      */

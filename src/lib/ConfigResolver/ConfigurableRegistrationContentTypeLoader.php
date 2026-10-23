@@ -22,8 +22,7 @@ readonly class ConfigurableRegistrationContentTypeLoader implements Registration
         private ConfigResolverInterface $configResolver,
         private Repository $repository,
         private ContentTypeService $contentTypeService
-    ) {
-    }
+    ) {}
 
     public function loadContentType(?string $siteAccessIdentifier = null): ContentType
     {

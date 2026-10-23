@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace Ibexa\User\UserSetting\Setting;
 
 use Ibexa\User\UserSetting\Setting\Value\DateTimeFormat;
+
 use function is_array;
 
 final class DateTimeFormatSerializer

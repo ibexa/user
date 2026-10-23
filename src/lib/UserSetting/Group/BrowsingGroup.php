@@ -8,12 +8,13 @@ declare(strict_types=1);
 
 namespace Ibexa\User\UserSetting\Group;
 
+use Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class BrowsingGroup extends AbstractGroup
 {
     /**
-     * @param array<string, \Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface> $values
+     * @param array<string, ValueDefinitionInterface> $values
      */
     public function __construct(
         private readonly TranslatorInterface $translator,

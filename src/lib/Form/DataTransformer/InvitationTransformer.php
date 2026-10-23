@@ -18,8 +18,7 @@ readonly class InvitationTransformer implements DataTransformerInterface
 {
     public function __construct(
         private InvitationService $invitationService
-    ) {
-    }
+    ) {}
 
     public function transform(mixed $value): ?string
     {

@@ -15,8 +15,7 @@ class UserPasswordForgotWithLoginData
     public function __construct(
         #[Assert\NotBlank]
         private ?string $login = null
-    ) {
-    }
+    ) {}
 
     public function setLogin(?string $login): void
     {

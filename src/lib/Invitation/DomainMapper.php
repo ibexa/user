@@ -28,8 +28,7 @@ final readonly class DomainMapper implements DomainMapperInterface
         private UserService $userService,
         private RoleService $roleService,
         private LimitationService $limitationService
-    ) {
-    }
+    ) {}
 
     public function buildDomainObject(PersistenceInvitation $invitation): Invitation
     {
