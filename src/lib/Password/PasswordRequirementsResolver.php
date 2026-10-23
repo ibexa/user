@@ -34,7 +34,7 @@ final readonly class PasswordRequirementsResolver implements TranslationContaine
     ];
 
     /**
-     * @return \Ibexa\User\Password\PasswordRequirement[]
+     * @return PasswordRequirement[]
      */
     public function getRequirements(ContentType $contentType): array
     {
@@ -60,8 +60,11 @@ final readonly class PasswordRequirementsResolver implements TranslationContaine
      * @param array<string, mixed> $constraints
      * @param array<string, mixed> $fieldSettings
      */
-    private function isEnabled(string $constraintKey, array $constraints, array $fieldSettings): bool
-    {
+    private function isEnabled(
+        string $constraintKey,
+        array $constraints,
+        array $fieldSettings
+    ): bool {
         return match ($constraintKey) {
             self::MIN_LENGTH_CONSTRAINT => (int)($constraints[self::MIN_LENGTH_CONSTRAINT] ?? 0) > 0,
             // A configured password TTL implies this rule, {@see \Ibexa\Core\FieldType\User\Type::isNewPasswordRequired()}
@@ -77,15 +80,17 @@ final readonly class PasswordRequirementsResolver implements TranslationContaine
      *
      * @return array<string, scalar>
      */
-    private function getParameters(string $constraintKey, array $constraints): array
-    {
+    private function getParameters(
+        string $constraintKey,
+        array $constraints
+    ): array {
         return $constraintKey === self::MIN_LENGTH_CONSTRAINT
             ? ['%length%' => (int)$constraints[self::MIN_LENGTH_CONSTRAINT]]
             : [];
     }
 
     /**
-     * @return \JMS\TranslationBundle\Model\Message[]
+     * @return Message[]
      */
     public static function getTranslationMessages(): array
     {

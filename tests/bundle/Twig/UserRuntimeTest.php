@@ -24,9 +24,9 @@ final class UserRuntimeTest extends TestCase
 {
     private const int CURRENT_USER_ID = 14;
 
-    private PermissionResolver&MockObject $permissionResolver;
+    private PermissionResolver & MockObject $permissionResolver;
 
-    private UserService&MockObject $userService;
+    private UserService & MockObject $userService;
 
     private UserRuntime $runtime;
 
@@ -56,7 +56,7 @@ final class UserRuntimeTest extends TestCase
     public function testGetPasswordRequirementsForGivenContentType(): void
     {
         $this->userService
-            ->expects(self::never())
+            ->expects($this->never())
             ->method('loadUser');
 
         $requirements = $this->runtime->getPasswordRequirements(
@@ -72,17 +72,17 @@ final class UserRuntimeTest extends TestCase
     {
         $fieldDefinition = $this->createMock(FieldDefinition::class);
         $fieldDefinition
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('getValidatorConfiguration')
             ->willReturn(['PasswordValueValidator' => ['minLength' => $minLength]]);
         $fieldDefinition
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('getFieldSettings')
             ->willReturn([]);
 
         $contentType = $this->createMock(ContentType::class);
         $contentType
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('getFirstFieldDefinitionOfType')
             ->with('ibexa_user')
             ->willReturn($fieldDefinition);
@@ -94,22 +94,22 @@ final class UserRuntimeTest extends TestCase
     {
         $userReference = $this->createMock(UserReference::class);
         $userReference
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('getUserId')
             ->willReturn(self::CURRENT_USER_ID);
 
         $user = $this->createMock(User::class);
         $user
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('getContentType')
             ->willReturn($contentType);
 
         $this->permissionResolver
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('getCurrentUserReference')
             ->willReturn($userReference);
         $this->userService
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('loadUser')
             ->with(self::CURRENT_USER_ID)
             ->willReturn($user);

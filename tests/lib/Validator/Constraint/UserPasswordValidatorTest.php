@@ -44,13 +44,13 @@ class UserPasswordValidatorTest extends TestCase
     public function testEmptyValueType(?string $value): void
     {
         $this->userService
-            ->expects(self::never())
+            ->expects($this->never())
             ->method('checkUserCredentials');
         $this->tokenStorage
-            ->expects(self::never())
+            ->expects($this->never())
             ->method('getToken');
         $this->executionContext
-            ->expects(self::never())
+            ->expects($this->never())
             ->method('buildViolation');
 
         $this->validator->validate($value, new UserPassword());
@@ -81,7 +81,7 @@ class UserPasswordValidatorTest extends TestCase
             ->with($apiUser, 'password')
             ->willReturn(true);
         $this->executionContext
-            ->expects(self::never())
+            ->expects($this->never())
             ->method('buildViolation');
 
         $this->validator->validate('password', new UserPassword());
@@ -103,7 +103,7 @@ class UserPasswordValidatorTest extends TestCase
         $constraint = new UserPassword();
         $constraintViolationBuilder = self::createStub(ConstraintViolationBuilderInterface::class);
         $this->executionContext
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('buildViolation')
             ->with($constraint->message)
             ->willReturn($constraintViolationBuilder);

@@ -26,8 +26,7 @@ final readonly class PasswordRequirement
     public function __construct(
         private string $identifier,
         private array $parameters = []
-    ) {
-    }
+    ) {}
 
     public function getIdentifier(): string
     {

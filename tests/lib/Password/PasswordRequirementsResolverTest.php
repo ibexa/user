@@ -32,7 +32,7 @@ final class PasswordRequirementsResolverTest extends TestCase
     {
         $contentType = $this->createMock(ContentType::class);
         $contentType
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('getFirstFieldDefinitionOfType')
             ->with('ibexa_user')
             ->willReturn(null);
@@ -139,7 +139,7 @@ final class PasswordRequirementsResolverTest extends TestCase
         ))->getValidatorConfigurationSchema()['PasswordValueValidator'];
 
         $allRulesEnabled = array_map(
-            static fn (array $rule): int|true => $rule['type'] === 'int' ? 1 : true,
+            static fn (array $rule): int | true => $rule['type'] === 'int' ? 1 : true,
             $schema
         );
         $allRulesEnabled['minLength'] = 10;
@@ -171,21 +171,23 @@ final class PasswordRequirementsResolverTest extends TestCase
      * @param array<string, mixed> $constraints
      * @param array<string, mixed> $fieldSettings
      */
-    private function createContentType(array $constraints, array $fieldSettings): ContentType
-    {
+    private function createContentType(
+        array $constraints,
+        array $fieldSettings
+    ): ContentType {
         $fieldDefinition = $this->createMock(FieldDefinition::class);
         $fieldDefinition
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('getValidatorConfiguration')
             ->willReturn($constraints === [] ? [] : ['PasswordValueValidator' => $constraints]);
         $fieldDefinition
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('getFieldSettings')
             ->willReturn($fieldSettings);
 
         $contentType = $this->createMock(ContentType::class);
         $contentType
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('getFirstFieldDefinitionOfType')
             ->with('ibexa_user')
             ->willReturn($fieldDefinition);

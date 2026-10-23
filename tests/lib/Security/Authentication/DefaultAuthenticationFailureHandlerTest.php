@@ -43,7 +43,7 @@ final class DefaultAuthenticationFailureHandlerTest extends TestCase
         $expectedUrl = '/forgot-password';
 
         $this->httpUtils
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('generateUri')
             ->with($request, 'ibexa.user.forgot_password.migration')
             ->willReturn($expectedUrl);
@@ -55,7 +55,7 @@ final class DefaultAuthenticationFailureHandlerTest extends TestCase
     {
         $session = $this->getSession();
         $session
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('set')
             ->with(
                 '_security.last_error',
@@ -72,7 +72,7 @@ final class DefaultAuthenticationFailureHandlerTest extends TestCase
         $originalException = new BadCredentialsException('Original message');
 
         $this->httpUtils
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('createRedirectResponse')
             ->with($request);
 
@@ -90,7 +90,7 @@ final class DefaultAuthenticationFailureHandlerTest extends TestCase
     ): void {
         $session = $this->getSession();
         $session
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('set')
             ->with(
                 '_security.last_error',
@@ -114,7 +114,7 @@ final class DefaultAuthenticationFailureHandlerTest extends TestCase
     {
         $session = $this->getSession();
         $session
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('set')
             ->with(
                 '_security.last_error',
@@ -159,8 +159,11 @@ final class DefaultAuthenticationFailureHandlerTest extends TestCase
         ];
     }
 
-    private function getRequest(?Session $session = null, ?string $username = null, ?string $password = null): Request
-    {
+    private function getRequest(
+        ?Session $session = null,
+        ?string $username = null,
+        ?string $password = null
+    ): Request {
         $parameters = [];
 
         if ($username !== null) {
@@ -180,7 +183,7 @@ final class DefaultAuthenticationFailureHandlerTest extends TestCase
     public function getSession(): MockObject & Session
     {
         $session = $this->createMock(Session::class);
-        $session->expects(self::any())->method('isStarted')->willReturn(true);
+        $session->expects($this->any())->method('isStarted')->willReturn(true);
 
         return $session;
     }
