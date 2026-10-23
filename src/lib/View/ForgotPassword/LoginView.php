@@ -10,6 +10,4 @@ namespace Ibexa\User\View\ForgotPassword;
 
 use Ibexa\Core\MVC\Symfony\View\BaseView;
 
-class LoginView extends BaseView
-{
-}
+class LoginView extends BaseView {}

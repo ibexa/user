@@ -9,6 +9,4 @@ namespace Ibexa\User\View\Register;
 
 use Ibexa\Core\MVC\Symfony\View\BaseView;
 
-class ConfirmView extends BaseView
-{
-}
+class ConfirmView extends BaseView {}

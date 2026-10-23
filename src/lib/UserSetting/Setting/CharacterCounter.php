@@ -23,8 +23,7 @@ class CharacterCounter implements ValueDefinitionInterface, FormMapperInterface
 
     public function __construct(
         private readonly TranslatorInterface $translator
-    ) {
-    }
+    ) {}
 
     public function getName(): string
     {
@@ -53,8 +52,10 @@ class CharacterCounter implements ValueDefinitionInterface, FormMapperInterface
         return 'enabled';
     }
 
-    public function mapFieldForm(FormBuilderInterface $formBuilder, ValueDefinitionInterface $value): FormBuilderInterface
-    {
+    public function mapFieldForm(
+        FormBuilderInterface $formBuilder,
+        ValueDefinitionInterface $value
+    ): FormBuilderInterface {
         $choices = [
             $this->getTranslatedOptionEnabled() => self::ENABLED_OPTION,
             $this->getTranslatedOptionDisabled() => self::DISABLED_OPTION,

@@ -10,6 +10,7 @@ namespace Ibexa\Bundle\User\Controller;
 
 use Ibexa\ContentForms\Form\ActionDispatcher\ActionDispatcherInterface;
 use Ibexa\Contracts\User\Invitation\InvitationService;
+use Ibexa\Core\Base\Exceptions\InvalidArgumentType;
 use Ibexa\Core\MVC\Symfony\Security\Authorization\Attribute;
 use Ibexa\User\Form\DataMapper\UserRegisterMapper;
 use Ibexa\User\Form\Type\UserRegisterType;
@@ -25,13 +26,12 @@ class UserRegisterController extends Controller
         private readonly UserRegisterMapper $userRegisterMapper,
         private readonly ActionDispatcherInterface $userActionDispatcher,
         private readonly InvitationService $invitationService
-    ) {
-    }
+    ) {}
 
     /**
-     * @throws \Ibexa\Core\Base\Exceptions\InvalidArgumentType
+     * @throws InvalidArgumentType
      */
-    public function registerAction(Request $request): Response|FormView
+    public function registerAction(Request $request): Response | FormView
     {
         if (!$this->isGranted(new Attribute('user', 'register'))) {
             throw new UnauthorizedHttpException('You are not allowed to register a new account');
@@ -67,7 +67,7 @@ class UserRegisterController extends Controller
         return new ConfirmView();
     }
 
-    public function registerFromInvitationAction(Request $request): Response|FormView
+    public function registerFromInvitationAction(Request $request): Response | FormView
     {
         $invitation = $this->invitationService->getInvitation($request->get('inviteHash'));
 

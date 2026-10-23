@@ -18,8 +18,7 @@ abstract class AbstractDateTimeFormat implements ValueDefinitionInterface, FormM
     public function __construct(
         protected DateTimeFormatSerializer $serializer,
         protected FormatterInterface $formatter
-    ) {
-    }
+    ) {}
 
     public function getName(): string
     {

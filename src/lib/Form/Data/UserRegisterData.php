@@ -10,6 +10,4 @@ namespace Ibexa\User\Form\Data;
 
 use Ibexa\ContentForms\Data\User\UserCreateData;
 
-class UserRegisterData extends UserCreateData
-{
-}
+class UserRegisterData extends UserCreateData {}

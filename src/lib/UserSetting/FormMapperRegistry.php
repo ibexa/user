@@ -17,12 +17,11 @@ use Ibexa\Core\Base\Exceptions\InvalidArgumentException;
 class FormMapperRegistry
 {
     /**
-     * @param array<string, \Ibexa\Contracts\User\UserSetting\FormMapperInterface> $formMappers
+     * @param array<string, FormMapperInterface> $formMappers
      */
     public function __construct(
         protected array $formMappers = []
-    ) {
-    }
+    ) {}
 
     public function addFormMapper(
         string $identifier,
@@ -32,7 +31,7 @@ class FormMapperRegistry
     }
 
     /**
-     * @throws \Ibexa\Core\Base\Exceptions\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function getFormMapper(string $identifier): FormMapperInterface
     {
@@ -47,7 +46,7 @@ class FormMapperRegistry
     }
 
     /**
-     * @return array<string, \Ibexa\Contracts\User\UserSetting\FormMapperInterface>
+     * @return array<string, FormMapperInterface>
      */
     public function getFormMappers(): array
     {

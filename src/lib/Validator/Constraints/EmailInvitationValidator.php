@@ -17,17 +17,18 @@ class EmailInvitationValidator extends ConstraintValidator
 {
     public function __construct(
         private readonly UserService $userService
-    ) {
-    }
+    ) {}
 
     /**
      * Checks if the passed value is valid.
      *
      * @param mixed $email The value that should be validated
-     * @param \Symfony\Component\Validator\Constraint $constraint The constraint for the validation
+     * @param Constraint $constraint The constraint for the validation
      */
-    public function validate(mixed $email, Constraint $constraint): void
-    {
+    public function validate(
+        mixed $email,
+        Constraint $constraint
+    ): void {
         assert(is_string($email));
 
         try {

@@ -9,8 +9,11 @@ declare(strict_types=1);
 namespace Ibexa\Bundle\User\Command;
 
 use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\Exception;
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
+use Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException;
 use Ibexa\Contracts\Core\Repository\UserService;
+use Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition;
 use Ibexa\Core\FieldType\User\Type;
 use Ibexa\Core\FieldType\User\UserStorage\Gateway\DoctrineStorage;
 use Symfony\Component\Console\Command\Command;
@@ -28,8 +31,8 @@ final class AuditUserDatabaseCommand extends Command
     }
 
     /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
-     * @throws \Doctrine\DBAL\Exception
+     * @throws InvalidArgumentException
+     * @throws Exception
      */
     public function execute(
         InputInterface $input,
@@ -100,7 +103,7 @@ final class AuditUserDatabaseCommand extends Command
     }
 
     /**
-     * @return list<\Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition>
+     * @return list<FieldDefinition>
      */
     private function getUserFieldDefinitions(): array
     {
@@ -122,7 +125,7 @@ final class AuditUserDatabaseCommand extends Command
     }
 
     /**
-     * @param list<\Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition> $userFieldDefinitions
+     * @param list<FieldDefinition> $userFieldDefinitions
      */
     private function isUniqueEmailRequired(array $userFieldDefinitions): bool
     {

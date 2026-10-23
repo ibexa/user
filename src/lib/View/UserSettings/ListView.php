@@ -10,6 +10,4 @@ namespace Ibexa\User\View\UserSettings;
 
 use Ibexa\Core\MVC\Symfony\View\BaseView;
 
-class ListView extends BaseView
-{
-}
+class ListView extends BaseView {}

@@ -20,8 +20,7 @@ class UserPasswordResetData
          * @deprecated ContentType should be passed as option to FormType.
          */
         private ?ContentType $contentType = null
-    ) {
-    }
+    ) {}
 
     public function setNewPassword(?string $newPassword): void
     {

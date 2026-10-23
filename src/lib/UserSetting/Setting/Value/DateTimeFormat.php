@@ -13,8 +13,7 @@ final class DateTimeFormat implements \Stringable
     public function __construct(
         private ?string $dateFormat = null,
         private ?string $timeFormat = null
-    ) {
-    }
+    ) {}
 
     public function getDateFormat(): ?string
     {

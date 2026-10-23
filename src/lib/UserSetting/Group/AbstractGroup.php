@@ -21,8 +21,10 @@ abstract class AbstractGroup implements ValueDefinitionGroupInterface
     ) {
     }
 
-    public function addValueDefinition(string $identifier, ValueDefinitionInterface $valueDefinition): void
-    {
+    public function addValueDefinition(
+        string $identifier,
+        ValueDefinitionInterface $valueDefinition
+    ): void {
         $this->values[$identifier] = $valueDefinition;
     }
 

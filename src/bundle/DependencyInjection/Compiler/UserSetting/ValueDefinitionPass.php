@@ -14,6 +14,7 @@ use Ibexa\User\UserSetting\ValueDefinitionRegistry;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\Compiler\PriorityTaggedServiceTrait;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 
 class ValueDefinitionPass implements CompilerPassInterface
 {
@@ -24,8 +25,8 @@ class ValueDefinitionPass implements CompilerPassInterface
 
     /**
      * @throws \Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
-     * @throws \Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException
-     * @throws \Ibexa\Core\Base\Exceptions\InvalidArgumentException
+     * @throws ServiceNotFoundException
+     * @throws InvalidArgumentException
      */
     public function process(ContainerBuilder $container): void
     {

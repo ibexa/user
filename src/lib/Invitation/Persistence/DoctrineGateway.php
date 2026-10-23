@@ -201,8 +201,10 @@ final readonly class DoctrineGateway implements Gateway
         return $statement->fetchAllAssociative();
     }
 
-    public function updateInvitation(string $hash, InvitationUpdateStruct $updateStruct): void
-    {
+    public function updateInvitation(
+        string $hash,
+        InvitationUpdateStruct $updateStruct
+    ): void {
         $query = $this->connection->createQueryBuilder();
         $query->update(self::TABLE_USER_INVITATIONS);
 

@@ -18,8 +18,7 @@ class UserSettingArrayAccessor implements ArrayAccess
 {
     public function __construct(
         protected UserSettingService $userSettingService
-    ) {
-    }
+    ) {}
 
     public function offsetExists(mixed $offset): bool
     {
@@ -33,8 +32,10 @@ class UserSettingArrayAccessor implements ArrayAccess
         return $this->userSettingService->getUserSetting($offset)->value;
     }
 
-    public function offsetSet(mixed $offset, mixed $value): void
-    {
+    public function offsetSet(
+        mixed $offset,
+        mixed $value
+    ): void {
         $this->userSettingService->setUserSetting($offset, $value);
     }
 

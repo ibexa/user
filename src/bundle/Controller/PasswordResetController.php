@@ -12,6 +12,7 @@ use DateInterval;
 use DateTime;
 use Exception;
 use Ibexa\Bundle\User\Type\UserForgotPasswordReason;
+use Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException;
 use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
 use Ibexa\Contracts\Core\Repository\PermissionResolver;
 use Ibexa\Contracts\Core\Repository\UserService;
@@ -19,6 +20,7 @@ use Ibexa\Contracts\Core\Repository\Values\User\User;
 use Ibexa\Contracts\Core\Repository\Values\User\UserTokenUpdateStruct;
 use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 use Ibexa\Contracts\User\PasswordReset\NotifierInterface;
+use Ibexa\Core\Base\Exceptions\InvalidArgumentType;
 use Ibexa\User\ExceptionHandler\ActionResultHandler;
 use Ibexa\User\Form\Data\UserPasswordResetData;
 use Ibexa\User\Form\Factory\FormFactory;
@@ -41,15 +43,16 @@ class PasswordResetController extends Controller
         private readonly PermissionResolver $permissionResolver,
         private readonly ConfigResolverInterface $configResolver,
         private readonly NotifierInterface $passwordResetMailer
-    ) {
-    }
+    ) {}
 
     /**
-     * @throws \Ibexa\Core\Base\Exceptions\InvalidArgumentType
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
+     * @throws InvalidArgumentType
+     * @throws InvalidArgumentException
      */
-    public function userForgotPasswordAction(Request $request, ?string $reason = null): RedirectResponse|SuccessView|FormView
-    {
+    public function userForgotPasswordAction(
+        Request $request,
+        ?string $reason = null
+    ): RedirectResponse | SuccessView | FormView {
         $form = $this->formFactory->forgotUserPassword();
         $form->handleRequest($request);
 
@@ -63,7 +66,7 @@ class PasswordResetController extends Controller
             }
 
             if (!empty($users)) {
-                /** @var \Ibexa\Contracts\Core\Repository\Values\User\User $user */
+                /** @var User $user */
                 $user = reset($users);
                 $token = $this->updateUserToken($user);
 
@@ -81,10 +84,10 @@ class PasswordResetController extends Controller
     }
 
     /**
-     * @throws \Ibexa\Core\Base\Exceptions\InvalidArgumentType
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
+     * @throws InvalidArgumentType
+     * @throws InvalidArgumentException
      */
-    public function userForgotPasswordLoginAction(Request $request): SuccessView|LoginView
+    public function userForgotPasswordLoginAction(Request $request): SuccessView | LoginView
     {
         $form = $this->formFactory->forgotUserPasswordWithLogin();
 
@@ -119,10 +122,12 @@ class PasswordResetController extends Controller
     }
 
     /**
-     * @throws \Ibexa\Core\Base\Exceptions\InvalidArgumentType
+     * @throws InvalidArgumentType
      */
-    public function userResetPasswordAction(Request $request, string $hashKey): InvalidLinkView|UserResetPasswordSuccessView|UserResetPasswordFormView
-    {
+    public function userResetPasswordAction(
+        Request $request,
+        string $hashKey
+    ): InvalidLinkView | UserResetPasswordSuccessView | UserResetPasswordFormView {
         $response = new Response();
         $response->headers->set('X-Robots-Tag', 'noindex');
 
@@ -179,7 +184,7 @@ class PasswordResetController extends Controller
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     private function updateUserToken(User $user): string
     {

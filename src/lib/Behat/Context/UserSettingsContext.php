@@ -19,14 +19,15 @@ class UserSettingsContext implements Context
         private readonly UserSettingService $userSettingService,
         private readonly PermissionResolver $permissionResolver,
         private readonly UserService $userService
-    ) {
-    }
+    ) {}
 
     /**
      * @When I set autosave interval value to :autosaveInterval for user :userLogin
      */
-    public function iSetAutosaveDraftIntervalValue(string $autosaveInterval, string $userLogin): void
-    {
+    public function iSetAutosaveDraftIntervalValue(
+        string $autosaveInterval,
+        string $userLogin
+    ): void {
         $currentUser = $this->permissionResolver->getCurrentUserReference();
         $user = $this->userService->loadUserByLogin($userLogin);
         $this->permissionResolver->setCurrentUserReference($user);

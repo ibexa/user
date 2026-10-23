@@ -9,6 +9,7 @@ namespace Ibexa\User\Form\DataMapper;
 
 use Ibexa\Contracts\ContentForms\Data\Content\FieldData;
 use Ibexa\Contracts\Core\Repository\Values\Content\Field;
+use Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition;
 use Ibexa\Contracts\User\Invitation\Invitation;
 use Ibexa\User\ConfigResolver\RegistrationContentTypeLoader;
 use Ibexa\User\ConfigResolver\RegistrationGroupLoader;
@@ -26,11 +27,12 @@ class UserRegisterMapper
     public function __construct(
         private readonly RegistrationContentTypeLoader $contentTypeLoader,
         private readonly RegistrationGroupLoader $parentGroupLoader
-    ) {
-    }
+    ) {}
 
-    public function setParam(string $name, mixed $value): void
-    {
+    public function setParam(
+        string $name,
+        mixed $value
+    ): void {
         $this->params[$name] = $value;
     }
 
@@ -40,7 +42,7 @@ class UserRegisterMapper
         $this->configureOptions($resolver);
         $this->params = $resolver->resolve($this->params);
 
-        /** @var \Ibexa\Contracts\User\Invitation\Invitation|null $invitation */
+        /** @var Invitation|null $invitation */
         $invitation = $this->params['invitation'] ?? null;
         $contentType = $this->contentTypeLoader->loadContentType(
             $invitation ? $invitation->getSiteAccessIdentifier() : null
@@ -66,7 +68,7 @@ class UserRegisterMapper
             $data->email = $invitation->getEmail();
         }
 
-        /** @var \Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition $fieldDef */
+        /** @var FieldDefinition $fieldDef */
         foreach ($contentType->fieldDefinitions as $fieldDef) {
             $value = $fieldDef->defaultValue;
             if ($invitation && $fieldDef->fieldTypeIdentifier === 'ibexa_user') {

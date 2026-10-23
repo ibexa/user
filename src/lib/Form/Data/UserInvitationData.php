@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\User\Form\Data;
 
+use Ibexa\Contracts\Core\Repository\Values\Content\Section;
 use Ibexa\Contracts\Core\Repository\Values\User\Limitation\RoleLimitation;
 use Ibexa\Contracts\Core\Repository\Values\User\Role;
 use Ibexa\Contracts\Core\Repository\Values\User\UserGroup;
@@ -17,7 +18,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 final class UserInvitationData
 {
     /**
-     * @param array<int, \Ibexa\Contracts\Core\Repository\Values\Content\Section>|null $sections
+     * @param array<int, Section>|null $sections
      * @param array<string, mixed>|null $limitationValue
      */
     public function __construct(
@@ -33,8 +34,7 @@ final class UserInvitationData
         private ?RoleLimitation $roleLimitation = null,
         private ?string $limitationType = null,
         private ?array $limitationValue = null
-    ) {
-    }
+    ) {}
 
     public function getLimitationType(): ?string
     {

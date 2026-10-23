@@ -56,8 +56,11 @@ class UserRegistration extends AbstractParser
      * @param array<string, mixed> $scopeSettings
      * @param string $currentScope
      */
-    public function mapConfig(array &$scopeSettings, $currentScope, ContextualizerInterface $contextualizer): void
-    {
+    public function mapConfig(
+        array &$scopeSettings,
+        $currentScope,
+        ContextualizerInterface $contextualizer
+    ): void {
         if (empty($scopeSettings['user_registration'])) {
             return;
         }

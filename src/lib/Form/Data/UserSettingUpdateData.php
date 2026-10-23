@@ -19,8 +19,7 @@ class UserSettingUpdateData
         #[Assert\NotBlank]
         private string $identifier,
         private array $values
-    ) {
-    }
+    ) {}
 
     public function getIdentifier(): string
     {

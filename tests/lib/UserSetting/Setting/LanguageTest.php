@@ -17,9 +17,9 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class LanguageTest extends TestCase
 {
-    private UserLanguagePreferenceProviderInterface&MockObject $userLanguagePreferenceProvider;
+    private UserLanguagePreferenceProviderInterface & MockObject $userLanguagePreferenceProvider;
 
-    private AvailableLocaleChoiceLoader&MockObject $availableLocaleChoiceLoader;
+    private AvailableLocaleChoiceLoader & MockObject $availableLocaleChoiceLoader;
 
     protected function setUp(): void
     {

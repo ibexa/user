@@ -23,9 +23,9 @@ use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 
 class PasswordValidatorTest extends TestCase
 {
-    private UserService&MockObject $userService;
+    private UserService & MockObject $userService;
 
-    private ExecutionContextInterface&MockObject $executionContext;
+    private ExecutionContextInterface & MockObject $executionContext;
 
     private PasswordValidator $validator;
 
@@ -40,7 +40,7 @@ class PasswordValidatorTest extends TestCase
     /**
      * @dataProvider dataProviderForValidateNotSupportedValueType
      */
-    public function testValidateShouldBeSkipped(\stdClass|string|null $value): void
+    public function testValidateShouldBeSkipped(stdClass | string | null $value): void
     {
         $this->userService
             ->expects(self::never())
@@ -63,7 +63,10 @@ class PasswordValidatorTest extends TestCase
             ->expects(self::once())
             ->method('validatePassword')
             ->willReturnCallback(
-                static function (string $actualPassword, PasswordValidationContext $actualContext) use (
+                static function (
+                    string $actualPassword,
+                    PasswordValidationContext $actualContext
+                ) use (
                     $password,
                     $contentType,
                     $user
@@ -100,7 +103,10 @@ class PasswordValidatorTest extends TestCase
         $this->userService
             ->expects(self::once())
             ->method('validatePassword')
-            ->willReturnCallback(function (string $actualPassword, PasswordValidationContext $actualContext) use (
+            ->willReturnCallback(function (
+                string $actualPassword,
+                PasswordValidationContext $actualContext
+            ) use (
                 $password,
                 $contentType,
                 $errorMessage,

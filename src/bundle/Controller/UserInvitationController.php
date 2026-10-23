@@ -16,6 +16,7 @@ use Ibexa\Contracts\User\Invitation\InvitationCreateStruct;
 use Ibexa\Contracts\User\Invitation\InvitationSender;
 use Ibexa\Contracts\User\Invitation\InvitationService;
 use Ibexa\User\ExceptionHandler\ActionResultHandler;
+use Ibexa\User\Form\Data\UserInvitationData;
 use Ibexa\User\Form\Type\Invitation\UserInvitationType;
 use Ibexa\User\View\Invitation\FormView;
 use JMS\TranslationBundle\Annotation\Desc;
@@ -47,7 +48,7 @@ final class UserInvitationController extends Controller implements RestrictedCon
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            /** @var \Ibexa\User\Form\Data\UserInvitationData $data */
+            /** @var UserInvitationData $data */
             $data = $form->getData();
             try {
                 $invitation = $this->invitationService->createInvitation(

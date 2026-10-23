@@ -20,8 +20,7 @@ readonly class ConfigurableRegistrationGroupLoader implements RegistrationGroupL
     public function __construct(
         private ConfigResolverInterface $configResolver,
         private Repository $repository
-    ) {
-    }
+    ) {}
 
     public function loadGroup(): UserGroup
     {

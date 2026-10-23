@@ -66,8 +66,10 @@ final readonly class DomainMapper implements DomainMapperInterface
         return $this->repository->sudo(fn (): Role => $this->roleService->loadRole($roleId));
     }
 
-    private function mapRoleLimitation(string $type, array $values): RoleLimitation
-    {
+    private function mapRoleLimitation(
+        string $type,
+        array $values
+    ): RoleLimitation {
         $limitation = $this->limitationService->getLimitationType($type)->buildValue($values);
 
         if (!$limitation instanceof RoleLimitation) {

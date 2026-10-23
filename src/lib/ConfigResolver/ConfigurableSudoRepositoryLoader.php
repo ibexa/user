@@ -32,11 +32,12 @@ abstract class ConfigurableSudoRepositoryLoader
     public function __construct(
         private readonly Repository $repository,
         private array $params = []
-    ) {
-    }
+    ) {}
 
-    public function setParam(string $name, mixed $value): self
-    {
+    public function setParam(
+        string $name,
+        mixed $value
+    ): self {
         $this->params[$name] = $value;
 
         return $this;

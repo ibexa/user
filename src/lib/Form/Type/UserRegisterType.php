@@ -28,8 +28,7 @@ class UserRegisterType extends AbstractType
 {
     public function __construct(
         private readonly ConfigResolverInterface $configResolver
-    ) {
-    }
+    ) {}
 
     public function getName(): string
     {
@@ -48,8 +47,10 @@ class UserRegisterType extends AbstractType
         return BaseContentType::class;
     }
 
-    public function buildForm(FormBuilderInterface $builder, array $options): void
-    {
+    public function buildForm(
+        FormBuilderInterface $builder,
+        array $options
+    ): void {
         $builder
             ->add('register', SubmitType::class, ['label' => /** @Desc("Register") */ 'user.register_button'])
             ->addEventSubscriber(new UserFieldsSubscriber());

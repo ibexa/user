@@ -19,8 +19,7 @@ class UpdateViewBuilder implements ViewBuilder
         private readonly UserSettingService $userSettingService,
         private readonly Configurator $viewConfigurator,
         private readonly ParametersInjector $viewParametersInjector
-    ) {
-    }
+    ) {}
 
     public function matches(mixed $argument): bool
     {

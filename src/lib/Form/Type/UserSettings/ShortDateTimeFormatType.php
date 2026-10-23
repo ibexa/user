@@ -16,8 +16,7 @@ class ShortDateTimeFormatType extends AbstractType
 {
     public function __construct(
         private readonly ConfigResolverInterface $configResolver
-    ) {
-    }
+    ) {}
 
     public function configureOptions(OptionsResolver $resolver): void
     {
