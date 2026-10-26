@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace Ibexa\Tests\Integration\User\Invitation;
 
 use DateTime;
+use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
 use Ibexa\Contracts\Core\Repository\RoleService;
 use Ibexa\Contracts\Core\Repository\UserService;
 use Ibexa\Contracts\User\Invitation\Exception\InvitationAlreadyExistsException;
@@ -16,7 +17,6 @@ use Ibexa\Contracts\User\Invitation\Exception\UserAlreadyExistsException;
 use Ibexa\Contracts\User\Invitation\InvitationCreateStruct;
 use Ibexa\Contracts\User\Invitation\InvitationService;
 use Ibexa\Contracts\User\Invitation\Query\InvitationFilter;
-use Ibexa\Core\Base\Exceptions\NotFoundException;
 use Ibexa\Tests\Integration\User\IbexaKernelTestCase;
 use Ibexa\User\Invitation\Persistence\Handler;
 use Symfony\Bridge\PhpUnit\ClockMock;
@@ -172,16 +172,26 @@ final class InvitationServiceTest extends IbexaKernelTestCase
 
     public function testGetInvitationByEmailReturnsRowForExistingInvitation(): void
     {
+        $invitationEmail = 'invitation-service@ibexa.co';
+
         $invitation = $this->invitationService->createInvitation(
             new InvitationCreateStruct(
-                'invitation-service@ibexa.co',
+                $invitationEmail,
                 'admin',
             )
         );
 
-        $invitationByEmail = $this->invitationService->getInvitationByEmail($invitation->getEmail());
+        $this->invitationService->createInvitation(
+            new InvitationCreateStruct(
+                'invitation-service-other@ibexa.co',
+                'admin',
+            )
+        );
 
-        self::assertSame($invitation->getEmail(), $invitationByEmail->getEmail());
+        $invitationByEmail = $this->invitationService->getInvitationByEmail($invitationEmail);
+
+        self::assertSame($invitationEmail, $invitationByEmail->getEmail());
+        self::assertNotSame('', $invitationByEmail->getHash());
         self::assertSame($invitation->getHash(), $invitationByEmail->getHash());
     }
 
@@ -203,7 +213,7 @@ final class InvitationServiceTest extends IbexaKernelTestCase
 
         $invitationByHash = $this->invitationService->getInvitation($invitation->getHash());
 
-        self::assertSame($invitation->getEmail(), $invitationByHash->getEmail());
+        self::assertSame('invitation-service-by-hash@ibexa.co', $invitationByHash->getEmail());
         self::assertSame($invitation->getHash(), $invitationByHash->getHash());
     }
 
