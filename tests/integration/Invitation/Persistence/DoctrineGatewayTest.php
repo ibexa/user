@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\Tests\Integration\User\Invitation\Persistence;
 
-use Ibexa\Core\Base\Exceptions\NotFoundException;
+use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
 use Ibexa\Tests\Integration\User\IbexaKernelTestCase;
 use Ibexa\User\Invitation\Persistence\DoctrineGateway;
 
@@ -23,16 +23,14 @@ final class DoctrineGatewayTest extends IbexaKernelTestCase
 
     public function testGetInvitationByEmailReturnsRowForExistingInvitation(): void
     {
-        $invitation = $this->gateway->addInvitation(
-            'gateway-existing@ibexa.co',
-            'admin',
-            'gateway-existing-hash'
-        );
+        $gatewayEmail = 'gateway-existing@ibexa.co';
+        $this->gateway->addInvitation('gateway-other@ibexa.co', 'admin', 'gateway-other-hash');
+        $this->gateway->addInvitation($gatewayEmail, 'admin', 'gateway-existing-hash');
 
-        $invitationRow = $this->gateway->getInvitationByEmail($invitation['email']);
+        $invitationRow = $this->gateway->getInvitationByEmail($gatewayEmail);
 
-        self::assertSame($invitation['email'], $invitationRow['email']);
-        self::assertSame($invitation['hash'], $invitationRow['hash']);
+        self::assertSame($gatewayEmail, $invitationRow['email']);
+        self::assertSame('gateway-existing-hash', $invitationRow['hash']);
     }
 
     public function testGetInvitationByEmailThrowExceptionWhenInvitationDoesNotExist(): void
@@ -44,16 +42,14 @@ final class DoctrineGatewayTest extends IbexaKernelTestCase
 
     public function testGetInvitationReturnsRowForExistingHash(): void
     {
-        $invitation = $this->gateway->addInvitation(
-            'gateway-existing-by-hash@ibexa.co',
-            'admin',
-            'gateway-existing-by-hash-hash'
-        );
+        $gatewayHash = 'gateway-existing-by-hash-hash';
+        $this->gateway->addInvitation('gateway-other-by-hash@ibexa.co', 'admin', 'gateway-other-by-hash-hash');
+        $this->gateway->addInvitation('gateway-existing-by-hash@ibexa.co', 'admin', $gatewayHash);
 
-        $invitationRow = $this->gateway->getInvitation($invitation['hash']);
+        $invitationRow = $this->gateway->getInvitation($gatewayHash);
 
-        self::assertSame($invitation['email'], $invitationRow['email']);
-        self::assertSame($invitation['hash'], $invitationRow['hash']);
+        self::assertSame('gateway-existing-by-hash@ibexa.co', $invitationRow['email']);
+        self::assertSame($gatewayHash, $invitationRow['hash']);
     }
 
     public function testGetInvitationThrowExceptionWhenHashDoesNotExist(): void
