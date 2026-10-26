@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace Ibexa\Tests\Integration\User\Invitation;
 
 use DateTime;
+use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
 use Ibexa\Contracts\Core\Repository\RoleService;
 use Ibexa\Contracts\Core\Repository\UserService;
 use Ibexa\Contracts\User\Invitation\Exception\InvitationAlreadyExistsException;
@@ -167,5 +168,59 @@ final class InvitationServiceTest extends IbexaKernelTestCase
         self::assertNotEquals($invitation->getHash(), $refreshed->getHash());
 
         ClockMock::withClockMock(false);
+    }
+
+    public function testGetInvitationByEmailReturnsRowForExistingInvitation(): void
+    {
+        $invitationEmail = 'invitation-service@ibexa.co';
+
+        $invitation = $this->invitationService->createInvitation(
+            new InvitationCreateStruct(
+                $invitationEmail,
+                'admin',
+            )
+        );
+
+        $this->invitationService->createInvitation(
+            new InvitationCreateStruct(
+                'invitation-service-other@ibexa.co',
+                'admin',
+            )
+        );
+
+        $invitationByEmail = $this->invitationService->getInvitationByEmail($invitationEmail);
+
+        self::assertSame($invitationEmail, $invitationByEmail->getEmail());
+        self::assertNotSame('', $invitationByEmail->getHash());
+        self::assertSame($invitation->getHash(), $invitationByEmail->getHash());
+    }
+
+    public function testGetInvitationByEmailThrowErrorWhenInvitationDoesNotExist(): void
+    {
+        $this->expectException(NotFoundException::class);
+
+        $this->invitationService->getInvitationByEmail('gateway-missing@ibexa.co');
+    }
+
+    public function testGetInvitationReturnsRowForExistingHash(): void
+    {
+        $invitation = $this->invitationService->createInvitation(
+            new InvitationCreateStruct(
+                'invitation-service-by-hash@ibexa.co',
+                'admin',
+            )
+        );
+
+        $invitationByHash = $this->invitationService->getInvitation($invitation->getHash());
+
+        self::assertSame('invitation-service-by-hash@ibexa.co', $invitationByHash->getEmail());
+        self::assertSame($invitation->getHash(), $invitationByHash->getHash());
+    }
+
+    public function testGetInvitationThrowExceptionWhenHashDoesNotExist(): void
+    {
+        $this->expectException(NotFoundException::class);
+
+        $this->invitationService->getInvitation('invitation-service-missing-hash');
     }
 }
