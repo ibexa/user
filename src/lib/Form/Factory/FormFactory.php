@@ -91,14 +91,13 @@ class FormFactory
         if (null === $data) {
             throw new InvalidArgumentException('UserPasswordResetData is required for resetting user password');
         }
-        $userContentType = $contentType ?? $data->getContentType();
 
         return $this->formFactory->createNamed(
             $name,
             UserPasswordResetType::class,
             $data,
             [
-                'content_type' => $userContentType,
+                'content_type' => $contentType,
                 'user' => $user,
             ]
         );
