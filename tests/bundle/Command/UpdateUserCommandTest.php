@@ -68,10 +68,12 @@ final class UpdateUserCommandTest extends KernelTestCase
 
     public function testExecuteReturnsSuccess(): void
     {
+        // `--password` without a value, so the command asks for it
+        $this->commandTester->setInputs(['Ibexa-Password1']);
         $this->commandTester->execute(
             [
                 'user' => 'anonymous',
-                '--password' => true,
+                '--password' => null,
                 '--email' => 'foo@bar.com',
                 '--enable' => true,
             ],
