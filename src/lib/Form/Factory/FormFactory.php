@@ -20,7 +20,6 @@ use Ibexa\User\Form\Type\UserPasswordForgotType;
 use Ibexa\User\Form\Type\UserPasswordForgotWithLoginType;
 use Ibexa\User\Form\Type\UserPasswordResetType;
 use Ibexa\User\Form\Type\UserSettingUpdateType;
-use InvalidArgumentException;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\Util\StringUtil;
@@ -81,24 +80,19 @@ class FormFactory
      * @throws InvalidOptionsException
      */
     public function resetUserPassword(
-        ?UserPasswordResetData $data = null,
-        ?string $name = null,
-        ?ContentType $contentType = null,
+        UserPasswordResetData $data,
+        ?string $name,
+        ContentType $contentType,
         ?User $user = null
     ): FormInterface {
         $name = $name ?: StringUtil::fqcnToBlockPrefix(UserPasswordResetType::class);
-
-        if (null === $data) {
-            throw new InvalidArgumentException('UserPasswordResetData is required for resetting user password');
-        }
-        $userContentType = $contentType ?? $data->getContentType();
 
         return $this->formFactory->createNamed(
             $name,
             UserPasswordResetType::class,
             $data,
             [
-                'content_type' => $userContentType,
+                'content_type' => $contentType,
                 'user' => $user,
             ]
         );
