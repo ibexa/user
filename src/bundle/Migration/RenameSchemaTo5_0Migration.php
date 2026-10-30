@@ -10,9 +10,9 @@ namespace Ibexa\Bundle\User\Migration;
 
 use DateTimeImmutable;
 use Doctrine\DBAL\Schema\Schema;
-use Ibexa\Contracts\DoctrineMigrations\Migrations\AbstractSqlMigration;
 use Ibexa\Contracts\DoctrineMigrations\Migrations\IbexaMigrationInterface;
 use Ibexa\Contracts\DoctrineMigrations\Migrations\SqlPlatform;
+use Ibexa\InternalContracts\DoctrineMigrations\Migrations\AbstractSqlMigration;
 
 final class RenameSchemaTo5_0Migration extends AbstractSqlMigration implements IbexaMigrationInterface
 {
