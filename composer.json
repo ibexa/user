@@ -43,6 +43,7 @@
         "twig/twig": "^3.0"
     },
     "require-dev": {
+        "doctrine/doctrine-migrations-bundle": "^3.2",
         "ibexa/code-style": "~2.3.1",
         "ibexa/design-engine": "~5.0.x-dev",
         "ibexa/doctrine-schema": "~5.0.x-dev",

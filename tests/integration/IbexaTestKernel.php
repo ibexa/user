@@ -8,7 +8,9 @@ declare(strict_types=1);
 
 namespace Ibexa\Tests\Integration\User;
 
+use Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle;
 use Ibexa\Bundle\ContentForms\IbexaContentFormsBundle;
+use Ibexa\Bundle\DoctrineMigrations\IbexaDoctrineMigrationsBundle;
 use Ibexa\Bundle\Notifications\IbexaNotificationsBundle;
 use Ibexa\Bundle\Test\Core\IbexaTestCoreBundle;
 use Ibexa\Bundle\User\IbexaUserBundle;
@@ -29,6 +31,10 @@ final class IbexaTestKernel extends BaseIbexaTestKernel
         yield from parent::registerBundles();
 
         yield new IbexaTestCoreBundle();
+
+        yield new DoctrineMigrationsBundle();
+
+        yield new IbexaDoctrineMigrationsBundle();
 
         yield from [
             new IbexaUserBundle(),
