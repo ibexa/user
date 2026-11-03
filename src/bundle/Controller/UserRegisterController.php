@@ -85,6 +85,7 @@ class UserRegisterController extends Controller
             [
                 'languageCode' => $language,
                 'mainLanguageCode' => $language,
+                'struct' => $data,
                 'intent' => 'invitation',
             ]
         );
