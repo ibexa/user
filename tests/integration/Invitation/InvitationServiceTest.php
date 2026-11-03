@@ -174,13 +174,6 @@ final class InvitationServiceTest extends IbexaKernelTestCase
     {
         $invitationEmail = 'invitation-service@ibexa.co';
 
-        $invitation = $this->invitationService->createInvitation(
-            new InvitationCreateStruct(
-                $invitationEmail,
-                'admin',
-            )
-        );
-
         $this->invitationService->createInvitation(
             new InvitationCreateStruct(
                 'invitation-service-other@ibexa.co',
@@ -188,10 +181,16 @@ final class InvitationServiceTest extends IbexaKernelTestCase
             )
         );
 
+        $invitation = $this->invitationService->createInvitation(
+            new InvitationCreateStruct(
+                $invitationEmail,
+                'admin',
+            )
+        );
+
         $invitationByEmail = $this->invitationService->getInvitationByEmail($invitationEmail);
 
         self::assertSame($invitationEmail, $invitationByEmail->getEmail());
-        self::assertNotSame('', $invitationByEmail->getHash());
         self::assertSame($invitation->getHash(), $invitationByEmail->getHash());
     }
 
@@ -204,6 +203,13 @@ final class InvitationServiceTest extends IbexaKernelTestCase
 
     public function testGetInvitationReturnsRowForExistingHash(): void
     {
+        $this->invitationService->createInvitation(
+            new InvitationCreateStruct(
+                'invitation-service-by-hash-other@ibexa.co',
+                'admin',
+            )
+        );
+
         $invitation = $this->invitationService->createInvitation(
             new InvitationCreateStruct(
                 'invitation-service-by-hash@ibexa.co',

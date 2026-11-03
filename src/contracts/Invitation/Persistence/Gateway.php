@@ -8,7 +8,6 @@ declare(strict_types=1);
 
 namespace Ibexa\Contracts\User\Invitation\Persistence;
 
-use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
 use Ibexa\Contracts\User\Invitation\Query\InvitationFilter;
 
 /**
@@ -40,19 +39,12 @@ interface Gateway
     ): array;
 
     /**
-     * @phpstan-return TInvitationData
-     *
-     * @throws NotFoundException
+     * @return array<string, mixed>
      */
     public function getInvitation(string $hash): array;
 
     public function invitationExistsForEmail(string $email): bool;
 
-    /**
-     * @phpstan-return TInvitationData
-     *
-     * @throws NotFoundException
-     */
     public function getInvitationByEmail(string $email);
 
     /**
