@@ -1,0 +1,17 @@
+{
+    "recipesEndpoint": "",
+    "packages": [
+        {
+            "requirement": "dev-IBX-11939-internal-contracts-6.0 as 6.0.x-dev",
+            "repositoryUrl": "https://github.com/ibexa/doctrine-migrations.git",
+            "package": "ibexa/doctrine-migrations",
+            "shouldBeAddedAsVCS": false
+        },
+        {
+            "requirement": "dev-IBX-11939-internal-contracts-6.0 as 6.0.x-dev",
+            "repositoryUrl": "https://github.com/ibexa/core.git",
+            "package": "ibexa/core",
+            "shouldBeAddedAsVCS": false
+        }
+    ]
+}

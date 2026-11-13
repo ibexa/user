@@ -10,9 +10,9 @@ namespace Ibexa\Bundle\User\Migration;
 
 use DateTimeImmutable;
 use Doctrine\DBAL\Schema\Schema;
-use Ibexa\Contracts\DoctrineMigrations\Migrations\AbstractSqlMigration;
 use Ibexa\Contracts\DoctrineMigrations\Migrations\IbexaMigrationInterface;
 use Ibexa\Contracts\DoctrineMigrations\Migrations\SqlPlatform;
+use Ibexa\InternalContracts\DoctrineMigrations\Migrations\AbstractSqlMigration;
 
 /**
  * Turns the SERIAL columns of the user tables into identity columns on PostgreSQL, as a fresh 6.0
