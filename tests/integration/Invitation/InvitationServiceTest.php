@@ -66,6 +66,13 @@ final class InvitationServiceTest extends IbexaKernelTestCase
 
     public function testCreateExistingInvitation(): void
     {
+        $this->invitationService->createInvitation(
+            new InvitationCreateStruct(
+                'thisisjustatest@ibexa.co',
+                'admin',
+            )
+        );
+
         $this->expectExceptionObject(new InvitationAlreadyExistsException());
         $this->invitationService->createInvitation(
             new InvitationCreateStruct(
@@ -77,6 +84,13 @@ final class InvitationServiceTest extends IbexaKernelTestCase
 
     public function testFindInvitations(): void
     {
+        $this->invitationService->createInvitation(
+            new InvitationCreateStruct(
+                'thisisjustatest@ibexa.co',
+                'admin',
+            )
+        );
+
         $invitations = $this->invitationService->findInvitations();
         self::assertCount(1, $invitations);
     }
@@ -84,6 +98,13 @@ final class InvitationServiceTest extends IbexaKernelTestCase
     public function testFindInvitationsWithUserGroupFilter(): void
     {
         $editorsGroup = $this->userService->loadUserGroupByRemoteId('3c160cca19fb135f83bd02d911f04db2');
+
+        $this->invitationService->createInvitation(
+            new InvitationCreateStruct(
+                'thisisjustatest@ibexa.co',
+                'admin',
+            )
+        );
 
         $this->invitationService->createInvitation(
             new InvitationCreateStruct(
@@ -107,6 +128,21 @@ final class InvitationServiceTest extends IbexaKernelTestCase
     {
         $editorsGroup = $this->userService->loadUserGroupByRemoteId('3c160cca19fb135f83bd02d911f04db2');
         $role = $this->roleService->loadRoleByIdentifier('Anonymous');
+
+        $this->invitationService->createInvitation(
+            new InvitationCreateStruct(
+                'thisisjustatest@ibexa.co',
+                'admin',
+            )
+        );
+
+        $this->invitationService->createInvitation(
+            new InvitationCreateStruct(
+                'editor@ibexa.co',
+                'admin',
+                $editorsGroup
+            )
+        );
 
         $this->invitationService->createInvitation(
             new InvitationCreateStruct(
