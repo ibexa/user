@@ -24,6 +24,8 @@ use Symfony\Bridge\PhpUnit\ClockMock;
 
 final class InvitationServiceTest extends IbexaKernelTestCase
 {
+    private const INVITEE_EMAIL = 'thisisjustatest@ibexa.co';
+
     private InvitationService $invitationService;
 
     private UserService $userService;
@@ -42,9 +44,9 @@ final class InvitationServiceTest extends IbexaKernelTestCase
     public function testCreateInvitation(): void
     {
         $now = (new \DateTime())->getTimestamp();
-        $invitation = $this->createInvitation('thisisjustatest@ibexa.co');
+        $invitation = $this->createInvitation(self::INVITEE_EMAIL);
 
-        self::assertEquals('thisisjustatest@ibexa.co', $invitation->getEmail());
+        self::assertEquals(self::INVITEE_EMAIL, $invitation->getEmail());
         self::assertEquals('admin', $invitation->getSiteAccessIdentifier());
         self::assertNotNull($invitation->getHash());
         self::assertFalse($invitation->isUsed());
@@ -59,15 +61,15 @@ final class InvitationServiceTest extends IbexaKernelTestCase
 
     public function testCreateExistingInvitation(): void
     {
-        $this->createInvitation('thisisjustatest@ibexa.co');
+        $this->createInvitation(self::INVITEE_EMAIL);
 
         $this->expectExceptionObject(new InvitationAlreadyExistsException());
-        $this->createInvitation('thisisjustatest@ibexa.co');
+        $this->createInvitation(self::INVITEE_EMAIL);
     }
 
     public function testFindInvitations(): void
     {
-        $this->createInvitation('thisisjustatest@ibexa.co');
+        $this->createInvitation(self::INVITEE_EMAIL);
 
         $invitations = $this->invitationService->findInvitations();
         self::assertCount(1, $invitations);
@@ -77,7 +79,7 @@ final class InvitationServiceTest extends IbexaKernelTestCase
     {
         $editorsGroup = $this->userService->loadUserGroupByRemoteId('3c160cca19fb135f83bd02d911f04db2');
 
-        $this->createInvitation('thisisjustatest@ibexa.co');
+        $this->createInvitation(self::INVITEE_EMAIL);
 
         $this->createInvitation('editor@ibexa.co', $editorsGroup);
 
@@ -96,7 +98,7 @@ final class InvitationServiceTest extends IbexaKernelTestCase
         $editorsGroup = $this->userService->loadUserGroupByRemoteId('3c160cca19fb135f83bd02d911f04db2');
         $role = $this->roleService->loadRoleByIdentifier('Anonymous');
 
-        $this->createInvitation('thisisjustatest@ibexa.co');
+        $this->createInvitation(self::INVITEE_EMAIL);
 
         $this->createInvitation('editor@ibexa.co', $editorsGroup);
 
