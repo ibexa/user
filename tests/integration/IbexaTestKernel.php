@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\Tests\Integration\User;
 
+use DAMA\DoctrineTestBundle\DAMADoctrineTestBundle;
 use Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle;
 use Ibexa\Bundle\ContentForms\IbexaContentFormsBundle;
 use Ibexa\Bundle\DoctrineMigrations\IbexaDoctrineMigrationsBundle;
@@ -36,6 +37,8 @@ final class IbexaTestKernel extends BaseIbexaTestKernel
         yield new DoctrineMigrationsBundle();
 
         yield new IbexaDoctrineMigrationsBundle();
+
+        yield new DAMADoctrineTestBundle();
 
         yield from [
             new IbexaUserBundle(),

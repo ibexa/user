@@ -43,18 +43,4 @@ final class UserRegisterControllerTest extends IbexaKernelTestCase
 
         self::assertSame(Response::HTTP_OK, $client->getResponse()->getStatusCode());
     }
-
-    protected function tearDown(): void
-    {
-        // Database is imported once per run and there is no per-test rollback, so without this the
-        // invitation survives into InvitationServiceTest, which asserts absolute findInvitations()
-        // counts and fails
-        $connection = self::getDoctrineConnection();
-        $connection->executeStatement(
-            'DELETE FROM ibexa_user_invitation_assignment WHERE invitation_id IN '
-            . '(SELECT id FROM ibexa_user_invitation WHERE email = :email)',
-            ['email' => self::INVITEE_EMAIL]
-        );
-        $connection->delete('ibexa_user_invitation', ['email' => self::INVITEE_EMAIL]);
-    }
 }

@@ -28,6 +28,9 @@
         <env name="DATABASE_URL" value="sqlite://i@i/test.db"/>
         <env name="SYMFONY_DEPRECATIONS_HELPER" value="disabled"/>
     </php>
+    <extensions>
+        <extension class="DAMA\DoctrineTestBundle\PHPUnit\PHPUnitExtension" />
+    </extensions>
     <listeners>
         <listener class="\Symfony\Bridge\PhpUnit\SymfonyTestsListener"/>
     </listeners>
