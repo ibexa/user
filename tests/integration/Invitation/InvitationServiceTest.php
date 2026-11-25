@@ -26,7 +26,7 @@ use Symfony\Bridge\PhpUnit\ClockMock;
 
 final class InvitationServiceTest extends IbexaKernelTestCase
 {
-    private const INVITEE_EMAIL = 'thisisjustatest@ibexa.co';
+    private const string INVITEE_EMAIL = 'thisisjustatest@ibexa.co';
 
     private InvitationService $invitationService;
 
