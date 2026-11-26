@@ -43,6 +43,7 @@
         "twig/twig": "^3.0"
     },
     "require-dev": {
+        "dama/doctrine-test-bundle": "^8.2",
         "doctrine/doctrine-migrations-bundle": "^3.2",
         "ibexa/code-style": "~2.3.1",
         "ibexa/design-engine": "~6.0.x-dev",
@@ -59,6 +60,7 @@
         "phpstan/phpstan-phpunit": "^2.0",
         "phpstan/phpstan-symfony": "^2.0",
         "phpunit/phpunit": "^11.5",
+        "symfony/browser-kit": "^8.1",
         "symfony/phpunit-bridge": "^8.1"
     },
     "scripts": {
