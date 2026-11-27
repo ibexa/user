@@ -93,8 +93,7 @@ final class UserInvitationTypeTest extends IbexaKernelTestCase
         $role = self::getRoleService()->loadRoleByIdentifier('Editor');
         $userGroup = self::getUserService()->loadUserGroupByRemoteId(self::EDITORS_GROUP_REMOTE_ID);
 
-        /** @var FormFactoryInterface $formFactory */
-        $formFactory = self::getContainer()->get(FormFactoryInterface::class);
+        $formFactory = self::getServiceByClassName(FormFactoryInterface::class);
         $form = $formFactory->create(UserInvitationType::class, null, ['csrf_protection' => false]);
         $form->submit($overrides + [
             'email' => self::INVITEE_EMAIL,

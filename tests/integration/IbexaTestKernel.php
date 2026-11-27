@@ -22,6 +22,7 @@ use Swift_Mailer;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\Form\FormFactoryInterface;
 
 final class IbexaTestKernel extends BaseIbexaTestKernel
 {
@@ -48,6 +49,7 @@ final class IbexaTestKernel extends BaseIbexaTestKernel
         yield from parent::getExposedServicesByClass();
 
         yield InvitationService::class;
+        yield FormFactoryInterface::class;
     }
 
     public function registerContainerConfiguration(LoaderInterface $loader): void
