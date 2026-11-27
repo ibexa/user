@@ -98,7 +98,7 @@ final class UserInvitationTypeTest extends IbexaKernelTestCase
     public static function provideForMissingRequiredField(): iterable
     {
         yield 'empty email' => ['email', ''];
-        yield 'no site access' => ['siteaccess', null];
+        yield 'unknown site access' => ['siteaccess', 'removed_site'];
     }
 
     /**
@@ -134,7 +134,6 @@ final class UserInvitationTypeTest extends IbexaKernelTestCase
         $data = $form->getData();
         self::assertInstanceOf(UserInvitationData::class, $data);
         self::assertSame(self::INVITEE_EMAIL, $data->getEmail());
-        self::assertNotNull($data->getSiteaccess());
         self::assertSame(self::SITEACCESS, $data->getSiteaccess()->name);
         self::assertNotNull($data->getRole());
         self::assertSame('Editor', $data->getRole()->identifier);
