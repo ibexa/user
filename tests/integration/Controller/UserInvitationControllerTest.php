@@ -27,7 +27,6 @@ final class UserInvitationControllerTest extends IbexaKernelTestCase
 {
     private const INVITEE_EMAIL = 'invitee@example.com';
     private const SITEACCESS = 'eng';
-    private const EDITORS_GROUP_REMOTE_ID = '3c160cca19fb135f83bd02d911f04db2';
 
     protected function setUp(): void
     {
