@@ -51,11 +51,13 @@ final class UserInvitationController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var UserInvitationData $data */
             $data = $form->getData();
+            $siteAccess = $data->getSiteaccess();
+            assert($siteAccess !== null, 'Site access is required by the NotBlank constraint');
             try {
                 $invitation = $this->invitationService->createInvitation(
                     new InvitationCreateStruct(
                         $data->getEmail(),
-                        $data->getSiteaccess()->name,
+                        $siteAccess->name,
                         $data->getUserGroup(),
                         $data->getRole(),
                         $data->getRoleLimitation(),

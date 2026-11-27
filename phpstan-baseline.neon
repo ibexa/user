@@ -391,12 +391,6 @@ parameters:
 			path: src/lib/Form/Data/UserInvitationData.php
 
 		-
-			message: '#^Method Ibexa\\User\\Form\\Data\\UserInvitationData\:\:getSiteaccess\(\) should return Ibexa\\Core\\MVC\\Symfony\\SiteAccess but returns Ibexa\\Core\\MVC\\Symfony\\SiteAccess\|null\.$#'
-			identifier: return.type
-			count: 1
-			path: src/lib/Form/Data/UserInvitationData.php
-
-		-
 			message: '#^Method Ibexa\\User\\Form\\Data\\UserInvitationData\:\:setLimitationValue\(\) has parameter \$limitationValue with no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1

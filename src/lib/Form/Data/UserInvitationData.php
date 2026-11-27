@@ -116,7 +116,7 @@ final class UserInvitationData
         $this->userGroup = $userGroup;
     }
 
-    public function getSiteaccess(): SiteAccess
+    public function getSiteaccess(): ?SiteAccess
     {
         return $this->siteaccess;
     }

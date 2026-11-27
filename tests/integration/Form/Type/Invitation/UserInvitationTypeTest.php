@@ -117,6 +117,7 @@ final class UserInvitationTypeTest extends IbexaKernelTestCase
         $data = $form->getData();
         self::assertInstanceOf(UserInvitationData::class, $data);
         self::assertSame(self::INVITEE_EMAIL, $data->getEmail());
+        self::assertNotNull($data->getSiteaccess());
         self::assertSame(self::SITEACCESS, $data->getSiteaccess()->name);
         self::assertNotNull($data->getRole());
         self::assertSame('Editor', $data->getRole()->identifier);
