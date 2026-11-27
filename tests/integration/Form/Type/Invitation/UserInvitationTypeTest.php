@@ -79,9 +79,9 @@ final class UserInvitationTypeTest extends IbexaKernelTestCase
     }
 
     /**
-     * @dataProvider provideForMissingRequiredField
+     * @dataProvider provideForInvalidRequiredField
      */
-    public function testSubmitWithMissingRequiredFieldShowsValidationError(
+    public function testSubmitWithInvalidRequiredFieldShowsValidationError(
         string $field,
         ?string $value
     ): void {
@@ -95,7 +95,7 @@ final class UserInvitationTypeTest extends IbexaKernelTestCase
     /**
      * @return iterable<string, array{string, string|null}>
      */
-    public static function provideForMissingRequiredField(): iterable
+    public static function provideForInvalidRequiredField(): iterable
     {
         yield 'empty email' => ['email', ''];
         yield 'unknown site access' => ['siteaccess', 'removed_site'];
