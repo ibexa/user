@@ -65,22 +65,27 @@ final class UserInvitationTypeTest extends IbexaKernelTestCase
         self::assertSame([self::SUBTREE_PATH], $limitation->limitationValues);
     }
 
-    public function testSubmitWithEmptyEmailShowsValidationError(): void
-    {
-        $form = $this->submitForm(['email' => '', 'limitation_type' => '0']);
+    /**
+     * @dataProvider provideForMissingRequiredField
+     */
+    public function testSubmitWithMissingRequiredFieldShowsValidationError(
+        string $field,
+        ?string $value
+    ): void {
+        $form = $this->submitForm([$field => $value, 'limitation_type' => '0']);
 
         self::assertTrue($form->isSubmitted());
         self::assertFalse($form->isValid());
-        self::assertCount(1, $form->get('email')->getErrors());
+        self::assertCount(1, $form->get($field)->getErrors());
     }
 
-    public function testSubmitWithoutSiteAccessShowsValidationError(): void
+    /**
+     * @return iterable<string, array{string, string|null}>
+     */
+    public static function provideForMissingRequiredField(): iterable
     {
-        $form = $this->submitForm(['siteaccess' => null, 'limitation_type' => '0']);
-
-        self::assertTrue($form->isSubmitted());
-        self::assertFalse($form->isValid());
-        self::assertCount(1, $form->get('siteaccess')->getErrors());
+        yield 'empty email' => ['email', ''];
+        yield 'no site access' => ['siteaccess', null];
     }
 
     /**
