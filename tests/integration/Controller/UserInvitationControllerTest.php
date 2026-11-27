@@ -12,7 +12,7 @@ use Ibexa\Bundle\User\Controller\UserInvitationController;
 use Ibexa\Contracts\User\Invitation\Invitation;
 use Ibexa\Contracts\User\Invitation\InvitationSender;
 use Ibexa\Tests\Integration\User\IbexaKernelTestCase;
-use Ibexa\User\ExceptionHandler\NullActionResultHandler;
+use Ibexa\User\ExceptionHandler\ActionResultHandler;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -46,6 +46,13 @@ final class UserInvitationControllerTest extends IbexaKernelTestCase
                 return $invitation->getEmail() === self::INVITEE_EMAIL;
             }));
 
+        $actionResultHandler = $this->createMock(ActionResultHandler::class);
+        $actionResultHandler
+            ->expects(self::once())
+            ->method('success')
+            ->with('user_invitation.send.success', ['%email%' => self::INVITEE_EMAIL], 'ibexa_user_invitation');
+        $actionResultHandler->expects(self::never())->method('error');
+
         $role = self::getRoleService()->loadRoleByIdentifier('Editor');
         $userGroup = self::getUserService()->loadUserGroupByRemoteId(self::EDITORS_GROUP_REMOTE_ID);
 
@@ -67,7 +74,7 @@ final class UserInvitationControllerTest extends IbexaKernelTestCase
             self::getInvitationService(),
             $invitationSender,
             self::getServiceByClassName(FormFactoryInterface::class),
-            new NullActionResultHandler()
+            $actionResultHandler
         );
         $controller->inviteUser($request);
 
