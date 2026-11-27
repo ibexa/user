@@ -15,6 +15,7 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class UserInvitationType extends AbstractType
@@ -79,6 +80,13 @@ final class UserInvitationType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => UserInvitationData::class,
+            // build the data from submitted values instead of a blank `new UserInvitationData()`
+            'empty_data' => static function (FormInterface $form): UserInvitationData {
+                return new UserInvitationData(
+                    $form->get('email')->getData(),
+                    $form->get('siteaccess')->getData()
+                );
+            },
             'translation_domain' => 'forms',
         ]);
     }

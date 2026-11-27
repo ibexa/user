@@ -13,6 +13,8 @@ use Ibexa\Contracts\User\Invitation\InvitationService;
 
 abstract class IbexaKernelTestCase extends BaseIbexaKernelTestCase
 {
+    protected const EDITORS_GROUP_REMOTE_ID = '3c160cca19fb135f83bd02d911f04db2';
+
     protected static function getInvitationService(): InvitationService
     {
         return self::getServiceByClassName(InvitationService::class);
