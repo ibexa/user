@@ -18,6 +18,7 @@ use Ibexa\User\Form\Data\UserInvitationData;
 use Ibexa\User\Form\Type\Invitation\UserInvitationType;
 use Ibexa\User\View\Invitation\FormView;
 use JMS\TranslationBundle\Annotation\Desc;
+use LogicException;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -52,7 +53,9 @@ final class UserInvitationController extends Controller
             /** @var UserInvitationData $data */
             $data = $form->getData();
             $siteAccess = $data->getSiteaccess();
-            assert($siteAccess !== null, 'Site access is required by the NotBlank constraint');
+            if ($siteAccess === null) {
+                throw new LogicException('Site access is required by the NotBlank constraint');
+            }
             try {
                 $invitation = $this->invitationService->createInvitation(
                     new InvitationCreateStruct(
