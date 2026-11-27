@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\Tests\Integration\User\Form\Type\Invitation;
 
+use Ibexa\Contracts\Core\Repository\Values\User\Limitation\RoleLimitation;
 use Ibexa\Contracts\Core\Repository\Values\User\Limitation\SectionLimitation;
 use Ibexa\Contracts\Core\Repository\Values\User\Limitation\SubtreeLimitation;
 use Ibexa\Tests\Integration\User\IbexaKernelTestCase;
@@ -33,36 +34,49 @@ final class UserInvitationTypeTest extends IbexaKernelTestCase
         self::setAdministratorUser();
     }
 
-    public function testSubmitWithoutLimitation(): void
-    {
-        $form = $this->submitForm(['limitation_type' => '0']);
-
-        $data = $this->getValidData($form);
-        self::assertNull($data->getRoleLimitation());
-    }
-
-    public function testSubmitWithSectionLimitation(): void
-    {
-        $form = $this->submitForm([
-            'limitation_type' => '1',
-            'sections' => [(string)self::STANDARD_SECTION_ID],
-        ]);
+    /**
+     * @dataProvider provideForSubmit
+     *
+     * @param array<string, mixed> $overrides
+     */
+    public function testSubmit(
+        array $overrides,
+        ?RoleLimitation $expectedLimitation
+    ): void {
+        $form = $this->submitForm($overrides);
 
         $limitation = $this->getValidData($form)->getRoleLimitation();
-        self::assertInstanceOf(SectionLimitation::class, $limitation);
-        self::assertSame([self::STANDARD_SECTION_ID], $limitation->limitationValues);
+
+        // assertSame on values: assertEquals on the objects would accept '1' for 1
+        self::assertSame(
+            $expectedLimitation === null ? null : get_class($expectedLimitation),
+            $limitation === null ? null : get_class($limitation)
+        );
+        self::assertSame(
+            $expectedLimitation === null ? null : $expectedLimitation->limitationValues,
+            $limitation === null ? null : $limitation->limitationValues
+        );
     }
 
-    public function testSubmitWithSubtreeLimitation(): void
+    /**
+     * @return iterable<string, array{array<string, mixed>, RoleLimitation|null}>
+     */
+    public static function provideForSubmit(): iterable
     {
-        $form = $this->submitForm([
-            'limitation_type' => '2',
-            'location_path' => self::SUBTREE_PATH,
-        ]);
+        yield 'no limitation' => [
+            ['limitation_type' => '0'],
+            null,
+        ];
 
-        $limitation = $this->getValidData($form)->getRoleLimitation();
-        self::assertInstanceOf(SubtreeLimitation::class, $limitation);
-        self::assertSame([self::SUBTREE_PATH], $limitation->limitationValues);
+        yield 'section limitation' => [
+            ['limitation_type' => '1', 'sections' => [(string)self::STANDARD_SECTION_ID]],
+            new SectionLimitation(['limitationValues' => [self::STANDARD_SECTION_ID]]),
+        ];
+
+        yield 'subtree limitation' => [
+            ['limitation_type' => '2', 'location_path' => self::SUBTREE_PATH],
+            new SubtreeLimitation(['limitationValues' => [self::SUBTREE_PATH]]),
+        ];
     }
 
     /**
